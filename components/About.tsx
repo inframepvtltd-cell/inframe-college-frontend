@@ -82,7 +82,7 @@ const AboutPage = () => {
             {/* Left side: Heading and Image */}
             <div data-aos="fade-right">
               <Image
-                src={"/campus images/1719304885452_1.jpg"}
+                src={"/images/gallery/1719304885452_1.jpg"}
                 alt={"Cultural Event"}
                 width={720}
                 height={480}
