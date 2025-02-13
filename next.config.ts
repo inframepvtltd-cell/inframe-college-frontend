@@ -36,7 +36,19 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'plus.unsplash.com'
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'imageio.forbes.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'venturebeat.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'live-production.wcms.abc-cdn.net.au'
+      },
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,

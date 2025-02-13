@@ -12,8 +12,12 @@ export default async function CategoryPage({
 }) {
   const { category } = await params;
   const categoryLower = category.toLowerCase();
+  console.log(category);
+  
   
   const categoryCourses = courseTypes[categoryLower];
+  console.log(categoryCourses);
+  
   
   
   

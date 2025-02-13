@@ -1,10 +1,8 @@
-// app/layout.tsx
-'use client'
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
-import { usePathname } from 'next/navigation'
+import { headers } from "next/headers";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -13,21 +11,21 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Get the current pathname
-  const pathname = usePathname();
+  // Get pathname from headers
+  const headersData = await headers();
+  const pathname = headersData.get("x-pathname") || "";
   
-  // Check if we're on the landing page route
-  const isLandingPage = pathname?.startsWith('/landingpage');
+  // Check if it's the landing page
+  const isLandingPage = pathname.startsWith("/landingpage");
 
   return (
-    <html lang="en">
-      <body className={manrope.variable}>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body  className={manrope.variable}>
         {!isLandingPage && <Navbar />}
         {children}
         <Footer />

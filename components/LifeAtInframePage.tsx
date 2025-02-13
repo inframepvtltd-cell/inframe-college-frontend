@@ -184,7 +184,7 @@ export const LifeAtCampus = () => {
                       </svg>
                     </div>
                     <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                    <p className="mb-6 text-justify">{service.description}</p>
+                    <p className="mb-6 text-justify ">{service.description}</p>
                     <Button variant="outline" className="text-white border-white bg-transparent hover:bg-white/20 w-full">
                       Learn More <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>

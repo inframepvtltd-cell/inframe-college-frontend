@@ -1,4 +1,5 @@
 // app/page.tsx
+
 import HeroSection from "../components/HeroSection";
 
 import DreamsSection from "../components/DreamSection";

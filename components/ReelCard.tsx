@@ -97,14 +97,14 @@ const ReelCard = () => {
 
             <div className="flex justify-between items-center mb-4 p-4 relative z-10">
               <div className="flex items-center">
-                <button className="text-white mr-2">
+                <Button className="text-white mr-2">
                   <ArrowLeft />
-                </button>
+                </Button>
                 <p className="text-white font-semibold text-lg">Reels</p>
               </div>
-              <button className="text-white">
+              <Button className="text-white">
                 <Camera />
-              </button>
+              </Button>
             </div>
 
             <div className="flex justify-between pb-[5.5rem] items-end h-full relative z-10 px-4">
@@ -132,9 +132,9 @@ const ReelCard = () => {
                 </div>
                 <p className="mb-2">Trees, fogs, and mountains⛰️🌳</p>
                 <p className="flex items-center text-sm">
-                  <button className="mr-2">
+                  <Button className="mr-2">
                     <Tally1 />
-                  </button>
+                  </Button>
                   AJR • The Good Part
                 </p>
               </div>
@@ -147,15 +147,15 @@ const ReelCard = () => {
                   {isredHeart ? <Heart fill="red" /> : <Heart />}
                 </button>
 
-                <button className="text-white transform scale-x-[-1] hover:text-blue-500 transition-transform duration-300 transform hover:scale-125">
+                <Button className="text-white transform scale-x-[-1] hover:text-blue-500 transition-transform duration-300 transform hover:scale-125">
                   <MessageCircle />
-                </button>
-                <button className="text-white hover:text-green-500 transition-transform duration-300 transform hover:scale-125">
+                </Button>
+                <Button className="text-white hover:text-green-500 transition-transform duration-300 transform hover:scale-125">
                   <Send />
-                </button>
-                <button className="text-white hover:text-gray-400 transition-transform duration-300 transform hover:scale-125">
+                </Button>
+                <Button className="text-white hover:text-gray-400 transition-transform duration-300 transform hover:scale-125">
                   <MoreHorizontal />
-                </button>
+                </Button>
                 <Image
                   src="https://i.scdn.co/image/ab67616d0000b2736227bea855e8e32fe0c4e81f"
                   alt="Music Cover"
