@@ -43,6 +43,16 @@ const RefundPolicy = () => {
                 We shall not be responsible in any case until the course fee paid by student or parent is credited into the Bank Account of the institute. If credited into our account, the refund policy will be applicable as per the institute norms.
               </p>
             </section>
+
+            <section className="mb-8">
+  <h2 className="text-2xl font-semibold text-gray-800 mb-4 my-10">Cancellation Policy</h2>
+  <p className="text-gray-600">
+    If a student wishes to cancel enrollment, they must submit a written request within X days of registration. 
+    Cancellations after this period will not be eligible for a refund.
+  </p>
+</section>
+
+
           </CardContent>
         </Card>
       </div>
