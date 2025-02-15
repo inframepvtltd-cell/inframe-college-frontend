@@ -56,7 +56,7 @@ const DownloadsSection = () => {
     ]
   };
 
-  const iconMap: { [key: string]: React.ComponentType<any> } = {
+  const iconMap: { [key: string]: React.ElementType } = {
     "Entrance Exam Schedule": Calendar,
     "Previous Year Sample Papers": BookOpen,
     "Newsletters": NewspaperIcon,
