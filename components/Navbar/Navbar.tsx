@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { INFRAME_LOGO, LOGO, LOGOS } from "../../utils/constant";
+import { INFRAME_LOGO, LOGO} from "../../utils/constant";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import StudyDropDown from "./StudyDropDown";
 import { Poppins } from "next/font/google";

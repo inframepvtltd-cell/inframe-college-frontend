@@ -28,15 +28,15 @@ const ThankYouPage = () => {
           
           <div className="space-y-4 mb-8">
             <p className="text-lg text-gray-600">
-              Thank you for choosing to apply with us. We're excited to review your application!
+              {`Thank you for choosing to apply with us. We're excited to review your application!`}
             </p>
             
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-gray-600">
               <h3 className="font-semibold mb-2">What happens next?</h3>
               <ul className="space-y-2 text-left list-disc pl-4">
-                <li>You'll receive a confirmation email within the next few minutes</li>
+                <li>{`You'll receive a confirmation email within the next few minutes`}</li>
                 <li>Our admissions team will review your application within 2-3 business days</li>
-                <li>We'll schedule an interview if required for your chosen program</li>
+                <li>{`We'll schedule an interview if required for your chosen program`}</li>
               </ul>
             </div>
           </div>
