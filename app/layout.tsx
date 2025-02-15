@@ -11,6 +11,13 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
+export const metadata = {
+  title: "Your Website Title",
+  icons: {
+    icon: "/500x500.jpg", // Path to the new favicon
+  },
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{

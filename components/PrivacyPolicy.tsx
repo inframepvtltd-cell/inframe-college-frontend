@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
             
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Who we are</h2>
-              <p className="text-gray-600">Our website address is: https://inframecollege.org.</p>
+              <p className="text-gray-600">Our website address is: https://www.inframeschool.com/.</p>
             </section>
 
             <section className="mb-8">
