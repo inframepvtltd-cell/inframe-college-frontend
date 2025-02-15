@@ -33,7 +33,7 @@ const RefundPolicy = () => {
 
                 <li className="flex gap-3">
                   <span className="flex-shrink-0">•</span>
-                  <p>The payment gets deducted from the payer's account and does not reach the institute's account or payment gets debited twice due to server error.</p>
+                  <p>{`The payment gets deducted from the payer's account and does not reach the institute's account or payment gets debited twice due to server error.`}</p>
                 </li>
               </ul>
             </section>

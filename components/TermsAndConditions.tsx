@@ -17,10 +17,10 @@ const TermsAndConditions = () => {
             
             <section className="mb-8">
               <p className="text-gray-600 mb-4">
-                Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern 'INFRAME DESIGN INSTITUTE' relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                {`Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern 'INFRAME SCHOOL OF ART DESIGN & BUSINESS' relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.`}
               </p>
               <p className="text-gray-600 mb-4">
-                The term 'INFRAME SCHOOL OF ART DESIGN & BUSINESS' or 'us' or 'we' refers to the owner of the website whose registered office is B-09 Behind Kamla Nagar Hospital Pal Link Road Jodhpur Rajasthan. The term 'you' refers to the user or viewer of our website.
+                {`The term 'INFRAME SCHOOL OF ART DESIGN & BUSINESS' or 'us' or 'we' refers to the owner of the website whose registered office is B-09 Behind Kamla Nagar Hospital Pal Link Road Jodhpur Rajasthan. The term 'you' refers to the user or viewer of our website.`}
               </p>
             </section>
 
@@ -48,7 +48,7 @@ const TermsAndConditions = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Payment and Refund Policy</h2>
               <ul className="list-disc pl-6 space-y-3 text-gray-600">
-                <li>After depositing money towards 'Registration & Admission', if a student becomes disinterested, the Institute will not refund the Registration fee/Admission fee.</li>
+                <li>{`After depositing money towards 'Registration & Admission', if a student becomes disinterested, the Institute will not refund the Registration fee/Admission fee.`}</li>
                 <li>If the tuition fee is not paid in lump sum, submission of post dated cheques is mandatory.</li>
                 <li>If the cheque is bounced for any reason, a fine of ₹200 will be charged separately.</li>
               </ul>
@@ -66,7 +66,7 @@ const TermsAndConditions = () => {
             <section>
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Warranties and Disclaimers</h2>
               <p className="text-gray-600 mb-4">
-                We provide our Services using a commercially reasonable level of skill and care. Other than as expressly set out in these terms or additional terms, IDI does not make any specific promises about the Services. We provide the Services "as is".
+                {`We provide our Services using a commercially reasonable level of skill and care. Other than as expressly set out in these terms or additional terms, IDI does not make any specific promises about the Services. We provide the Services "as is".`}
               </p>
             </section>
           </CardContent>

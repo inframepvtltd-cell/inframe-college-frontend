@@ -51,7 +51,7 @@ const ShippingPolicy = () => {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Tracking Your Order</h2>
               <p className="text-gray-600 mb-4">
-                You can track your order using the tracking number provided in your order confirmation email by visiting our delivery partner's website. It may take upto 12-24 hours to update your tracking number on our website.
+                {`You can track your order using the tracking number provided in your order confirmation email by visiting our delivery partner's website. It may take upto 12-24 hours to update your tracking number on our website.`}
               </p>
             </section>
 
