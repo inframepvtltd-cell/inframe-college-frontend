@@ -47,7 +47,7 @@ const ThankYouPage = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.href = '/landingpage'}
               className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-6"
             >
               Return to Homepage
