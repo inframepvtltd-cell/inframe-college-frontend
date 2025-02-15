@@ -119,9 +119,10 @@ const Footer = () => {
         <div className="container mx-auto px-6 lg:px-16 text-center text-sm opacity-80">
           <p>
             © 2025 Inframe. Ltd. All rights reserved ·{" "}
-            <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link> ·{" "}
-            <Link href="#" className="hover:underline">Refund Policy</Link> ·{" "}
-            <Link href="#" className="hover:underline">Terms & Conditions</Link>
+            <Link href={"/privacy-policy"} className="hover:underline">Privacy Policy</Link> ·{" "}
+            <Link href={"/refund-policy"} className="hover:underline">Refund Policy</Link> ·{" "}
+            <Link href={"/terms-and-conditions"} className="hover:underline">Terms & Conditions</Link> ·{" "}
+            <Link href={"/shipping-policy"} className="hover:underline">Shipping and Delivery</Link>
           </p>
         </div>
       </div>
