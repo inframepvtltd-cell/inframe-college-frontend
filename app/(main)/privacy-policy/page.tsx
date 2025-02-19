@@ -1,10 +1,14 @@
+
+
 import React from 'react'
-import AdvisorsPage from '../../components/AdvisorsPage'
+import PrivacyPolicy from '../../../components/PrivacyPolicy'
+
+
 
 const page = () => {
   return (
     <div>
-        <AdvisorsPage/>
+        <PrivacyPolicy/>
     </div>
   )
 }

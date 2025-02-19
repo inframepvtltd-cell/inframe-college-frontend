@@ -1,10 +1,11 @@
+
 import React from 'react'
-import ShippingPolicy from '../../components/ShippingPolicy'
+import ThankYouPage from '../../../components/ThankYouPage'
 
 const page = () => {
   return (
     <div>
-        <ShippingPolicy/>
+        <ThankYouPage/>
     </div>
   )
 }

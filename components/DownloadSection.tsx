@@ -1,12 +1,13 @@
 'use client'
 import React from 'react';
 import { FileDown, Calendar, BookOpen, NewspaperIcon, Building, Users, Award } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
 import ApplyNow from './ApplyNow';
 import DreamsSection from './DreamSection';
 import FreeResourcesCTABanner from './FreeResourcesCTABanner';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const poppins = Poppins({
   subsets: ["latin"],

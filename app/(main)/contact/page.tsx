@@ -1,12 +1,16 @@
 
-import { ContactUsForm } from "../../components/ContactUs";
 
 
-import "../../components/style.css";
 
 
-import ReelCard from "../../components/ReelCard";
-import ApplyNow from "../../components/ApplyNow";
+
+import "@/components/style.css";
+import { ContactUsForm } from "../../../components/ContactUs";
+import ReelCard from "../../../components/ReelCard";
+import ApplyNow from "../../../components/ApplyNow";
+
+
+
 
 
 export default function page() {

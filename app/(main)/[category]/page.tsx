@@ -1,7 +1,10 @@
 // app/[category]/page.tsx
 
-import CoursePage from "../../components/Courses/CoursePage";
-import { courseTypes } from "../../utils/courseTypes";
+
+
+import CoursePage from "../../../components/Courses/CoursePage";
+import { courseTypes } from "../../../utils/courseTypes";
+
 
 type ParamsType = Promise<{ category: string }>;
 

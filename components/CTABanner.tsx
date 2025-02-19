@@ -1,7 +1,8 @@
-import React from "react";
+
 import { ArrowRight } from "lucide-react"; // Lucide icons
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
+
 
 // Using the Poppins font
 const poppins = Poppins({

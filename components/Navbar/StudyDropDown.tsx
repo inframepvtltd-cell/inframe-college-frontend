@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +16,7 @@ import { categories } from "../../utils/constant";
 import { Poppins } from "next/font/google";
 import { FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
+import { useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],

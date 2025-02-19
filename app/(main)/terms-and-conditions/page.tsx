@@ -1,5 +1,6 @@
+import TermsAndConditions from "../../../components/TermsAndConditions"
 
-import TermsAndConditions from '../../components/TermsAndConditions'
+
 
 const page = () => {
   return (

@@ -61,6 +61,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.livemint.com'
       },
+      {
+        protocol: 'https',
+        hostname: 'img.etimg.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'graphicdesignjunction.com'
+      },
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,

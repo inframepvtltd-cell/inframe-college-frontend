@@ -1,6 +1,6 @@
  
 import React from 'react'
-import {LifeAtCampus} from '../../components/LifeAtInframePage'
+import LifeAtCampus from '../../../components/LifeAtInframePage'
 
 const page = () => {
   return (

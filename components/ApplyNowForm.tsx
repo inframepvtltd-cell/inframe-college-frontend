@@ -1,17 +1,11 @@
 'use client'
-import React, {  useState } from 'react';
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "../components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../components/ui/sheet";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+
 import {
   Select,
   SelectContent,
@@ -23,6 +17,8 @@ import { Input } from "../components/ui/input";
 import { states, cities as citiesData, programLevels, allLevels, BFAPrograms } from '../utils/constant';
 import { Poppins } from 'next/font/google';
 import { useRouter } from 'next/navigation'; // Changed from 'next/router' to 'next/navigation'
+import { useState } from "react";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
 const poppins = Poppins({
   subsets: ["latin"],

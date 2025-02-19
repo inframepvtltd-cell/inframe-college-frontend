@@ -1,10 +1,10 @@
 import React from 'react'
-import PrivacyPolicy from '../../components/PrivacyPolicy'
+import ExamPapersSection from '../../../components/DownloadSection'
 
 const page = () => {
   return (
     <div>
-        <PrivacyPolicy/>
+        <ExamPapersSection/>
     </div>
   )
 }

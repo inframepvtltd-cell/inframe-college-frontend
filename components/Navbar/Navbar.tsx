@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import StudyDropDown from "./StudyDropDown";
 import { Poppins } from "next/font/google";
 import { Menu } from "lucide-react";
 import ApplyNowForm from "../ApplyNowForm";
+import { useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],

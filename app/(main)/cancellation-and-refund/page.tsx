@@ -1,10 +1,12 @@
+
 import React from 'react'
-import ExamPapersSection from '../../components/DownloadSection'
+import RefundPolicy from '../../../components/RefundPolicy'
+
 
 const page = () => {
   return (
     <div>
-        <ExamPapersSection/>
+        <RefundPolicy/>
     </div>
   )
 }
