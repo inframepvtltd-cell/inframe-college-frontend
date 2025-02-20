@@ -14,7 +14,8 @@ export default function CategoryPage({ params }: { params: { category: string } 
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
 
-export function getMetadata({ params }: { params: { category: string } }) {
+// ✅ Correct function name: generateMetadata
+export async function generateMetadata({ params }: { params: { category: string } }) {
   const categoryLower = params.category.toLowerCase() as CategoryKey;
   const courseInfo = metadata[categoryLower];
 
@@ -26,26 +27,25 @@ export function getMetadata({ params }: { params: { category: string } }) {
   }
 
   return {
-    title: courseInfo.metaTitle,
-    description: courseInfo.metaDescription,
-    keywords: ["design courses", "best courses", "art school"],
+    title: courseInfo.metaTitle || `${categoryLower} Courses | Inframe School`,
+    description: courseInfo.metaDescription || `Enroll in our ${categoryLower} courses at Inframe School.`,
     openGraph: {
-      title: courseInfo.metaTitle,
-      description: courseInfo.metaDescription,
+      title: courseInfo.metaTitle || `${categoryLower} Courses | Inframe School`,
+      description: courseInfo.metaDescription || `Enroll in our ${categoryLower} courses at Inframe School.`,
       url: `https://yourwebsite.com/${categoryLower}`,
       images: [
         {
           url: courseInfo.image || "/default-course-image.jpg",
           width: 1200,
           height: 630,
-          alt: `${courseInfo.name} Course`,
+          alt: `${categoryLower} Course`,
         },
       ],
     },
   };
 }
 
-// Pre-generate static pages for each category
+// ✅ Ensure this function is correctly named
 export async function generateStaticParams() {
   return Object.keys(courseTypes).map((category) => ({
     category,
