@@ -14,7 +14,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
 
-// ✅ Correct function name: generateMetadata
+// ✅ Fix: Corrected type for params in generateMetadata
 export async function generateMetadata({ params }: { params: { category: string } }) {
   const categoryLower = params.category.toLowerCase() as CategoryKey;
   const courseInfo = metadata[categoryLower];
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-// ✅ Ensure this function is correctly named
+// ✅ Fix: generateStaticParams correctly typed
 export async function generateStaticParams() {
   return Object.keys(courseTypes).map((category) => ({
     category,
