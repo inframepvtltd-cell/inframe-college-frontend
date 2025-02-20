@@ -2,20 +2,21 @@ import CoursePage from "../../../components/Courses/CoursePage";
 import { courseTypes } from "../../../utils/courseTypes";
 import { metadata } from "../../../utils/metadata";
 
+type CategoryPageProps = { params: { category: string } };
 type CategoryKey = keyof typeof metadata;
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
+export default function CategoryPage({ params }: CategoryPageProps) {
   const categoryLower = params.category.toLowerCase();
   console.log(categoryLower);
 
-  const categoryCourses = courseTypes[categoryLower];
+  const categoryCourses = courseTypes[categoryLower] || null;
   console.log(categoryCourses);
 
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
 
-// ✅ Fix: Correct Next.js metadata function
-export async function generateMetadata({ params }: { params: { category: string } }) {
+// ✅ Fix: Ensure generateMetadata has the correct type
+export async function generateMetadata({ params }: CategoryPageProps) {
   const categoryLower = params.category.toLowerCase() as CategoryKey;
   const courseInfo = metadata[categoryLower] || null;
 
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-// ✅ Fix: Ensure generateStaticParams returns correct structure
+// ✅ Fix: Ensure generateStaticParams returns an array of objects
 export async function generateStaticParams() {
   return Object.keys(courseTypes).map((category) => ({
     category,
