@@ -18,7 +18,7 @@ const poppins = Poppins({
 const LifeAtInframe = () => {
   return (
     <section className="py-16 font-sans relative overflow-hidden">
-      <div className="pl-4 md:pl-6 lg:pl-[calc(((100vw-1200px)/2)+1rem)] pr-0">
+      <div className="pl-4 md:pl-6 lg:pl-[calc(((95vw-1200px)/2)+1rem)] pr-0">
         {/* Section header */}
         <div className="mb-12 max-w-3xl">
           <h3 className="text-sm font-medium uppercase tracking-wider text-gray-600 mb-2">
