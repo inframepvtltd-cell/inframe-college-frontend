@@ -70,7 +70,7 @@ export default function TestimonialCarousel() {
                     {/* Testimonial Text */}
                     <div className="space-y-4">
                       <p className="text-white/90 text-lg leading-relaxed line-clamp-4">
-                        "{testimonial.feedback}"
+                        {`"${testimonial.feedback}"`}
                       </p>
                       
                       {/* Student Info */}
