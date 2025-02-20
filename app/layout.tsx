@@ -34,8 +34,10 @@ export default function RootLayout({
 
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="dGWC26ZkV6A4Ue6fhZdXFh5gMfWQDF3Q-3qpLE71h5M" />
+      </Head>
 
-        {/* Google Analytics */}
+      <body>
+        {/* Google Analytics (placed inside <body>, not inside <Head>) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1Q0ED5JDYB"
           strategy="afterInteractive"
@@ -48,9 +50,9 @@ export default function RootLayout({
             gtag('config', 'G-1Q0ED5JDYB');
           `}
         </Script>
-      </Head>
 
-      <body>{children}</body>
+        {children}
+      </body>
     </html>
   );
 }
