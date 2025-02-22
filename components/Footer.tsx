@@ -117,8 +117,8 @@ const Footer = () => {
       {/* Copyright Section */}
       <div className="mt-8 border-t-2 border-gray-800 pt-6">
         <div className="container mx-auto px-6 lg:px-16 text-center text-sm opacity-80">
-          <p>
-            © 2025 Inframe. Ltd. All rights reserved Inframe School of Art, Design & Business is a Unit of Inframe Educational Society Registered under the Rajasthan Society Act.  <br />
+          <p className="font-bold">
+            © 2025 Inframe School of Art, Design & Business is a Unit of Inframe Educational Society Registered under the Rajasthan Society Act. All rights reserved  <br />
             <Link href={"/privacy-policy"} className="hover:underline">Privacy Policy</Link> ·{" "}
             <Link href={"/cancellation-and-refund"} className="hover:underline">Cancellation and Refund</Link> ·{" "}
             <Link href={"/terms-and-conditions"} className="hover:underline">Terms & Conditions</Link> ·{" "}
