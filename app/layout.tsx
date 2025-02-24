@@ -1,4 +1,5 @@
 import { Poppins } from "next/font/google";
+import { headers } from "next/headers"; // ✅ Get pathname dynamically on the server
 import "./globals.css";
 import Script from "next/script";
 import type { Metadata } from "next";
@@ -35,7 +36,48 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Define breadcrumb mapping for static pages
+const breadcrumbPages: Record<string, { name: string; url: string }> = {
+  "/about": { name: "About Us", url: "https://www.inframeschool.com/about" },
+  "/courses": { name: "Courses", url: "https://www.inframeschool.com/courses" },
+  "/blog": { name: "Blog", url: "https://www.inframeschool.com/blog" },
+  "/contact": { name: "Contact Us", url: "https://www.inframeschool.com/contact" },
+  "/lifeatinframe": { name: "Student Life", url: "https://www.inframeschool.com/lifeatinframe" },
+  "/careers": { name: "Careers", url: "https://www.inframeschool.com/careers" },
+  "/download": { name: "Download Resources", url: "https://www.inframeschool.com/download" },
+  "/mentors": { name: "Mentors", url: "https://www.inframeschool.com/mentors" },
+};
+
+export default  async function RootLayout({ children }: { children: React.ReactNode }) {
+  // ✅ Get the current pathname dynamically from headers
+  const pathname = (await headers()).get("x-pathname") || "/";
+
+  const currentPage = breadcrumbPages[pathname];
+
+  // Breadcrumb Schema for Static Pages
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.inframeschool.com",
+      },
+      ...(currentPage
+        ? [
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": currentPage.name,
+              "item": currentPage.url,
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <html lang="en" className={poppins.className}>
       <body>
@@ -52,6 +94,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-1Q0ED5JDYB');
           `}
         </Script>
+
+        {/* Inject Breadcrumb Schema */}
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
 
         {children}
       </body>
