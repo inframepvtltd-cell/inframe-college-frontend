@@ -32,12 +32,13 @@ export default async function CategoryPage({
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 2,
         "name": category,
         "item": `https://www.inframeschool.com/${categoryLower}`
       }
     ]
   };
+  
 
   return (
     <>
