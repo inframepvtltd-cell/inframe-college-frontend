@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { format } from "date-fns"; // Formatting dates
@@ -21,7 +21,7 @@ const LatestNews = () => {
     urlToImage: string | null;
     publishedAt: string;
   }
-  
+
   const [news, setNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,17 +40,29 @@ const LatestNews = () => {
           articles: Article[];
         }
 
-        const filteredNews = (response.data as ApiResponse).articles.filter((article: Article) => {
-          const keywords = [
-            'graphic design', 'UI/UX', 'web design', 'digital art', 'art exhibitions',
-            'tech innovations', 'technology startups', 'art', 'design', 'technology'
-          ];
+        const filteredNews = (response.data as ApiResponse).articles.filter(
+          (article: Article) => {
+            const keywords = [
+              "graphic design",
+              "UI/UX",
+              "web design",
+              "digital art",
+              "art exhibitions",
+              "tech innovations",
+              "technology startups",
+              "art",
+              "design",
+              "technology",
+            ];
 
-          return keywords.some((keyword) =>
-            article.title.toLowerCase().includes(keyword) ||
-            (article.description && article.description.toLowerCase().includes(keyword))
-          );
-        });
+            return keywords.some(
+              (keyword) =>
+                article.title.toLowerCase().includes(keyword) ||
+                (article.description &&
+                  article.description.toLowerCase().includes(keyword))
+            );
+          }
+        );
 
         setNews(filteredNews);
         setLoading(false);
@@ -64,7 +76,6 @@ const LatestNews = () => {
   }, []);
   console.log("ENV API KEY:", process.env.NEXT_PUBLIC_NEWS_API_KEY);
 
-
   if (loading) {
     return <div className="text-center py-8">Loading...</div>;
   }
@@ -75,14 +86,18 @@ const LatestNews = () => {
 
   return (
     <section className="latest-news font-sans px-4 py-8">
-       <h2 className={`text-3xl font-bold text-left mb-4 ${poppins.className}`}>
-          Latest News
-        </h2>
+      <h2 className={`text-3xl font-bold text-left mb-4 ${poppins.className}`}>
+        Latest News
+      </h2>
 
-        {/* Short Description */}
-        <p className={`text-left text-lg text-gray-600 mb-8 ${poppins.className}`}>
-          Stay up-to-date with the latest trends in design, art, and technology. Our curated news covers the most innovative developments in the creative world.
-        </p>
+      {/* Short Description */}
+      <p
+        className={`text-left text-lg text-gray-600 mb-8 ${poppins.className}`}
+      >
+        Stay up-to-date with the latest trends in design, art, and technology.
+        Our curated news covers the most innovative developments in the creative
+        world.
+      </p>
       <ul className="news-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         {news.slice(0, 5).map((article, index) => (
           <li
@@ -105,13 +120,20 @@ const LatestNews = () => {
                 <h3 className="text-xl font-semibold text-gray-800 hover:text-blue-500 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-gray-600 text-sm line-clamp-3">{article.description}</p>
+                <p className="text-gray-600 text-sm line-clamp-3">
+                  {article.description}
+                </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500 flex items-center space-x-1">
                     <Clock size={14} />
-                    <span>{format(new Date(article.publishedAt), "MMM dd, yyyy")}</span>
+                    <span>
+                      {format(new Date(article.publishedAt), "MMM dd, yyyy")}
+                    </span>
                   </span>
-                  <ChevronRight size={18} className="text-gray-500 hover:text-gray-700 transition-colors" />
+                  <ChevronRight
+                    size={18}
+                    className="text-gray-500 hover:text-gray-700 transition-colors"
+                  />
                 </div>
               </div>
             </a>

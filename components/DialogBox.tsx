@@ -9,7 +9,6 @@ import {
 import { programs } from "../utils/constant";
 import { ChevronDown } from "lucide-react";
 
-
 export function DialogDemo() {
   return (
     <Dialog>
@@ -23,7 +22,9 @@ export function DialogDemo() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle className="font-sans font-bold">Self-Paced Programs</DialogTitle>
+          <DialogTitle className="font-sans font-bold">
+            Self-Paced Programs
+          </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <p className="text-sm font-sans text-gray-600">
@@ -32,8 +33,12 @@ export function DialogDemo() {
           <ul className="space-y-2">
             {programs.map((program, index) => (
               <li key={index} className="border-b pb-2">
-                <h3 className="text-lg font-sans font-semibold">{program.title}</h3>
-                <p className="text-sm font-sans text-gray-500">by {program.by}</p>
+                <h3 className="text-lg font-sans font-semibold">
+                  {program.title}
+                </h3>
+                <p className="text-sm font-sans text-gray-500">
+                  by {program.by}
+                </p>
               </li>
             ))}
           </ul>

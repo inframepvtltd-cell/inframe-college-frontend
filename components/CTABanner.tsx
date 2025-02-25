@@ -1,8 +1,6 @@
-
 import { ArrowRight } from "lucide-react"; // Lucide icons
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
 import { Button } from "./ui/button";
-
 
 // Using the Poppins font
 const poppins = Poppins({
@@ -20,8 +18,8 @@ const CoursesCTABanner = () => {
             <span>🚀</span> {`Not sure what you're interested in?`}
           </h2>
           <p className="text-sm lg:text-lg opacity-90">
-            Explore a wide range of courses tailored to help you achieve your goals{" "}
-            <ArrowRight size={20} className="inline ml-2 text-gray-900" />
+            Explore a wide range of courses tailored to help you achieve your
+            goals <ArrowRight size={20} className="inline ml-2 text-gray-900" />
           </p>
         </div>
 

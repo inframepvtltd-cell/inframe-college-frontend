@@ -124,7 +124,6 @@ export function ContactUsForm({
                 Shyam Nagar, Jodhpur, Rajasthan 342008
               </p>
               <div className="mt-4 space-y-3">
-               
                 <p className="text-lg text-center md:text-left text-gray-700">
                   <Phone className="inline mr-2 text-blue-600" />
                   Admissions:{" "}
@@ -152,7 +151,7 @@ export function ContactUsForm({
                     href="mailto:info@inframecollege.org"
                     className="text-blue-600 hover:underline"
                   >
-                   info@inframeschool.com
+                    info@inframeschool.com
                   </a>
                 </p>
                 <p className="text-lg text-center md:text-left text-gray-700">

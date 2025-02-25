@@ -4,11 +4,7 @@ import Script from "next/script";
 
 type ParamsType = Promise<{ category: string }>;
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: ParamsType;
-}) {
+export default async function CategoryPage({ params }: { params: ParamsType }) {
   const { category } = await params;
   const categoryLower = category.toLowerCase();
 
@@ -23,22 +19,21 @@ export default async function CategoryPage({
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.inframeschool.com"
+        position: 1,
+        name: "Home",
+        item: "https://www.inframeschool.com",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": category,
-        "item": `https://www.inframeschool.com/${categoryLower}`
-      }
-    ]
+        position: 2,
+        name: category,
+        item: `https://www.inframeschool.com/${categoryLower}`,
+      },
+    ],
   };
-  
 
   return (
     <>

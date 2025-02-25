@@ -1,7 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
 import { CourseType } from "../../utils/courseTypes";
 import CourseContent from "./CourseContent";
 
@@ -34,7 +45,12 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseType, category }) => {
   }
   return (
     <div className="min-h-screen mt-24 sm:mt-0 font-sans bg-black text-white">
-      <Tabs defaultValue={selectedTab} value={selectedTab} onValueChange={setSelectedTab} className="w-full">
+      <Tabs
+        defaultValue={selectedTab}
+        value={selectedTab}
+        onValueChange={setSelectedTab}
+        className="w-full"
+      >
         {/* Mobile View - Select Dropdown */}
         <div className="block md:hidden p-4">
           <Select value={selectedTab} onValueChange={setSelectedTab}>
@@ -43,7 +59,11 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseType, category }) => {
             </SelectTrigger>
             <SelectContent className="bg-zinc-900 text-white border border-zinc-700">
               {courseType.map((tab) => (
-                <SelectItem key={tab.value} value={tab.value} className="cursor-pointer">
+                <SelectItem
+                  key={tab.value}
+                  value={tab.value}
+                  className="cursor-pointer"
+                >
                   {tab.label}
                 </SelectItem>
               ))}

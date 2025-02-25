@@ -1,8 +1,7 @@
 // app/landingpage/layout.tsx
-import React from 'react';
+import React from "react";
 
-import LandingNavbar from '../../components/LandingPageNavbar';
-
+import LandingNavbar from "../../components/LandingPageNavbar";
 
 export default function LandingPageLayout({
   children,

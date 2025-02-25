@@ -31,7 +31,6 @@ const ReelCard = () => {
 
   const videos = [
     "/videos/Sports day__--___quotes _love _likesforlike _travel _foryou _followforfollowback _trendingreels _ootdfashion(MP4).mp4",
-   
   ];
 
   const handleVideoEnd = () => {

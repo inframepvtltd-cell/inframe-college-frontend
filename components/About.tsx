@@ -98,12 +98,12 @@ const AboutPage = () => {
               <p className="text-lg font-sans leading-relaxed text-justify">
                 Inframe school of art, design & business is established by the
                 Inframe Educational Society under Rajasthan Societies Act 1958.
-                Inframe school of art, design and business will be one of a
-                kind design institute in Jodhpur which will commence it’s
-                curriculum with the aim to expand the design and business field
-                in Jodhpur and it’s surrounding regions by being the first
-                design and business school of Jodhpur to offer degree, diploma
-                and professional courses in various fields of interior design,
+                Inframe school of art, design and business will be one of a kind
+                design institute in Jodhpur which will commence it’s curriculum
+                with the aim to expand the design and business field in Jodhpur
+                and it’s surrounding regions by being the first design and
+                business school of Jodhpur to offer degree, diploma and
+                professional courses in various fields of interior design,
                 graphic design, fine arts and digital marketing .
                 <br />
                 <br />
@@ -111,8 +111,8 @@ const AboutPage = () => {
                 in specific subject .The candidate from any educational
                 background can pursue or take admission to a design course and
                 fulfill their dreams of becoming designer with inframe design
-                school .In school will not only help the students to learn
-                more effectively and have a great future.
+                school .In school will not only help the students to learn more
+                effectively and have a great future.
               </p>
             </div>
           </div>
@@ -275,8 +275,8 @@ const AboutPage = () => {
                 in specific subject .The candidate from any educational
                 background can pursue or take admission to a design course and
                 fulfill their dreams of becoming designer with inframe design
-                school .In school will not only help the students to learn
-                more effectively and have a great future.
+                school .In school will not only help the students to learn more
+                effectively and have a great future.
               </p>
             </div>
           </div>

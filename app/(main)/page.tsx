@@ -1,4 +1,3 @@
-
 // app/page.tsx
 
 import HeroSection from "../../components/HeroSection";
@@ -14,18 +13,17 @@ import TestimonialCarousel from "../../components/TestimonialSection ";
 import MembershipPartnership from "../../components/MemberShipSection";
 import CourseCatalog from "../../components/CourseCarousel";
 
-
 export default function Home() {
   return (
     <div>
       <HeroSection />
-      <CourseCatalog/>
+      <CourseCatalog />
       <DreamsSection />
       <InfiniteSlider />
       <CounselingForm />
       <LifeAtInframe />
- 
-      <MembershipPartnership/>
+
+      <MembershipPartnership />
       <CTABanner />
       <LatestNews />
       <FeaturesSection />

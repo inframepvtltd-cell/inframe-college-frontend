@@ -1,14 +1,12 @@
-
-import React from 'react'
-import ShippingPolicy from '../../../components/ShippingPolicy'
-
+import React from "react";
+import ShippingPolicy from "../../../components/ShippingPolicy";
 
 const page = () => {
   return (
     <div>
-        <ShippingPolicy/>
+      <ShippingPolicy />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

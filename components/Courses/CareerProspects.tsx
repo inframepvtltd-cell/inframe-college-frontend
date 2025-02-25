@@ -23,7 +23,11 @@ const CareerProspects = () => (
         },
         {
           title: "Design Consultant",
-          roles: ["Freelance Designer", "Design Firm Partner", "Project Manager"],
+          roles: [
+            "Freelance Designer",
+            "Design Firm Partner",
+            "Project Manager",
+          ],
         },
         {
           title: "Specialized Roles",

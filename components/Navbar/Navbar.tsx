@@ -1,10 +1,9 @@
 "use client";
 
-
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { INFRAME_LOGO, LOGO} from "../../utils/constant";
+import { INFRAME_LOGO, LOGO } from "../../utils/constant";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import StudyDropDown from "./StudyDropDown";
 import { Poppins } from "next/font/google";
@@ -50,7 +49,9 @@ const Navbar = () => {
                 </span>
               </div>
               <StudyDropDown />
-              <nav className={`hidden md:flex items-center gap-8 ${poppins.className}`}>
+              <nav
+                className={`hidden md:flex items-center gap-8 ${poppins.className}`}
+              >
                 <Link
                   href={"/about"}
                   className="text-muted-foreground text-white font-bold"

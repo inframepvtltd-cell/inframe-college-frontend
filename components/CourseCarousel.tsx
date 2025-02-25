@@ -28,8 +28,7 @@ const courses = {
         "1 Year Diploma in Interior Design",
         "3 Year Diploma in Interior Design",
       ],
-      image:
-        "/images/gallery/1717668148989.jpg",
+      image: "/images/gallery/1717668148989.jpg",
     },
     {
       title: "Fashion Design",
@@ -51,8 +50,7 @@ const courses = {
         "1 Year Diploma in Graphic Design",
         "3 Year Diploma in Graphic Design",
       ],
-      image:
-        "/images/gallery/DSC04267.JPG",
+      image: "/images/gallery/DSC04267.JPG",
     },
     {
       title: "UIUX-Design",
@@ -101,8 +99,7 @@ const courses = {
         "1 Year Diploma in Painting",
         "3 Year Diploma in Fine Arts",
       ],
-      image:
-        "/images/gallery/1717485328677 - Copy (4).jpg",
+      image: "/images/gallery/1717485328677 - Copy (4).jpg",
     },
   ],
   business: [
@@ -162,7 +159,6 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
         className="overflow-hidden group hover:shadow-2xl transition-all duration-300 border-yellow-100 hover:border-yellow-300"
       >
         <div className="relative">
-          
           <Image
             src={course.image}
             alt={course.title}

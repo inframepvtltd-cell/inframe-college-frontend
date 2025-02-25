@@ -7,7 +7,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-
 } from "../components/ui/carousel";
 
 const poppins = Poppins({
@@ -24,11 +23,16 @@ const LifeAtInframe = () => {
           <h3 className="text-sm font-medium uppercase tracking-wider text-gray-600 mb-2">
             OUR CULTURE
           </h3>
-          <h2 className={`text-2xl md:text-3xl font-bold text-left ${poppins.className}`}>
+          <h2
+            className={`text-2xl md:text-3xl font-bold text-left ${poppins.className}`}
+          >
             Life @ Inframe
           </h2>
-          <p className={`text-left text-lg text-gray-600 mt-3 ${poppins.className}`}>
-            Experience a vibrant, collaborative environment at Inframe where creativity and innovation thrive.
+          <p
+            className={`text-left text-lg text-gray-600 mt-3 ${poppins.className}`}
+          >
+            Experience a vibrant, collaborative environment at Inframe where
+            creativity and innovation thrive.
           </p>
         </div>
 
@@ -42,10 +46,11 @@ const LifeAtInframe = () => {
         >
           <CarouselContent className="-ml-6">
             {cards.map((card, index) => (
-              <CarouselItem key={index} className="pl-6 basis-full md:basis-[398px]">
-                <Card 
-                  className="h-[598px] ml-3 overflow-hidden border-0 shadow-lg rounded-lg bg-transparent z-10 text-white group relative"
-                >
+              <CarouselItem
+                key={index}
+                className="pl-6 basis-full md:basis-[398px]"
+              >
+                <Card className="h-[598px] ml-3 overflow-hidden border-0 shadow-lg rounded-lg bg-transparent z-10 text-white group relative">
                   {/* Image with gradient overlay */}
                   <div className="relative w-full h-full">
                     <Image
@@ -57,7 +62,7 @@ const LifeAtInframe = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
                   </div>
-                  
+
                   {/* Card Content */}
                   <CardContent className="absolute bottom-0 left-0 right-0 p-6">
                     <CardTitle className="text-xl font-bold leading-tight mb-3">
@@ -71,7 +76,6 @@ const LifeAtInframe = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-         
         </Carousel>
       </div>
     </section>

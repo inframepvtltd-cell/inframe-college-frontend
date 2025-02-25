@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from './ui/button'
+import React from "react";
+import { Button } from "./ui/button";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -31,7 +31,7 @@ const ApplyNow = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ApplyNow
+export default ApplyNow;

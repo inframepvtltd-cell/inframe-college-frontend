@@ -1,15 +1,12 @@
-
-import React from 'react'
-import AdvisorsPage from '../../../components/AdvisorsPage'
-
-
+import React from "react";
+import AdvisorsPage from "../../../components/AdvisorsPage";
 
 const page = () => {
   return (
     <div>
-        <AdvisorsPage/>
+      <AdvisorsPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

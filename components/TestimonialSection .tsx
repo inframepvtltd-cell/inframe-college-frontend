@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
-import { Carousel, CarouselContent, CarouselItem } from "../components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "../components/ui/carousel";
 import { Card } from "../components/ui/card";
 import Image from "next/image";
 import { testimonials } from "../utils/constant";
@@ -19,13 +23,14 @@ export default function TestimonialCarousel() {
     <div className="w-full max-w-7xl mx-auto py-20 px-4 lg:px-8">
       {/* Header Section */}
       <div className="mb-16 max-w-2xl">
-        <h2 
+        <h2
           className={`text-4xl lg:text-5xl font-bold mb-4 ${poppins.className}`}
         >
           Student Success Stories
         </h2>
         <p className="text-gray-600 text-lg">
-          Discover how our platform has transformed the learning journey of our students
+          Discover how our platform has transformed the learning journey of our
+          students
         </p>
       </div>
 
@@ -54,25 +59,28 @@ export default function TestimonialCarousel() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority
                   />
-                  
+
                   {/* Semi-transparent gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                  
+
                   {/* Content Container */}
                   <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-24">
                     {/* Rating Stars */}
                     <div className="flex gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        <Star
+                          key={i}
+                          className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                        />
                       ))}
                     </div>
-                    
+
                     {/* Testimonial Text */}
                     <div className="space-y-4">
                       <p className="text-white/90 text-lg leading-relaxed line-clamp-4">
                         {`"${testimonial.feedback}"`}
                       </p>
-                      
+
                       {/* Student Info */}
                       <div className="flex items-center gap-4 pt-4 border-t border-white/10">
                         <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white/30">

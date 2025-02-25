@@ -1,11 +1,12 @@
- 
-import React from 'react'
-import LifeAtCampus from '../../../components/LifeAtInframePage'
+import React from "react";
+import LifeAtCampus from "../../../components/LifeAtInframePage";
 
 const page = () => {
   return (
-    <div><LifeAtCampus/></div>
-  )
-}
+    <div>
+      <LifeAtCampus />
+    </div>
+  );
+};
 
-export default page
+export default page;

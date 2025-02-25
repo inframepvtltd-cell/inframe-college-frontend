@@ -8,7 +8,11 @@ interface HighlightCardProps {
   description: string;
 }
 
-const HighlightCard: React.FC<HighlightCardProps> = ({ icon: Icon, title, description }) => (
+const HighlightCard: React.FC<HighlightCardProps> = ({
+  icon: Icon,
+  title,
+  description,
+}) => (
   <Card className="bg-zinc-900 border border-yellow-400/20 hover:border-yellow-400 transition-colors duration-300">
     <CardContent className="p-6">
       <Icon className="w-12 h-12 text-yellow-400 mb-4" />

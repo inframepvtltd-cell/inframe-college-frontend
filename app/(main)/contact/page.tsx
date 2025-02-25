@@ -1,29 +1,18 @@
-
-
-
-
-
-
 import "../../../components/style.css";
 import { ContactUsForm } from "../../../components/ContactUs";
 import ReelCard from "../../../components/ReelCard";
 import ApplyNow from "../../../components/ApplyNow";
 
-
-
-
-
 export default function page() {
   return (
     <>
-     
-      <div >
+      <div>
         <ContactUsForm />
-        <ReelCard/>
+        <ReelCard />
         <section>
           <div className="bg bg1  "></div>
 
-         <ApplyNow/>
+          <ApplyNow />
         </section>
       </div>
     </>
