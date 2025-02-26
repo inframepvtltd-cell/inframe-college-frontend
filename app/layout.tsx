@@ -11,14 +11,16 @@ const poppins = Poppins({
 
 // Metadata object for SEO & verification
 export const metadata: Metadata = {
-  title: "Inframe School: Best Art, Design & Business School in Jodhpur | Top College for Creative Education",
+  title:
+    "Inframe School: Best Art, Design & Business School in Jodhpur | Top College for Creative Education",
   description:
     "Inframe School of Art, Design & Business is a Leading Institution in Jodhpur with Over 15 Years of Excellence. We are the Trusted Choice for Creative Education in Jodhpur.",
   icons: {
     icon: "/500x500.jpg",
   },
   openGraph: {
-    title: "Inframe School: Best Art, Design & Business School in Jodhpur | Top College for Creative Education",
+    title:
+      "Inframe School: Best Art, Design & Business School in Jodhpur | Top College for Creative Education",
     description:
       "Inframe School of Art, Design & Business is a Leading Institution in Jodhpur with Over 15 Years of Excellence. We are the Trusted Choice for Creative Education in Jodhpur.",
     url: "https://yourwebsite.com",
@@ -41,14 +43,27 @@ const breadcrumbPages: Record<string, { name: string; url: string }> = {
   "/about": { name: "About Us", url: "https://www.inframeschool.com/about" },
   "/courses": { name: "Courses", url: "https://www.inframeschool.com/courses" },
   "/blog": { name: "Blog", url: "https://www.inframeschool.com/blog" },
-  "/contact": { name: "Contact Us", url: "https://www.inframeschool.com/contact" },
-  "/lifeatinframe": { name: "Student Life", url: "https://www.inframeschool.com/lifeatinframe" },
+  "/contact": {
+    name: "Contact Us",
+    url: "https://www.inframeschool.com/contact",
+  },
+  "/lifeatinframe": {
+    name: "Student Life",
+    url: "https://www.inframeschool.com/lifeatinframe",
+  },
   "/careers": { name: "Careers", url: "https://www.inframeschool.com/careers" },
-  "/download": { name: "Download Resources", url: "https://www.inframeschool.com/download" },
+  "/download": {
+    name: "Download Resources",
+    url: "https://www.inframeschool.com/download",
+  },
   "/mentors": { name: "Mentors", url: "https://www.inframeschool.com/mentors" },
 };
 
-export default  async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   // ✅ Get the current pathname dynamically from headers
   const pathname = (await headers()).get("x-pathname") || "/";
 
@@ -58,20 +73,20 @@ export default  async function RootLayout({ children }: { children: React.ReactN
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.inframeschool.com",
+        position: 1,
+        name: "Home",
+        item: "https://www.inframeschool.com",
       },
       ...(currentPage
         ? [
             {
               "@type": "ListItem",
-              "position": 2,
-              "name": currentPage.name,
-              "item": currentPage.url,
+              position: 2,
+              name: currentPage.name,
+              item: currentPage.url,
             },
           ]
         : []),
