@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     "Inframe School of Art, Design & Business is a Leading Institution in Jodhpur with Over 15 Years of Excellence. We are the Trusted Choice for Creative Education in Jodhpur.",
   icons: {
-    icon: "/500x500.jpg",
+    icon: "/favicon.ico",
   },
   openGraph: {
     title:
@@ -95,6 +95,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={poppins.className}>
+       <head>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" type="image/x-icon" />
+  </head>
       <body>
         {/* Google Analytics */}
         <Script
