@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { Card, CardContent } from "../components/ui/card";
-import { highlights, LOGOS, studentImages, values } from "../utils/constant";
+import { experienceCamputLife, highlights, LOGOS, studentImages, values } from "../utils/constant";
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
 import ApplyNow from "./ApplyNow";
 import Image from "next/image";
@@ -284,7 +284,7 @@ const AboutPage = () => {
       </section>
 
       {/* Campus Life Grid */}
-      <CampusLife />
+      <CampusLife  experienceCamputLife={experienceCamputLife}/>
       <section className="bg-white text-black py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-36 items-center">
