@@ -1,4 +1,3 @@
-import { experienceCamputLife } from "../utils/constant";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import React from "react";
@@ -8,7 +7,11 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-const CampusLife = () => {
+interface CampusLifeProps {
+  experienceCamputLife: string[];
+}
+
+const CampusLife: React.FC<CampusLifeProps> = ({ experienceCamputLife }) => {
   return (
     <div>
       <section className="py-20 bg-yellow-50 text-black">

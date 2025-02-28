@@ -5,6 +5,7 @@ import { ChevronRight, ArrowRight } from "lucide-react";
 import { Suspense, lazy } from "react";
 import { Poppins } from "next/font/google";
 import "../components/style.css";
+import { experienceCamputLife2 } from "../utils/constant";
 
 // Lazy load components
 const CampusLife = lazy(() => import("../components/CampusLife"));
@@ -230,7 +231,7 @@ export const LifeAtCampus = () => {
 
         {/* Lazy Loaded Components */}
         <Suspense fallback={<LoadingSpinner />}>
-          <CampusLife />
+          <CampusLife experienceCamputLife={experienceCamputLife2} />
           <StudentClubs />
           <div className="bg bg2" />
           <SportsArena />

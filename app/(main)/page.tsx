@@ -7,7 +7,6 @@ import InfiniteSlider from "../../components/LogoCarousel";
 import CounselingForm from "../../components/CounselingForm";
 import LifeAtInframe from "../../components/LifeAtInframe";
 import CTABanner from "../../components/CTABanner";
-import LatestNews from "../../components/LatestNews";
 import FeaturesSection from "../../components/WhyInframe";
 import TestimonialCarousel from "../../components/TestimonialSection ";
 import MembershipPartnership from "../../components/MemberShipSection";
@@ -25,7 +24,6 @@ export default function Home() {
 
       <MembershipPartnership />
       <CTABanner />
-      <LatestNews />
       <FeaturesSection />
       <TestimonialCarousel />
     </div>

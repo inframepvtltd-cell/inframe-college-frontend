@@ -515,6 +515,21 @@ export const experienceCamputLife = [
   "/IMG_20230304_151926.jpg",
   "/240008bb-a702-400d-b344-429884fda820.jpg",
 ];
+export const experienceCamputLife2 = [
+  "/images/gallery/DSC04232.JPG",
+  "/images/gallery/SKF02723.JPG",
+  "/images/gallery/SKF02878.JPG",
+  "/images/gallery/SKF02763.JPG",
+  "/images/gallery/1719576263358.jpg",
+  "/images/gallery/DSC04130.JPG",
+  "/images/gallery/DSC04264.JPG",
+  "/images/gallery/SKF02844.JPG",
+  "/images/gallery/1717476204703 - Copy (2).jpg",
+  "/images/gallery/SKF02808.JPG",
+  "/images/gallery/SKF02725.JPG",
+  "/images/gallery/1717571273328.jpg",
+  "/images/gallery/DSC04166.JPG",
+];
 
 export const values = [
   {
