@@ -19,10 +19,9 @@ const categoryColors: Record<string, string> = {
   "Student Life": "bg-orange-500 text-white",
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const slug = params.slug
-  const post = blogPostsData[slug as keyof typeof blogPostsData]
-
+export default async function BlogPost({ params }: { params: BlogPostParams }) {
+    const { slug } = await params
+    const post = blogPostsData[slug as keyof typeof blogPostsData]
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
