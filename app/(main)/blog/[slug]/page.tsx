@@ -278,7 +278,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
-          <p className="mb-6">The blog post you're looking for doesn't exist.</p>
+          <p className="mb-6">{`The blog post you're looking for doesn't exist.`}</p>
           <Link href="/">
             <Button>Return to Home</Button>
           </Link>
@@ -294,27 +294,30 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   }))
 
   useEffect(() => {
+    if (!sectionRefs.current) return; // Ensure sectionRefs.current is initialized
+  
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+            setActiveSection(entry.target.id);
           }
-        })
+        });
       },
-      { rootMargin: "-100px 0px -80% 0px" },
-    )
-
+      { rootMargin: "-100px 0px -80% 0px" }
+    );
+  
     Object.values(sectionRefs.current).forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
-
+      if (ref) observer.observe(ref);
+    });
+  
     return () => {
       Object.values(sectionRefs.current).forEach((ref) => {
-        if (ref) observer.unobserve(ref)
-      })
-    }
-  }, [])
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []); // Ensure no conditional dependencies
+  
 
   const scrollToSection = (id: string) => {
     const element = sectionRefs.current[id]
@@ -471,13 +474,13 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 
                   {section.content.split("\n\n").map((paragraph, idx) => (
                     <p key={idx} className="mb-4">
-                      {paragraph}
+                      {`${paragraph}`}
                     </p>
                   ))}
 
                   {section.quote && (
                     <blockquote className="border-l-4 border-yellow-400 pl-6 py-2 my-6 bg-yellow-50 rounded-r-lg">
-                      <p className="italic text-xl mb-2">"{section.quote}"</p>
+                      <p className="italic text-xl mb-2">{`"${section.quote}"`}</p>
                       {section.quoteAuthor && (
                         <footer className="text-right font-medium">– {section.quoteAuthor}</footer>
                       )}
