@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, Calendar, Clock, Share2, Bookmark, ThumbsUp, MessageSquare } from "lucide-react"
 import { blogPostsData } from "../../../../utils/constant"
 
+type BlogPostParams = Promise<{ slug: string }>;
 // Category colors mapping
 const categoryColors: Record<string, string> = {
   Education: "bg-yellow-400 text-black",
@@ -18,7 +19,7 @@ const categoryColors: Record<string, string> = {
   "Student Life": "bg-orange-500 text-white",
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: { slug: string } }) {
   const slug = params.slug
   const post = blogPostsData[slug as keyof typeof blogPostsData]
 
@@ -256,3 +257,8 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   )
 }
 
+export async function generateStaticParams() {
+    return Object.keys(blogPostsData).map((slug) => ({
+      slug,
+    }))
+  }
