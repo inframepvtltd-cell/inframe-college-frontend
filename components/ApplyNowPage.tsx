@@ -53,6 +53,7 @@ import ApplyNowForm from "./ApplyNowForm";
 import Image from "next/image";
 
 import CourseCatalog from "./CourseCarousel";
+import { experienceCamputLife } from "../utils/constant";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -304,7 +305,7 @@ export default function ApplyPage() {
       </section>
 
       {/* Life at Institute */}
-      <CampusLife />
+      <CampusLife experienceCamputLife={experienceCamputLife}/>
 
       {/* Contact Section */}
       <section
