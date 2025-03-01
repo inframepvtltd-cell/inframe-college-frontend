@@ -242,7 +242,7 @@ export default function BlogPost() {
                       opportunities in design.`}
                     </p>
                     <blockquote className="border-l-4 border-yellow-400 pl-4 italic my-4">
-                      "Success is where preparation and opportunity meet." – Bobby Unser
+                      {`"Success is where preparation and opportunity meet." – Bobby Unser`}
                     </blockquote>
                   </CardContent>
                 </Card>

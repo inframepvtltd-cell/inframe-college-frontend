@@ -27,7 +27,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
-          <p className="mb-6">The blog post you're looking for doesn't exist.</p>
+          <p className="mb-6">{`The blog post you're looking for doesn't exist.`}</p>
           <Link href="/">
             <Button>Return to Home</Button>
           </Link>
@@ -158,7 +158,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 
                   {section.quote && (
                     <blockquote className="border-l-4 border-yellow-400 pl-6 py-2 my-6 bg-yellow-50 rounded-r-lg">
-                      <p className="italic text-xl mb-2">"{section.quote}"</p>
+                      <p className="italic text-xl mb-2">{`"${section.quote}"`}</p>
                       {section.quoteAuthor && (
                         <footer className="text-right font-medium">– {section.quoteAuthor}</footer>
                       )}

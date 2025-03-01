@@ -74,11 +74,11 @@ export default function BlogPost() {
         />
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 max-w-4xl">
-            Why Inframe School is the Best Choice for Your Child's Future
+            {`Why Inframe School is the Best Choice for Your Child's Future`}
           </h1>
           <p className="text-xl text-white max-w-2xl">
-            Explore the perfect blend of education, expertise, and exposure at Inframe School for students after 12th
-            grade.
+            {`Explore the perfect blend of education, expertise, and exposure at Inframe School for students after 12th
+            grade.`}
           </p>
         </div>
       </section>
@@ -142,20 +142,20 @@ export default function BlogPost() {
             <article className="prose prose-lg max-w-none">
               <section id="intro" ref={(el) => { sectionRefs.current["intro"] = el }} className="mb-12">
                 <p>
-                  Choosing the right educational path after 12th is a critical decision that can shape your child's
+                  {`Choosing the right educational path after 12th is a critical decision that can shape your child's
                   future. With an overwhelming number of courses and career options available, it's easy to feel lost.
                   However, if your child is passionate about design, arts, and creativity, then Inframe School offers
                   the perfect blend of education, expertise, and exposure. In this article, we'll explore why Inframe
                   School is the best choice for your child's future, especially if you're searching for the best
-                  designing school in Rajasthan or guidance on what to do after 12th.
+                  designing school in Rajasthan or guidance on what to do after 12th.`}
                 </p>
                 <p>
-                  As your child completes their 12th grade, the question of "what's next?" becomes more important than
+                  {`As your child completes their 12th grade, the question of "what's next?" becomes more important than
                   ever. The right educational path can significantly influence their future. If your child has an
                   interest in design, arts, and creativity, then Inframe School offers a unique opportunity for them to
                   develop both academically and professionally. If you're wondering what to do after 12th or looking for
                   the best designing school in Rajasthan, this article will highlight why Inframe School is the best
-                  choice for your child's bright future.
+                  choice for your child's bright future.`}
                 </p>
               </section>
 
@@ -166,20 +166,20 @@ export default function BlogPost() {
                       1. Industry-Driven Curriculum Designed for Future Creatives
                     </h2>
                     <p>
-                      Inframe School offers a specialized curriculum aimed at nurturing future designers and artists.
+                      {`Inframe School offers a specialized curriculum aimed at nurturing future designers and artists.
                       The programs are meticulously designed to combine theoretical knowledge with hands-on practice,
                       enabling students to excel in their field of interest. Whether your child is inclined towards
                       graphic design, fashion design, or architecture, the curriculum is customized to support these
-                      passions and more.
+                      passions and more.`}
                     </p>
                     <p>
-                      Inframe School's curriculum isn't just about academics—it's about preparing students for
+                      {`Inframe School's curriculum isn't just about academics—it's about preparing students for
                       real-world challenges. If you're looking for a course that bridges the gap between education and
-                      industry for your child, Inframe School is one of the best design schools in Rajasthan.
+                      industry for your child, Inframe School is one of the best design schools in Rajasthan.`}
                     </p>
                     <blockquote className="border-l-4 border-yellow-400 pl-4 italic my-4">
-                      "Your work is going to fill a large part of your life, and the only way to be truly satisfied is
-                      to do what you believe is great work." – Steve Jobs
+                      {`"Your work is going to fill a large part of your life, and the only way to be truly satisfied is
+                      to do what you believe is great work." – Steve Jobs`}
                     </blockquote>
                   </CardContent>
                 </Card>
@@ -190,19 +190,19 @@ export default function BlogPost() {
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-4">2. Top-Notch Infrastructure for Creativity to Thrive</h2>
                     <p>
-                      When it comes to learning, the environment plays a crucial role. Inframe School prides itself on
+                      {`When it comes to learning, the environment plays a crucial role. Inframe School prides itself on
                       offering world-class infrastructure that supports students' creative journeys. The school boasts
                       advanced design labs, art studios, and digital media centers where students can experiment,
                       explore, and enhance their creativity. These facilities are specially designed to foster
-                      innovation and technical skill, allowing students to turn their ideas into reality.
+                      innovation and technical skill, allowing students to turn their ideas into reality.`}
                     </p>
                     <p>
-                      For students considering their options after 12th, Inframe School provides an environment where
-                      creativity thrives. Its facilities make it one of the best designing schools in Rajasthan.
+                      {`For students considering their options after 12th, Inframe School provides an environment where
+                      creativity thrives. Its facilities make it one of the best designing schools in Rajasthan.`}
                     </p>
                     <div className="bg-yellow-50 p-4 rounded-md my-4">
                       <h4 className="font-bold text-lg">
-                        Where Creativity Meets Technology: The Power of Inframe School's Facilities
+                        {`Where Creativity Meets Technology: The Power of Inframe School's Facilities`}
                       </h4>
                       <ul className="list-disc pl-5 mt-2">
                         <li>State-of-the-art design studios with industry-standard equipment</li>
@@ -220,19 +220,19 @@ export default function BlogPost() {
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-4">3. Faculty with Practical Industry Expertise</h2>
                     <p>
-                      One of the standout features of Inframe School is its team of highly experienced and qualified
+                      {`One of the standout features of Inframe School is its team of highly experienced and qualified
                       faculty members. Unlike traditional schools, the faculty at Inframe School comprises professionals
                       with significant experience in the arts and design industries. This ensures that students receive
                       education based on current trends and industry needs, allowing them to stay relevant and ahead of
-                      the curve.
+                      the curve.`}
                     </p>
                     <p>
-                      If your child is looking to explore creative careers, Inframe School's expert faculty members
+                      {`If your child is looking to explore creative careers, Inframe School's expert faculty members
                       offer guidance, mentorship, and practical insights to help them succeed. It's this blend of
-                      academic rigor and industry expertise that makes Inframe School an outstanding choice.
+                      academic rigor and industry expertise that makes Inframe School an outstanding choice.`}
                     </p>
                     <blockquote className="border-l-4 border-yellow-400 pl-4 italic my-4">
-                      "The best way to predict the future is to create it." – Peter Drucker
+                      {`"The best way to predict the future is to create it." – Peter Drucker`}
                     </blockquote>
                   </CardContent>
                 </Card>
@@ -243,23 +243,23 @@ export default function BlogPost() {
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-4">4. Career-Oriented Opportunities and Placement Support</h2>
                     <p>
-                      At Inframe School, education goes beyond the classroom. The school places a strong emphasis on
+                      {`At Inframe School, education goes beyond the classroom. The school places a strong emphasis on
                       offering career-oriented experiences that help students transition from the academic world to
                       professional life seamlessly. Through internships, industry workshops, and career placement
-                      programs, students gain valuable experience and exposure to the design industry.
+                      programs, students gain valuable experience and exposure to the design industry.`}
                     </p>
                     <p>
-                      If you're wondering about career options after 12th or how to gain industry experience, Inframe
+                      {`If you're wondering about career options after 12th or how to gain industry experience, Inframe
                       School's strong ties with design firms and professionals offer the ideal platform to launch your
-                      child's career. The school ensures that your child is career-ready by the time they graduate.
+                      child's career. The school ensures that your child is career-ready by the time they graduate.`}
                     </p>
                     <div className="bg-yellow-50 p-4 rounded-md my-4">
                       <h4 className="font-bold text-lg">
-                        Turning Passion into Profession: How Inframe School Prepares Students for Career Success
+                        {`Turning Passion into Profession: How Inframe School Prepares Students for Career Success`}
                       </h4>
                       <p className="mt-2">
-                        The school's placement cell works tirelessly to connect students with opportunities that match
-                        their skills and interests, ensuring a smooth transition from education to employment.
+                        {`The school's placement cell works tirelessly to connect students with opportunities that match
+                        their skills and interests, ensuring a smooth transition from education to employment.`}
                       </p>
                     </div>
                   </CardContent>
@@ -271,18 +271,18 @@ export default function BlogPost() {
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-4">5. Fostering Holistic Growth Beyond Academics</h2>
                     <p>
-                      At Inframe School, the focus is not only on academics but also on developing students' personal
+                      {`At Inframe School, the focus is not only on academics but also on developing students' personal
                       growth and leadership skills. By encouraging participation in extracurricular activities,
                       workshops, and student-led projects, the school helps students build confidence, communication
                       skills, and teamwork. These attributes are equally important for professional success, especially
-                      in the creative industries.
+                      in the creative industries.`}
                     </p>
                     <p>
-                      The school's comprehensive approach ensures that students not only excel in their academic field
-                      but also develop the well-rounded personality needed to succeed in any career path.
+                      {`The school's comprehensive approach ensures that students not only excel in their academic field
+                      but also develop the well-rounded personality needed to succeed in any career path.`}
                     </p>
                     <blockquote className="border-l-4 border-yellow-400 pl-4 italic my-4">
-                      "Success is the sum of small efforts, repeated day in and day out." – Robert Collier
+                      {`"Success is the sum of small efforts, repeated day in and day out." – Robert Collier`}
                     </blockquote>
                   </CardContent>
                 </Card>
@@ -293,20 +293,20 @@ export default function BlogPost() {
                   <CardContent className="p-6">
                     <h2 className="text-2xl font-bold mb-4">6. Strong Alumni Network and Industry Recognition</h2>
                     <p>
-                      Choosing Inframe School means joining a community of successful professionals in the design and
+                      {`Choosing Inframe School means joining a community of successful professionals in the design and
                       arts fields. The school has an impressive alumni network that continues to support and guide
                       current students, offering mentorship and valuable industry connections. Being part of this
-                      network ensures that your child can access career opportunities even after they graduate.
+                      network ensures that your child can access career opportunities even after they graduate.`}
                     </p>
                     <p>
-                      Inframe School's industry recognition as one of the best designing schools in Rajasthan gives your
-                      child a competitive edge, both during their studies and in their future career.
+                      {`Inframe School's industry recognition as one of the best designing schools in Rajasthan gives your
+                      child a competitive edge, both during their studies and in their future career.`}
                     </p>
                     <div className="bg-yellow-50 p-4 rounded-md my-4">
                       <h4 className="font-bold text-lg">The Inframe Advantage: A Network That Opens Doors</h4>
                       <p className="mt-2">
-                        Alumni regularly return to campus for guest lectures, workshops, and recruitment drives,
-                        creating a continuous cycle of knowledge sharing and opportunity creation for current students.
+                        {`Alumni regularly return to campus for guest lectures, workshops, and recruitment drives,
+                        creating a continuous cycle of knowledge sharing and opportunity creation for current students.`}
                       </p>
                     </div>
                   </CardContent>
