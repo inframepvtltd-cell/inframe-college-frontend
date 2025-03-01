@@ -19,7 +19,7 @@ const blogPosts = [
     excerpt:
       "Discover why Inframe School stands out as one of the best design schools in India and the top arts & design school in Rajasthan.",
     image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/1717492615506 - Copy (2).jpg",
     category: "Education",
     date: "Feb 28, 2025",
     readTime: "5 min read",
@@ -30,7 +30,7 @@ const blogPosts = [
     excerpt:
       "Explore the perfect blend of education, expertise, and exposure at Inframe School for students after 12th grade.",
     image:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/1721737773149.jpg",
     category: "Career",
     date: "Feb 25, 2025",
     readTime: "6 min read",
@@ -40,7 +40,7 @@ const blogPosts = [
     title: "Explore the State-of-the-Art Facilities at Inframe School",
     excerpt: "Take a virtual tour of our modern design labs, creative spaces, and innovative learning environments.",
     image:
-      "https://images.unsplash.com/photo-1581078426770-6d336e5de7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/SKF02844.JPG",
     category: "Facilities",
     date: "Feb 20, 2025",
     readTime: "4 min read",
@@ -50,7 +50,7 @@ const blogPosts = [
     title: "Success Stories from Inframe School Alumni",
     excerpt: "Read inspiring stories of our graduates who are making waves in the design and creative industries.",
     image:
-      "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/1721366034581.jpg",
     category: "Alumni",
     date: "Feb 15, 2025",
     readTime: "7 min read",
@@ -72,7 +72,7 @@ const blogPosts = [
     excerpt:
       "Learn about our extensive network of industry partners and how they help our students launch successful careers.",
     image:
-      "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/1717475821142 - Copy (8).jpg",
     category: "Placements",
     date: "Feb 5, 2025",
     readTime: "6 min read",
@@ -82,7 +82,7 @@ const blogPosts = [
     title: "Faculty Spotlight: Meet Our Industry Experts",
     excerpt: "Get to know the accomplished professionals who make up our teaching faculty at Inframe School.",
     image:
-      "https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/DSC04264.JPG",
     category: "Faculty",
     date: "Jan 30, 2025",
     readTime: "8 min read",
@@ -93,7 +93,7 @@ const blogPosts = [
     excerpt:
       "Explore the vibrant student community, extracurricular activities, and creative events at Inframe School.",
     image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+      "/images/gallery/1721738128651.jpg",
     category: "Student Life",
     date: "Jan 25, 2025",
     readTime: "5 min read",
@@ -117,10 +117,10 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       {/* Hero Section with Image */}
        <div className="relative z-10">
-                <div className="relative h-[80vh] ">
-                  <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent z-10" />
+                <div className="relative h-[83vh] ">
+                  <div className="absolute inset-0 bg-gradient-to-r from-black via-black/55 to-transparent z-10" />
                   <Image
-                    src="/images/gallery/1721738128651.jpg"
+                    src="/images/gallery/DSC04232.JPG"
                     alt="Campus Life Hero Image"
                     fill
                     className="object-cover"
@@ -147,6 +147,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              
 
       {/* Featured Articles Section */}
       <section id="featured-articles" className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
@@ -220,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-black text-white">
+      <section className="py-16 my-10 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Stay Updated with Inframe School</h2>
           <p className="mb-8">Subscribe to our newsletter to receive the latest articles, news, and updates.</p>
@@ -230,7 +231,7 @@ export default function Home() {
               placeholder="Your email address"
               className="px-4 py-3 rounded-md flex-grow text-black"
             />
-            <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-6">Subscribe</Button>
+            <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-6 py-6">Subscribe</Button>
           </div>
         </div>
       </section>

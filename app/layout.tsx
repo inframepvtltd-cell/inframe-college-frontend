@@ -94,11 +94,11 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" className={poppins.className}>
+    <html lang="en" >
        <head>
     <link rel="icon" href="/favicon.ico" sizes="32x32" type="image/x-icon" />
   </head>
-      <body>
+      <body className={poppins.className}>
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1Q0ED5JDYB"

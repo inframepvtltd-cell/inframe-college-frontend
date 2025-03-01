@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, List, X } from "lucide-react"
 import { cn } from "../../../../lib/utils"
+import { Badge } from "@/components/ui/badge"
 
 interface IndexItem {
   id: string
@@ -64,15 +65,18 @@ export default function BlogPost() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] bg-black">
+      <section className="relative h-[60vh] min-h-[400px] bg-black">
         <Image
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+          src="/images/gallery/1717492615506 - Copy (2).jpg"
           alt="Students in a design classroom"
           fill
           className="object-cover opacity-60"
           priority
         />
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4">
+        <Badge className="bg-yellow-500 hover:bg-yellow-600 my-20 text-white px-4 py-1 rounded-full mb-4 text-sm font-medium">
+            Education
+          </Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 max-w-4xl">
             {`Top 5 Reasons to Choose Inframe School for Your Child's Education`}
           </h1>
