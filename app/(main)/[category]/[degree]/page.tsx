@@ -2,7 +2,7 @@ import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
-import type { Metadata, ResolvingMetadata } from "next"
+import type { Metadata} from "next"
 
 type ParamsType = { category: string; degree: string }
 
