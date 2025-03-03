@@ -7,8 +7,8 @@ type ParamsType = {
   degree: string; 
 };
 
-export default function DegreePage({ params }: { params: ParamsType }) {
-  const { category, degree } = params; // Corrected: params is directly an object, not a Promise.
+export default async function  DegreePage({ params }: { params: Promise<ParamsType> }) {
+  const { category, degree } = await params; // Corrected: params is directly an object, not a Promise.
   const categoryLower = category.toLowerCase();
 
   if (!courseTypes[categoryLower]) {
