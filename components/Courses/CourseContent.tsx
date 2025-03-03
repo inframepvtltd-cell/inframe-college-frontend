@@ -1,55 +1,43 @@
-"use client"
-import { useState, useEffect } from "react"
-import { Button } from "../../components/ui/button"
-import { ChevronRight, Download, ArrowRight } from "lucide-react"
-import { Poppins } from "next/font/google"
-import HighlightsSection from "./HighlightsSection"
-import CareerProspects from "./CareerProspects"
-import CurriculumSection from "./CurriculumSection"
-import SoftwareLogos from "./SoftwareLogos"
-import TestimonialSlider from "./TestimonialSlider"
-import FAQSection from "./FAQSection"
+"use client";
+
+import { Poppins } from "next/font/google";
+import HighlightsSection from "./HighlightsSection";
+import CareerProspects from "./CareerProspects";
+import CurriculumSection from "./CurriculumSection";
+import SoftwareLogos from "./SoftwareLogos";
+import TestimonialSlider from "./TestimonialSlider";
+import FAQSection from "./FAQSection";
 import {
   categoryHeroImages,
   type CurriculumType,
   type SoftwareType,
   type VideosType,
   type WhatLearn,
-} from "../../utils/courseTypes"
-import IndustryPartners from "./Partners"
-import AdmissionProcess from "./AdmissionProcess"
-import WhatYouWillLearn from "./WhatYouWillLearn"
-import DreamsSection from "../DreamSection"
-import Image from "next/image"
+} from "../../utils/courseTypes";
+import IndustryPartners from "./Partners";
+import AdmissionProcess from "./AdmissionProcess";
+import WhatYouWillLearn from "./WhatYouWillLearn";
+import DreamsSection from "../DreamSection";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-})
+});
 
 interface CourseContentProps {
-  title: string
-  duration: string
-  description: string
-  content: string
-  index: number
-  category: string
-  curriculum?: CurriculumType
-  software?: SoftwareType[]
-  whatYouWillLearn?: WhatLearn[]
-  videos?: VideosType[]
+  title: string;
+  duration: string;
+  description: string;
+  content: string;
+  index: number;
+  category: string;
+  curriculum?: CurriculumType;
+  software?: SoftwareType[];
+  whatYouWillLearn?: WhatLearn[];
+  videos?: VideosType[];
 }
-
-const sections = [
-  { id: "overview", label: "Overview" },
-  { id: "admission", label: "Admission" },
-  { id: "highlights", label: "Highlights" },
-  { id: "curriculum", label: "Curriculum" },
-  { id: "career", label: "Career" },
-  { id: "partners", label: "Partners" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "faq", label: "FAQ" },
-]
 
 const CourseContent = ({
   title,
@@ -63,33 +51,13 @@ const CourseContent = ({
   whatYouWillLearn,
   videos = [],
 }: CourseContentProps) => {
-  
-  const [isNavSticky, setIsNavSticky] = useState(false)
-
-  // Get the hero images for the current category
-  const heroImagesForCategory = categoryHeroImages[category] || []
-  const heroImage = heroImagesForCategory[index] || heroImagesForCategory[0]
-  const fallbackHeroImage = "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1600&q=80"
-
-
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offset = isNavSticky ? 80 : 0
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      })
-    }
-  }
+  const heroImagesForCategory = categoryHeroImages[category] || [];
+  const heroImage = heroImagesForCategory[index] || heroImagesForCategory[0];
+  const fallbackHeroImage =
+    "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1600&q=80";
 
   return (
     <div className="bg-white text-black">
-      {/* Hero Section */}
       <div className="relative h-[95vh] overflow-hidden" id="overview">
         <Image
           src={heroImage || fallbackHeroImage}
@@ -105,59 +73,52 @@ const CourseContent = ({
             <div className="bg-yellow-400 text-black mb-6 px-4 py-2 mt-14 text-lg inline-block rounded-full">
               {duration}
             </div>
-            <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white">{title}</h1>
-            <p className="text-lg md:text-2xl max-w-3xl mx-auto text-gray-300 mb-8">{description}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                className={`bg-yellow-400 text-black font-semibold hover:bg-yellow-500 px-8 py-6 text-lg ${poppins.className}`}
-                onClick={() => scrollToSection("admission")}
-              >
-                Start Your Journey <ChevronRight className="ml-2" />
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-8 py-6 text-lg"
-              >
-                <Download className="mr-2" /> Download Brochure
-              </Button>
-            </div>
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white">
+              {title}
+            </h1>
+            <p className="text-lg md:text-2xl max-w-3xl mx-auto text-gray-300 mb-8">
+              {description}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Sticky Navigation */}
-
-
-      {/* Course Overview */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <h2 className={`text-3xl font-bold mb-6 ${poppins.className}`}>Course Overview</h2>
+            <h2 className={`text-3xl font-bold mb-6 ${poppins.className}`}>
+              Course Overview
+            </h2>
             <p className="text-lg leading-relaxed text-gray-700">{content}</p>
           </div>
-          <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl p-8 h-fit">
-            <h3 className={`text-2xl font-bold mb-6 text-black ${poppins.className}`}>Quick Actions</h3>
-            <div className="space-y-4">
+          <div className="sm:w-[413px] p-14 sm:h-[300px] rounded-lg border bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
+            <h3
+              className={`text-2xl ${poppins.className} text-center py-5 font-bold text-black`}
+            >
+              Step into the World of {title.split(" in ")[1] || "Design"}
+            </h3>
+            <div className="flex items-center gap-6">
               <Button
-                className="w-full bg-black text-white hover:bg-gray-900"
-                onClick={() => scrollToSection("admission")}
+                id=""
+                className="bg-white hover:bg-black hover:text-white transition-all duration-200 text-black border font-bold"
               >
-                Apply Now <ArrowRight className="ml-2 h-4 w-4" />
+                Apply Now
               </Button>
               <Button
-                variant="outline"
-                className="w-full bg-white/90 hover:bg-white"
-                onClick={() => scrollToSection("curriculum")}
+                onClick={() =>
+                  document
+                    .getElementById("curriculum")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="hover:bg-white hover:text-black transition-all duration-200 font-bold"
               >
-                View Curriculum
+                Curriculum
               </Button>
-              
             </div>
           </div>
         </div>
       </div>
 
-      {/* Other Sections */}
       <div className="max-w-7xl mx-auto px-4">
         <div id="admission">
           <AdmissionProcess />
@@ -197,30 +158,9 @@ const CourseContent = ({
         <div id="faq">
           <FAQSection />
         </div>
-
-        {/* Call to Action */}
-        <div className="text-center py-20 my-20 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl">
-          <h2 className={`text-4xl font-bold mb-6 text-black ${poppins.className}`}>Ready to Start Your Journey?</h2>
-          <p className="text-black/80 mb-8 max-w-2xl mx-auto text-lg">
-            Join our community of creative professionals and start your journey towards becoming a professional{" "}
-            {title.split(" in ")[1] || "designer"}.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              className="border-2 border-black text-black hover:bg-black hover:text-yellow-400 px-8"
-            >
-              <Download className="mr-2" /> Download Brochure
-            </Button>
-            <Button className="bg-black text-yellow-400 hover:bg-gray-900 px-8">
-              Apply Now <ArrowRight className="ml-2" />
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CourseContent
-
+export default CourseContent;
