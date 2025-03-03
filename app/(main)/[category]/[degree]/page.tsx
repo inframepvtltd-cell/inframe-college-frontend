@@ -3,11 +3,14 @@ import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
 
-type ParamsType = { category: string, degree: string }
+type ParamsType = { 
+  category: string, 
+  degree: string 
+}
 
-
-export default async function DegreePage(props: { params: Promise<ParamsType> }) {
-  const { category, degree } = await props.params
+// Fix: Change the props type - params should not be a Promise
+export default async function DegreePage(props: { params: ParamsType }) {
+  const { category, degree } = props.params
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
@@ -64,7 +67,7 @@ export default async function DegreePage(props: { params: Promise<ParamsType> })
 }
 
 export async function generateMetadata({ params }: { params: ParamsType }) {
-  const { category, degree } =  await params
+  const { category, degree } = params
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
