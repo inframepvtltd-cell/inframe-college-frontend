@@ -66,8 +66,8 @@ export default async function DegreePage(props: { params: Promise<ParamsType> })
   )
 }
 
-export async function generateMetadata({ params }: { params: ParamsType }) {
-  const { category, degree } = params
+export async function generateMetadata({ params }: { params: Promise<ParamsType> }) {
+  const { category, degree } = await params
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
