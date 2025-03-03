@@ -8,12 +8,15 @@ type ParamsType = {
 };
 
 export default function DegreePage({ params }: { params: ParamsType }) {
-  const { category, degree } = params; // No need to use 'use' or treat it as a Promise
+  const { category, degree } = params; // Corrected: params is directly an object, not a Promise.
   const categoryLower = category.toLowerCase();
 
   if (!courseTypes[categoryLower]) {
     return notFound();
   }
+ 
+  
+  
 
   const categoryCourses = courseTypes[categoryLower];
   const selectedCourseIndex = categoryCourses.findIndex((course) => course.value === degree);
@@ -27,8 +30,8 @@ export default function DegreePage({ params }: { params: ParamsType }) {
   return <CoursePage courseType={categoryCourses} category={categoryLower} initialTabIndex={initialTabIndex} />;
 }
 
-export async function generateStaticParams() {
-  const paths: { category: string; degree: string }[] = [];
+export async function generateStaticParams(): Promise<ParamsType[]> {
+  const paths: ParamsType[] = [];
 
   Object.entries(courseTypes).forEach(([category, courses]) => {
     courses.forEach((course) => {
