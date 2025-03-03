@@ -38,14 +38,10 @@ export default function DegreePage(props: { params: Promise<ParamsType> }) {
 
 
 
+// Generate Static Paths for Dynamic Routing
 export async function generateStaticParams() {
-  const paths: { category: string; degree: string }[] = []
-
-  Object.entries(courseTypes).forEach(([category, courses]) => {
-    courses.forEach((course) => {
-      paths.push({ category, degree: course.value })
-    })
-  })
-
-  return paths
+  return Object.keys(courseTypes).map((category) => ({
+    category,
+    degree: courseTypes[category].map((course) => course.value)
+  }))
 }
