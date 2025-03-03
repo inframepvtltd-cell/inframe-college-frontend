@@ -5,7 +5,8 @@ import CoursePage from "../../../../components/Courses/CoursePage"
 
 type ParamsType = { category: string; degree: string }
 
-export default async function DegreePage({ params }: { params: Awaited<Promise<ParamsType>> }) {
+export default async function DegreePage(props: { params: Promise<Awaited<Promise<ParamsType>>> }) {
+  const params = await props.params;
   const { category, degree } = params
   const categoryLower = category.toLowerCase()
 

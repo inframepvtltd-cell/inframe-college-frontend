@@ -6,7 +6,8 @@ import { courseTypes } from "../../../utils/courseTypes"
 
 type ParamsType = { category: string }
 
-export default async function CategoryPage({ params }: { params: ParamsType }) {
+export default async function CategoryPage(props: { params: Promise<ParamsType> }) {
+  const params = await props.params;
   const { category } = params
   const categoryLower = category.toLowerCase()
 
