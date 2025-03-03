@@ -79,7 +79,7 @@ export default async function DegreePage({
 // Generate Metadata for SEO
 export async function generateMetadata(
   { params }: { params: ParamsType },
-  parent: ResolvingMetadata,
+ 
 ): Promise<Metadata> {
   const { category, degree } = params
   const categoryLower = category.toLowerCase()
