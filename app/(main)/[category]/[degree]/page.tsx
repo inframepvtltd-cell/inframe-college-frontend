@@ -1,17 +1,16 @@
-import React from "react";
 import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
+import { use } from 'react'
 
 type ParamsType = { 
   category: string, 
   degree: string 
 }
 
-// Change back to match what your Next.js setup expects
-export default async function DegreePage(props: { params: Promise<ParamsType> }) {
-  const { category, degree } = await props.params
+export default function DegreePage(props: { params: Promise<ParamsType> }) {
+  const { category, degree } = use(props.params)
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
@@ -67,8 +66,8 @@ export default async function DegreePage(props: { params: Promise<ParamsType> })
   )
 }
 
-export async function generateMetadata({ params }: { params: Promise<ParamsType> }) {
-  const { category, degree } = await params
+export async function generateMetadata({ params }: { params: ParamsType }) {
+  const { category, degree } = params
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
