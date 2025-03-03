@@ -6,12 +6,12 @@ import { Metadata } from "next";
 
 type ParamsType = { category: string; degree: string }
 
-// Define props type for the page component
-type PageProps = {
-  params: Promise<ParamsType>;
-}
-
-export default async function DegreePage({ params }: { params: ParamsType }) {
+// Using a regular props type for the page component
+export default async function DegreePage({ 
+  params 
+}: { 
+  params: ParamsType 
+}) {
   const { category, degree } = params
   const categoryLower = category.toLowerCase()
   
@@ -77,8 +77,8 @@ export default async function DegreePage({ params }: { params: ParamsType }) {
 }
 
 // Generate Metadata for SEO
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { category, degree } = await params;
+export async function generateMetadata(props: any): Promise<Metadata> {
+  const { category, degree } = await props.params;
   const categoryLower = category.toLowerCase();
   
   if (!courseTypes[categoryLower]) {
