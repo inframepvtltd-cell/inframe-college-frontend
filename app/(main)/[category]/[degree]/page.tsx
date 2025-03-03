@@ -64,33 +64,9 @@ export default async function DegreePage({ params }: { params: Params }) {
   )
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const category = params.category as string
-  const degree = params.degree as string
-  const categoryLower = category.toLowerCase()
 
-  if (!courseTypes[categoryLower]) {
-    return {
-      title: "Course Not Found - Inframe School",
-      description: "The requested course could not be found.",
-    }
-  }
 
-  const categoryCourses = courseTypes[categoryLower]
-  const selectedCourse = categoryCourses.find((course) => course.value === degree)
 
-  if (!selectedCourse) {
-    return {
-      title: `${category.replace(/-/g, " ")} Courses - Inframe School`,
-      description: `Browse our ${category.replace(/-/g, " ")} courses and enhance your skills with Inframe School.`,
-    }
-  }
-
-  return {
-    title: `${selectedCourse.title} - Inframe School`,
-    description: selectedCourse.description,
-  }
-}
 
 export async function generateStaticParams() {
   const paths: { category: string; degree: string }[] = []
