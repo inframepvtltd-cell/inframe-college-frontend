@@ -4,13 +4,17 @@ import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage";
 import { Metadata } from "next";
 
-type ParamsType = { category: string; degree: string }
+// Define the params type
+type Params = {
+  category: string;
+  degree: string;
+}
 
-// Using a regular props type for the page component
+// Define the page component
 export default async function DegreePage({ 
   params 
 }: { 
-  params: ParamsType 
+  params: Params 
 }) {
   const { category, degree } = params
   const categoryLower = category.toLowerCase()
@@ -76,8 +80,11 @@ export default async function DegreePage({
   )
 }
 
-// Generate Metadata for SEO
-export async function generateMetadata({ params }: { params: ParamsType }): Promise<Metadata> {
+// Generate Metadata for SEO - using object destructuring in param type
+export async function generateMetadata(
+  { params }: { params: { category: string, degree: string } }
+): Promise<Metadata> {
+  // No await on params
   const { category, degree } = params;
   const categoryLower = category.toLowerCase();
   
@@ -95,7 +102,7 @@ export async function generateMetadata({ params }: { params: ParamsType }): Prom
     return {
       title: `${category
         .split("-")
-        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ")} Courses - Inframe School`,
       description: `Browse our ${category.replace(/-/g, " ")} courses and enhance your skills with Inframe School.`,
     }
