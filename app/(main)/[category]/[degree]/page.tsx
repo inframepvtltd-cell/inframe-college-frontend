@@ -2,11 +2,13 @@ import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
+import type { Metadata } from "next"
 
-export default async function DegreePage({ params }: { params: { category: string; degree: string } }) {
-  const resolvedParams = await Promise.resolve(params) // Ensure params isn't treated as a Promise unexpectedly
+type Params = { [key: string]: string | string[] | undefined }
 
-  const { category, degree } = resolvedParams
+export default async function DegreePage({ params }: { params: Params }) {
+  const category = params.category as string
+  const degree = params.degree as string
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
@@ -62,8 +64,9 @@ export default async function DegreePage({ params }: { params: { category: strin
   )
 }
 
-export async function generateMetadata({ params }: { params: { category: string; degree: string } }) {
-  const { category, degree } = params
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const category = params.category as string
+  const degree = params.degree as string
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
@@ -100,3 +103,4 @@ export async function generateStaticParams() {
 
   return paths
 }
+
