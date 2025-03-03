@@ -1,8 +1,10 @@
-import { courseTypes } from "../../../../utils/courseTypes"
+
 import Script from "next/script"
 import { notFound } from "next/navigation"
+
+import { Metadata } from "next"
+import { courseTypes } from "../../../../utils/courseTypes";
 import CoursePage from "../../../../components/Courses/CoursePage";
-import { Metadata } from "next";
 
 // Define the params type
 type Params = {
@@ -11,7 +13,7 @@ type Params = {
 }
 
 // Define the page component
-export default async function DegreePage({ 
+export default function DegreePage({ 
   params 
 }: { 
   params: Params 
@@ -21,7 +23,7 @@ export default async function DegreePage({
   
   // Ensure only the valid categories are included
   if (!courseTypes[categoryLower]) {
-    return notFound()
+    notFound()
   }
   
   const categoryCourses = courseTypes[categoryLower]
@@ -31,7 +33,7 @@ export default async function DegreePage({
   
   // If degree not found, return 404
   if (selectedCourseIndex === -1) {
-    return notFound()
+    notFound()
   }
   
   const initialTabIndex = selectedCourseIndex
@@ -80,14 +82,14 @@ export default async function DegreePage({
   )
 }
 
-// Generate Metadata for SEO - using object destructuring in param type
+// Generate Metadata for SEO
 export async function generateMetadata(
   { params }: { params: { category: string, degree: string } }
 ): Promise<Metadata> {
-  // No await on params
   const { category, degree } = params;
   const categoryLower = category.toLowerCase();
   
+  // Handle case where category doesn't exist
   if (!courseTypes[categoryLower]) {
     return {
       title: "Course Not Found - Inframe School",
@@ -98,6 +100,7 @@ export async function generateMetadata(
   const categoryCourses = courseTypes[categoryLower];
   const selectedCourse = categoryCourses.find((course) => course.value === degree);
   
+  // Handle case where degree doesn't exist
   if (!selectedCourse) {
     return {
       title: `${category
