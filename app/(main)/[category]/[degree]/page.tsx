@@ -2,7 +2,7 @@ import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
-import type { Metadata } from "next"
+
 
 type Params = { [key: string]: string | string[] | undefined }
 
