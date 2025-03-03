@@ -2,7 +2,7 @@ import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
-import type { Metadata } from "next"
+import type { Metadata, ResolvingMetadata } from "next"
 
 type ParamsType = { category: string; degree: string }
 
@@ -77,11 +77,10 @@ export default async function DegreePage({
 }
 
 // Generate Metadata for SEO
-export async function generateMetadata({
-  params,
-}: {
-  params: ParamsType
-}): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: ParamsType },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { category, degree } = params
   const categoryLower = category.toLowerCase()
 
