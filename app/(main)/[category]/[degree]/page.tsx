@@ -3,12 +3,10 @@ import Script from "next/script"
 import { notFound } from "next/navigation"
 import CoursePage from "../../../../components/Courses/CoursePage"
 
+type ParamsType = Promise<{ category: string; degree: string }>
 
-type Params = { [key: string]: string | string[] | undefined }
-
-export default async function DegreePage({ params }: { params: Params }) {
-  const category = params.category as string
-  const degree = params.degree as string
+export default async function DegreePage({ params }: { params: Awaited<Promise<ParamsType>> }) {
+  const { category, degree } = params
   const categoryLower = category.toLowerCase()
 
   if (!courseTypes[categoryLower]) {
@@ -63,20 +61,3 @@ export default async function DegreePage({ params }: { params: Params }) {
     </>
   )
 }
-
-
-
-
-
-export async function generateStaticParams() {
-  const paths: { category: string; degree: string }[] = []
-
-  Object.entries(courseTypes).forEach(([category, courses]) => {
-    courses.forEach((course) => {
-      paths.push({ category, degree: course.value })
-    })
-  })
-
-  return paths
-}
-
