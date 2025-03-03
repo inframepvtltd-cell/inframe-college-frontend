@@ -63,7 +63,7 @@ const CourseContent = ({
   whatYouWillLearn,
   videos = [],
 }: CourseContentProps) => {
-  const [activeSection, setActiveSection] = useState("overview")
+  
   const [isNavSticky, setIsNavSticky] = useState(false)
 
   // Get the hero images for the current category
@@ -71,26 +71,7 @@ const CourseContent = ({
   const heroImage = heroImagesForCategory[index] || heroImagesForCategory[0]
   const fallbackHeroImage = "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1600&q=80"
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      setIsNavSticky(scrollPosition > window.innerHeight - 100)
 
-      // Update active section based on scroll position
-      sections.forEach(({ id }) => {
-        const element = document.getElementById(id)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(id)
-          }
-        }
-      })
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)

@@ -172,7 +172,7 @@ const CategoryLandingPage: React.FC<CategoryLandingPageProps> = ({
         {/* Bachelor's Degrees */}
         {degreeGroups.bachelor.length > 0 && (
           <div className="mb-16">
-            <h3 className={`text-2xl font-bold mb-8 ${poppins.className}`}>Bachelor's Degrees</h3>
+            <h3 className={`text-2xl font-bold mb-8 ${poppins.className}`}>{`Bachelor's Degrees`}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {degreeGroups.bachelor.map((course) => (
                 <DegreeCard key={course.value} course={course} category={category} />
