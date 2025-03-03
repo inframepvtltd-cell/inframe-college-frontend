@@ -77,18 +77,8 @@ export default async function DegreePage({
 }
 
 // Generate Metadata for SEO
-interface MetadataProps {
-  params: ParamsType;
-}
-
-interface CourseType {
-  value: string;
-  title: string;
-  description: string;
-}
-
-export async function generateMetadata(props: MetadataProps): Promise<Metadata> {
-  const { category, degree } = await props.params;
+export async function generateMetadata({ params }: { params: ParamsType }): Promise<Metadata> {
+  const { category, degree } = params;
   const categoryLower = category.toLowerCase();
   
   if (!courseTypes[categoryLower]) {
@@ -98,14 +88,14 @@ export async function generateMetadata(props: MetadataProps): Promise<Metadata> 
     }
   }
   
-  const categoryCourses: CourseType[] = courseTypes[categoryLower];
+  const categoryCourses = courseTypes[categoryLower];
   const selectedCourse = categoryCourses.find((course) => course.value === degree);
   
   if (!selectedCourse) {
     return {
       title: `${category
         .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ")} Courses - Inframe School`,
       description: `Browse our ${category.replace(/-/g, " ")} courses and enhance your skills with Inframe School.`,
     }
