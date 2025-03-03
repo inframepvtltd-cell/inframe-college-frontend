@@ -1,3 +1,4 @@
+import React from "react";
 import { courseTypes } from "../../../../utils/courseTypes"
 import Script from "next/script"
 import { notFound } from "next/navigation"
