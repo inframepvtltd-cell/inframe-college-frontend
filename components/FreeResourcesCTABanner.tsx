@@ -20,7 +20,8 @@ const FreeResourcesCTABanner = () => {
             Access Free Learning Resources!
           </h2>
           <p className="text-sm lg:text-lg opacity-80">
-            Explore free courses, guides, and templates to help you excel in your field.
+            Explore free courses, guides, and templates to help you excel in
+            your field.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
-'use client'
-import React, { useState } from 'react';
-import Image from 'next/image';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
 import { Button } from "../components/ui/button";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -13,50 +13,50 @@ const ModernGallery = () => {
       alt: "Pow Wow celebration with red balloons",
       size: "large",
       width: 1920,
-      height: 1080
+      height: 1080,
     },
     {
       url: "/fashion-2.JPG", // Updated path
       alt: "Convocation ceremony",
       size: "medium",
       width: 1080,
-      height: 1320
+      height: 1320,
     },
     {
       url: "/fashion-1.JPG", // Updated path
       alt: "Students in knitting lab",
       size: "medium",
       width: 1080,
-      height: 810
+      height: 810,
     },
     {
       url: "/images/gallery/1721738128651.jpg",
       alt: "Ethnic Day celebration",
       size: "medium",
       width: 1080,
-      height: 810
+      height: 810,
     },
     {
       url: "/campus-32.JPG", // Updated path
       alt: "Ethnic Day celebration",
       size: "medium",
       width: 1080,
-      height: 810
+      height: 810,
     },
     {
       url: "/images/gallery/1721737896096.jpg",
       alt: "Ethnic Day celebration",
       size: "medium",
       width: 1920,
-      height: 1080
+      height: 1080,
     },
     {
       url: "/campus-29.jpg", // Removed "- Copy"
       alt: "Ethnic Day celebration",
       size: "medium",
       width: 1080,
-      height: 1320
-    }
+      height: 1320,
+    },
   ];
 
   const navigateGallery = (direction: number) => {
@@ -71,7 +71,7 @@ const ModernGallery = () => {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-12">Gallery</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
         {/* Large image - Pow Wow */}
         <div className="col-span-1 lg:col-span-2 aspect-[16/9] relative group">
@@ -112,11 +112,14 @@ const ModernGallery = () => {
 
         {/* Remaining images */}
         {images.slice(3).map((image, index) => (
-          <div 
+          <div
             key={index + 3}
             className={`${
-              image.size === 'large' ? 'col-span-1 lg:col-span-2 aspect-[16/9]' : 
-              image.size === 'medium' ? 'aspect-[4/3]' : 'aspect-[9/11]'
+              image.size === "large"
+                ? "col-span-1 lg:col-span-2 aspect-[16/9]"
+                : image.size === "medium"
+                ? "aspect-[4/3]"
+                : "aspect-[9/11]"
             } relative group`}
           >
             <Image

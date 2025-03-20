@@ -18,16 +18,12 @@ export type CurriculumType = {
 };
 
 export type WhatLearn = {
-  skill: string,
-  description: string,
-  
-}
+  skill: string;
+  description: string;
+};
 export type VideosType = {
-  url: string,
-  
-
-  
-}
+  url: string;
+};
 
 export type CourseType = {
   value: string;
@@ -41,7 +37,7 @@ export type CourseType = {
   curriculum?: CurriculumType;
   software: SoftwareType[];
   whatYouWillLearn: WhatLearn[];
-  videos: VideosType[];  // Now software is an array of objects
+  videos: VideosType[]; // Now software is an array of objects
 };
 
 export const courseTypes: CourseCategory = {
@@ -63,414 +59,390 @@ export const courseTypes: CourseCategory = {
         { "name": "Photoshop", "src": "/software logos/pngegg (24).png" }
       ],
 
-      "videos": [
+      videos: [
         {
-
-          "url": "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
-          
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
         },
         {
-
-          "url": "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
-  
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
         },
         {
-
-          "url": "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
-      
-        }
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
       ],
-    "whatYouWillLearn": [],
-    "curriculum": {
-      "1st Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design fundamentals sketch and materials",
-        "Semester 1": [
-          "Contextual Art and Design",
-          "Material Studies",
-          "Creative Skills",
-          "Object as History",
-          "Visual Expression",
-          "Design Concepts"
-        ],
-        "Semester 2": [
-          "Design Communication Skills",
-          "Craft Experience",
-          "Basic Design I",
-          "Technical Representation",
-          "Design Process",
-          "Design Thinking"
-        ]
+      whatYouWillLearn: [],
+      curriculum: {
+        "1st Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          "Semester 1": [
+            "Contextual Art and Design",
+            "Material Studies",
+            "Creative Skills",
+            "Object as History",
+            "Visual Expression",
+            "Design Concepts",
+          ],
+          "Semester 2": [
+            "Design Communication Skills",
+            "Craft Experience",
+            "Basic Design I",
+            "Technical Representation",
+            "Design Process",
+            "Design Thinking",
+          ],
+        },
+        "2nd Year": {
+          image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f",
+          imageAlt: "Modern interior space planning",
+          "Semester 3": [
+            "Interior Design Studio I",
+            "Construction Methods",
+            "Digital Design I",
+            "History of Design",
+            "Building Services",
+            "Professional Practice",
+          ],
+          "Semester 4": [
+            "Interior Design Studio II",
+            "Advanced Construction",
+            "Digital Design II",
+            "Contemporary Design",
+            "Services Integration",
+            "Business Practice",
+          ],
+        },
+        "3rd Year": {
+          image: "https://images.unsplash.com/photo-1511920173225-7b9060208f02",
+          imageAlt: "Advanced interior design techniques",
+          "Semester 5": [
+            "Interior Design Studio III",
+            "Lighting Design",
+            "Sustainable Design",
+            "3D Visualization",
+            "Human-Centered Design",
+            "Furniture Design",
+          ],
+          "Semester 6": [
+            "Interior Design Studio IV",
+            "Advanced Digital Design",
+            "Space Planning & Management",
+            "Cultural and Social Design",
+            "Material Innovations",
+            "Business of Design",
+          ],
+        },
+        "4th Year": {
+          image: "https://images.unsplash.com/photo-1562967917-35e6a0329813",
+          imageAlt: "Final project and professional portfolio",
+          "Semester 7": [
+            "Capstone Design Project",
+            "Design Research Methods",
+            "Lighting and Acoustics",
+            "Urban Design",
+            "Client Management",
+            "Interior Project Management",
+          ],
+          "Semester 8": [
+            "Thesis Preparation",
+            "Professional Portfolio Development",
+            "Interior Design Ethics",
+            "Internship/Fieldwork",
+            "Exhibition Design",
+            "Entrepreneurship in Design",
+          ],
+        },
       },
-      "2nd Year": {
-        "image": "https://images.unsplash.com/photo-1600607687644-c7171b42498f",
-        "imageAlt": "Modern interior space planning",
-        "Semester 3": [
-          "Interior Design Studio I",
-          "Construction Methods",
-          "Digital Design I",
-          "History of Design",
-          "Building Services",
-          "Professional Practice"
-        ],
-        "Semester 4": [
-          "Interior Design Studio II",
-          "Advanced Construction",
-          "Digital Design II",
-          "Contemporary Design",
-          "Services Integration",
-          "Business Practice"
-        ]
+    },
+    {
+      value: "bvoc",
+      label: "B.VOC in Interior Design",
+      title: "B.VOC in Interior Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Combine practical skills with theoretical knowledge in our vocational bachelor's program. Perfect for hands-on learners ready to enter the industry.",
+      content:
+        "The Bachelor of Vocation (B.VOC) in Interior Design is a three-year full-time program tailored for students seeking a more practical and skill-oriented approach. The curriculum blends fundamental design principles with hands-on workshops covering space planning, interior styling, lighting design, furniture arrangement, and ergonomics. The course focuses on real-world projects, internships, and business modules to prepare students for careers in residential and commercial interior design, retail space planning, and hospitality design.",
+      software: [
+        { name: "AutoCAD", src: "/software logos/pngegg (17).png" },
+        { name: "SketchUp", src: "/software logos/pngegg (18).png" },
+        { name: "3dsMax", src: "/software logos//pngegg (19).png" },
+        { name: "Revit", src: "/software logos/pngegg (21).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
+      videos: [
+        {
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
+        },
+        {
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
+        },
+        {
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
+      ],
+      whatYouWillLearn: [],
+      curriculum: {
+        "1st Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          "Semester 1": [
+            "Fundamentals of Interior Design",
+            "Technical Drawing",
+            "Material Studies",
+            "Basic Space Planning",
+          ],
+          "Semester 2": [
+            "Color Theory and Applications",
+            "Furniture Design Basics",
+            "AutoCAD and Digital Drafting",
+            "Lighting Design Principles",
+          ],
+        },
+        "2nd Year": {
+          image: "https://images.unsplash.com/photo-1563271184-8cfecf7d7f0e",
+          imageAlt: "Advanced interior design concept development",
+          "Semester 3": [
+            "Advanced Space Planning",
+            "Interior Styling Techniques",
+            "Ergonomics and Human Factors",
+            "Digital Visualization Techniques",
+          ],
+          "Semester 4": [
+            "Sustainable Design Practices",
+            "Interior Design for Commercial Spaces",
+            "Furniture Arrangement and Layout",
+            "Business Aspects of Interior Design",
+          ],
+        },
+        "3rd Year": {
+          image: "https://images.unsplash.com/photo-1564643544-d59db2b2f5d9",
+          imageAlt: "Final interior design project and presentation",
+          "Semester 5": [
+            "Interior Design Project Management",
+            "Lighting Design for Commercial Spaces",
+            "Interior Design in Hospitality",
+            "Designing with Green Materials",
+          ],
+          "Semester 6": [
+            "Final Interior Design Project",
+            "Internship and Industry Practice",
+            "Professional Development in Interior Design",
+            "Marketing and Branding for Interior Designers",
+          ],
+        },
       },
-      "3rd Year": {
-        "image": "https://images.unsplash.com/photo-1511920173225-7b9060208f02",
-        "imageAlt": "Advanced interior design techniques",
-        "Semester 5": [
-          "Interior Design Studio III",
-          "Lighting Design",
-          "Sustainable Design",
-          "3D Visualization",
-          "Human-Centered Design",
-          "Furniture Design"
-        ],
-        "Semester 6": [
-          "Interior Design Studio IV",
-          "Advanced Digital Design",
-          "Space Planning & Management",
-          "Cultural and Social Design",
-          "Material Innovations",
-          "Business of Design"
-        ]
-      },
-      "4th Year": {
-        "image": "https://images.unsplash.com/photo-1562967917-35e6a0329813",
-        "imageAlt": "Final project and professional portfolio",
-        "Semester 7": [
-          "Capstone Design Project",
-          "Design Research Methods",
-          "Lighting and Acoustics",
-          "Urban Design",
-          "Client Management",
-          "Interior Project Management"
-        ],
-        "Semester 8": [
-          "Thesis Preparation",
-          "Professional Portfolio Development",
-          "Interior Design Ethics",
-          "Internship/Fieldwork",
-          "Exhibition Design",
-          "Entrepreneurship in Design"
-        ]
-      }
-    }
-  }
-  ,
-  {
-    "value": "bvoc",
-    "label": "B.VOC in Interior Design",
-    "title": "B.VOC in Interior Design",
-    "duration": "3 Years Full-Time",
-    "description": "Combine practical skills with theoretical knowledge in our vocational bachelor's program. Perfect for hands-on learners ready to enter the industry.",
-    "content": "The Bachelor of Vocation (B.VOC) in Interior Design is a three-year full-time program tailored for students seeking a more practical and skill-oriented approach. The curriculum blends fundamental design principles with hands-on workshops covering space planning, interior styling, lighting design, furniture arrangement, and ergonomics. The course focuses on real-world projects, internships, and business modules to prepare students for careers in residential and commercial interior design, retail space planning, and hospitality design.",
-    "software": [
-      { "name": "AutoCAD", "src": "/software logos/pngegg (17).png" },
-      { "name": "SketchUp", "src": "/software logos/pngegg (18).png" },
-      { "name": "3dsMax", "src": "/software logos//pngegg (19).png" },
-      { "name": "Revit", "src": "/software logos/pngegg (21).png" },
-      { "name": "Photoshop", "src": "/software logos/pngegg (24).png" }
-    ],
-    "videos": [
-      {
+    },
 
-        "url": "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
-        
+    {
+      value: "bsc",
+      label: "B.SC in Interior Design",
+      title: "B.SC in Interior Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Master the technical aspects of interior design with our science-focused program. Ideal for analytical minds passionate about design.",
+      content:
+        "The Bachelor of Science (B.Sc) in Interior Design is a three-year program focusing on the technical and scientific aspects of interior design. The curriculum integrates design theory with practical applications such as architectural drafting, color psychology, building materials, sustainable design, and lighting technologies. The program emphasizes research-based learning, industry-standard software training, site visits, and workshops. Graduates can work in residential and commercial interior design, workspace planning, set design, and sustainable design consulting.",
+      software: [
+        { name: "AutoCAD", src: "/software logos/pngegg (17).png" },
+        { name: "SketchUp", src: "/software logos/pngegg (18).png" },
+        { name: "3dsMax", src: "/software logos//pngegg (19).png" },
+        { name: "Revit", src: "/software logos/pngegg (21).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
+      videos: [
+        {
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
+        },
+        {
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
+        },
+        {
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
+      ],
+      whatYouWillLearn: [],
+      curriculum: {
+        "1st Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          "Semester 1": [
+            "Architectural Drawing Techniques",
+            "Building Materials and Finishes",
+            "Interior Design Studio I",
+            "History of Interiors",
+          ],
+          "Semester 2": [
+            "Structural Systems",
+            "3D Modeling and Rendering",
+            "Furniture and Fixture Design",
+            "Environmental Studies",
+          ],
+        },
+        "2nd Year": {
+          image: "https://images.unsplash.com/photo-1563271184-8cfecf7d7f0e",
+          imageAlt: "Interior design workspace and design application",
+          "Semester 3": [
+            "Lighting Design and Technologies",
+            "Sustainable Interior Design Practices",
+            "Advanced 3D Modeling",
+            "Human Factors and Ergonomics in Design",
+          ],
+          "Semester 4": [
+            "Building Codes and Regulations",
+            "Designing for Commercial Spaces",
+            "Interior Design Project Management",
+            "Textile and Finishing Techniques",
+          ],
+        },
+        "3rd Year": {
+          image: "https://images.unsplash.com/photo-1564643544-d59db2b2f5d9",
+          imageAlt: "Advanced interior design project presentation",
+          "Semester 5": [
+            "Research Methods in Interior Design",
+            "Furniture Design and Production",
+            "Interior Design for Special Environments",
+            "Sustainability in Design",
+          ],
+          "Semester 6": [
+            "Capstone Project",
+            "Industry Internship",
+            "Professional Practice and Ethics",
+            "Design Consultancy and Entrepreneurship",
+          ],
+        },
       },
-      {
+    },
 
-        "url": "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
-
+    {
+      value: "diploma1",
+      label: "1 Year Diploma",
+      title: "1 Year Diploma in Interior Design",
+      duration: "1 Year Intensive",
+      description:
+        "Fast-track your career with our intensive one-year program. Focus on practical skills and industry-ready training.",
+      content:
+        "The 1 Year Diploma in Interior Design is a fast-track program for students looking to gain essential interior design skills. The curriculum covers space planning, color theory, furniture selection, and design principles through hands-on training. Students engage in design workshops, studio-based assignments, and industry interactions. The program emphasizes creativity and functionality, preparing students for roles as junior designers, design assistants, or freelance interior decorators.",
+      software: [
+        { name: "AutoCAD", src: "/software logos/pngegg (17).png" },
+        { name: "SketchUp", src: "/software logos/pngegg (18).png" },
+        { name: "3dsMax", src: "/software logos//pngegg (19).png" },
+        { name: "Revit", src: "/software logos/pngegg (21).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
+      videos: [
+        {
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
+        },
+        {
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
+        },
+        {
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
+      ],
+      whatYouWillLearn: [],
+      curriculum: {
+        "Semester 1": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          content: [
+            "Fundamentals of Interior Design",
+            "Color Theory and Application",
+            "Space Planning and Layout",
+          ],
+        },
+        "Semester 2": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design sketch and furniture arrangement",
+          content: [
+            "Furniture and Fixtures",
+            "Digital Drafting Techniques",
+            "Design Portfolio Development",
+          ],
+        },
       },
-      {
+    },
 
-        "url": "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
-    
-      }
-    ],
-    "whatYouWillLearn": [],
-    "curriculum": {
-      "1st Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design fundamentals sketch and materials",
-        "Semester 1": [
-          "Fundamentals of Interior Design",
-          "Technical Drawing",
-          "Material Studies",
-          "Basic Space Planning"
-        ],
-        "Semester 2": [
-          "Color Theory and Applications",
-          "Furniture Design Basics",
-          "AutoCAD and Digital Drafting",
-          "Lighting Design Principles"
-        ]
+    {
+      value: "diploma3",
+      label: "3 Year Diploma",
+      title: "3 Year Diploma in Interior Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Gain comprehensive knowledge and hands-on experience in all aspects of interior design. Perfect for creative minds seeking in-depth understanding.",
+      content:
+        "The 3 Year Diploma in Interior Design is a comprehensive program offering a strong foundation in design principles, spatial planning, sustainable design, furniture design, and architectural concepts. The curriculum includes industry-standard software training, real-world projects, internships, and collaborative assignments. Students also learn business aspects of interior design, such as project management and client handling, preparing them for careers as interior designers, exhibition designers, and retail space planners.",
+      software: [
+        { name: "AutoCAD", src: "/software logos/pngegg (17).png" },
+        { name: "SketchUp", src: "/software logos/pngegg (18).png" },
+        { name: "3dsMax", src: "/software logos//pngegg (19).png" },
+        { name: "Revit", src: "/software logos/pngegg (21).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
+      videos: [
+        {
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
+        },
+        {
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
+        },
+        {
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
+      ],
+      whatYouWillLearn: [],
+      curriculum: {
+        "1st Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          "Semester 1": [
+            "Basic Design Principles",
+            "Technical Drafting",
+            "Material and Finishes",
+            "Design Visualization",
+          ],
+          "Semester 2": [
+            "3D Modeling and Rendering",
+            "Furniture and Fixture Design",
+            "Residential Space Planning",
+            "Building Services",
+          ],
+        },
+        "2nd Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design software and space planning",
+          "Semester 3": [
+            "Sustainable Design Practices",
+            "Lighting Design",
+            "Commercial Space Planning",
+            "Interior Detailing",
+          ],
+          "Semester 4": [
+            "Advanced Materials and Textiles",
+            "Design Project Management",
+            "Exhibition Design",
+            "Interior Design Ethics and Law",
+          ],
+        },
+        "3rd Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design presentation and projects",
+          "Semester 5": [
+            "Business Aspects of Interior Design",
+            "Client Handling and Communication",
+            "Final Design Project I",
+            "Interior Design Portfolio",
+          ],
+          "Semester 6": [
+            "Internship/Industry Placement",
+            "Final Design Project II",
+            "Professional Practice in Interior Design",
+            "Project Presentation and Defense",
+          ],
+        },
       },
-      "2nd Year": {
-        "image": "https://images.unsplash.com/photo-1563271184-8cfecf7d7f0e",
-        "imageAlt": "Advanced interior design concept development",
-        "Semester 3": [
-          "Advanced Space Planning",
-          "Interior Styling Techniques",
-          "Ergonomics and Human Factors",
-          "Digital Visualization Techniques"
-        ],
-        "Semester 4": [
-          "Sustainable Design Practices",
-          "Interior Design for Commercial Spaces",
-          "Furniture Arrangement and Layout",
-          "Business Aspects of Interior Design"
-        ]
-      },
-      "3rd Year": {
-        "image": "https://images.unsplash.com/photo-1564643544-d59db2b2f5d9",
-        "imageAlt": "Final interior design project and presentation",
-        "Semester 5": [
-          "Interior Design Project Management",
-          "Lighting Design for Commercial Spaces",
-          "Interior Design in Hospitality",
-          "Designing with Green Materials"
-        ],
-        "Semester 6": [
-          "Final Interior Design Project",
-          "Internship and Industry Practice",
-          "Professional Development in Interior Design",
-          "Marketing and Branding for Interior Designers"
-        ]
-      }
-    }
-  },
-  
-  {
-    "value": "bsc",
-    "label": "B.SC in Interior Design",
-    "title": "B.SC in Interior Design",
-    "duration": "3 Years Full-Time",
-    "description": "Master the technical aspects of interior design with our science-focused program. Ideal for analytical minds passionate about design.",
-    "content": "The Bachelor of Science (B.Sc) in Interior Design is a three-year program focusing on the technical and scientific aspects of interior design. The curriculum integrates design theory with practical applications such as architectural drafting, color psychology, building materials, sustainable design, and lighting technologies. The program emphasizes research-based learning, industry-standard software training, site visits, and workshops. Graduates can work in residential and commercial interior design, workspace planning, set design, and sustainable design consulting.",
-    "software": [
-      { "name": "AutoCAD", "src": "/software logos/pngegg (17).png" },
-      { "name": "SketchUp", "src": "/software logos/pngegg (18).png" },
-      { "name": "3dsMax", "src": "/software logos//pngegg (19).png" },
-      { "name": "Revit", "src": "/software logos/pngegg (21).png" },
-      { "name": "Photoshop", "src": "/software logos/pngegg (24).png" }
-    ],
-    "videos": [
-      {
-
-        "url": "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
-        
-      },
-      {
-
-        "url": "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
-
-      },
-      {
-
-        "url": "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
-    
-      }
-    ],
-    "whatYouWillLearn": [],
-    "curriculum": {
-      "1st Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design fundamentals sketch and materials",
-        "Semester 1": [
-          "Architectural Drawing Techniques",
-          "Building Materials and Finishes",
-          "Interior Design Studio I",
-          "History of Interiors"
-        ],
-        "Semester 2": [
-          "Structural Systems",
-          "3D Modeling and Rendering",
-          "Furniture and Fixture Design",
-          "Environmental Studies"
-        ]
-      },
-      "2nd Year": {
-        "image": "https://images.unsplash.com/photo-1563271184-8cfecf7d7f0e",
-        "imageAlt": "Interior design workspace and design application",
-        "Semester 3": [
-          "Lighting Design and Technologies",
-          "Sustainable Interior Design Practices",
-          "Advanced 3D Modeling",
-          "Human Factors and Ergonomics in Design"
-        ],
-        "Semester 4": [
-          "Building Codes and Regulations",
-          "Designing for Commercial Spaces",
-          "Interior Design Project Management",
-          "Textile and Finishing Techniques"
-        ]
-      },
-      "3rd Year": {
-        "image": "https://images.unsplash.com/photo-1564643544-d59db2b2f5d9",
-        "imageAlt": "Advanced interior design project presentation",
-        "Semester 5": [
-          "Research Methods in Interior Design",
-          "Furniture Design and Production",
-          "Interior Design for Special Environments",
-          "Sustainability in Design"
-        ],
-        "Semester 6": [
-          "Capstone Project",
-          "Industry Internship",
-          "Professional Practice and Ethics",
-          "Design Consultancy and Entrepreneurship"
-        ]
-      }
-    }
-  },
-  
-  {
-    "value": "diploma1",
-    "label": "1 Year Diploma",
-    "title": "1 Year Diploma in Interior Design",
-    "duration": "1 Year Intensive",
-    "description": "Fast-track your career with our intensive one-year program. Focus on practical skills and industry-ready training.",
-    "content": "The 1 Year Diploma in Interior Design is a fast-track program for students looking to gain essential interior design skills. The curriculum covers space planning, color theory, furniture selection, and design principles through hands-on training. Students engage in design workshops, studio-based assignments, and industry interactions. The program emphasizes creativity and functionality, preparing students for roles as junior designers, design assistants, or freelance interior decorators.",
-    "software": [
-      { "name": "AutoCAD", "src": "/software logos/pngegg (17).png" },
-      { "name": "SketchUp", "src": "/software logos/pngegg (18).png" },
-      { "name": "3dsMax", "src": "/software logos//pngegg (19).png" },
-      { "name": "Revit", "src": "/software logos/pngegg (21).png" },
-      { "name": "Photoshop", "src": "/software logos/pngegg (24).png" }
-    ],
-    "videos": [
-      {
-
-        "url": "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
-        
-      },
-      {
-
-        "url": "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
-
-      },
-      {
-
-        "url": "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
-    
-      }
-    ],
-    "whatYouWillLearn": [],
-    "curriculum": {
-      "Semester 1": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design fundamentals sketch and materials",
-        "content": [
-          "Fundamentals of Interior Design",
-          "Color Theory and Application",
-          "Space Planning and Layout"
-        ]
-      },
-      "Semester 2": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design sketch and furniture arrangement",
-        "content": [
-          "Furniture and Fixtures",
-          "Digital Drafting Techniques",
-          "Design Portfolio Development"
-        ]
-      }
-    }
-  },
-  
-  {
-    "value": "diploma3",
-    "label": "3 Year Diploma",
-    "title": "3 Year Diploma in Interior Design",
-    "duration": "3 Years Full-Time",
-    "description": "Gain comprehensive knowledge and hands-on experience in all aspects of interior design. Perfect for creative minds seeking in-depth understanding.",
-    "content": "The 3 Year Diploma in Interior Design is a comprehensive program offering a strong foundation in design principles, spatial planning, sustainable design, furniture design, and architectural concepts. The curriculum includes industry-standard software training, real-world projects, internships, and collaborative assignments. Students also learn business aspects of interior design, such as project management and client handling, preparing them for careers as interior designers, exhibition designers, and retail space planners.",
-    "software": [
-      { "name": "AutoCAD", "src": "/software logos/pngegg (17).png" },
-      { "name": "SketchUp", "src": "/software logos/pngegg (18).png" },
-      { "name": "3dsMax", "src": "/software logos//pngegg (19).png" },
-      { "name": "Revit", "src": "/software logos/pngegg (21).png" },
-      { "name": "Photoshop", "src": "/software logos/pngegg (24).png" }
-    ],
-    "videos": [
-      {
-
-        "url": "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
-        
-      },
-      {
-
-        "url": "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
-
-      },
-      {
-
-        "url": "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
-    
-      }
-    ],
-    "whatYouWillLearn": [],
-    "curriculum": {
-      "1st Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design fundamentals sketch and materials",
-        "Semester 1": [
-          "Basic Design Principles",
-          "Technical Drafting",
-          "Material and Finishes",
-          "Design Visualization"
-        ],
-        "Semester 2": [
-          "3D Modeling and Rendering",
-          "Furniture and Fixture Design",
-          "Residential Space Planning",
-          "Building Services"
-        ]
-      },
-      "2nd Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design software and space planning",
-        "Semester 3": [
-          "Sustainable Design Practices",
-          "Lighting Design",
-          "Commercial Space Planning",
-          "Interior Detailing"
-        ],
-        "Semester 4": [
-          "Advanced Materials and Textiles",
-          "Design Project Management",
-          "Exhibition Design",
-          "Interior Design Ethics and Law"
-        ]
-      },
-      "3rd Year": {
-        "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-        "imageAlt": "Interior design presentation and projects",
-        "Semester 5": [
-          "Business Aspects of Interior Design",
-          "Client Handling and Communication",
-          "Final Design Project I",
-          "Interior Design Portfolio"
-        ],
-        "Semester 6": [
-          "Internship/Industry Placement",
-          "Final Design Project II",
-          "Professional Practice in Interior Design",
-          "Project Presentation and Defense"
-        ]
-      }
-    }
-  }
-  
+    },
   ],
 
   "fashion-design": [
@@ -490,21 +462,20 @@ export const courseTypes: CourseCategory = {
         { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
         
       ],
-      "videos": [
-       
-      ],
-      "whatYouWillLearn": [],
-      "curriculum": {
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://images.unsplash.com/photo-1567631643547-67a2dd59f266?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "imageAlt": "Fashion design fundamentals and sketching",
+          image:
+            "https://images.unsplash.com/photo-1567631643547-67a2dd59f266?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          imageAlt: "Fashion design fundamentals and sketching",
           "Semester 1": [
             "Fashion Design Fundamentals",
             "Fashion Illustration",
             "Textile Science",
             "Fashion History",
             "Color Theory",
-            "Design Studio I"
+            "Design Studio I",
           ],
           "Semester 2": [
             "Pattern Making Basics",
@@ -512,19 +483,20 @@ export const courseTypes: CourseCategory = {
             "Fashion Art",
             "Digital Design Tools",
             "Material Studies",
-            "Design Studio II"
-          ]
+            "Design Studio II",
+          ],
         },
         "2nd Year": {
-          "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "imageAlt": "Fashion garment construction",
+          image:
+            "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          imageAlt: "Fashion garment construction",
           "Semester 3": [
             "Advanced Pattern Making",
             "Draping Techniques",
             "Fashion Trends",
             "Computer-Aided Design",
             "Fashion Marketing",
-            "Design Studio III"
+            "Design Studio III",
           ],
           "Semester 4": [
             "Tailoring Techniques",
@@ -532,77 +504,77 @@ export const courseTypes: CourseCategory = {
             "Textile Design",
             "Fashion Merchandising",
             "Portfolio Development",
-            "Design Studio IV"
-          ]
+            "Design Studio IV",
+          ],
         },
         "3rd Year": {
-          "image": "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "imageAlt": "Fashion trend forecasting and design applications",
+          image:
+            "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          imageAlt: "Fashion trend forecasting and design applications",
           "Semester 5": [
             "Advanced Draping Techniques",
             "Fashion Photography",
             "Fashion Styling",
             "Digital Fashion Illustration",
-            "Sustainable Fashion Design"
+            "Sustainable Fashion Design",
           ],
           "Semester 6": [
             "Fashion Branding and Marketing",
             "Fashion Collection Design",
             "Fashion Retail Management",
             "Fashion Trend Forecasting",
-            "Advanced Textile Design"
-          ]
+            "Advanced Textile Design",
+          ],
         },
         "4th Year": {
-          "image": "https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "imageAlt": "Fashion design portfolio and professional practice",
+          image:
+            "https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          imageAlt: "Fashion design portfolio and professional practice",
           "Semester 7": [
             "Capstone Fashion Design Project",
             "Fashion Show Production",
             "Advanced Pattern Drafting",
             "Fashion Project Management",
-            "Luxury Fashion Design"
+            "Luxury Fashion Design",
           ],
           "Semester 8": [
             "Thesis Preparation",
             "Fashion Entrepreneurship",
             "Internship/Fieldwork",
             "Professional Portfolio Development",
-            "Global Fashion Trends"
-          ]
-        }
-      }
-    }
-    ,
+            "Global Fashion Trends",
+          ],
+        },
+      },
+    },
     {
-      "content": "The Bachelor of Vocation (B.VOC) in Fashion Design is a three-year program focused on practical skills and industry readiness. Students gain hands-on experience in garment construction, pattern making, and fashion illustration. The curriculum includes intensive workshops, industry internships, and real-world projects. This program emphasizes technical proficiency alongside creative development, preparing graduates for immediate entry into the fashion industry.",
-      "value": "bvoc",
-      "label": "B.VOC in Fashion Design",
-      "title": "B.VOC in Fashion Design",
-      "duration": "3 Years Full-Time",
-      "description": "Master practical fashion design skills with industry-focused training.",
-     "software": [
-      { "name": "Adobe Illustrator", "src": "/software logos/pngegg (25).png" },
-      { "name": "Corel Draw", "src": "/software logos/pngegg (26).png" },
-      { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
-      
-    ],
+      content:
+        "The Bachelor of Vocation (B.VOC) in Fashion Design is a three-year program focused on practical skills and industry readiness. Students gain hands-on experience in garment construction, pattern making, and fashion illustration. The curriculum includes intensive workshops, industry internships, and real-world projects. This program emphasizes technical proficiency alongside creative development, preparing graduates for immediate entry into the fashion industry.",
+      value: "bvoc",
+      label: "B.VOC in Fashion Design",
+      title: "B.VOC in Fashion Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Master practical fashion design skills with industry-focused training.",
+      software: [
+        { name: "Adobe Illustrator", src: "/software logos/pngegg (25).png" },
+        { name: "Corel Draw", src: "/software logos/pngegg (26).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
 
-    "videos": [
-     
-    ],
-    "whatYouWillLearn": [],
-      "curriculum": {
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://images.unsplash.com/photo-1576691337280-42342cc5cf76",
-          "imageAlt": "Basic fashion design concepts and workshops",
+          image: "https://images.unsplash.com/photo-1576691337280-42342cc5cf76",
+          imageAlt: "Basic fashion design concepts and workshops",
           "Semester 1": [
             "Fashion Design Basics",
             "Garment Construction",
             "Pattern Making Techniques",
             "Fashion Illustration Fundamentals",
             "Textile Science",
-            "Design Communication"
+            "Design Communication",
           ],
           "Semester 2": [
             "Fashion History",
@@ -610,19 +582,19 @@ export const courseTypes: CourseCategory = {
             "Sewing and Stitching",
             "Color Theory",
             "Material Studies",
-            "Design Studio I"
-          ]
+            "Design Studio I",
+          ],
         },
         "2nd Year": {
-          "image": "https://images.unsplash.com/photo-1564866651-c2d17b80e9d8",
-          "imageAlt": "Intermediate fashion design techniques and projects",
+          image: "https://images.unsplash.com/photo-1564866651-c2d17b80e9d8",
+          imageAlt: "Intermediate fashion design techniques and projects",
           "Semester 3": [
             "Advanced Pattern Making",
             "Fashion Design Software",
             "Fashion Photography",
             "Fashion Marketing",
             "Textile Design",
-            "Design Studio II"
+            "Design Studio II",
           ],
           "Semester 4": [
             "Fashion Collection Design",
@@ -630,60 +602,59 @@ export const courseTypes: CourseCategory = {
             "Portfolio Development",
             "Sustainable Fashion Practices",
             "Advanced Sewing Techniques",
-            "Design Studio III"
-          ]
+            "Design Studio III",
+          ],
         },
         "3rd Year": {
-          "image": "https://images.unsplash.com/photo-1586190840451-97c7a9e5d9bb",
-          "imageAlt": "Final year fashion design projects and internships",
+          image: "https://images.unsplash.com/photo-1586190840451-97c7a9e5d9bb",
+          imageAlt: "Final year fashion design projects and internships",
           "Semester 5": [
             "Industry Internship",
             "Fashion Trend Forecasting",
             "Fashion Show Production",
             "Fashion Entrepreneurship",
-            "Professional Development"
+            "Professional Development",
           ],
           "Semester 6": [
             "Capstone Project",
             "Fashion Retail Management",
             "Advanced Fashion Illustration",
             "Global Fashion Trends",
-            "Professional Portfolio Development"
-          ]
-        }
-      }
+            "Professional Portfolio Development",
+          ],
+        },
+      },
     },
-    
+
     {
-      "content": "The Bachelor of Science (B.SC) in Fashion Design is a three-year program that combines design creativity with technical and scientific aspects of fashion. Students study textile science, color theory, fashion technology, and sustainable practices. The curriculum includes advanced computer-aided design, production management, and quality control, providing a strong foundation in the technical aspects of fashion production.",
-      "value": "bsc",
-      "label": "B.SC in Fashion Design",
-      "title": "B.SC in Fashion Design",
-      "duration": "3 Years Full-Time",
-      "description": "Combine scientific knowledge with fashion design expertise.",
-      "software": [
-        { "name": "Adobe Illustrator", "src": "/software logos/pngegg (25).png" },
-        { "name": "Corel Draw", "src": "/software logos/pngegg (26).png" },
-        { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
-        
+      content:
+        "The Bachelor of Science (B.SC) in Fashion Design is a three-year program that combines design creativity with technical and scientific aspects of fashion. Students study textile science, color theory, fashion technology, and sustainable practices. The curriculum includes advanced computer-aided design, production management, and quality control, providing a strong foundation in the technical aspects of fashion production.",
+      value: "bsc",
+      label: "B.SC in Fashion Design",
+      title: "B.SC in Fashion Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Combine scientific knowledge with fashion design expertise.",
+      software: [
+        { name: "Adobe Illustrator", src: "/software logos/pngegg (25).png" },
+        { name: "Corel Draw", src: "/software logos/pngegg (26).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
       ],
 
-      "videos": [
-       
-      ],
-      "whatYouWillLearn": [],
-      "curriculum": {
-      
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://images.unsplash.com/photo-1575240023813-210ca26abf1c",
-          "imageAlt": "Introduction to textile science and basic design techniques",
+          image: "https://images.unsplash.com/photo-1575240023813-210ca26abf1c",
+          imageAlt:
+            "Introduction to textile science and basic design techniques",
           "Semester 1": [
             "Introduction to Fashion Design",
             "Textile Science Fundamentals",
             "Fashion Illustration Basics",
             "Color Theory and Application",
             "Design Communication",
-            "Basic Garment Construction"
+            "Basic Garment Construction",
           ],
           "Semester 2": [
             "Fashion History and Evolution",
@@ -691,19 +662,19 @@ export const courseTypes: CourseCategory = {
             "Introduction to Fashion Technology",
             "Materials and Fabrics",
             "Design Thinking and Innovation",
-            "Fashion Photography"
-          ]
+            "Fashion Photography",
+          ],
         },
         "2nd Year": {
-          "image": "https://images.unsplash.com/photo-1592904012202-2c54212261e6",
-          "imageAlt": "Intermediate design concepts and fashion technology",
+          image: "https://images.unsplash.com/photo-1592904012202-2c54212261e6",
+          imageAlt: "Intermediate design concepts and fashion technology",
           "Semester 3": [
             "Advanced Pattern Making",
             "Fashion Design Software",
             "Textile Design and Innovation",
             "Computer-Aided Design (CAD)",
             "Sustainable Fashion Practices",
-            "Fashion Merchandising"
+            "Fashion Merchandising",
           ],
           "Semester 4": [
             "Production Management",
@@ -711,59 +682,58 @@ export const courseTypes: CourseCategory = {
             "Fashion Marketing and Retail",
             "3D Design Technology",
             "Brand Development",
-            "Advanced Garment Construction"
-          ]
+            "Advanced Garment Construction",
+          ],
         },
         "3rd Year": {
-          "image": "https://images.unsplash.com/photo-1555094546-9cf3b18d7e84",
-          "imageAlt": "Final year projects and professional development",
+          image: "https://images.unsplash.com/photo-1555094546-9cf3b18d7e84",
+          imageAlt: "Final year projects and professional development",
           "Semester 5": [
             "Fashion Trend Forecasting",
             "Fashion Entrepreneurship",
             "Fashion Show Production",
             "Advanced Textile Science",
-            "Global Fashion Trends"
+            "Global Fashion Trends",
           ],
           "Semester 6": [
             "Capstone Project",
             "Fashion Business Management",
             "Professional Portfolio Development",
             "Fashion Retail and E-commerce",
-            "Internship in Fashion Industry"
-          ]
-        }
-      }
+            "Internship in Fashion Industry",
+          ],
+        },
+      },
     },
-    
+
     {
-      "content": "The One Year Diploma in Fashion Design is an intensive program covering essential fashion design skills. Students learn basic pattern making, garment construction, fashion illustration, and digital design tools. The program includes practical projects and a basic understanding of the fashion industry, perfect for those seeking quick entry into the fashion world.",
-      "value": "diploma1",
-      "label": "1 Year Diploma in Fashion Design",
-      "title": "1 Year Diploma in Fashion Design",
-      "duration": "1 Year Intensive",
-      "description": "Fast-track your fashion design career with hands-on training.",
-      "software": [
-        { "name": "Adobe Illustrator", "src": "/software logos/pngegg (25).png" },
-        { "name": "Corel Draw", "src": "/software logos/pngegg (26).png" },
-        { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
-        
+      content:
+        "The One Year Diploma in Fashion Design is an intensive program covering essential fashion design skills. Students learn basic pattern making, garment construction, fashion illustration, and digital design tools. The program includes practical projects and a basic understanding of the fashion industry, perfect for those seeking quick entry into the fashion world.",
+      value: "diploma1",
+      label: "1 Year Diploma in Fashion Design",
+      title: "1 Year Diploma in Fashion Design",
+      duration: "1 Year Intensive",
+      description:
+        "Fast-track your fashion design career with hands-on training.",
+      software: [
+        { name: "Adobe Illustrator", src: "/software logos/pngegg (25).png" },
+        { name: "Corel Draw", src: "/software logos/pngegg (26).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
       ],
 
-      "videos": [
-       
-      ],
-      "whatYouWillLearn": [],
-      "curriculum": {
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://images.unsplash.com/photo-1555043131-5b53bb99b96e",
-          "imageAlt": "Fashion design basics and garment construction",
+          image: "https://images.unsplash.com/photo-1555043131-5b53bb99b96e",
+          imageAlt: "Fashion design basics and garment construction",
           "Semester 1": [
             "Introduction to Fashion Design",
             "Basic Pattern Making",
             "Fashion Illustration Basics",
             "Garment Construction Techniques",
             "Textile Knowledge",
-            "Fashion Communication"
+            "Fashion Communication",
           ],
           "Semester 2": [
             "Fashion Styling and Trends",
@@ -771,39 +741,40 @@ export const courseTypes: CourseCategory = {
             "Introduction to Digital Design Tools",
             "Basic Fashion Marketing",
             "Sewing and Draping Techniques",
-            "Fashion Industry Overview"
-          ]
-        }
-      }
+            "Fashion Industry Overview",
+          ],
+        },
+      },
     },
-    
+
     {
-      "content": "The Three Year Diploma in Fashion Design offers comprehensive training in all aspects of fashion design. Students develop strong technical skills in pattern making, garment construction, and design development. The program includes extensive practical training, industry internships, and portfolio development, preparing graduates for various roles in the fashion industry.",
-      "value": "diploma3",
-      "label": "3 Year Diploma in Fashion Design",
-      "title": "3 Year Diploma in Fashion Design",
-      "duration": "3 Years Full-Time",
-      "description": "Gain comprehensive knowledge and practical expertise in fashion design.",
-      "software": [
-        { "name": "Adobe Illustrator", "src": "/software logos/pngegg (25).png" },
-        { "name": "Corel Draw", "src": "/software logos/pngegg (26).png" },
-        { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
-        
+      content:
+        "The Three Year Diploma in Fashion Design offers comprehensive training in all aspects of fashion design. Students develop strong technical skills in pattern making, garment construction, and design development. The program includes extensive practical training, industry internships, and portfolio development, preparing graduates for various roles in the fashion industry.",
+      value: "diploma3",
+      label: "3 Year Diploma in Fashion Design",
+      title: "3 Year Diploma in Fashion Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Gain comprehensive knowledge and practical expertise in fashion design.",
+      software: [
+        { name: "Adobe Illustrator", src: "/software logos/pngegg (25).png" },
+        { name: "Corel Draw", src: "/software logos/pngegg (26).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
       ],
 
-      "videos": [],
-      "whatYouWillLearn": [],
-      "curriculum": {
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
-          "imageAlt": "Fashion design basics and pattern making",
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Fashion design basics and pattern making",
           "Semester 1": [
             "Introduction to Fashion Design",
             "Basic Pattern Making",
             "Fashion Illustration Basics",
             "Garment Construction Techniques",
             "Textile Science",
-            "Fashion Communication"
+            "Fashion Communication",
           ],
           "Semester 2": [
             "Fashion Trends and Forecasting",
@@ -811,19 +782,19 @@ export const courseTypes: CourseCategory = {
             "Basic Draping Techniques",
             "Sewing Fundamentals",
             "Digital Fashion Design Tools",
-            "Fashion Industry Overview"
-          ]
+            "Fashion Industry Overview",
+          ],
         },
         "2nd Year": {
-          "image": "https://images.unsplash.com/photo-1565037639-7f1c95e31261",
-          "imageAlt": "Advanced fashion design and garment construction",
+          image: "https://images.unsplash.com/photo-1565037639-7f1c95e31261",
+          imageAlt: "Advanced fashion design and garment construction",
           "Semester 3": [
             "Advanced Pattern Making",
             "Fashion Draping and Construction",
             "Fashion History",
             "Portfolio Development",
             "Fashion Merchandising",
-            "Sustainable Fashion Practices"
+            "Sustainable Fashion Practices",
           ],
           "Semester 4": [
             "Digital Fashion Design II",
@@ -831,19 +802,19 @@ export const courseTypes: CourseCategory = {
             "Fashion Photography Basics",
             "Textile Technology",
             "Branding and Business in Fashion",
-            "Internship Preparation"
-          ]
+            "Internship Preparation",
+          ],
         },
         "3rd Year": {
-          "image": "https://images.unsplash.com/photo-1533745062109-15f3c78b65b5",
-          "imageAlt": "Final fashion design project and portfolio",
+          image: "https://images.unsplash.com/photo-1533745062109-15f3c78b65b5",
+          imageAlt: "Final fashion design project and portfolio",
           "Semester 5": [
             "Final Fashion Design Project",
             "Advanced Fashion Illustration",
             "Fashion Show Production",
             "Trends and Innovations in Fashion",
             "Advanced Draping and Couture Techniques",
-            "Internship"
+            "Internship",
           ],
           "Semester 6": [
             "Professional Development in Fashion",
@@ -851,12 +822,11 @@ export const courseTypes: CourseCategory = {
             "Fashion Design Portfolio Finalization",
             "Sustainable Fashion Design",
             "Fashion Collection Presentation",
-            "Industry Internship"
-          ]
-        }
-      }
-    }
-    
+            "Industry Internship",
+          ],
+        },
+      },
+    },
   ],
 
 "graphic-design": [
@@ -1820,23 +1790,22 @@ export const courseTypes: CourseCategory = {
       
     ],
 
-    "software": [],
-    "curriculum": {
-      "1st Semester": {
-        "image": "https://images.unsplash.com/photo-1596506895294-e4a47e1846fe",
-        "imageAlt": "Learning digital marketing basics",
-        "Semester 1": [
-          "Overview of Digital Marketing",
-          "SEO Fundamentals",
-          "Social Media Platforms and Tools",
-          "Introduction to Google Ads",
-          "Content Marketing for Beginners"
-        ]
-      }
-    }
-  }
-],
-
+      software: [],
+      curriculum: {
+        "1st Semester": {
+          image: "https://images.unsplash.com/photo-1596506895294-e4a47e1846fe",
+          imageAlt: "Learning digital marketing basics",
+          "Semester 1": [
+            "Overview of Digital Marketing",
+            "SEO Fundamentals",
+            "Social Media Platforms and Tools",
+            "Introduction to Google Ads",
+            "Content Marketing for Beginners",
+          ],
+        },
+      },
+    },
+  ],
 
 "jewellery-design": [
   {
@@ -2667,7 +2636,7 @@ export const courseTypes: CourseCategory = {
   }
 ],
 
-"advertising-marketing": [
+  "advertising-marketing": [
     {
       "metaTitle": "Advertising and Marketing Course in Jodhpur | Inframe School of Art & Design",
       "metaDescription": "Enroll in the Business Administration in Advertising and Marketing course in Jodhpur. Gain essential skills in marketing, advertising, and business management",
@@ -2684,73 +2653,72 @@ export const courseTypes: CourseCategory = {
         { "name": "V-Ray", "src": "/logos/pngegg (20).png" },
         { "name": "Rhino", "src": "/logos/pngegg (23).png" }
       ],
-      "videos": [],
-      "whatYouWillLearn": [],
-      "curriculum": {
+      videos: [],
+      whatYouWillLearn: [],
+      curriculum: {
         "1st Year": {
-          "image": "https://example.com/bba_advertising_1.jpg",
-          "imageAlt": "Introduction to Advertising and Marketing",
+          image: "https://example.com/bba_advertising_1.jpg",
+          imageAlt: "Introduction to Advertising and Marketing",
           "Semester 1": [
             "Introduction to Business Administration",
             "Fundamentals of Marketing",
             "Consumer Behavior",
             "Business Communication",
-            "Principles of Management"
+            "Principles of Management",
           ],
           "Semester 2": [
             "Market Research",
             "Advertising Principles",
             "Brand Management",
             "Digital Marketing Basics",
-            "Accounting for Managers"
-          ]
+            "Accounting for Managers",
+          ],
         },
         "2nd Year": {
-          "image": "https://example.com/bba_advertising_2.jpg",
-          "imageAlt": "Advanced Marketing Strategies",
+          image: "https://example.com/bba_advertising_2.jpg",
+          imageAlt: "Advanced Marketing Strategies",
           "Semester 3": [
             "Strategic Marketing Management",
             "Media Planning and Buying",
             "Advertising Campaigns",
             "Social Media Marketing",
-            "Public Relations"
+            "Public Relations",
           ],
           "Semester 4": [
             "Search Engine Marketing (SEM)",
             "Content Strategy and Marketing",
             "Sales and Distribution Management",
             "Market Analytics",
-            "Email Marketing"
-          ]
+            "Email Marketing",
+          ],
         },
         "3rd Year": {
-          "image": "https://example.com/bba_advertising_3.jpg",
-          "imageAlt": "Industry Practice and Marketing Projects",
+          image: "https://example.com/bba_advertising_3.jpg",
+          imageAlt: "Industry Practice and Marketing Projects",
           "Semester 5": [
             "Marketing Economics",
             "Event Management",
             "Entrepreneurship in Marketing",
             "Advertising Design and Copywriting",
-            "Public Relations and Corporate Communication"
+            "Public Relations and Corporate Communication",
           ],
           "Semester 6": [
             "Advanced Digital Marketing",
             "Marketing Automation",
             "Business Law for Marketers",
             "Internship and Industry Project",
-            "Final Marketing Project"
-          ]
-        }
-      }
-    }
-]
+            "Final Marketing Project",
+          ],
+        },
+      },
+    },
+  ],
   // Continue with other categories...
 };
 
 export const categoryHeroImages: { [key: string]: string[] } = {
-
-  "interior-design":[
-     "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1600&q=80", // BDes
+  "interior-design": [
+    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1600&q=80", // BDes
     "https://images.unsplash.com/photo-1618221381711-42ca8ab6e908?w=1600&q=80", // BVOC
     "https://images.unsplash.com/photo-1616048056617-93b94a339009?w=1600&q=80", // BSc
     "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1600&q=80", // 1 Year Diploma
@@ -2761,7 +2729,7 @@ export const categoryHeroImages: { [key: string]: string[] } = {
     "https://images.unsplash.com/photo-1537832816519-689ad163238b?w=1600&q=80", // Fashion showcase
     "https://images.unsplash.com/photo-1528459801416-a9241982fc8d?w=1600&q=80", // Design workshop
     "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1600&q=80", // Fashion show
-    "https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&q=80"  // Textile design
+    "https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&q=80", // Textile design
   ],
 
   "graphic-design": [
@@ -2769,27 +2737,25 @@ export const categoryHeroImages: { [key: string]: string[] } = {
     "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1600&q=80", // Creative process
     "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1600&q=80", // Digital art
     "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1600&q=80", // Design tools
-    "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1600&q=80"  // Typography work
+    "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1600&q=80", // Typography work
   ],
 
   "ui-ux-design": [
     "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=1600&q=80", // UX workspace
-    "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1600&q=80"  // Digital prototyping
+    "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1600&q=80", // Digital prototyping
   ],
-
-
 
   "digital-marketing": [
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80", // Digital analytics
     "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1600&q=80", // Social media marketing
-    "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1600&q=80"  // Content strategy
+    "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1600&q=80", // Content strategy
   ],
-"jewellery-design": [
+  "jewellery-design": [
     "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&q=80", // BVOC - Jewellery workshop
     "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1600&q=80", // 1 Year Diploma - Diamond and jewellery design
     "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=1600&q=80", // CAD Jewellery - Digital design workspace
     "https://images.unsplash.com/photo-1590548784585-643d2b9f2925?w=1600&q=80", // 6 Month Certificate - Basic jewellery making
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&q=80"  // 6 Month CAD Certificate - Modern jewellery design
+    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1600&q=80", // 6 Month CAD Certificate - Modern jewellery design
   ],
 
   "animation-vfx": [
@@ -2798,17 +2764,17 @@ export const categoryHeroImages: { [key: string]: string[] } = {
     "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80", // BSc - Technical setup
     "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=80", // 1 Year Diploma
     "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1600&q=80", // 2 Year Diploma
-    "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&q=80"  // 3 Year Diploma
+    "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&q=80", // 3 Year Diploma
   ],
 
   "entrepreneurship-skill": [
     "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80", // BVOC - Business planning and strategy
-    "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&q=80"  // 1 Year Diploma - Startup workspace
+    "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&q=80", // 1 Year Diploma - Startup workspace
   ],
 
   "media-entertainment": [
     "https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1600&q=80", // BVOC - Professional media studio
-    "https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?w=1600&q=80"  // 1 Year Diploma - Content creation setup
+    "https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?w=1600&q=80", // 1 Year Diploma - Content creation setup
   ],
 
   "fine-arts": [
@@ -2818,14 +2784,11 @@ export const categoryHeroImages: { [key: string]: string[] } = {
     "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=1600&q=80", // BFA Applied
     "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80", // BVOC Fine Arts
     "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1600&q=80", // 1 Year Diploma Painting
-    "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1600&q=80"  // 3 Year Diploma Fine Arts
+    "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1600&q=80", // 3 Year Diploma Fine Arts
   ],
 
-   "advertising-marketing": [
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80" // BBA - Marketing strategy and planning
+  "advertising-marketing": [
+    "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&q=80", // BBA - Marketing strategy and planning
   ],
   // Continue with other categories...
 };
-
-
-

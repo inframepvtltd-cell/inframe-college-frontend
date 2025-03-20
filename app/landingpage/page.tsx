@@ -1,13 +1,13 @@
-import ApplyPage from '../../components/ApplyNowPage'
+import ApplyPage from "../../components/ApplyNowPage";
 
-import React from 'react'
+import React from "react";
 
 const page = () => {
   return (
     <div>
-        <ApplyPage/>
+      <ApplyPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

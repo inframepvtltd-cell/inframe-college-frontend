@@ -21,7 +21,7 @@ export default function RootLayout({
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any"/>
-        <link rel="icon" type="image/png" href="/favicon.png"/>
+      <link rel="icon" type="image/png" href="/favicon.png"/>
 
         {/* Open Graph Metadata (for social sharing) */}
         

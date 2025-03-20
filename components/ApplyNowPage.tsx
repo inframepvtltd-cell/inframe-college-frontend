@@ -42,7 +42,7 @@ declare global {
 
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
-import {  MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import IndustryPartners from "./Courses/Partners";
 import Testimonial from "./Testimonials";
 import { Poppins } from "next/font/google";
@@ -52,8 +52,8 @@ import ApplyNow from "./ApplyNow";
 import ApplyNowForm from "./ApplyNowForm";
 import Image from "next/image";
 
-
 import CourseCatalog from "./CourseCarousel";
+import { experienceCamputLife } from "../utils/constant";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -69,8 +69,6 @@ interface Contact {
   bgColor: string;
   hoverColor: string;
 }
-
-
 
 interface Facility {
   title: string;
@@ -161,7 +159,6 @@ export default function ApplyPage() {
     }
   }, [isScrolled, isFormOpen]);
 
- 
   const facilities: Facility[] = [
     {
       title: "Design Studios",
@@ -269,7 +266,7 @@ export default function ApplyPage() {
       </section>
 
       <section className="py-20 ">
-        <CourseCatalog/>
+        <CourseCatalog />
       </section>
 
       {/* Campus Infrastructure */}
@@ -308,7 +305,7 @@ export default function ApplyPage() {
       </section>
 
       {/* Life at Institute */}
-      <CampusLife />
+      <CampusLife experienceCamputLife={experienceCamputLife}/>
 
       {/* Contact Section */}
       <section

@@ -15,16 +15,11 @@ export const metadata: Metadata = {
 
 
 const page = () => {
-
-  
-
-
-
   return (
     <div>
-      <AboutPage/>
+      <AboutPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -85,7 +85,7 @@ export function ContactUsForm({
     >
       <div className="mt-4">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28944.773590809277!2d72.8512564!3d26.2424944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418e9b41703f4d%3A0xa8313d8409192420!2s09%2C%20Pal%20Link%20Rd%2C%20Marudhar%20Nagar%2C%20Kamla%20Nehru%20Nagar%2C%20Shyam%20Nagar%2C%20Jodhpur%2C%20Rajasthan%20342008!5e0!3m2!1sen!2sin!4v1671167712000!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4402.294141288112!2d72.98366907607904!3d26.270182887406257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x67b93f41c21a1b33%3A0x75c39459005a6414!2sInframe%20School%20of%20Art%2C%20Design%20%26%20Business!5e1!3m2!1sen!2sin!4v1740730217159!5m2!1sen!2sin"
           width="100%"
           height="500"
           style={{ border: "0", borderRadius: "10px" }}
@@ -126,16 +126,6 @@ export function ContactUsForm({
               <div className="mt-4 space-y-3">
                 <p className="text-lg text-center md:text-left text-gray-700">
                   <Phone className="inline mr-2 text-blue-600" />
-                  Phone:{" "}
-                  <a
-                    href="tel:+917123456789"
-                    className="text-blue-600 hover:underline"
-                  >
-                    +91 7123456789
-                  </a>
-                </p>
-                <p className="text-lg text-center md:text-left text-gray-700">
-                  <Phone className="inline mr-2 text-blue-600" />
                   Admissions:{" "}
                   <a
                     href="tel:+919649964937"
@@ -161,7 +151,7 @@ export function ContactUsForm({
                     href="mailto:info@inframecollege.org"
                     className="text-blue-600 hover:underline"
                   >
-                    info@inframecollege.org
+                    info@inframeschool.com
                   </a>
                 </p>
                 <p className="text-lg text-center md:text-left text-gray-700">
@@ -171,7 +161,7 @@ export function ContactUsForm({
                     href="mailto:hr@inframecollege.org"
                     className="text-blue-600 hover:underline"
                   >
-                    hr@inframecollege.org
+                    hr@inframeschool.com
                   </a>
                 </p>
               </div>

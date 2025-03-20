@@ -22,8 +22,6 @@
 //   const [selectedCategory, setSelectedCategory] = useState("All");
 //   const [searchQuery, setSearchQuery] = useState("");
 
-  
-
 //   const filteredCategories = categories2.map(category => ({
 //     ...category,
 //     items: category.items.filter(item => {

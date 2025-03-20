@@ -14,8 +14,10 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div><LifeAtCampus/></div>
-  )
-}
+    <div>
+      <LifeAtCampus />
+    </div>
+  );
+};
 
-export default page
+export default page;

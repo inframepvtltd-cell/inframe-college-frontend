@@ -12,12 +12,8 @@ import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"], // Including various font weights
-});
 
-const courses = {
+const category = {
   design: [
     {
       title: "Interior Design",
@@ -141,6 +137,35 @@ const courses = {
     },
   ],
 };
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
+interface DegreeMap {
+  [key: string]: string;
+}
+
+const getDegreeType = (text: string): string => {
+  const degreeMap: DegreeMap = {
+    "B. Des": "bdes",
+    "B.VOC": "bvoc",
+    "B.SC": "bsc",
+    "1 Year Diploma": "diploma1",
+    "3 Year Diploma": "diploma3",
+    "2 Year Diploma": "diploma2",
+    "6 Month Certificate": "certificate6",
+  };
+
+  // Find which degree type this course belongs to
+  for (const [key, value] of Object.entries(degreeMap)) {
+    if (text.includes(key)) {
+      return value;
+    }
+  }
+
+  return "bdes"; // Default fallback
+};
 
 interface Course {
   title: string;
@@ -162,7 +187,6 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
         className="overflow-hidden group hover:shadow-2xl transition-all duration-300 border-yellow-100 hover:border-yellow-300"
       >
         <div className="relative">
-          
           <Image
             src={course.image}
             alt={course.title}
@@ -182,10 +206,17 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
                 key={idx}
                 className="text-sm text-gray-600 hover:text-yellow-600 transition-colors flex items-start"
               >
-                <span className="text-yellow-400 mr-2 text-lg leading-none">
-                  •
-                </span>
-                {program}
+                <Link
+                  className="hover:text-blue-500 hover:underline"
+                  href={`/${course.title
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}/${getDegreeType(program)}`}
+                >
+                  <span className="text-yellow-400 mr-2 text-lg leading-none">
+                    •
+                  </span>
+                  {program}
+                </Link>
               </li>
             ))}
           </ul>
@@ -195,9 +226,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
             className="block mt-6"
             scroll={false}
           >
-            <Button
-              className={`w-full bg-yellow-400 hover:bg-yellow-500 text-black flex items-center justify-center space-x-2 px-5 py-3 rounded-md ${poppins.className}`}
-            >
+            <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black flex items-center justify-center space-x-2 px-5 py-3 rounded-md">
               <span>Explore Now</span>
               <FaArrowRight className="text-black" />
             </Button>
@@ -209,7 +238,11 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
 );
 
 const CourseCatalog = () => {
-  const allCourses = [...courses.design, ...courses.art, ...courses.business];
+  const allCourses = [
+    ...category.design,
+    ...category.art,
+    ...category.business,
+  ];
 
   return (
     <div
@@ -220,35 +253,33 @@ const CourseCatalog = () => {
           <h1 className="text-4xl md:text-5xl my-10 font-bold mb-4 text-gray-800">
             Our Industry-Centered Programs
           </h1>
-          <div className="w-24 h-1 bg-yellow-400  rounded-full" />
+          <div className="w-24 h-1 bg-yellow-400 rounded-full" />
         </div>
-
-        <Tabs defaultValue="all" className="w-full ">
-          <div className=" p-2 mb-12">
-            <TabsList className="flex flex-wrap justify-center sm:justify-start my-3 rounded-lg   gap-2  font-bold text-black font-sans">
+        <Tabs defaultValue="all" className="w-full">
+          <div className="p-2 mb-12">
+            <TabsList className="flex flex-wrap justify-center sm:justify-start my-3 rounded-lg gap-2 font-bold text-black font-sans">
               {["all", "art", "business", "design"].map((tab) => (
                 <TabsTrigger
                   key={tab}
                   value={tab}
-                  className="px-8 py-3 data-[state=active]:bg-yellow-400 border border-black  font-sans font-bold data-[state=active]:text-black transition-all duration-300"
+                  className="px-8 py-3 data-[state=active]:bg-yellow-400 border border-black font-sans font-bold data-[state=active]:text-black transition-all duration-300"
                 >
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </TabsTrigger>
               ))}
             </TabsList>
           </div>
-
           <TabsContent value="all">
             <CourseSection courses={allCourses} />
           </TabsContent>
           <TabsContent value="art">
-            <CourseSection courses={courses.art} />
+            <CourseSection courses={category.art} />
           </TabsContent>
           <TabsContent value="business">
-            <CourseSection courses={courses.business} />
+            <CourseSection courses={category.business} />
           </TabsContent>
           <TabsContent value="design">
-            <CourseSection courses={courses.design} />
+            <CourseSection courses={category.design} />
           </TabsContent>
         </Tabs>
       </div>

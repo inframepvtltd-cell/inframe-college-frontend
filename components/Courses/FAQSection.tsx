@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
 import { ChevronDown } from "lucide-react";
 
 interface AccordionItemProps {
@@ -45,7 +50,7 @@ const FAQSection = () => (
     </CardHeader>
     <CardContent className="text-black">
       <div className="space-y-4 text-black">
-        <AccordionItem title="What are the admission requirements?"  >
+        <AccordionItem title="What are the admission requirements?">
           Admission requirements include a high school diploma or equivalent,
           portfolio of creative work (optional but recommended), and a personal
           interview. International students must demonstrate English language

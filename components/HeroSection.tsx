@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from './ui/button';
-import ImageCarousel from './ImageCarousel';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "./ui/button";
+import ImageCarousel from "./ImageCarousel";
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
 
 // Using the Poppins font
@@ -15,19 +15,19 @@ const poppins = Poppins({
 const HeroSection = () => {
   const slides = [
     {
-      title: 'LIFE@Inframe',
+      title: "LIFE@Inframe",
       description:
-        'Inframe’s enthusiastic and colourful atmosphere strives to inspire future designers to make their dreams a reality, encouraging them to pursue a fulfilling career.',
+        "Inframe’s enthusiastic and colourful atmosphere strives to inspire future designers to make their dreams a reality, encouraging them to pursue a fulfilling career.",
     },
     {
-      title: 'CREATIVITY UNLEASHED',
+      title: "CREATIVITY UNLEASHED",
       description:
-        'Our community nurtures creativity and innovation, helping students bring their unique visions to life.',
+        "Our community nurtures creativity and innovation, helping students bring their unique visions to life.",
     },
     {
-      title: 'DESIGN YOUR FUTURE',
+      title: "DESIGN YOUR FUTURE",
       description:
-        'Explore endless possibilities in design and craft a future that resonates with your passion.',
+        "Explore endless possibilities in design and craft a future that resonates with your passion.",
     },
   ];
 
@@ -52,7 +52,9 @@ const HeroSection = () => {
       {/* Content Section */}
       <div className="relative z-20 flex flex-col lg:flex-row justify-center md:justify-start px-6 md:px-12 lg:px-24 xl:px-32 text-white h-full w-full">
         {/* Left Text Section */}
-        <div className={`flex flex-col justify-center items-start text-left space-y-4 lg:space-y-6 max-w-lg lg:max-w-xl xl:max-w-2xl ${poppins.className}`}>
+        <div
+          className={`flex flex-col justify-center items-start text-left space-y-4 lg:space-y-6 max-w-lg lg:max-w-xl xl:max-w-2xl ${poppins.className}`}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}

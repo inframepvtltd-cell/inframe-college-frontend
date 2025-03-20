@@ -114,7 +114,8 @@ const CounselingForm = () => {
                         />
                         {errors.name && (
                           <p className="text-red-500 text-sm mt-1">
-                            {typeof errors.name?.message === "string" && errors.name.message}
+                            {typeof errors.name?.message === "string" &&
+                              errors.name.message}
                           </p>
                         )}
                       </div>
@@ -130,7 +131,8 @@ const CounselingForm = () => {
                         />
                         {errors.phone && (
                           <p className="text-red-500 text-sm mt-1">
-                            {typeof errors.phone?.message === "string" && errors.phone.message}
+                            {typeof errors.phone?.message === "string" &&
+                              errors.phone.message}
                           </p>
                         )}
                       </div>
@@ -146,7 +148,8 @@ const CounselingForm = () => {
                         />
                         {errors.email && (
                           <p className="text-red-500 text-sm mt-1">
-                            {typeof errors.email?.message === "string" && errors.email.message}
+                            {typeof errors.email?.message === "string" &&
+                              errors.email.message}
                           </p>
                         )}
                       </div>
@@ -162,7 +165,8 @@ const CounselingForm = () => {
                         />
                         {errors.city && (
                           <p className="text-red-500 text-sm mt-1">
-                            {typeof errors.city?.message === "string" && errors.city.message}
+                            {typeof errors.city?.message === "string" &&
+                              errors.city.message}
                           </p>
                         )}
                       </div>
@@ -172,7 +176,10 @@ const CounselingForm = () => {
                           onValueChange={(value) => setValue("course", value)}
                           defaultValue=""
                         >
-                          <SelectTrigger id="course" className="w-full font-sans">
+                          <SelectTrigger
+                            id="course"
+                            className="w-full font-sans"
+                          >
                             <SelectValue placeholder="Choose a course" />
                           </SelectTrigger>
                           <SelectContent>
@@ -211,7 +218,8 @@ const CounselingForm = () => {
                         </Select>
                         {errors.course && (
                           <p className="text-red-500 text-sm mt-1">
-                            {typeof errors.course?.message === "string" && errors.course.message}
+                            {typeof errors.course?.message === "string" &&
+                              errors.course.message}
                           </p>
                         )}
                       </div>

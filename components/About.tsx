@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { Card, CardContent } from "../components/ui/card";
-import { highlights, LOGOS, studentImages, values } from "../utils/constant";
+import { experienceCamputLife, highlights, LOGOS, studentImages, values } from "../utils/constant";
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
 import ApplyNow from "./ApplyNow";
 import Image from "next/image";
@@ -96,14 +96,14 @@ const AboutPage = () => {
                 About Us
               </h2>
               <p className="text-lg font-sans leading-relaxed text-justify">
-                Inframe college of art, design & business is established by the
+                Inframe school of art, design & business is established by the
                 Inframe Educational Society under Rajasthan Societies Act 1958.
-                Inframe college of art, design and business will be one of a
-                kind design institute in Jodhpur which will commence it’s
-                curriculum with the aim to expand the design and business field
-                in Jodhpur and it’s surrounding regions by being the first
-                design and business college of Jodhpur to offer degree, diploma
-                and professional courses in various fields of interior design,
+                Inframe school of art, design and business will be one of a kind
+                design institute in Jodhpur which will commence it’s curriculum
+                with the aim to expand the design and business field in Jodhpur
+                and it’s surrounding regions by being the first design and
+                business school of Jodhpur to offer degree, diploma and
+                professional courses in various fields of interior design,
                 graphic design, fine arts and digital marketing .
                 <br />
                 <br />
@@ -111,8 +111,8 @@ const AboutPage = () => {
                 in specific subject .The candidate from any educational
                 background can pursue or take admission to a design course and
                 fulfill their dreams of becoming designer with inframe design
-                college .In college will not only help the students to learn
-                more effectively and have a great future.
+                school .In school will not only help the students to learn more
+                effectively and have a great future.
               </p>
             </div>
           </div>
@@ -163,7 +163,7 @@ const AboutPage = () => {
                 VISION
               </h2>
               <p className="text-lg font-sans leading-relaxed">
-                Inframe college of art, design and business aspires to be a
+                Inframe school of art, design and business aspires to be a
                 nationally and internationally recognized institution for
                 education in various fields of design, art and business. We want
                 the students of our city/state to flourish in their life and at
@@ -255,15 +255,15 @@ const AboutPage = () => {
                 MISSION
               </h2>
               <p className="text-lg font-sans leading-relaxed">
-                Inframe college of art, design and business believes in
+                Inframe school of art, design and business believes in
                 innovative and effective way of learning rather than just
                 sticking to the curriculum. We want to prepare our students to
                 get into the industry of their choice and outperform everyone
                 else with the perk of having learned every aspect of the
-                industry. The main mission of our college is to prepare the
+                industry. The main mission of our school is to prepare the
                 students in becoming the designers, artists and entrepreneurs of
                 tomorrow so that they can take on the world by storm and mark
-                their presence in the world. Our college is collaborating with
+                their presence in the world. Our school is collaborating with
                 the various industries and leading designers of Jodhpur to
                 conduct workshops, have work experience, real world problem
                 solving and have various business opportunities which will help
@@ -275,8 +275,8 @@ const AboutPage = () => {
                 in specific subject .The candidate from any educational
                 background can pursue or take admission to a design course and
                 fulfill their dreams of becoming designer with inframe design
-                college .In college will not only help the students to learn
-                more effectively and have a great future.
+                school .In school will not only help the students to learn more
+                effectively and have a great future.
               </p>
             </div>
           </div>
@@ -284,7 +284,7 @@ const AboutPage = () => {
       </section>
 
       {/* Campus Life Grid */}
-      <CampusLife />
+      <CampusLife  experienceCamputLife={experienceCamputLife}/>
       <section className="bg-white text-black py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-36 items-center">
@@ -314,12 +314,12 @@ const AboutPage = () => {
                 CORE VALUES
               </h2>
               <p className="text-lg font-sans leading-relaxed">
-                Inframe college of art, design and business inculcates design
+                Inframe school of art, design and business inculcates design
                 thinking in students which enables them to think from a
                 different perspective and understand the needs and wants of the
                 user. Our institute has developed a curriculum which not only
                 focuses on the theoretical knowledge but also focuses on the
-                practical learning and innovation. The college organises various
+                practical learning and innovation. The school organises various
                 workshops and internship opportunities for the students with the
                 help of industry experts and glorified designers. With the main
                 aim of “developing sustainable design for the people of

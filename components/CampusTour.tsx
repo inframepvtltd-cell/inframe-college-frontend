@@ -1,5 +1,5 @@
-'use client'
-import React, { useEffect } from 'react';
+"use client";
+import React, { useEffect } from "react";
 
 interface YouTubePlayer {
   playVideo(): void;
@@ -41,9 +41,9 @@ declare global {
 const CampusTour = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const tag = document.createElement('script');
+      const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName('script')[0];
+      const firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
 
       // Store the original function (if it exists)
@@ -51,8 +51,8 @@ const CampusTour = () => {
 
       window.onYouTubeIframeAPIReady = () => {
         if (window.YT) {
-            new window.YT.Player('youtube-player', {
-            videoId: 'JW0YxVpnj9o',
+          new window.YT.Player("youtube-player", {
+            videoId: "JW0YxVpnj9o",
             playerVars: {
               autoplay: 1,
               loop: 1,
@@ -62,12 +62,12 @@ const CampusTour = () => {
               enablejsapi: 1,
               modestbranding: 1,
               mute: 1, // Required for autoplay
-              playlist: 'JW0YxVpnj9o',
+              playlist: "JW0YxVpnj9o",
             } as PlayerVars,
             events: {
               onReady: (event: YouTubeEvent) => event.target.playVideo(),
             },
-            } as PlayerOptions);
+          } as PlayerOptions);
         }
       };
 
@@ -89,21 +89,22 @@ const CampusTour = () => {
               Inframe Campus Tour
             </h1>
             <p className="text-lg text-gray-600 mb-8 font-light">
-              Our virtual tour will take you around our 200-acre state-of-the-art residential campus, which 
-              features cutting-edge infrastructure, international sports facilities, and more.
+              Our virtual tour will take you around our 200-acre
+              state-of-the-art residential campus, which features cutting-edge
+              infrastructure, international sports facilities, and more.
             </p>
             <button className="inline-flex items-center px-8 py-3 bg-rose-500 hover:bg-rose-600 transition-colors rounded-full text-white text-sm font-light gap-2">
               Take our virtual tour
-              <svg 
-                className="w-4 h-4" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
@@ -114,7 +115,10 @@ const CampusTour = () => {
         {/* Right Video */}
         <div className="w-full lg:w-1/2 relative">
           <div className="aspect-video w-full h-full">
-            <div id="youtube-player" className="w-full h-full pointer-events-none" />
+            <div
+              id="youtube-player"
+              className="w-full h-full pointer-events-none"
+            />
           </div>
         </div>
       </div>

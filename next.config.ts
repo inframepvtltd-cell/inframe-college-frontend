@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    formats: ['image/webp'],
+    formats: ["image/avif", "image/webp"], // Optimized for modern browsers
     remotePatterns: [
       {
         protocol: 'https',
@@ -92,10 +92,11 @@ const nextConfig = {
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; media-src 'none'; frame-src 'none';",
   },
   reactStrictMode: true,
-  swcMinify: true
-}
+  swcMinify: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

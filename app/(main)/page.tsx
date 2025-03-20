@@ -1,4 +1,3 @@
-
 // app/page.tsx
 
 import HeroSection from "../../components/HeroSection";
@@ -7,7 +6,6 @@ import InfiniteSlider from "../../components/LogoCarousel";
 import CounselingForm from "../../components/CounselingForm";
 import LifeAtInframe from "../../components/LifeAtInframe";
 import CTABanner from "../../components/CTABanner";
-import LatestNews from "../../components/LatestNews";
 import FeaturesSection from "../../components/WhyInframe";
 import TestimonialCarousel from "../../components/TestimonialSection ";
 import MembershipPartnership from "../../components/MemberShipSection";
@@ -19,20 +17,18 @@ export const metadata: Metadata = {
   description: 'Inframe School of Art, Design & Business is a Leading Institution in Jodhpur with Over 15 Years of Excellence. We are the Trusted Choice for Creative Education in Jodhpur.',
 };
 
-
 export default function Home() {
   return (
     <div>
       <HeroSection />
-      <CourseCatalog/>
+      <CourseCatalog />
       <DreamsSection />
       <InfiniteSlider />
       <CounselingForm />
       <LifeAtInframe />
- 
-      <MembershipPartnership/>
+
+      <MembershipPartnership />
       <CTABanner />
-      <LatestNews />
       <FeaturesSection />
       <TestimonialCarousel />
     </div>

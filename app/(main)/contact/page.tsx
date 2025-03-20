@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import "../../../components/style.css";
 import { ContactUsForm } from "../../../components/ContactUs";
 import ReelCard from "../../../components/ReelCard";
@@ -23,14 +17,13 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <>
-     
-      <div >
+      <div>
         <ContactUsForm />
-        <ReelCard/>
+        <ReelCard />
         <section>
           <div className="bg bg1  "></div>
 
-         <ApplyNow/>
+          <ApplyNow />
         </section>
       </div>
     </>

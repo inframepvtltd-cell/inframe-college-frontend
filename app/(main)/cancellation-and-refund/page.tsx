@@ -1,14 +1,12 @@
-
-import React from 'react'
-import RefundPolicy from '../../../components/RefundPolicy'
-
+import React from "react";
+import RefundPolicy from "../../../components/RefundPolicy";
 
 const page = () => {
   return (
     <div>
-        <RefundPolicy/>
+      <RefundPolicy />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,15 +1,13 @@
-// app/[category]/page.tsx
-
-
-
+import React from "react";
+import CategoryLandingPage from "../../../components/Courses/CategoryLandingPage"
+import { courseTypes } from "../../../utils/courseTypes"
 import CoursePage from "../../../components/Courses/CoursePage";
-import { courseTypes } from "../../../utils/courseTypes";
 
 
 
+type ParamsType = { category: string }
 
 
-type ParamsType = Promise<{ category: string }>;
 
 
 export async function generateMetadata({ params }: { params: { category: string } })  {
@@ -54,18 +52,3 @@ export default async function CategoryPage({
   
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
-
-// // Generate metadata
-// export async function generateMetadata({ params }: { params: ParamsType }) {
-//   const { category } = await params;
-//   return {
-//     title: `${category} Courses`,
-//     description: `Browse our ${category} courses`,
-//   };
-// }
-
-// export async function generateStaticParams() {
-//   return Object.keys(courseTypes).map((category) => ({
-//     category,
-//   }));
-// }
