@@ -1,17 +1,11 @@
 import React from "react";
-// import CategoryLandingPage from "../../../components/Courses/CategoryLandingPage"
-import { courseTypes } from "../../../utils/courseTypes"
+import { courseTypes } from "../../../utils/courseTypes";
 import CoursePage from "../../../components/Courses/CoursePage";
 
 
-
-type ParamsType = { category: string }
-
-
-
-
-export async function generateMetadata({ params }: { params: { category: string } })  {
-  const { category } = await params;
+// ✅ Generate Metadata
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; // ✅ Await the promise
   const categoryLower = category.toLowerCase();
   const categoryData = courseTypes[categoryLower];
 
@@ -22,33 +16,24 @@ export async function generateMetadata({ params }: { params: { category: string 
     };
   }
 
-  // If metadata is stored separately, adjust how you retrieve it
-  const metaInfo = categoryData[0]; // Assuming metadata is stored in the first object
+  const metaInfo = categoryData[0] || {}; // ✅ Prevent undefined errors
 
   return {
-    title: metaInfo.metaTitle || `${params.category} Courses`,
-    description: metaInfo.metaDescription || `Browse our ${params.category} courses`,
-
+    title: metaInfo.metaTitle || `${category} Courses`,
+    description: metaInfo.metaDescription || `Browse our ${category} courses`,
   };
 }
 
-
-
-export default async function CategoryPage({
-  params,
-}: {
-  params: ParamsType;
-}) {
-  const { category } = await params;
+// ✅ Category Page Component
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; // ✅ Await the promise
   const categoryLower = category.toLowerCase();
+  const categoryCourses = courseTypes[categoryLower] || [];
 
-  
-  
-  const categoryCourses = courseTypes[categoryLower];
-
-  
-  
-  
-  
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
+}
+
+// ✅ Static Params for SSG
+export async function generateStaticParams() {
+  return Object.keys(courseTypes).map((category) => ({ category }));
 }
