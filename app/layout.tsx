@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
+// import Script from "next/script";
 import Head from "next/head"; // Import Next.js Head component
 
 const poppins = Poppins({
