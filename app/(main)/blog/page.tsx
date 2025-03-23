@@ -5,7 +5,12 @@ import { ChevronRight } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { Metadata } from "next"
 
+export const metadata: Metadata = {
+  title: 'Educational Insights, Tips & Updates | Inframe School Blog',
+  description: 'Explore expert insights, useful education tips, and the latest updates on academic trends at Inframe School Blog. Stay informed and inspired.',
+};
 
 
 

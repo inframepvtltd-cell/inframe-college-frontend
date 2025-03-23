@@ -5,29 +5,90 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"], // Optimized for modern browsers
     remotePatterns: [
-      { protocol: "https", hostname: "miro.medium.com" },
-      { protocol: "https", hostname: "s3files.core77.com" },
-      { protocol: "https", hostname: "buffer.com" },
-      { protocol: "https", hostname: "weandthecolor.com" },
-      { protocol: "https", hostname: "image.cnbcfm.com" },
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "inframecollege.org" },
-      { protocol: "https", hostname: "plus.unsplash.com" },
-      { protocol: "https", hostname: "imageio.forbes.com" },
-      { protocol: "https", hostname: "venturebeat.com" },
-      { protocol: "https", hostname: "live-production.wcms.abc-cdn.net.au" },
-      { protocol: "https", hostname: "i.scdn.co" },
-      { protocol: "https", hostname: "s.yimg.com" },
-      { protocol: "https", hostname: "www.livemint.com" },
-      { protocol: "https", hostname: "img.etimg.com" },
-      { protocol: "https", hostname: "graphicdesignjunction.com" },
-      { protocol: "https", hostname: "statetimes.in" },
-      { protocol: "https", hostname: "example.com" },
-      { protocol: "https", hostname: "mertbulan.com" },
-      { protocol: "https", hostname: "www.qdigitizing.com" },
-      { protocol: "https", hostname: "d1q3gj91a17lu.cloudfront.net" },
-      { protocol: "https", hostname: "i.ytimg.com" },
-      { protocol: "https", hostname: "d3ui957tjb5bqd.cloudfront.net" },
+      {
+        protocol: 'https',
+        hostname: 'miro.medium.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 's3files.core77.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'buffer.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'weandthecolor.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'image.cnbcfm.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'inframecollege.org'
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'imageio.forbes.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'venturebeat.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'live-production.wcms.abc-cdn.net.au'
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co'
+      },
+      {
+        protocol: 'https',
+        hostname: 's.yimg.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.livemint.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.etimg.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'graphicdesignjunction.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'statetimes.in'
+      },
+      {
+        protocol: 'https',
+        hostname: 'example.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'productside.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'd15shllkswkct0.cloudfront.net'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images-prod.dazeddigital.com'
+      },
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,

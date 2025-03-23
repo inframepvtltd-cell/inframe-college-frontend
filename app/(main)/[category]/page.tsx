@@ -1,40 +1,39 @@
 import React from "react";
-import CategoryLandingPage from "../../../components/Courses/CategoryLandingPage"
-import { courseTypes } from "../../../utils/courseTypes"
+import { courseTypes } from "../../../utils/courseTypes";
+import CoursePage from "../../../components/Courses/CoursePage";
 
 
+// ✅ Generate Metadata
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; // ✅ Await the promise
+  const categoryLower = category.toLowerCase();
+  const categoryData = courseTypes[categoryLower];
 
-type ParamsType = { category: string }
-
-export default async function CategoryPage(props: { params: Promise<ParamsType> }) {
-  const params = await props.params;
-  const { category } = params
-  const categoryLower = category.toLowerCase()
-
-  // Ensure only valid categories are included
-  if (!courseTypes[categoryLower]) {
-    return <div>Category not found</div>
+  if (!categoryData || !Array.isArray(categoryData) || categoryData.length === 0) {
+    return {
+      title: "Courses | Inframe School of Art & Design",
+      description: "Explore our courses and find the perfect fit for you.",
+    };
   }
 
-  const categoryCourses = courseTypes[categoryLower]
+  const metaInfo = categoryData[0] || {}; // ✅ Prevent undefined errors
 
-  return <CategoryLandingPage category={categoryLower} courses={categoryCourses} />
-}
-
-// Generate metadata for SEO
-export async function generateMetadata({ params }: { params: ParamsType }) {
-  const { category } = await params;
   return {
-    title: `${category} Courses`,
-    description: `Browse our ${category} courses`,
+    title: metaInfo.metaTitle || `${category} Courses`,
+    description: metaInfo.metaDescription || `Browse our ${category} courses`,
   };
 }
 
+// ✅ Category Page Component
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params; // ✅ Await the promise
+  const categoryLower = category.toLowerCase();
+  const categoryCourses = courseTypes[categoryLower] || [];
 
-// Generate Static Paths for Dynamic Routing
-export async function generateStaticParams() {
-  return Object.keys(courseTypes).map((category) => ({
-    category,
-  }))
+  return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
 
+// ✅ Static Params for SSG
+export async function generateStaticParams() {
+  return Object.keys(courseTypes).map((category) => ({ category }));
+}
