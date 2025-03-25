@@ -25,9 +25,9 @@ export default async function  DegreePage({ params }: { params: Promise<ParamsTy
     return notFound();
   }
 
-  const initialTabIndex = selectedCourseIndex;
+  // const initialTabIndex = selectedCourseIndex;
 
-  return <CoursePage courseType={categoryCourses} category={categoryLower} initialTabIndex={initialTabIndex} />;
+  return <CoursePage courseType={categoryCourses} category={categoryLower}/>;
 }
 
 export async function generateStaticParams(): Promise<ParamsType[]> {

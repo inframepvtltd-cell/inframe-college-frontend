@@ -12,7 +12,6 @@ import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
-
 const category = {
   design: [
     {
