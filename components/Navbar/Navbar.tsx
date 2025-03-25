@@ -51,14 +51,6 @@ const Navbar = () => {
                 </span>
               </div>
               <StudyDropDown />
-              {/* study */}
-              {/* <Link
-                  href={"/study"}
-                  className="text-muted-foreground text-white font-bold"
-                  onClick={handleLinkClick}
-                >
-                  Study
-                </Link> */}
 
               <nav
                 className={`hidden md:flex items-center gap-8 ${poppins.className}`}
