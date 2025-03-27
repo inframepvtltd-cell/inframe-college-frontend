@@ -131,7 +131,8 @@ const StudyDropDown = () => {
                                           className="hover:text-blue-500 hover:underline"
                                           href={`/${item.title
                                             .replace(/\s+/g, "-")
-                                            .toLowerCase()}/${getDegreeType(link.text)}`}
+                                            .toLowerCase()}/${link.text.replace(/\s+/g, "-").replace(/\./g, "")
+                                              .toLowerCase()}`}
                                         >
                                           {link.text}
                                         </Link>

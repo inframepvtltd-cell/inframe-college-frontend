@@ -45,7 +45,7 @@ export const courseTypes: CourseCategory = {
   {
     "metaTitle": "Interior Design Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Join Inframe's Interior Design Course in Jodhpur and turn your passion into a career. 15+ years of expertise in top-notch Interior Design education.",
-    "value": "bdes",
+    "value": "bdes-in-interior-design",
     "label": "B. Des in Interior Design",
     "title": "Bachelor of Design in Interior Design",
     "duration": "4 Years Full-Time",
@@ -155,7 +155,7 @@ export const courseTypes: CourseCategory = {
       },
     },
     {
-      value: "bvoc",
+      value: "bvoc-in-interior-design",
       label: "B.VOC in Interior Design",
       title: "B.VOC in Interior Design",
       duration: "3 Years Full-Time",
@@ -235,7 +235,7 @@ export const courseTypes: CourseCategory = {
     },
 
     {
-      value: "bsc",
+      value: "bsc-in-interior-design",
       label: "B.SC in Interior Design",
       title: "B.SC in Interior Design",
       duration: "3 Years Full-Time",
@@ -315,7 +315,7 @@ export const courseTypes: CourseCategory = {
     },
 
     {
-      value: "diploma1",
+      value: "one-year-diploma-in-interior-design",
       label: "1 Year Diploma",
       title: "1 Year Diploma in Interior Design",
       duration: "1 Year Intensive",
@@ -365,7 +365,7 @@ export const courseTypes: CourseCategory = {
     },
 
     {
-      value: "diploma3",
+      value: "three-year-diploma-in-interior-design",
       label: "3 Year Diploma",
       title: "3 Year Diploma in Interior Design",
       duration: "3 Years Full-Time",
@@ -449,7 +449,7 @@ export const courseTypes: CourseCategory = {
     {
       "metaTitle": "Fashion Design Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Join Inframe's Fashion Design Course in Jodhpur. With 15+ years of expertise, we offer top-notch education to launch your career in fashion design.",
-      "value": "bdes",
+      "value": "bdes-in-fashion-design",
       "label": "B. Des in Fashion Design",
       "title": "Bachelor of Design in Fashion Design",
       "duration": "4 Years Full-Time",
@@ -550,7 +550,7 @@ export const courseTypes: CourseCategory = {
     {
       content:
         "The Bachelor of Vocation (B.VOC) in Fashion Design is a three-year program focused on practical skills and industry readiness. Students gain hands-on experience in garment construction, pattern making, and fashion illustration. The curriculum includes intensive workshops, industry internships, and real-world projects. This program emphasizes technical proficiency alongside creative development, preparing graduates for immediate entry into the fashion industry.",
-      value: "bvoc",
+      value: "bvoc-in-fashion-design",
       label: "B.VOC in Fashion Design",
       title: "B.VOC in Fashion Design",
       duration: "3 Years Full-Time",
@@ -629,7 +629,7 @@ export const courseTypes: CourseCategory = {
     {
       content:
         "The Bachelor of Science (B.SC) in Fashion Design is a three-year program that combines design creativity with technical and scientific aspects of fashion. Students study textile science, color theory, fashion technology, and sustainable practices. The curriculum includes advanced computer-aided design, production management, and quality control, providing a strong foundation in the technical aspects of fashion production.",
-      value: "bsc",
+      value: "bsc-in-fashion-design",
       label: "B.SC in Fashion Design",
       title: "B.SC in Fashion Design",
       duration: "3 Years Full-Time",
@@ -709,7 +709,7 @@ export const courseTypes: CourseCategory = {
     {
       content:
         "The One Year Diploma in Fashion Design is an intensive program covering essential fashion design skills. Students learn basic pattern making, garment construction, fashion illustration, and digital design tools. The program includes practical projects and a basic understanding of the fashion industry, perfect for those seeking quick entry into the fashion world.",
-      value: "diploma1",
+      value: "one-year-diploma-in-fashion-design",
       label: "1 Year Diploma in Fashion Design",
       title: "1 Year Diploma in Fashion Design",
       duration: "1 Year Intensive",
@@ -750,7 +750,7 @@ export const courseTypes: CourseCategory = {
     {
       content:
         "The Three Year Diploma in Fashion Design offers comprehensive training in all aspects of fashion design. Students develop strong technical skills in pattern making, garment construction, and design development. The program includes extensive practical training, industry internships, and portfolio development, preparing graduates for various roles in the fashion industry.",
-      value: "diploma3",
+      value: "three-year-diploma-in-fashion-design",
       label: "3 Year Diploma in Fashion Design",
       title: "3 Year Diploma in Fashion Design",
       duration: "3 Years Full-Time",
@@ -834,7 +834,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Graphic Design Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Enroll in Inframe's Graphic Design Course in Jodhpur. With 15+ years of experience, we provide expert training to kickstart your career in graphic design.",
     "content": "The Bachelor of Design (B.Des) in Graphic Design is a comprehensive four-year program that develops creative problem-solving skills through visual communication. Students learn typography, layout design, branding, digital illustration, and motion graphics. The program emphasizes both traditional design principles and modern digital tools, preparing students for diverse creative industry roles.",
-    "value": "bdes",
+    "value": "bdes-in-graphic-design",
     "label": "B. Des in Graphic Design",
     "title": "Bachelor of Design in Graphic Design",
     "duration": "4 Years Full-Time",
@@ -920,7 +920,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The Bachelor of Vocation (B.VOC) in Graphic Design is a three-year program focusing on practical design skills and industry applications. Students gain hands-on experience with design software, digital illustration, and print production. The curriculum emphasizes real-world projects and industry collaboration, preparing graduates for immediate employment in the design industry.",
-    "value": "bvoc",
+    "value": "bvoc-in-graphic-design",
     "label": "B.VOC in Graphic Design",
     "title": "B.VOC in Graphic Design",
     "duration": "3 Years Full-Time",
@@ -990,7 +990,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The Bachelor of Science (B.SC) in Graphic Design combines design principles with technical expertise. Students study color theory, visual perception, digital technology, and production processes. The program includes advanced software training, web design basics, and understanding of print and digital media technologies.",
-    "value": "bsc",
+    "value": "bsc-in-graphic-design",
     "label": "B.SC in Graphic Design",
     "title": "B.SC in Graphic Design",
     "duration": "3 Years Full-Time",
@@ -1060,7 +1060,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The One Year Diploma in Graphic Design provides essential skills in visual communication. Students learn fundamental design principles, basic software proficiency, and practical design applications. The program includes hands-on projects in logo design, branding, and digital media, ideal for quick entry into the design industry.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-graphic-design",
     "label": "1 Year Diploma in Graphic Design",
     "title": "1 Year Diploma in Graphic Design",
     "duration": "1 Year Intensive",
@@ -1102,7 +1102,7 @@ export const courseTypes: CourseCategory = {
   ,
   {
     "content": "The Three Year Diploma in Graphic Design offers comprehensive training in visual communication and design technology. Students develop expertise in design software, typography, branding, and multimedia design. The program includes extensive practical projects, portfolio development, and industry internships.",
-    "value": "diploma3",
+    "value": "three-year-diploma-in-graphic-design",
     "label": "3 Year Diploma in Graphic Design",
     "title": "3 Year Diploma in Graphic Design",
     "duration": "3 Years Full-Time",
@@ -1178,7 +1178,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "UI/UX Design Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Join Inframe's UI/UX Design Course in Jodhpur. With 15+ years of expertise, we offer industry-focused training to kickstart your career in UI/UX design.",
     "content": "The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design.",
-    "value": "bdes",
+    "value": "bdes-in-ui-&-ux-design",
     "label": "B. Des in UI & UX Design",
     "title": "Bachelor of Design in UI & UX Design",
     "duration": "4 Years Full-Time",
@@ -1268,7 +1268,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The One Year Diploma in UI & UX Design is an intensive program covering essential skills in digital interface design. Students learn fundamental UX principles, UI design tools, prototyping software, and basic coding concepts. The program includes practical projects and portfolio development, perfect for quick entry into the digital design industry.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-ui-&-ux-design",
     "label": "1 Year Diploma in UI & UX Design",
     "title": "1 Year Diploma in UI & UX Design",
     "duration": "1 Year Intensive",
@@ -1311,7 +1311,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Animation & VFX Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Enroll in Inframe's Animation & VFX Course in Jodhpur. With 15+ years of experience, we provide expert training to launch your career in animation and visual effects.",
     "content": "The Bachelor of Design (B.Des) in Animation and VFX is a four-year program that focuses on creating captivating animations and visual effects for films, games, and digital media. Students will gain expertise in animation techniques, VFX production, 3D modeling, and compositing, with an emphasis on creativity and technical skills. This program prepares students for a career in the dynamic field of animation and visual effects.",
-    "value": "bdes",
+    "value": "bdes-in-animation-and-vfx",
     "label": "B. Des in Animation and VFX",
     "title": "Bachelor of Design in Animation and VFX",
     "duration": "4 Years Full-Time",
@@ -1405,7 +1405,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The One Year Diploma in Animation and VFX is an intensive program designed to equip students with the core skills needed for a career in the animation and visual effects industry. The course covers 2D and 3D animation, VFX tools and software, compositing, and visual storytelling. This program is perfect for those looking to quickly develop industry-ready skills and enter the world of animation and VFX production.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-animation-and-vfx",
     "label": "1 Year Diploma in Animation and VFX",
     "title": "1 Year Diploma in Animation and VFX",
     "duration": "1 Year Intensive",
@@ -1445,7 +1445,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The Two Year Diploma in Animation and VFX is a comprehensive program that covers all aspects of animation and visual effects production. Students will dive deep into 2D and 3D animation, compositing, advanced VFX software, and industry-standard workflows. This program ensures that students are well-prepared for entry-level positions in animation and VFX production.",
-    "value": "diploma2",
+    "value": "two-year-diploma-in-animation-and-vfx",
     "label": "2 Year Diploma in Animation and VFX",
     "title": "2 Year Diploma in Animation and VFX",
     "duration": "2 Years Intensive",
@@ -1503,7 +1503,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The Three Year Diploma in Animation and VFX is an extensive program that covers animation, VFX, visual storytelling, 3D modeling, compositing, and more. Students will gain advanced skills in industry-standard tools and techniques. This program prepares students for high-level roles in animation and VFX production, suitable for larger studios or specialized production teams.",
-    "value": "diploma3",
+    "value": "three-year-diploma-in-animation-and-vfx",
     "label": "3 Year Diploma in Animation and VFX",
     "title": "3 Year Diploma in Animation and VFX",
     "duration": "3 Years Intensive",
@@ -1585,7 +1585,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Best Digital Marketing Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Join Inframe's Digital Marketing Course in Jodhpur. Learn SEO, Social Media Marketing, and Online Advertising with 15+ years of expertise to boost your career.",
     "content": "The Bachelor of Vocation (B.VOC) in Digital Marketing is a comprehensive three-year program focused on modern marketing strategies. Students learn social media marketing, SEO, content marketing, and data analytics. The curriculum includes hands-on projects, industry certifications, and real-world campaign management experience.",
-    "value": "bvoc",
+    "value": "bvoc-in-digital-marketing",
     "label": "B.VOC in Digital Marketing",
     "title": "B.VOC in Digital Marketing",
     "duration": "3 Years Full-Time",
@@ -1685,7 +1685,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The One Year Diploma in Digital Marketing provides intensive training in digital marketing tools and strategies. Students learn social media management, SEO techniques, email marketing, and basic analytics. The program includes practical projects and preparation for industry certifications.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-digital-marketing",
     "label": "1 Year Diploma in Digital Marketing",
     "title": "1 Year Diploma in Digital Marketing",
     "duration": "1 Year Intensive",
@@ -1749,7 +1749,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The Six Month Certificate course in Digital Marketing offers focused training in key digital marketing skills. Students learn the fundamentals of online marketing, including social media, SEO, and basic analytics. Perfect for quick skill development and career transition.",
-    "value": "certificate6",
+    "value": "six-month-certificate-course-in-digital-marketing",
     "label": "6 Month Certificate in Digital Marketing",
     "title": "6 Month Certificate in Digital Marketing",
     "duration": "6 Months Part-Time",
@@ -1812,7 +1812,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Jewellery Design Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Join Inframe's Jewellery Design Course in Jodhpur. With 15+ years of expertise, we offer a top-tier Jewellery Design Course in Jodhpur to help you build a successful career.",
     "content": "The Bachelor of Vocation (B.VOC) in Jewellery Design is a three-year full-time program that combines creative design skills with technical expertise in jewellery making. This comprehensive course focuses on developing both artistic vision and practical craftsmanship skills essential for the jewellery industry. Students learn various aspects of jewellery design, including traditional and contemporary techniques, gemology, metal work, and digital design tools. The curriculum covers topics such as design principles, material studies, stone setting, metal casting, and CAD/CAM technologies for jewellery production. \n\nThroughout the program, students gain hands-on experience in professional workshops, working with different materials and techniques. They learn about various aspects of jewellery making, from concept development to final production. The course also includes modules on business management, marketing, and entrepreneurship specific to the jewellery industry. Students study historical and contemporary jewellery trends, precious metals, gemstones, and sustainable practices in jewellery making. By the final year, students participate in industry internships and create professional portfolios. Graduates can pursue careers as jewellery designers, CAD specialists, production managers, or establish their own jewellery design studios.",
-    "value": "bvoc",
+    "value": "bvoc-in-jewellery-design",
     "label": "B.VOC in Jewellery Design",
     "title": "Bachelor of Vocation in Jewellery Design",
     "duration": "3 Years Full-Time",
@@ -1884,7 +1884,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 1 Year Diploma in Jewellery Design is an intensive program designed for aspiring jewellery designers who want to quickly enter the industry. This hands-on course covers fundamental aspects of jewellery design, including sketching, rendering, metal work, and basic gemology. Students learn essential design principles, traditional crafting techniques, and modern production methods. The program emphasizes practical skills through workshop sessions where students create their own jewellery pieces.\n\nThe curriculum includes modules on design development, material knowledge, market trends, and basic business practices in the jewellery industry. Students also receive training in digital design tools used in modern jewellery production. Through regular projects and assignments, they develop a strong portfolio showcasing their design capabilities. The course includes industry visits and guest lectures from experienced professionals, providing valuable insights into the jewellery market. Graduates can work as junior jewellery designers, design assistants, or start their independent practice.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-jewellery-design",
     "label": "1 Year Diploma in Jewellery Design",
     "title": "1 Year Diploma in Jewellery Design",
     "duration": "1 Year Full-Time",
@@ -1918,7 +1918,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 1 Year Diploma in CAD Jewellery is a specialized program focusing on digital design tools and technologies used in modern jewellery production. This course is perfect for those who want to specialize in the technical aspects of jewellery design. Students learn industry-standard software like Matrix, Rhino, and JewelCAD, developing expertise in 3D modeling, rendering, and digital production techniques. The curriculum covers advanced CAD tools, technical drawing, digital rendering, and rapid prototyping methods.\n\nThroughout the year, students work on practical projects that simulate real industry requirements. They learn how to transform hand sketches into detailed 3D models, create technical specifications for production, and understand the manufacturing process. The course also covers digital presentation techniques, file preparation for 3D printing, and integration with traditional jewellery making methods. Graduates are well-prepared for roles as CAD designers, technical designers, or digital modeling specialists in the jewellery industry.",
-    "value": "cad1",
+    "value": "one-year-diploma-in-cad-jewellery",
     "label": "1 Year Diploma in CAD Jewellery",
     "title": "1 Year Diploma in CAD Jewellery",
     "duration": "1 Year Full-Time",
@@ -1955,7 +1955,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 6 Month Certificate course in Jewellery Design is a focused program that introduces students to the essentials of jewellery design and creation. This short-term course is ideal for beginners and hobbyists who want to explore jewellery design. Students learn basic design principles, sketching techniques, material knowledge, and fundamental crafting skills. The program includes hands-on workshops where students practice traditional jewellery making techniques.\n\nThe course covers design conceptualization, basic metal work, stone setting fundamentals, and an introduction to current market trends. Students create simple jewellery pieces and develop a basic portfolio of their work. The program also includes basic business knowledge and marketing concepts for those interested in starting their own small-scale jewellery business. Graduates can work as junior designers, apprentices, or pursue further education in specialized areas of jewellery design.",
-    "value": "cert6",
+    "value": "six-month-certificate-course-in-jewellery-design",
     "label": "6 Month Certificate in Jewellery Design",
     "title": "6 Month Certificate in Jewellery Design",
     "duration": "6 Months Part-Time",
@@ -1985,7 +1985,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 6 Month Certificate course in CAD Jewellery focuses on essential digital design skills needed in modern jewellery production. This program is designed for those who want to quickly learn computer-aided design specifically for jewellery making. Students learn the basics of industry-standard CAD software, including fundamental 3D modeling techniques, digital rendering, and preparation of designs for production. The course emphasizes practical training with popular jewellery design software.\n\nStudents learn how to create basic jewellery designs digitally, understand file formats and specifications for production, and develop skills in digital presentation. The program includes projects that help students build a digital portfolio of their work. Basic knowledge of manufacturing processes and production requirements is also covered. Graduates can work as junior CAD designers, digital design assistants, or continue their education in advanced CAD jewelry programs.",
-    "value": "cadcert6",
+    "value": "six-month-certificate-course-in-cad-jewellery",
     "label": "6 Month Certificate in CAD Jewellery",
     "title": "6 Month Certificate in CAD Jewellery",
     "duration": "6 Months Part-Time",
@@ -2020,7 +2020,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Entrepreneurship Skills Course in Jodhpur | Inframe School of Art & Design",
     "metaDescription": "Enroll in Inframe's Entrepreneurship Skills Course in Jodhpur. Gain essential skills to start and grow your business with expert guidance and 15+ years of experience.",
     "content": "The Bachelor of Vocation (B.VOC) in Entrepreneurship Skills is a three-year full-time program designed to develop future business leaders and innovators. This comprehensive course combines theoretical knowledge with practical business skills essential for successful entrepreneurship. Students learn various aspects of business development, including market analysis, business planning, financial management, marketing strategies, and leadership skills. The curriculum emphasizes real-world application through case studies, business simulations, and actual startup projects.\n\nThroughout the program, students gain hands-on experience in developing business models, conducting market research, and creating viable business plans. They learn about digital marketing, e-commerce, business law, and startup funding mechanisms. The course includes modules on innovation management, design thinking, and sustainable business practices. Students also develop essential soft skills like negotiation, team management, and business communication. Regular interactions with successful entrepreneurs, industry mentors, and business incubators provide valuable insights into the startup ecosystem. By the final year, students work on launching their own business ventures or detailed business projects. Graduates can start their own businesses, join family enterprises, work as business consultants, or pursue careers in startup accelerators and venture capital firms.",
-    "value": "bvoc",
+    "value": "bvoc-in-entrepreneurship-skill",
     "label": "B.VOC in Entrepreneurship Skill",
     "title": "Bachelor of Vocation in Entrepreneurship Skill",
     "duration": "3 Years Full-Time",
@@ -2093,7 +2093,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 1 Year Diploma in Entrepreneurship Skills is an intensive program designed for aspiring entrepreneurs who want to quickly develop essential business capabilities. This focused course covers fundamental aspects of entrepreneurship, including business ideation, market validation, financial planning, and business operations. The program is ideal for individuals planning to start their own ventures or enhance their business management skills.\n\nThe curriculum provides practical training in developing business strategies, understanding market dynamics, and managing business finances. Students learn about digital marketing, customer acquisition, basic accounting, and business law essentials. The program includes hands-on projects where students develop and present business plans, conduct market research, and create marketing strategies. Through workshops and mentoring sessions, students gain insights into various aspects of business management, from product development to customer service. The course also covers contemporary topics like social media marketing, e-commerce fundamentals, and startup funding options. Graduates are equipped to launch their own startups, manage family businesses, or work in business development roles.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-entrepreneurship-skill",
     "label": "1 Year Diploma in Entrepreneurship Skill",
     "title": "1 Year Diploma in Entrepreneurship Skill",
     "duration": "1 Year Full-Time",
@@ -2136,7 +2136,7 @@ export const courseTypes: CourseCategory = {
     "metaTitle": "Media and Entertainment Course in Jodhpur | Kickstart Your Career | Apply Now",
     "metaDescription": "Enroll in a comprehensive Media and Entertainment Course in Jodhpur. Learn industry skills and techniques to build a successful career in media and entertainment.",
     "content": "The Bachelor of Vocation (B.VOC) in Media and Entertainment is a three-year full-time program designed to prepare students for the dynamic world of media production and entertainment. This comprehensive course combines theoretical knowledge with hands-on training in various aspects of media creation, production, and distribution. Students learn about film and television production, digital media, content creation, broadcasting, and entertainment management. The curriculum covers both traditional and new media platforms, ensuring students are well-versed in current industry practices.\n\nThroughout the program, students gain practical experience in video production, content writing, social media management, and digital broadcasting. They learn to use professional equipment and software for media production, including video editing tools, audio production software, and streaming technologies. The course includes modules on storytelling, script writing, media laws, digital marketing, and project management. Students also study audience engagement, analytics, and content monetization strategies. Regular industry projects, internships, and collaborations with media houses provide real-world experience. Final year students work on comprehensive media projects and build professional portfolios. Graduates can pursue careers as content creators, media producers, broadcast professionals, digital media managers, or entertainment entrepreneurs.",
-    "value": "bvoc",
+    "value": "bvoc-in-media-and-entertainment",
     "label": "B.VOC in Media and Entertainment",
     "title": "Bachelor of Vocation in Media and Entertainment",
     "duration": "3 Years Full-Time",
@@ -2209,7 +2209,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 1 Year Diploma in Media and Entertainment is an intensive program focused on practical skills needed in today's media industry. This fast-track course covers essential aspects of media production, content creation, and entertainment management. Students learn fundamental techniques in video production, digital content creation, social media management, and basic broadcasting principles. The program is ideal for those seeking quick entry into the media and entertainment sector.\n\nThe curriculum provides hands-on training in camera operations, video editing, content writing, and digital media production. Students learn about different media platforms, content strategy, audience engagement, and basic production management. The program includes practical projects where students create various types of media content, from short films to digital marketing campaigns. Through workshops and industry sessions, students gain insights into current trends and practices in the entertainment industry. The course also covers basics of media law, copyright, and content distribution. Graduates can work as junior content creators, production assistants, social media managers, or pursue independent content creation careers.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-media-and-entertainment",
     "label": "1 Year Diploma in Media and Entertainment",
     "title": "1 Year Diploma in Media and Entertainment",
     "duration": "1 Year Full-Time",
@@ -2462,7 +2462,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The B.VOC in Fine Arts is a vocational degree program aimed at preparing students for careers in the art and design industry. The program combines both practical and theoretical learning, focusing on visual arts, design principles, and creative techniques. Students gain proficiency in various art forms, including painting, sculpture, and digital art. They also develop skills in entrepreneurship, business management, and marketing, preparing them for a variety of career paths in the arts.",
-    "value": "bvoc-fine-arts",
+    "value": "bvoc-in-fine-arts",
     "label": "B.VOC in Fine Arts",
     "title": "Bachelor of Vocation in Fine Arts",
     "duration": "3 Years Full-Time",
@@ -2532,7 +2532,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 1 Year Diploma in Painting is an intensive program designed for aspiring artists who want to focus specifically on painting techniques and styles. This focused course covers fundamental and intermediate painting skills, color theory, and composition. The program is ideal for those seeking to develop their artistic abilities in a shorter timeframe.\n\nStudents learn various painting techniques, medium handling, and style development through extensive studio practice. The course includes modules on art appreciation, contemporary painting trends, and basic art marketing. Through regular exhibitions and workshops, students develop their artistic voice and presentation skills. Graduates can pursue careers as professional artists, art teachers, or continue their education in advanced fine arts programs.",
-    "value": "diploma1",
+    "value": "one-year-diploma-in-fine-arts",
     "label": "1 Year Diploma in Painting",
     "title": "1 Year Diploma in Painting",
     "duration": "1 Year Full-Time",
@@ -2566,7 +2566,7 @@ export const courseTypes: CourseCategory = {
   },
   {
     "content": "The 3 Year Diploma in Fine Arts is a structured program that provides a comprehensive introduction to multiple fine arts disciplines. Over three years, students are immersed in practical and theoretical knowledge in painting, sculpture, printmaking, and digital media. This course develops both technical and conceptual skills, preparing students for professional careers in the arts.\n\nStudents engage in studio work, portfolio development, art history, and critical thinking courses, all designed to enhance their understanding of contemporary art. The curriculum also includes exposure to art exhibitions and internships. Graduates are ready for roles in visual arts, gallery management, and as professional artists.",
-    "value": "diploma3",
+    "value": "three-year-diploma-in-fine-arts",
     "label": "3 Year Diploma in Fine Arts",
     "title": "3 Year Diploma in Fine Arts",
     "duration": "3 Years Full-Time",
@@ -2641,7 +2641,7 @@ export const courseTypes: CourseCategory = {
       "metaTitle": "Advertising and Marketing Course in Jodhpur | Inframe School of Art & Design",
       "metaDescription": "Enroll in the Business Administration in Advertising and Marketing course in Jodhpur. Gain essential skills in marketing, advertising, and business management",
       "content": "The Bachelor of Business Administration (BBA) in Advertising and Marketing is a three-year full-time program that prepares students for the dynamic world of advertising, marketing, and brand management. This comprehensive course combines business fundamentals with specialized knowledge in modern marketing practices and advertising strategies. Students learn various aspects of marketing management, consumer behavior, brand strategy, digital marketing, and advertising campaign development. The curriculum emphasizes both traditional marketing principles and contemporary digital marketing techniques.\n\nThroughout the program, students gain hands-on experience in creating marketing strategies, developing advertising campaigns, and managing brand communications. They learn about market research, consumer psychology, media planning, content strategy, and analytics. The course includes specialized modules in social media marketing, search engine marketing, email marketing, and marketing automation. Students also study advertising design, copywriting, public relations, and event management. The program incorporates real-world projects where students work on actual marketing campaigns and brand strategies.\n\nThe curriculum also covers essential business aspects including marketing economics, business law, financial management, and entrepreneurship. Through industry internships and live projects, students gain practical experience in handling marketing challenges and advertising campaigns. Regular workshops and guest lectures from industry experts provide insights into current marketing trends and practices. Final year students work on comprehensive marketing projects and develop professional portfolios. Graduates can pursue careers as marketing managers, advertising executives, brand managers, digital marketing specialists, media planners, or marketing consultants. Many also go on to start their own advertising agencies or marketing consultancy firms.",
-      "value": "bba-advertising-marketing",
+      "value": "learn-advanced-advertising-and-marketing-strategies",
       "label": "BBA in Advertising and Marketing",
       "title": "Bachelor of Business Administration in Advertising and Marketing",
       "duration": "3 Years Full-Time",

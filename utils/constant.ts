@@ -318,11 +318,11 @@ export const categories = [
       {
         title: "Interior Design",
         links: [
-          { text: "B. Des In Interior Design", href: "#" },
+          { text: "B.Des In Interior Design", href: "#" },
           { text: "B.VOC in Interior Design", href: "#" },
           { text: "B.SC in Interior Design", href: "#" },
-          { text: "1 Year Diploma in Interior Design", href: "#" },
-          { text: "3 Year Diploma in Interior Design", href: "#" },
+          { text: "One Year Diploma in Interior Design", href: "#" },
+          { text: "Three Year Diploma in Interior Design", href: "#" },
         ],
         category: "Design",
         image:
@@ -331,11 +331,11 @@ export const categories = [
       {
         title: "Fashion Design",
         links: [
-          { text: "B. Des In Fashion Design", href: "#" },
+          { text: "B.Des In Fashion Design", href: "#" },
           { text: "B.VOC in Fashion Design", href: "#" },
           { text: "B.SC in Fashion Design", href: "#" },
-          { text: "1 Year Diploma in Fashion Design", href: "#" },
-          { text: "3 Year Diploma in Fashion Design", href: "#" },
+          { text: "One Year Diploma in Fashion Design", href: "#" },
+          { text: "Three Year Diploma in Fashion Design", href: "#" },
         ],
         category: "Design",
         image:
@@ -344,11 +344,11 @@ export const categories = [
       {
         title: "Graphic Design",
         links: [
-          { text: "B. Des In Graphic Design", href: "#" },
+          { text: "B.Des In Graphic Design", href: "#" },
           { text: "B.VOC in Graphic Design", href: "#" },
           { text: "B.SC in Graphic Design", href: "#" },
-          { text: "1 Year Diploma in Graphic Design", href: "#" },
-          { text: "3 Year Diploma in Graphic Design", href: "#" },
+          { text: "One Year Diploma in Graphic Design", href: "#" },
+          { text: "Three Year Diploma in Graphic Design", href: "#" },
         ],
         category: "Design",
         image:
@@ -357,8 +357,8 @@ export const categories = [
       {
         title: "UIUX-Design",
         links: [
-          { text: "B. Des In UI & UX Design", href: "#" },
-          { text: "1 Year Diploma in UI & UX Design", href: "#" },
+          { text: "B.Des In UI & UX Design", href: "#" },
+          { text: "One Year Diploma in UI & UX Design", href: "#" },
         ],
         category: "Design",
         image:
@@ -367,12 +367,12 @@ export const categories = [
       {
         title: "Animation-VFX",
         links: [
-          { text: "B. Des in Animation and VFX", href: "#" },
+          { text: "B.Des in Animation and VFX", href: "#" },
           { text: "B.VOC in Animation and VFX", href: "#" },
           { text: "B.SC in Animation and VFX", href: "#" },
-          { text: "1 Year Diploma in Animation and VFX", href: "#" },
-          { text: "2 Year Diploma in Animation and VFX", href: "#" },
-          { text: "3 Year Diploma in Animation and VFX", href: "#" },
+          { text: "One Year Diploma in Animation and VFX", href: "#" },
+          { text: "Two Year Diploma in Animation and VFX", href: "#" },
+          { text: "Three Year Diploma in Animation and VFX", href: "#" },
         ],
         category: "Design",
         image:
@@ -382,10 +382,10 @@ export const categories = [
         title: "Jewellery Design",
         links: [
           { text: "B.VOC in Jewellery Design", href: "#" },
-          { text: "1 Year Diploma in Jewellery Design", href: "#" },
-          { text: "1 Year Diploma in CAD Jewellery", href: "#" },
-          { text: "6 Month Certificate Course in Jewellery Design", href: "#" },
-          { text: "6 Month Certificate Course in CAD Jewellery", href: "#" },
+          { text: "One Year Diploma in Jewellery Design", href: "#" },
+          { text: "One Year Diploma in CAD Jewellery", href: "#" },
+          { text: "Six Month Certificate Course in Jewellery Design", href: "#" },
+          { text: "Six Month Certificate Course in CAD Jewellery", href: "#" },
         ],
         category: "Design",
         image:
@@ -400,9 +400,9 @@ export const categories = [
         title: "Digital Marketing",
         links: [
           { text: "B.VOC in Digital Marketing", href: "#" },
-          { text: "1 Year Diploma in Digital Marketing", href: "#" },
+          { text: "One Year Diploma in Digital Marketing", href: "#" },
           {
-            text: "6 Month Certificate Course in Digital Marketing",
+            text: "Six Month Certificate Course in Digital Marketing",
             href: "#",
           },
         ],
@@ -414,7 +414,7 @@ export const categories = [
         title: "Entrepreneurship Skill",
         links: [
           { text: "B.VOC in Entrepreneurship Skill", href: "#" },
-          { text: "1 Year Diploma in Entrepreneurship Skill", href: "#" },
+          { text: "One Year Diploma in Entrepreneurship Skill", href: "#" },
         ],
         category: "Business",
         image:
@@ -424,7 +424,7 @@ export const categories = [
         title: "Media-Entertainment",
         links: [
           { text: "B.VOC in Media and Entertainment", href: "#" },
-          { text: "1 Year Diploma in Media and Entertainment", href: "#" },
+          { text: "One Year Diploma in Media and Entertainment", href: "#" },
         ],
         category: "Business",
         image:
@@ -453,8 +453,8 @@ export const categories = [
           { text: "B. Des in Fine Arts", href: "#" },
           { text: "B.VOC in Fine Arts", href: "#" },
           { text: "B.SC in Fine Arts", href: "#" },
-          { text: "1 Year Diploma in Fine Arts", href: "#" },
-          { text: "3 Year Diploma in Fine Arts", href: "#" },
+          { text: "One Year Diploma in Fine Arts", href: "#" },
+          { text: "Three Year Diploma in Fine Arts", href: "#" },
         ],
         category: "Art",
         image:

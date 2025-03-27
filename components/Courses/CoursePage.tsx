@@ -116,8 +116,11 @@ interface CoursePageProps {
   category: string
 }
 
+
 const CoursePage: React.FC<CoursePageProps> = ({ courseType, category }) => {
   const pathname = usePathname()
+  
+
 
   if (!courseType?.length) {
     return (

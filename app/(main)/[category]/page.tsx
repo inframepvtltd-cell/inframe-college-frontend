@@ -29,6 +29,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const { category } = await params; // ✅ Await the promise
   const categoryLower = category.toLowerCase();
   const categoryCourses = courseTypes[categoryLower] || [];
+  
 
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
