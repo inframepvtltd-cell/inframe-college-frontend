@@ -42,30 +42,30 @@ const StudyDropDown = () => {
     .filter((category) => category.items.length > 0)
 
   // Helper function to extract degree type from course name
-  interface DegreeMap {
-    [key: string]: string;
-  }
+  // interface DegreeMap {
+  //   [key: string]: string;
+  // }
 
-  const getDegreeType = (text: string): string => {
-    const degreeMap: DegreeMap = {
-      "B. Des": "bdes",
-      "B.VOC": "bvoc",
-      "B.SC": "bsc",
-      "1 Year Diploma": "diploma1",
-      "3 Year Diploma": "diploma3",
-      "2 Year Diploma": "diploma2",
-      "6 Month Certificate": "certificate6",
-    }
+  // const getDegreeType = (text: string): string => {
+  //   const degreeMap: DegreeMap = {
+  //     "B. Des": "bdes",
+  //     "B.VOC": "bvoc",
+  //     "B.SC": "bsc",
+  //     "1 Year Diploma": "diploma1",
+  //     "3 Year Diploma": "diploma3",
+  //     "2 Year Diploma": "diploma2",
+  //     "6 Month Certificate": "certificate6",
+  //   }
 
-    // Find which degree type this course belongs to
-    for (const [key, value] of Object.entries(degreeMap)) {
-      if (text.includes(key)) {
-        return value
-      }
-    }
+  //   // Find which degree type this course belongs to
+  //   for (const [key, value] of Object.entries(degreeMap)) {
+  //     if (text.includes(key)) {
+  //       return value
+  //     }
+  //   }
 
-    return "bdes" // Default fallback
-  }
+  //   return "bdes" // Default fallback
+  // }
 
   return (
     <div>
