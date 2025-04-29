@@ -19,7 +19,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="admission-process"
                 className="hover:text-blue-500 transition duration-300"
               >
                 Admission Process
@@ -51,7 +51,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="/news-events"
                 className="hover:text-blue-500 transition duration-300"
               >
                 News & Events
@@ -79,6 +79,14 @@ const Footer = () => {
                 className="hover:text-blue-500 transition duration-300"
               >
                 Downloads
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/quick-payment"
+                className="hover:text-blue-500 transition duration-300"
+              >
+                Quick Payment
               </Link>
             </li>
           </ul>

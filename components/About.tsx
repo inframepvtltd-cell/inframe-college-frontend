@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect,} from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { experienceCamputLife, highlights, LOGOS, studentImages, values } from "../utils/constant";
 import { Poppins } from "next/font/google"; // Importing Google Fonts via next/font
-import ApplyNow from "./ApplyNow";
 import Image from "next/image";
-
 import "aos/dist/aos.css"; // Import the CSS for animations
 import CampusLife from "./CampusLife";
 import Aos from "aos";
+import ApplyNowForm from "./ApplyNowForm";
+// import { Button } from "./ui/button";
 // Using the Poppins font
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,6 +16,11 @@ const poppins = Poppins({
 });
 
 const AboutPage = () => {
+  // const [isFormOpen, setIsFormOpen] = useState(false);
+  //   const handleApplyClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  //     e.preventDefault();
+  //     setIsFormOpen(true);
+  //   };
   useEffect(() => {
     Aos.init({
       duration: 1000,
@@ -373,11 +378,27 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
+{/* 
+        <div className="flex justify-center">
+  <Button
+    onClick={handleApplyClick}
+    className="bg-black text-white hover:bg-gray-700 mb-10 hover:text-white px-6 py-3 rounded-md transition duration-300"
+  >
+    Apply Now
+  </Button>
+</div> */}
 
-        <ApplyNow />
+
+              {/* <ApplyNowForm
+                  isFormOpen={isFormOpen}
+                  setIsFormOpen={setIsFormOpen}
+                  isScrolled={false}
+              /> */}
+
       </section>
     </div>
   );
 };
 
 export default AboutPage;
+
