@@ -27,7 +27,13 @@ function Payment() {
     { id: 8, name: "entrepreneurship-skill" },
     { id: 9, name: "media-entertainment" },
     { id: 10, name: "fine-arts" },
-    { id: 11, name: "advertising-marketing" }
+    { id: 11, name: "advertising-marketing" },
+    // Diploma courses
+    { id: 12, name: "diploma-web-development" },
+    { id: 13, name: "diploma-photography" },
+    { id: 14, name: "diploma-video-editing" },
+    { id: 15, name: "diploma-3d-modeling" },
+    { id: 16, name: "diploma-mobile-app-development" }
   ];
 
   const createOrderId = async () => {
@@ -116,7 +122,7 @@ function Payment() {
         src="https://checkout.razorpay.com/v1/checkout.js"
       />
 
-      <div className="relative min-h-screen p-10 bg-gray-100">
+      <div className="relative min-h-screen p-4 sm:p-6 lg:p-10 bg-gray-100">
         {/* Background Banner */}
         <div className="absolute inset-0 z-0">
           <img
@@ -128,65 +134,98 @@ function Payment() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 container mx-auto px-4 py-16 min-h-screen flex flex-col md:flex-row">
+        <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12 lg:py-16 min-h-screen flex flex-col">
           {/* Header Text */}
-          <div className="w-full text-white mb-12">
-            <h2 className="text-3xl font-bold mt-8 mb-4">ADMISSIONS OPEN 2025</h2>
+          <div className="w-full text-white mb-8 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-4 sm:mt-8 mb-4 text-center lg:text-left">ADMISSIONS OPEN 2025</h2>
 
             {/* Two Column Layout */}
-            <div className="flex flex-col md:flex-row mt-6 gap-8">
+            <div className="flex flex-col lg:flex-row mt-6 gap-6 lg:gap-8">
               {/* Left Column - Programs */}
               <div className="w-full md:w-1/2">
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-yellow-400 mb-4">
-                    UNDERGRADUATE
-                  </h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Interior Design</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Graphics Design</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>UIUX Design</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Animation &vfx</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Digital Marketing</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Fashion Design</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Jewellery Design</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Entrepreneurship Skill</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Media-Entertainment</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Fine Arts</span>
-                    </li>
-                    <li className="flex items-baseline">
-                      <span className="text-yellow-400 mr-2">▶</span>
-                      <span>Advertising-Marketing</span>
-                    </li>
-                  </ul>
+                {/* Programs Grid - Side by side on larger screens, stacked on mobile */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+                  {/* Undergraduate Section */}
+                  <div>
+                    <h3 className="text-xl font-bold text-yellow-400 mb-4">
+                      UNDERGRADUATE
+                    </h3>
+                    <ul className="space-y-2 lg:space-y-3">
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Interior Design</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Graphics Design</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">UIUX Design</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Animation &vfx</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Digital Marketing</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Fashion Design</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Jewellery Design</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Entrepreneurship Skill</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Media-Entertainment</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Fine Arts</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Advertising-Marketing</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Diploma Section */}
+                  {/* <div>
+                    <h3 className="text-xl font-bold text-yellow-400 mb-4">
+                      DIPLOMA
+                    </h3>
+                    <ul className="space-y-2 lg:space-y-3">
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Web Development</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Photography</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Video Editing</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">3D Modeling</span>
+                      </li>
+                      <li className="flex items-baseline">
+                        <span className="text-yellow-400 mr-2 text-sm">▶</span>
+                        <span className="text-sm lg:text-base">Mobile App Development</span>
+                      </li>
+                    </ul>
+                  </div> */}
                 </div>
               </div>
 
@@ -207,7 +246,7 @@ function Payment() {
                       <input
                         type="text"
                         id="name"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                        className="w-full px-4 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                         placeholder="Enter your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -225,7 +264,7 @@ function Payment() {
                       <input
                         type="text"
                         id="father"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                        className="w-full px-4 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                         placeholder="Enter father's name"
                         value={fathername}
                         onChange={(e) => setFathername(e.target.value)}
