@@ -92,9 +92,7 @@ const nextConfig = {
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
-    eslint: {
-    ignoreDuringBuilds: true,
-  },
+ 
     contentSecurityPolicy:
       "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; media-src 'none'; frame-src 'none';",
   },
