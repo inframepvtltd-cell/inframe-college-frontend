@@ -31,7 +31,7 @@ export default function Home() {
       <CTABanner />
       <FeaturesSection />
       <TestimonialCarousel />
-      <WhatsAppFloat /> 
+      <WhatsAppFloat />
     </div>
   );
 }
