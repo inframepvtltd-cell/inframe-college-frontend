@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import CourseHero from "./courseDetails/courseDetails";
 
 const category = {
   design: [
@@ -288,6 +289,7 @@ const CourseCatalog = () => {
             <CourseSection courses={category.design} />
           </TabsContent>
         </Tabs>
+         
       </div>
     </div>
   );

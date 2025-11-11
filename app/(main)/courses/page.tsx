@@ -1,5 +1,6 @@
 import React from "react"
 import CourseCatalog from "../../../components/CourseCarousel";
+import CourseHero from "../../../components/courseDetails/courseDetails";
 
 
 

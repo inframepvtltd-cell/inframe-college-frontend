@@ -22,6 +22,11 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import ApplyNowForm from "../ApplyNowForm";
 import { useState } from "react";
+import CourseHero from "../courseDetails/courseDetails";
+import ComboPack from "../courseDetails/ComboPack";
+import CourseFeatures from "../courseDetails/courseFeature";
+import Customizecourse from "../courseDetails/CustomizePack";
+import WhyChooseUs from "../courseDetails/WhyChooseUs";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -66,6 +71,7 @@ const CourseContent = ({
 
   return (
     <div className="bg-white text-black">
+
       <div className="relative h-[95vh] overflow-hidden" id="overview">
         <Image
           src={heroImage || fallbackHeroImage}
@@ -90,8 +96,12 @@ const CourseContent = ({
           </div>
         </div>
       </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <CourseHero />
+      <ComboPack />
+      <CourseFeatures />
+      <Customizecourse />
+      <WhyChooseUs />
+      {/* <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
             <h2 className={`text-3xl font-bold mb-6 ${poppins.className}`}>
@@ -106,15 +116,15 @@ const CourseContent = ({
               Step into the World of {title.split(" in ")[1] || "Design"}
             </h3>
             <div className="flex items-center gap-6">
-            <Button onClick={handleApplyClick} className="bg-white text-black hover:bg-yellow-500 px-4 py-2">
-              Apply Now
-            </Button>
+              <Button onClick={handleApplyClick} className="bg-white text-black hover:bg-yellow-500 px-4 py-2">
+                Apply Now
+              </Button>
 
               <ApplyNowForm
-                  isFormOpen={isFormOpen}
-                  setIsFormOpen={setIsFormOpen}
-                  isScrolled={false}
-                />
+                isFormOpen={isFormOpen}
+                setIsFormOpen={setIsFormOpen}
+                isScrolled={false}
+              />
               <Button
                 onClick={() =>
                   document
@@ -128,8 +138,8 @@ const CourseContent = ({
             </div>
           </div>
         </div>
-      </div>
-
+      </div> */}
+      {/* 
       <div className="max-w-7xl mx-auto px-4">
         <div id="admission">
           <AdmissionProcess />
@@ -167,8 +177,16 @@ const CourseContent = ({
         )}
 
         <div id="faq">
-          <FAQSection />
+
         </div>
+      </div> */}
+
+
+      <div className="max-w-5xl mx-auto py-10 px-4">
+        <h1 className="text-2xl font-bold mb-6 text-gray-900">
+          Course Content
+        </h1>
+        <FAQSection />
       </div>
     </div>
   );
