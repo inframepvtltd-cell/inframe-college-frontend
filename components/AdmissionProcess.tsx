@@ -186,9 +186,7 @@ export default function Application() {
     );
 
     setSelectedSpecialization(matchedSpecialization || null);
-    console.log(selectedValue)
-    console.log(selectedCategory)
-    console.log(matchedSpecialization)
+
   };
 
   const disabled = !isChecked;
