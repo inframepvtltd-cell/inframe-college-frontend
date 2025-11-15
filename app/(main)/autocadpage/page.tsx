@@ -7,7 +7,11 @@
 // import CourseFeatures from "../../../components/courseDetails/courseFeature";
 // import Customizecourse from "../../../components/courseDetails/CustomizePack";
 // import WhyChooseUs from "../../../components/courseDetails/WhyChooseUs";
-
+function page() {
+  return (
+    <div>page</div>
+  )
+}
 
 // const poppins = Poppins({
 //     subsets: ["latin"],
