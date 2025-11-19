@@ -1,4 +1,4 @@
-import CityPageComponent from "../../../../components/Courses/CityPageComponent";
+import GraphicDesignComponent from "../../../components/cityComponents/GraphicDesignComponent";
 
 export const metadata = {
     title: "Graphic Design Course in Jaipur – Professional Training | Inframe School",
@@ -20,11 +20,11 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CityPageComponent
-                title="Graphic Design Course in Jaisalmer – Creative Design Institute | Inframe School"
+            <GraphicDesignComponent
+                title="Graphic Design Course in Jaipur"
                 duration="4 Years Full-Time"
-                description="Create compelling visual communications through innovative design."
-                content="The Bachelor of Design (B.Des) in Graphic Design is a comprehensive four-year program that develops creative problem-solving skills through visual communication. Students learn typography, layout design, branding, digital illustration, and motion graphics. The program emphasizes both traditional design principles and modern digital tools, preparing students for diverse creative industry roles."
+                description="Master the art of visual communication with our graphic design programs. Create compelling designs that captivate and communicate."               
+                 content="The Bachelor of Design (B.Des) in Graphic Design is a comprehensive four-year program that develops creative problem-solving skills through visual communication. Students learn typography, layout design, branding, digital illustration, and motion graphics. The program emphasizes both traditional design principles and modern digital tools, preparing students for diverse creative industry roles."
                 index={0}
                 category=""
                 software={["Photoshop", "Illustrator", "Corel Draw", "Maya", "After Effects", "Blender"]}
