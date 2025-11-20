@@ -35,6 +35,8 @@ import {
     SiAdobephotoshop, // Photoshop icon
     Si3M,             // 3ds Max substitute icon (closest available)
 } from "react-icons/si";
+import { Card, CardContent } from "../ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
 const poppins = Poppins({
     subsets: ["latin"],
     weight: ["400", "500", "700"],
@@ -76,6 +78,90 @@ const tools = [
         textColor: "text-blue-700"
     }
 ];
+
+export const interiorDesignCurriculum = {
+    "1st Year": {
+        title: "1st Year",
+        image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+        imageAlt: "Interior design fundamentals sketch and materials",
+        semesters: {
+            "Semester 1": [
+                "Architectural Drawing Techniques",
+                "Building Materials and Finishes",
+                "History of Interiors",
+                "Interior Design Studio"
+            ],
+            "Semester 2": [
+                "Structural Systems",
+                "3D Modeling and Rendering",
+                "Furniture and Fixture Design",
+                "Environmental Studies"
+            ]
+        }
+    },
+
+    "2nd Year": {
+        title: "2nd Year",
+        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f",
+        imageAlt: "Modern interior space planning",
+        semesters: {
+            "Semester 3": [
+                "Building Systems",
+                "Human Factors in Design",
+                "Lighting Fundamentals",
+                "Design Presentation Techniques"
+            ],
+            "Semester 4": [
+                "Residential Design",
+                "Estimating & Budgeting",
+                "Furniture and Fixture Design",
+                "3D Rendering"
+            ]
+        }
+    },
+
+    "3rd Year": {
+        title: "3rd Year",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+        imageAlt: "Advanced interior design techniques",
+        semesters: {
+            "Semester 5": [
+                "Commercial Design",
+                "Interior Landscaping",
+                "Lighting Applications",
+                "Digital Fabrication",
+
+            ],
+            "Semester 6": [
+                "Corporate Design",
+                "Hospitality Design",
+                "Advanced 3D Visualization",
+                "Building Codes & Standards",
+            ]
+        }
+    },
+
+    "4th Year": {
+        title: "4th Year",
+        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+        imageAlt: "Final project and professional portfolio",
+        semesters: {
+            "Semester 7": [
+                "Capstone Design Project",
+                "Design Research Methods",
+                "Lighting and Acoustics",
+                "Interior Project Management"
+            ],
+            "Semester 8": [
+                "Thesis Preparation",
+                "Professional Portfolio Development",
+                "Interior Design Ethics",
+                "Entrepreneurship in Design"
+            ]
+        }
+    }
+};
+
 interface CourseContentProps {
     title: string;
     duration: string;
@@ -195,7 +281,8 @@ const InteriorDesignComponent = ({
                         <h3
                             className={`text-2xl ${poppins.className} text-center py-5 font-bold text-black`}
                         >
-                            Step into the World of {title.split(" in ")[1] || "Design"}
+                            Step into the World of Interior Design
+                            {/* {title.split(" in ")[1] || "Design"} */}
                         </h3>
                         < div className="flex items-center gap-6" >
                             <Button onClick={handleApplyClick} className="bg-white text-black hover:bg-yellow-500 px-4 py-2" >
@@ -207,7 +294,17 @@ const InteriorDesignComponent = ({
                                 setIsFormOpen={setIsFormOpen}
                                 isScrolled={false}
                             />
+
                             <Button
+                                onClick={() =>
+                                    document.getElementById("curriculum")?.scrollIntoView({ behavior: "smooth" })
+                                }
+                                className="hover:bg-white hover:text-black transition-all duration-200 font-bold"
+                            >
+                                Curriculum
+                            </Button>
+
+                            {/* <Button
                                 onClick={
                                     () =>
                                         document
@@ -217,7 +314,7 @@ const InteriorDesignComponent = ({
                                 className="hover:bg-white hover:text-black transition-all duration-200 font-bold"
                             >
                                 Curriculum
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
                 </div>
@@ -298,7 +395,7 @@ const InteriorDesignComponent = ({
                 </section>
 
 
-
+                {/* career prospects section */}
                 <section className="py-6 bg-white">
                     {/* Heading */}
                     <h2 className="text-4xl font-extrabold text-start mb-14 text-black">
@@ -346,14 +443,89 @@ const InteriorDesignComponent = ({
 
                 </section>
 
+                {/* curriculam section */}
+                <div id="curriculum" className="max-w-7xl mx-auto px-4 py-16 bg-white">
+                    <h2 className="text-3xl font-bold mb-8 text-yellow-400">
+                        Course Curriculum
+                    </h2>
 
-                {
-                    curriculum && (
-                        <div id="curriculum" >
-                            <CurriculumSection curriculum={curriculum} />
-                        </div>
-                    )
-                }
+                    {/* Year Tabs */}
+                    <Tabs defaultValue="1st Year" className="w-full">
+                        <TabsList className="md:w-full flex flex-wrap h-10 mb-16 bg-zinc-200 rounded-lg p-1 gap-2">
+                            {Object.keys(interiorDesignCurriculum).map((year) => (
+                                <TabsTrigger
+                                    key={year}
+                                    value={year}
+                                    className="flex-1 data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                                >
+                                    {year}
+                                </TabsTrigger>
+                            ))}
+                        </TabsList>
+
+                        {/* Year Content */}
+                        {Object.entries(interiorDesignCurriculum).map(([year, data]) => (
+                            <TabsContent key={year} value={year}>
+                                <div className="mb-8">
+
+                                    {/* Banner Image */}
+                                    <div className="relative w-full h-64 mb-8 overflow-hidden rounded-lg">
+                                        <Image
+                                            src={data.image}
+                                            alt={data.imageAlt}
+                                            fill
+                                            className="object-cover transition-transform duration-300 hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
+                                            {data.title}
+                                        </h3>
+                                    </div>
+
+                                    {/* Semester Tabs */}
+                                    <Tabs defaultValue={Object.keys(data.semesters)[0]} className="w-full">
+                                        <TabsList className="md:w-full flex flex-wrap mb-16 rounded-lg bg-zinc-200 p-1 gap-2">
+                                            {Object.keys(data.semesters).map((semester) => (
+                                                <TabsTrigger
+                                                    key={semester}
+                                                    value={semester}
+                                                    className="flex-1 data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                                                >
+                                                    {semester}
+                                                </TabsTrigger>
+                                            ))}
+                                        </TabsList>
+
+                                        {/* Semester Subjects */}
+                                        {Object.entries(data.semesters).map(([semester, subjects]) => (
+                                            <TabsContent key={semester} value={semester}>
+                                                <Card className="bg-white border-none">
+                                                    <CardContent className="p-6">
+                                                        <div className="grid gap-4">
+                                                            {subjects.map((subject, index) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="p-4 bg-yellow-400 rounded-lg hover:bg-yellow-500 transition-colors"
+                                                                >
+                                                                    <p className="text-black font-bold">
+                                                                        {subject}
+                                                                    </p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+                                            </TabsContent>
+                                        ))}
+                                    </Tabs>
+                                </div>
+                            </TabsContent>
+                        ))}
+                    </Tabs>
+                </div>
+
+
+
 
 
 

@@ -21,7 +21,7 @@ function InteriorDesign() {
     const tools = [
         { name: "AutoCAD", icon: SiAutodesk, color: "text-red-600" },
         { name: "SketchUp", icon: SiSketchup, color: "text-orange-500" },
-        { name: "3ds Max", icon: FaCube, color: "text-blue-600" }, // use FaCube
+        { name: "3ds Max", icon: FaCube, color: "text-blue-600" },
         { name: "Photoshop", icon: SiAdobephotoshop, color: "text-blue-700" },
     ];
     useEffect(() => {
@@ -62,9 +62,9 @@ function InteriorDesign() {
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
             <HeroSection backgroundImage="/landingImages/course landscape-01-01.jpg" />
-            <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[93vh] overflow-hidden">
+            <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
-                    src="/landingImages/course landscape-01-01.jpg"
+                    src="/landingImages/we banner.png"
                     alt="Hero Banner"
                     fill
                     priority
@@ -82,94 +82,168 @@ function InteriorDesign() {
                         </div>
 
                         {/* AI Description Section */}
-                        <div className="my-5 sm:my-10 bg-gradient-to-r from-black via-gray-900 to-black text-white rounded-2xl shadow-2xl p-6 sm:p-5 border border-yellow-500/40 relative overflow-hidden animate-fade-in-up">
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.18),transparent_75%)] animate-pulse-slow"></div>
+                        <div className="my-10 px-4 sm:px-8 lg:px-20">
+                            <div className="bg-gradient-to-r from-black via-gray-900 to-black 
+                    text-white rounded-2xl shadow-2xl p-6 sm:p-10 
+                    border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
 
-                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center mb-4 relative z-10 animate-bounce-in">
-                                🤖 Learn Tools Faster with AI Assistant
-                            </h3>
+                                {/* Soft Glow Background */}
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.15),transparent_70%)]"></div>
 
-                            <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-3xl mx-auto text-center relative z-10 animate-fade-in delay-200">
-                                Master industry-leading tools like
-                                <span className="text-yellow-400 font-semibold"> AutoCAD</span>,
-                                <span className="text-yellow-400 font-semibold"> SketchUp</span>,
-                                <span className="text-yellow-400 font-semibold"> 3ds Max</span>,
-                                <span className="text-yellow-400 font-semibold"> Photoshop</span> and more —
-                                with the help of our intelligent
-                                <span className="text-yellow-400 font-bold"> AI-powered learning assistant.</span>
-                            </p>
+                                {/* Heading */}
+                                <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-center mb-4 relative z-10">
+                                    🤖 Learn Tools Faster with AI Assistant
+                                </h3>
 
-                            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-base font-semibold relative z-10 max-w-4xl mx-auto">
-                                {[
-                                    { icon: "⚡", text: "Step-by-step tool explanations" },
-                                    { icon: "🎯", text: "Personalized learning suggestions" },
-                                    { icon: "💡", text: "Instant answers to all tool-related queries" },
-                                    { icon: "🚀", text: "Learn 5× faster with AI support" }
-                                ].map((item, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-center gap-2 animate-slide-in-left"
-                                        style={{ animationDelay: `${400 + index * 100}ms` }}
-                                    >
-                                        <span className="text-yellow-400 text-xl animate-bounce">{item.icon}</span>
-                                        {item.text}
-                                    </li>
-                                ))}
-                            </ul>
+                                {/* Description */}
+                                <p className="text-sm sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center relative z-10">
+                                    Master industry-leading tools like
+                                    <span className="text-yellow-400 font-semibold"> Photoshop</span>,
+                                    <span className="text-yellow-400 font-semibold"> Illustrator</span>,
+                                    <span className="text-yellow-400 font-semibold"> CorelDRAW</span>,
+                                    and more — with the help of our intelligent
+                                    <span className="text-yellow-400 font-bold"> AI-powered learning assistant.</span>
+                                </p>
 
-                            <p className="text-center text-yellow-400 mt-6 text-lg font-bold relative z-10 animate-pulse">
-                                AI Assistant — Your Personal Guide for Every Software You Learn
-                            </p>
+                                {/* Feature List */}
+                                <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-base font-semibold relative z-10 max-w-3xl mx-auto">
+                                    {[
+                                        { icon: "⚡", text: "Step-by-step tool explanations" },
+                                        { icon: "🎯", text: "Personalized learning suggestions" },
+                                        { icon: "💡", text: "Instant answers to all tool queries" },
+                                        { icon: "🚀", text: "Learn 5× faster with AI support" }
+                                    ].map((item, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-center gap-3 animate-slide-in-left"
+                                            style={{ animationDelay: `${300 + index * 120}ms` }}
+                                        >
+                                            <span className="text-yellow-400 text-lg sm:text-xl">{item.icon}</span>
+                                            <span className="text-sm sm:text-base">{item.text}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                {/* Bottom Highlight Text */}
+                                <p className="text-center text-yellow-400 mt-8 text-base sm:text-lg font-bold relative z-10">
+                                    AI Assistant — Your Personal Guide for Every Software You Learn
+                                </p>
+                            </div>
                         </div>
+
 
                         {/* Course Level & Online Mode Notice */}
-                        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-4 sm:p-6 rounded-xl border-2 border-yellow-300 mb-8 sm:mb-12 animate-scale-in">
-                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-black mb-3 text-center animate-bounce-in">
-                                🎓 Designed for Class 10+ Students & Above
-                            </h3>
+                        <div className="px-4 sm:px-8 lg:px-20 my-10">
+                            <div className="
+        bg-gradient-to-r from-yellow-300 to-yellow-400 
+        p-6 sm:p-8 lg:p-12 
+        rounded-xl border border-yellow-300 
+        shadow-md 
+        animate-scale-in
+        text-center
+    ">
 
-                            <p className="text-base sm:text-lg text-black font-semibold text-center max-w-3xl mx-auto animate-fade-in delay-300">
-                                This is a <span className="text-red-600 font-bold animate-pulse">100% Online Course</span> that includes
-                                <span className="font-bold"> Pre-Recorded Video Lessons</span> along with
-                                <span className="font-bold"> Live Doubt-Clearing Sessions</span> for complete support.
-                            </p>
+                                {/* Heading */}
+                                <h3 className="
+            text-lg sm:text-2xl lg:text-3xl 
+            font-extrabold text-black 
+            mb-3
+        ">
+                                    🎓 Designed for Class 10+ Students & Above
+                                </h3>
+
+                                {/* Description */}
+                                <p className="
+            text-sm sm:text-lg lg:text-xl 
+            text-black 
+            font-medium 
+            max-w-3xl mx-auto 
+            leading-relaxed
+        ">
+                                    This is a
+                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course</span>
+                                    that includes
+                                    <span className="font-bold"> Pre-Recorded Video Lessons</span>
+                                    along with
+                                    <span className="font-bold"> Live Doubt-Clearing Sessions</span>
+                                    for complete support.
+                                </p>
+
+                            </div>
                         </div>
 
+
                         {/* Pricing Banner Section */}
-                        <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden animate-zoom-in">
+                        {/* <div className="relative w-full h-[35vh] sm:h-[45vh] md:h-[85vh] overflow-hidden">
                             <Image
                                 src={"/landingImages/course landscape-01-01.jpg"}
                                 alt="Hero Banner"
                                 fill
                                 priority
-                                className="object-contain sm:object-cover object-top hover:scale-105 transition-transform duration-700"
+                                className="object-contain object-top  transition-transform duration-700"
                             />
+                        </div> */}
+
+                        <div className="relative w-full  bg-black overflow-hidden">
+                            {/* Blurred Background */}
+                            <div className="absolute inset-0">
+                                <Image
+                                    src={"/landingImages/course landscape-01-01.jpg"}
+                                    alt="Blur Background"
+                                    fill
+                                    className="object-cover blur-xl opacity-40"
+                                    priority
+                                />
+                            </div>
+
+                            {/* Center Foreground Banner */}
+                            <div className="relative z-10 w-full flex items-center justify-center py-6">
+                                <Image
+                                    src={"/landingImages/course landscape-01-01.jpg"}
+                                    alt="Hero Banner"
+                                    width={900}
+                                    height={600}
+                                    className="w-full max-w-[900px] h-auto object-contain"
+                                    priority
+                                />
+                            </div>
+
                         </div>
 
+
                         {/* Tools Section */}
-                        <div className="my-12 px-4 animate-fade-in-up">
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center text-gray-900 mb-8 animate-bounce-in">
-                                🛠️ Master Industry-Relevant Tools
+                        <div className="my-16 px-4 animate-fade-in-up">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center text-gray-900 mb-10">
+                                <span className="bg-gradient-to-r from-gray-900 to-gray-800 bg-clip-text text-transparent">
+                                    🛠️ Master Industry-Relevant Tools
+                                </span>
                             </h2>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
                                 {tools.map((tool, index) => {
                                     const Icon = tool.icon;
                                     return (
                                         <div
                                             key={tool.name}
-                                            className="flex flex-col items-center bg-white shadow-lg rounded-xl p-4 hover:shadow-xl transition-all duration-300 animate-slide-up hover:scale-105 hover:-translate-y-2"
-                                            style={{ animationDelay: `${index * 100}ms` }}
+                                            className="flex flex-col items-center bg-white/40 backdrop-blur-lg 
+                               border border-white/30 shadow-lg rounded-2xl p-6
+                               hover:shadow-2xl hover:scale-[1.04] transition-all duration-300 
+                               animate-slide-up"
+                                            style={{ animationDelay: `${index * 120}ms` }}
                                         >
-                                            <div className={`mb-2 ${tool.color} animate-bounce`}>
-                                                <Icon className="w-10 h-10" />
+                                            <div className={`mb-3 ${tool.color}`}>
+                                                <Icon className="w-16 h-16" /> {/* Bigger icon */}
                                             </div>
-                                            <h3 className="font-semibold text-base text-center">{tool.name}</h3>
+
+                                            <h3 className="font-semibold text-lg text-center text-gray-800">
+                                                {tool.name}
+                                            </h3>
                                         </div>
                                     );
                                 })}
                             </div>
                         </div>
+
 
                         {/* Who Should Join */}
                         <div className="my-8 sm:my-12 animate-fade-in-up">
@@ -246,8 +320,19 @@ function InteriorDesign() {
                             <Carrousal />
                         </div>
 
+                        {/* Pricing Banner Section */}
+                        <div className="relative w-full mt-10 h-[35vh] sm:h-[45vh] md:h-[65vh] overflow-hidden">
+                            <Image
+                                src={"/landingImages/website.png"}
+                                alt="Hero Banner"
+                                fill
+                                priority
+                                className="object-contain object-top  transition-transform duration-700"
+                            />
+                        </div>
+
                         {/* Final CTA Section */}
-                        <div className="relative mt-10 p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
+                        <div className="relative mt-10 p-6 sm:p-10  bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 
     shadow-[0_10px_25px_rgba(0,0,0,0.25)] border border-yellow-300
     overflow-hidden group hover:shadow-[0_15px_35px_rgba(0,0,0,0.35)]
     transition-all duration-500">
