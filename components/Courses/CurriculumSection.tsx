@@ -18,6 +18,8 @@ interface Curriculum {
 }
 
 const CurriculumSection = ({ curriculum }: { curriculum: Curriculum }) => {
+  console.log(curriculum);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 bg-white">
       <h2 className="text-3xl font-bold mb-8 text-yellow-400">

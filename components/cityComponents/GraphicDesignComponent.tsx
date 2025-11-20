@@ -35,6 +35,8 @@ import { useState, useEffect, useRef } from "react";
 
 import { SiAdobe, SiAdobephotoshop, SiBlender, SiAutodesk, SiAdobepremierepro, SiCoreldraw } from "react-icons/si";
 import { FaTools, FaPaintBrush, FaFilm, FaMagic, FaCube, FaCubes, FaPenNib } from "react-icons/fa";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
+import { Card, CardContent } from "../ui/card";
 
 const tools = [
     {
@@ -86,24 +88,106 @@ const tools = [
         color: "from-orange-100 to-red-100",
         textColor: "text-orange-600"
     },
-    {
-        name: "More Tools",
-        category: "Expanding Library",
-        icon: <FaTools className="text-4xl text-green-600" />,
-        color: "from-green-100 to-teal-100",
-        textColor: "text-green-600"
-    },
-];
-// const tools = [
-//     { name: "Adobe", icon: <SiAdobe className="text-4xl" /> },
-//     { name: "Corel Draw", icon: <SiCoreldraw className="text-4xl" /> },
-//     { name: "Photoshop", icon: <SiAdobephotoshop className="text-4xl" /> },
-//     { name: "Maya (Autodesk)", icon: <SiAutodesk className="text-4xl" /> },
-//     { name: "After Effect (Adobe)", icon: <SiAdobepremierepro className="text-4xl" /> },
-//     { name: "Adobe Illustrator", icon: <SiAdobe className="text-4xl" /> },
-//     { name: "Blender", icon: <SiBlender className="text-4xl" /> },
-// ];
 
+];
+
+export const graphicDesignCurriculum = {
+    "1st Year": {
+        title: "1st Year",
+        image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e",
+        imageAlt: "Graphic design fundamentals and sketching",
+        semesters: {
+            "Semester 1": [
+                "Design Fundamentals & Principles",
+                "Drawing & Sketching Techniques",
+                "Color Theory & Application",
+                "Typography Basics",
+                "Digital Design Tools Introduction",
+                "Visual Communication Principles"
+            ],
+            "Semester 2": [
+                "Adobe Creative Suite Basics",
+                "Layout & Composition",
+                "Brand Identity Fundamentals",
+                "Vector Graphics & Illustration",
+                "Design History & Movements",
+                "Digital Imaging Techniques"
+            ]
+        }
+    },
+
+    "2nd Year": {
+        title: "2nd Year",
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5",
+        imageAlt: "Advanced graphic design and digital creation",
+        semesters: {
+            "Semester 3": [
+                "Advanced Typography",
+                "Branding & Logo Design",
+                "Packaging Design",
+                "Advertising Design",
+                "User Interface (UI) Basics",
+                "Print Production Techniques"
+            ],
+            "Semester 4": [
+                "Motion Graphics Fundamentals",
+                "Web Design Principles",
+                "Editorial Design",
+                "Photography for Designers",
+                "Design Thinking Process",
+                "Client Project Management"
+            ]
+        }
+    },
+
+    "3rd Year": {
+        title: "3rd Year",
+        image: "https://images.unsplash.com/photo-1558655146-d09347e92766",
+        imageAlt: "Specialized graphic design applications",
+        semesters: {
+            "Semester 5": [
+                "Advanced Branding Systems",
+                "Digital Illustration",
+                "3D Modeling for Designers",
+                "Advanced UI/UX Design",
+                "Social Media Graphics",
+                "Environmental Graphics"
+            ],
+            "Semester 6": [
+                "Interactive Design",
+                "Advanced Motion Graphics",
+                "Design for Web & Mobile",
+                "Portfolio Development",
+                "Design Research Methods",
+                "Professional Practices"
+            ]
+        }
+    },
+
+    "4th Year": {
+        title: "4th Year",
+        image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d",
+        imageAlt: "Professional portfolio and industry preparation",
+        semesters: {
+            "Semester 7": [
+                "Capstone Design Project",
+                "Advanced Portfolio Development",
+                "Design Entrepreneurship",
+                "Client Management",
+                "Design Studio Management",
+                "Industry Internship Preparation"
+            ],
+            "Semester 8": [
+                "Thesis Project",
+                "Professional Portfolio Showcase",
+                "Freelance Business Setup",
+                "Industry Networking",
+                "Design Agency Operations",
+                "Career Development & Placement"
+            ]
+        }
+    }
+};
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -135,6 +219,9 @@ const GraphicDesignComponent = ({
     whatYouWillLearn,
     videos = [],
 }: CourseContentProps) => {
+
+    console.log(title.split(" in ")[1] || "Design");
+
     const heroImagesForCategory = categoryHeroImages[category] || [];
     const heroImage = heroImagesForCategory[index] || heroImagesForCategory[0];
     const careers = [
@@ -233,7 +320,8 @@ const GraphicDesignComponent = ({
                         <h3
                             className={`text-2xl ${poppins.className} text-center py-5 font-bold text-black`}
                         >
-                            Step into the World of {title.split(" in ")[1] || "Design"}
+                            Step into the World of Graphic Design
+                            {/* {title.split(" in ")[1] || "Design"} */}
                         </h3>
                         < div className="flex items-center gap-6" >
                             <Button onClick={handleApplyClick} className="bg-white text-black hover:bg-yellow-500 px-4 py-2" >
@@ -245,7 +333,17 @@ const GraphicDesignComponent = ({
                                 setIsFormOpen={setIsFormOpen}
                                 isScrolled={false}
                             />
+
                             <Button
+                                onClick={() =>
+                                    document.getElementById("curriculum")?.scrollIntoView({ behavior: "smooth" })
+                                }
+                                className="hover:bg-white hover:text-black transition-all duration-200 font-bold"
+                            >
+                                Curriculum
+                            </Button>
+
+                            {/* <Button
                                 onClick={
                                     () =>
                                         document
@@ -255,7 +353,7 @@ const GraphicDesignComponent = ({
                                 className="hover:bg-white hover:text-black transition-all duration-200 font-bold"
                             >
                                 Curriculum
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
                 </div>
@@ -287,15 +385,15 @@ const GraphicDesignComponent = ({
                             <div
                                 key={index}
                                 className="
-  p-8
-  bg-[#040a11]            /* Dark Blue Background */
-  rounded-xl
-  border border-yellow-500
-  shadow-[0_0_20px_rgba(250,204,21,0.25)]
-  hover:shadow-[0_0_35px_rgba(250,204,21,0.55)]
-  transition-all duration-300
-  hover:-translate-y-3
-"
+                                            p-8
+                                            bg-[#040a11]            /* Dark Blue Background */
+                                            rounded-xl
+                                            border border-yellow-500
+                                            shadow-[0_0_20px_rgba(250,204,21,0.25)]
+                                            hover:shadow-[0_0_35px_rgba(250,204,21,0.55)]
+                                            transition-all duration-300
+                                            hover:-translate-y-3
+                                            "
 
                             >
                                 {/* Card Heading */}
@@ -322,13 +420,86 @@ const GraphicDesignComponent = ({
 
                 </section>
 
-                {
-                    curriculum && (
-                        <div id="curriculum" >
-                            <CurriculumSection curriculum={curriculum} />
-                        </div>
-                    )
-                }
+                {/* curriculam section */}
+                <div id="curriculum" className="max-w-7xl mx-auto px-4 py-16 bg-white">
+                    <h2 className="text-3xl font-bold mb-8 text-yellow-400">
+                        Course Curriculum
+                    </h2>
+
+                    {/* Year Tabs */}
+                    <Tabs defaultValue="1st Year" className="w-full">
+                        <TabsList className="md:w-full flex flex-wrap h-10 mb-6 bg-zinc-200 rounded-lg p-1 gap-2">
+                            {Object.keys(graphicDesignCurriculum).map((year) => (
+                                <TabsTrigger
+                                    key={year}
+                                    value={year}
+                                    className="flex-1 data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                                >
+                                    {year}
+                                </TabsTrigger>
+                            ))}
+                        </TabsList>
+
+                        {/* Year Content */}
+                        {Object.entries(graphicDesignCurriculum).map(([year, data]) => (
+                            <TabsContent key={year} value={year}>
+                                <div className="mb-8">
+
+                                    {/* Banner Image */}
+                                    <div className="relative w-full h-64 mb-8 overflow-hidden rounded-lg">
+                                        <Image
+                                            src={data.image}
+                                            alt={data.imageAlt}
+                                            fill
+                                            className="object-cover transition-transform duration-300 hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                        <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
+                                            {data.title}
+                                        </h3>
+                                    </div>
+
+                                    {/* Semester Tabs */}
+                                    <Tabs defaultValue={Object.keys(data.semesters)[0]} className="w-full">
+                                        <TabsList className="md:w-full flex flex-wrap mb-16 rounded-lg bg-zinc-200 p-1 gap-2">
+                                            {Object.keys(data.semesters).map((semester) => (
+                                                <TabsTrigger
+                                                    key={semester}
+                                                    value={semester}
+                                                    className="flex-1 data-[state=active]:bg-yellow-400 data-[state=active]:text-black"
+                                                >
+                                                    {semester}
+                                                </TabsTrigger>
+                                            ))}
+                                        </TabsList>
+
+                                        {/* Semester Subjects */}
+                                        {Object.entries(data.semesters).map(([semester, subjects]) => (
+                                            <TabsContent key={semester} value={semester}>
+                                                <Card className="bg-white border-none">
+                                                    <CardContent className="p-6">
+                                                        <div className="grid gap-4">
+                                                            {subjects.map((subject, index) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="p-4 bg-yellow-400 rounded-lg hover:bg-yellow-500 transition-colors"
+                                                                >
+                                                                    <p className="text-black font-bold">
+                                                                        {subject}
+                                                                    </p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </CardContent>
+                                                </Card>
+                                            </TabsContent>
+                                        ))}
+                                    </Tabs>
+                                </div>
+                            </TabsContent>
+                        ))}
+                    </Tabs>
+                </div>
 
 
                 {/* icons */}
@@ -365,12 +536,12 @@ const GraphicDesignComponent = ({
                                 {/* Icon Container */}
                                 <div
                                     className={`
-                mb-4 p-3 rounded-full bg-gradient-to-r 
-                ${tool.color} 
-                animate-float
-              `}
+                                        mb-4 p-3 rounded-full bg-gradient-to-r 
+                                        ${tool.color} 
+                                        animate-float
+                                    `}
                                 >
-                                    <div className="filter drop-shadow-md">
+                                    <div className="filter drop-shadow-md h-10">
                                         {tool.icon}
                                     </div>
                                 </div>
@@ -388,48 +559,6 @@ const GraphicDesignComponent = ({
                         ))}
                     </div>
                 </section>
-                {/* {software?.length > 0 && (
-                    <div className="my-12">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-                            🛠️ Tools You'll Master
-                        </h2>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 max-w-5xl mx-auto">
-                            {software.map((item : string) => {
-                                const logoMap: Record<string, string> = {
-                                    Photoshop: "https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg",
-                                    Illustrator: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg",
-                                    "Corel Draw": "https://upload.wikimedia.org/wikipedia/commons/4/43/CorelDRAW_X7_icon.svg",
-                                    Maya: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Autodesk_Maya_logo.svg",
-                                    "After Effects": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Adobe_After_Effects_CC_icon.svg",
-                                    Blender: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg",
-                                    Adobe: "https://upload.wikimedia.org/wikipedia/commons/d/dc/Adobe_Corporate_logo.svg",
-                                };
-                                const logo = logoMap[item] || "https://via.placeholder.com/64";
-
-                                return (
-                                    <div
-                                        key={item}
-                                        className="flex flex-col items-center justify-center p-4 rounded-lg bg-white shadow-md hover:shadow-xl transition-all duration-300"
-                                    >
-                                        <div className="w-16 h-16 relative mb-2">
-                                            <Image
-                                                src={logo}
-                                                alt={item}
-                                                fill
-                                                className="object-contain"
-                                                priority
-                                            />
-                                        </div>
-                                        <p className="text-sm sm:text-base font-semibold text-center">
-                                            {item}
-                                        </p>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )} */}
-
 
 
                 <div id="partners" >

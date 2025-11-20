@@ -2,21 +2,22 @@ import React from 'react'
 
 function CourseInfo({ title }: { title: string }) {
     const features = [
-        "Become an Interior Designer",
-        "4+ Tools & 4+ Hands-on Projects",
-        "Program Experts from the Industry",
-        "Live Doubts Support on App",
-        "Weekly Faculty Interaction via App",
-        "Become an Interior Designer",
-        "4+ Tools & 4+ Hands-on Projects",
-        "Program Experts from the Industry",
-        "Live Doubts Support on App",
-        "Weekly Faculty Interaction via App",
-    ];
+    "Become an Interior Designer",
+    "Master 4+ Industry Tools",
+    "Work on 4+ Hands-on Real Projects",
+    "Live Doubt Support on App",
+    "Weekly Faculty Interaction via App",
+    "Portfolio & Resume Building Support",
+    "Learn from Industry Experts",
+    "Job Assistance & Career Guidance",
+    "Access to Downloadable Study Material",
+    "Lifetime Access to Recorded Sessions"
+];
+
     return (
         <div className="w-full flex justify-center">
-            <div className="bg-white shadow-2xl border border-gray-200 rounded-3xl 
-                    p-3 sm:p-3 max-w-6xl w-full">
+            <div className="bg-white shadow-2xl border border-gray-200 rounded-2xl 
+                    p-3 sm:p-3 max-w-7xl w-full">
 
                 {/* Header */}
                 <div className="text-center mb-6">
