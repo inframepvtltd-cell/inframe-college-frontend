@@ -352,7 +352,7 @@ export const categories = [
           { text: "B.SC in Graphic Design", href: "#" },
           { text: "One Year Diploma in Graphic Design", href: "#" },
           { text: "Three Year Diploma in Graphic Design", href: "#" },
-          // { text: "AutoCad", href: "#" },
+          { text: "AutoCad", href: "#" },
 
         ],
         category: "Design",

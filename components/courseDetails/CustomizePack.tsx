@@ -1,9 +1,11 @@
+"use client";
+
 import React from 'react'
 
 export default function Customizecourse() {
     return (
-        <div className="w-full lg:p-3">
-            <div className='max-w-4xl grid sm:grid-cols-2 gap-10  p-3 lg:p-0 mx-auto lg:my-[80px] my-[20px]'>
+        <div className="w-full lg:p-1">
+            <div className='max-w-7xl grid sm:grid-cols-2 gap-10  p-3 lg:p-0 mx-auto lg:my-[2x] my-[2px]'>
                 <div className='border-[1px] border-gray-300 rounded-[20px] lg:px-5 px-2 py-8 shadow-lg'>
                     <div className='flex justify-between items-center '>
                         <h3 className='lg:text-[25px] text-[18px] font-semibold'>Customized course Pack</h3>

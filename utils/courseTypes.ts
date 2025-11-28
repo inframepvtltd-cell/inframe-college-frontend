@@ -452,6 +452,86 @@ export const courseTypes: CourseCategory = {
         },
       },
     },
+    {
+      redirectUrl: "/interior-design/autocad-page",
+      value: "autocad",
+      label: "3 Year Diploma",
+      title: "3 Year Diploma in Interior Design",
+      duration: "3 Years Full-Time",
+      description:
+        "Gain comprehensive knowledge and hands-on experience in all aspects of interior design. Perfect for creative minds seeking in-depth understanding.",
+      content:
+        "The 3 Year Diploma in Interior Design is a comprehensive program offering a strong foundation in design principles, spatial planning, sustainable design, furniture design, and architectural concepts. The curriculum includes industry-standard software training, real-world projects, internships, and collaborative assignments. Students also learn business aspects of interior design, such as project management and client handling, preparing them for careers as interior designers, exhibition designers, and retail space planners.",
+      software: [
+        { name: "AutoCAD", src: "/software logos/pngegg (17).png" },
+        { name: "SketchUp", src: "/software logos/pngegg (18).png" },
+        { name: "3dsMax", src: "/software logos//pngegg (19).png" },
+        { name: "Revit", src: "/software logos/pngegg (21).png" },
+        { name: "Photoshop", src: "/software logos/pngegg (24).png" },
+      ],
+      videos: [
+        {
+          url: "https://youtube.com/embed/8Zz5zcOPHDw?si=Tjq18SsXDOYT-bGL",
+        },
+        {
+          url: "https://youtube.com/embed/Vl9aTeiM6RM?si=LFYlYsi_N60oYj9a",
+        },
+        {
+          url: "https://youtube.com/embed/AyRoxi85cHw?si=aWO6rYOrAJUNsx7s",
+        },
+      ],
+      whatYouWillLearn: [],
+      curriculum: {
+        "1st Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design fundamentals sketch and materials",
+          "Semester 1": [
+            "Basic Design Principles",
+            "Technical Drafting",
+            "Material and Finishes",
+            "Design Visualization",
+          ],
+          "Semester 2": [
+            "3D Modeling and Rendering",
+            "Furniture and Fixture Design",
+            "Residential Space Planning",
+            "Building Services",
+          ],
+        },
+        "2nd Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design software and space planning",
+          "Semester 3": [
+            "Sustainable Design Practices",
+            "Lighting Design",
+            "Commercial Space Planning",
+            "Interior Detailing",
+          ],
+          "Semester 4": [
+            "Advanced Materials and Textiles",
+            "Design Project Management",
+            "Exhibition Design",
+            "Interior Design Ethics and Law",
+          ],
+        },
+        "3rd Year": {
+          image: "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          imageAlt: "Interior design presentation and projects",
+          "Semester 5": [
+            "Business Aspects of Interior Design",
+            "Client Handling and Communication",
+            "Final Design Project I",
+            "Interior Design Portfolio",
+          ],
+          "Semester 6": [
+            "Internship/Industry Placement",
+            "Final Design Project II",
+            "Professional Practice in Interior Design",
+            "Project Presentation and Defense",
+          ],
+        },
+      },
+    },
   ],
 
   "fashion-design": [
@@ -1195,9 +1275,7 @@ export const courseTypes: CourseCategory = {
           ]
         }
       }
-    }
-
-    ,
+    },
     {
       redirectUrl: "/graphic-design/three-year-diploma-in-graphic-design",
       "content": "The Three Year Diploma in Graphic Design offers comprehensive training in visual communication and design technology. Students develop expertise in design software, typography, branding, and multimedia design. The program includes extensive practical projects, portfolio development, and industry internships.",
@@ -1268,7 +1346,78 @@ export const courseTypes: CourseCategory = {
           ]
         }
       }
-    }
+    },
+    {
+      redirectUrl: "/graphic-design/autocad", //new tags updated by ayaad
+      "content": "The Three Year Diploma in Graphic Design offers comprehensive training in visual communication and design technology. Students develop expertise in design software, typography, branding, and multimedia design. The program includes extensive practical projects, portfolio development, and industry internships.",
+      "value": "three-year-diploma-in-graphic-design",
+      "label": "3 Year Diploma in Graphic Design",
+      "title": "3 Year Diploma in Graphic Design",
+      "duration": "3 Years Full-Time",
+      "software": [
+        { "name": "Adobe ", "src": "/software logos/pngegg (27).png" },
+        { "name": "Corel Draw", "src": "/software logos/pngegg (26).png" },
+        { "name": "Photoshop", "src": "/software logos/pngegg (24).png" },
+        { "name": "Maya", "src": "/software logos/pngegg (28).png" },
+        { "name": "After Effect", "src": "/software logos/pngegg (29).png" },
+        { "name": "Adobe Illustrator", "src": "/software logos/pngegg (25).png" },
+        { "name": "Blender", "src": "/software logos/pngegg (30).png" },
+
+      ],
+      "videos": [],
+      "whatYouWillLearn": [],
+      "description": "Comprehensive training in all aspects of graphic design.",
+      "curriculum": {
+        "1st Year": {
+          "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          "imageAlt": "Fundamentals of graphic design and media",
+          "Semester 1": [
+            "Introduction to Graphic Design",
+            "Digital Tools and Software",
+            "Typography and Layout",
+            "Design Thinking"
+          ],
+          "Semester 2": [
+            "Photo Manipulation and Editing",
+            "Branding and Identity Design",
+            "Basic Motion Graphics",
+            "Project Management"
+          ]
+        },
+        "2nd Year": {
+          "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          "imageAlt": "Branding and multimedia design",
+          "Semester 3": [
+            "Branding and Marketing Design",
+            "UI/UX Design Fundamentals",
+            "Advanced Typography",
+            "Social Media Design"
+          ],
+          "Semester 4": [
+            "Interactive Media",
+            "Packaging and Print Design",
+            "Multimedia Design",
+            "Digital Advertising"
+          ]
+        },
+        "3rd Year": {
+          "image": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467",
+          "imageAlt": "Industry-based projects and design portfolio",
+          "Semester 5": [
+            "Advanced Motion Graphics",
+            "Freelancing in Design",
+            "Internship",
+            "Design Portfolio Development"
+          ],
+          "Semester 6": [
+            "Capstone Project",
+            "Job Market Preparation",
+            "Professional Design Practices",
+            "Industry Collaboration Projects"
+          ]
+        }
+      }
+    },
   ],
 
 

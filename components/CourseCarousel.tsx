@@ -88,10 +88,6 @@ const category = {
     {
       title: "Fine Arts",
       programs: [
-        "BFA in Painting",
-        "BFA in Visual Communication",
-        "BFA in Sculpture",
-        "BFA in Applied",
         "B.VOC in Fine Arts",
         "1 Year Diploma in Painting",
         "3 Year Diploma in Fine Arts",
@@ -128,42 +124,55 @@ const category = {
       image:
         "https://plus.unsplash.com/premium_photo-1710961232986-36cead00da3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG1lZGlhJTIwYW5kJTIwZW50ZXJ0YWlubWVudHxlbnwwfHwwfHx8MA%3D%3D",
     },
-    {
-      title: "Animation-VFX",
-      programs: ["BBA in Advertising and Marketing"],
-      image:
-        "https://plus.unsplash.com/premium_photo-1684341008757-3b456034e943?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
   ],
 };
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
 
-interface DegreeMap {
-  [key: string]: string;
-}
-
-const getDegreeType = (text: string): string => {
-  const degreeMap: DegreeMap = {
-    "B. Des": "bdes",
-    "B.VOC": "bvoc",
-    "B.SC": "bsc",
-    "1 Year Diploma": "diploma1",
-    "3 Year Diploma": "diploma3",
-    "2 Year Diploma": "diploma2",
-    "6 Month Certificate": "certificate6",
+// Helper function to format course titles for URLs based on your working examples
+const formatCourseSlug = (title: string): string => {
+  const slugMap: { [key: string]: string } = {
+    "Interior Design": "interior-design",
+    "Fashion Design": "fashion-design", 
+    "Graphic Design": "graphic-design",
+    "UIUX-Design": "uiux-design",
+    "Animation-VFX": "animation-vfx",
+    "Jewellery Design": "jewellery-design",
+    "Fine Arts": "fine-arts",
+    "Digital Marketing": "digital-marketing",
+    "Entrepreneurship Skill": "entrepreneurship-skill",
+    "Media-Entertainment": "media-entertainment"
   };
+  
+  return slugMap[title] || title.replace(/\s+/g, "-").toLowerCase();
+};
 
-  // Find which degree type this course belongs to
-  for (const [key, value] of Object.entries(degreeMap)) {
-    if (text.includes(key)) {
-      return value;
-    }
+// Fixed getDegreeType function that matches your working URLs
+const getDegreeType = (programText: string, courseTitle: string): string => {
+  const courseSlug = formatCourseSlug(courseTitle);
+  
+  // Extract the degree type from program text
+  if (programText.includes("B. Des")) {
+    return `bdes-in-${courseSlug}`;
+  } else if (programText.includes("B.VOC")) {
+    return `bvoc-in-${courseSlug}`;
+  } else if (programText.includes("B.SC")) {
+    return `bsc-in-${courseSlug}`;
+  } else if (programText.includes("1 Year Diploma")) {
+    return `one-year-diploma-in-${courseSlug}`;
+  } else if (programText.includes("2 Year Diploma")) {
+    return `two-year-diploma-in-${courseSlug}`;
+  } else if (programText.includes("3 Year Diploma")) {
+    return `three-year-diploma-in-${courseSlug}`;
+  } else if (programText.includes("6 Month Certificate")) {
+    return `six-month-certificate-in-${courseSlug}`;
   }
 
-  return "bdes"; // Default fallback
+  // Fallback
+  return `program-in-${courseSlug}`;
 };
 
 interface Course {
@@ -207,9 +216,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
               >
                 <Link
                   className="hover:text-blue-500 hover:underline"
-                  href={`/${course.title
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}/${getDegreeType(program)}`}
+                  href={`/${formatCourseSlug(course.title)}/${getDegreeType(program, course.title)}`}
                 >
                   <span className="text-yellow-400 mr-2 text-lg leading-none">
                     •
@@ -221,7 +228,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
           </ul>
 
           <Link
-            href={`/${course.title.replace(/\s+/g, "-").toLowerCase()}`}
+            href={`/${formatCourseSlug(course.title)}`}
             className="block mt-6"
             scroll={false}
           >

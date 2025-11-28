@@ -24,12 +24,12 @@ const PaymentLinkPage = () => {
 
       {/* <RazorpayLinkGenerator /> */}
       <>
-    <Script
-    id="razorpay-checkout-js"
-    src="https://checkout.razorpay.com/v1/checkout.js"
-   />
-   <Payment/>
-  </>
+        <Script
+          id="razorpay-checkout-js"
+          src="https://checkout.razorpay.com/v1/checkout.js"
+        />
+        <Payment />
+      </>
     </div>
   );
 };

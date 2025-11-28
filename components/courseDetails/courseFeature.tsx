@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
@@ -34,7 +36,7 @@ export default function CourseFeatures() {
     return (
         <div className="w-[100%]  py-[10px] lg:p-0">
             <div className="max-w-7xl p-3 lg:p-0 mx-auto lg:my-[60px] my-[30px]">
-                <h3 className="text-center lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold">
+                <h3 className="text-left lg:text-[40px] text-[30px] text-gray-800 mb-5 font-semibold">
                     Designing Course <span className="text-amber-400">Features</span>
                 </h3>
                 <div className="border-[2px] border-gray-300 rounded-xl grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 p-5">

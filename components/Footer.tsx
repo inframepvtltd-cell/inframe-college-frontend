@@ -143,6 +143,13 @@ const Footer = () => {
                 >
                   3-Year Diploma in Interior Design
                 </Link></li>
+              <li>
+                <Link
+                  href="/interior-design/autocad" // by ayaad
+                  className="hover:text-blue-500 transition duration-300"
+                >
+                  AutoCad
+                </Link></li>
             </ul>
             <ul className="space-y-3">
               <li className="font-bold">Fashion Design</li>
@@ -220,6 +227,13 @@ const Footer = () => {
                 >
                   3-Year Diploma in Graphic Design
                 </Link></li>
+              {/* <li>
+                <Link
+                  href="/graphic-design/three-year-diploma-in-graphic-design"
+                  className="hover:text-blue-500 transition duration-300"
+                >
+                  3-Year Diploma in Graphic Design
+                </Link></li> */}
             </ul>
             <ul className="space-y-3">
               <li className="font-bold">UI & UX Design</li>
@@ -262,7 +276,7 @@ const Footer = () => {
           </p>
           <p className="mt-4 text-sm opacity-80">
             <strong>Admissions:</strong> +91 9649 9649 37
-            <br />
+            <br />three-year-diploma-in-interior-design
             <strong>Admin:</strong> +91 9649 9649 70
             <br />
             <strong>Email:</strong>{" "}

@@ -87,7 +87,8 @@ function QuickPayment({ price }: { price: string }) {
                 <span className="text-yellow-500">⚡</span>
                 Limited time offer - Don't miss out!
             </p> */}
-        </div>)
+        </div>
+    )
 }
 
 export default QuickPayment
