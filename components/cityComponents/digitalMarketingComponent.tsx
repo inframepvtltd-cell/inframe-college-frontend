@@ -263,24 +263,24 @@ const DigitalMarketingComponent = ({
     const heroImage = heroImagesForCategory[index] || heroImagesForCategory[0];
     const [active, setActive] = useState(0);
 
-const careers = [
-    {
-        title: "Digital Marketing Specialist",
-        items: ["SEO Executive", "SEM/PPC Specialist", "Content Strategist"],
-    },
-    {
-        title: "Social Media & Branding",
-        items: ["Social Media Manager", "Brand Strategist", "Influencer Marketing Manager"],
-    },
-    {
-        title: "Specialized Roles",
-        items: [
-            "Email Marketing Expert",
-            "Marketing Automation Specialist",
-            "Web Analytics & Data Analyst",
-        ],
-    },
-];
+    const careers = [
+        {
+            title: "Digital Marketing Specialist",
+            items: ["SEO Executive", "SEM/PPC Specialist", "Content Strategist"],
+        },
+        {
+            title: "Social Media & Branding",
+            items: ["Social Media Manager", "Brand Strategist", "Influencer Marketing Manager"],
+        },
+        {
+            title: "Specialized Roles",
+            items: [
+                "Email Marketing Expert",
+                "Marketing Automation Specialist",
+                "Web Analytics & Data Analyst",
+            ],
+        },
+    ];
 
     const fallbackHeroImage =
         "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1600&q=80";
