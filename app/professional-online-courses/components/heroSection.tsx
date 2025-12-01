@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+interface HeroSectionProps {
+  offPercentage: string;
+}
 
-export default function HeroSection({ backgroundImage = "/images/gallery/1721738128651.jpg" }) {
+export default function HeroSection({ offPercentage }: HeroSectionProps)  {
     const [timeLeft, setTimeLeft] = useState({
         hours: 3,
         minutes: 12,
@@ -44,7 +47,7 @@ export default function HeroSection({ backgroundImage = "/images/gallery/1721738
                                 <div className="marquee-group" key={copy}>
                                     {/* You can create a small function to render the repeated block */}
                                     <div className="marquee-item">
-                                        <span className="text-yellow-400 text-sm sm:text-lg font-bold animate-pulse">🎉 NEW YEAR 70% OFF 🎉</span>
+                                        <span className="text-yellow-400 text-sm sm:text-lg font-bold animate-pulse">🎉 NEW YEAR {offPercentage} OFF 🎉</span>
                                     </div>
 
                                     <div className="marquee-item">

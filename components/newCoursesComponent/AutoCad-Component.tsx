@@ -7,6 +7,7 @@ import Customizecourse from "../courseDetails/CustomizePack";
 import WhyChooseUs from "../courseDetails/WhyChooseUs";
 import FAQSection from "../Courses/FAQSection";
 import DreamsSection from "../DreamSection";
+import CustomizeCourse from "../courseDetails/CustomizePack";
 // import ComboPack from "../../../../components/courseDetails/ComboPack";
 // import CourseHero from "../../../../components/courseDetails/courseDetails";
 // import CourseFeatures from "../../../../components/courseDetails/courseFeature";
@@ -29,6 +30,14 @@ function AutoCadComponent() {
     script.async = true;
     document.body.appendChild(script);
   }, []);
+  const graphicDesignSoftware = [
+    { id: "1", name: "Adobe Photoshop", price: 1999, category: "design" },
+    { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
+    { id: "3", name: "Figma", price: 1499, category: "ui-ux" },
+    { id: "4", name: "Canva Pro", price: 999, category: "design" },
+    { id: "5", name: "Adobe InDesign", price: 1799, category: "publishing" },
+    { id: "6", name: "CorelDRAW", price: 1599, category: "design" }
+  ]
   return (
     <div className="bg-white text-black mt-20">
       <CourseHero price="1499" />
@@ -41,7 +50,10 @@ function AutoCadComponent() {
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       {/* < DreamsSection /> */}
 
-      <Customizecourse />
+       <CustomizeCourse
+                      courseTitle="Graphic Design"
+                      availableSoftware={graphicDesignSoftware}
+                  />      
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       < DreamsSection />
 

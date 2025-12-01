@@ -86,7 +86,7 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection backgroundImage="/landingImages/GrapLandscape-01.jpg" />
+            <HeroSection offPercentage="70%" />
             <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
                     src="/landingImages/we banner.png"

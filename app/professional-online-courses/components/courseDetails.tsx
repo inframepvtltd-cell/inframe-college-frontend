@@ -35,25 +35,44 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
                     </div>
 
                     {/* Compact Price Card */}
-                    <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-4 shadow-xl border-2 border-yellow-300 max-w-sm mx-auto">
+                    <div className="
+    bg-gradient-to-br from-yellow-400 to-orange-500 
+    rounded-xl 
+    p-4 md:p-6 lg:p-8
+    shadow-xl 
+    border-2 border-yellow-300 
+    max-w-xl md:max-w-2xl mx-auto
+">
                         <div className="flex items-center justify-between text-white">
+
+                            {/* WAS */}
                             <div className="text-left">
-                                <div className="text-xs opacity-90">WAS</div>
-                                <div className="text-lg line-through opacity-80">₹{originalPrice}</div>
+                                <div className="text-xs md:text-sm opacity-90">WAS</div>
+                                <div className="text-lg md:text-2xl lg:text-3xl line-through opacity-80">
+                                    ₹{originalPrice}
+                                </div>
                             </div>
 
+                            {/* NOW ONLY */}
                             <div className="text-center">
-                                <div className="text-xs opacity-90">NOW ONLY</div>
-                                <div className="text-3xl font-black">₹{priceWithDiscount}</div>
-                                <div className="text-xs opacity-90 mt-1">Lifetime Access</div>
+                                <div className="text-xs md:text-sm opacity-90">NOW ONLY</div>
+                                <div className="text-3xl md:text-4xl lg:text-5xl font-black">
+                                    ₹{priceWithDiscount}
+                                </div>
+                                <div className="text-xs md:text-sm opacity-90 mt-1">Lifetime Access</div>
                             </div>
 
+                            {/* YOU SAVE */}
                             <div className="text-right">
-                                <div className="text-xs opacity-90">YOU SAVE</div>
-                                <div className="text-lg font-bold text-green-100">70%</div>
+                                <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
+                                <div className="text-lg md:text-2xl lg:text-3xl font-bold text-green-100">
+                                    50%
+                                </div>
                             </div>
+
                         </div>
                     </div>
+
 
                     {/* Urgency Indicator */}
                     <div className="mt-3 text-sm text-red-600 font-semibold animate-pulse">
