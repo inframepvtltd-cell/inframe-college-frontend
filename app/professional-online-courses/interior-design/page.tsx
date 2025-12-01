@@ -89,7 +89,7 @@ function InteriorDesign() {
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection backgroundImage="/landingImages/course landscape-01-01.jpg" />
+            <HeroSection offPercentage="70%" />
 
             {/* Hero Banner Image */}
             <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">

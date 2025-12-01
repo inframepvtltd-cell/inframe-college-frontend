@@ -4,7 +4,6 @@ import Image from 'next/image';
 import HeroSection from '../components/heroSection';
 import Footer from '../components/footer';
 import QuickPayment from '../components/quickPayment';
-// import RelevantToolsAndFeatures from '../components/relevantToolsAndFeatures';
 import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
 import FAQSection from '../components/faq';
@@ -12,10 +11,8 @@ import StudentsWork from '../components/studentsWork';
 import TestimonialCarousel from '../../../components/TestimonialSection ';
 import FeaturesSection from '../components/featureSection';
 
-
 function CivilArch() {
     const [expanded, setExpanded] = useState(true);
-
 
     const course = {
         title: "Civil & Architecture Drawing Course (2D)",
@@ -27,12 +24,6 @@ function CivilArch() {
             "Electrical, Plumbing, Sanitary, AC & Flooring Plan",
         ],
     };
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.async = true;
-        document.body.appendChild(script);
-    }, []);
 
     const works = [
         "/landingImages/civil/SURESH JI  3D 2.jpg",
@@ -68,10 +59,25 @@ function CivilArch() {
         "Interior Decorators",
         "Teachers"
     ];
+
+    const contentItems = [
+        "Presentation Plan, Working Plan, Center Line, Excavation Plan",
+        "Water Tank Detail, 2D Elevation, RCC Slab Detail",
+        "Door/Window Schedule, Beam & Staircase Detail",
+        "Electrical, Plumbing, Sanitary, AC & Flooring Plan",
+    ];
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection backgroundImage="/landingImages/GrapLandscape-01.jpg" />
+            <HeroSection offPercentage="50%" />
             <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
                     src="/landingImages/we banner.png"
@@ -124,27 +130,27 @@ function CivilArch() {
                                 <div className="my-4 sm:my-6 w-16 sm:w-20 md:w-24 h-1 bg-yellow-400 mx-auto rounded-full"></div>
 
                                 {/* Course Content */}
-                                <div className="mt-4 sm:mt-6">
+                                <div className="mt-4 sm:mt-6 w-full">
                                     <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 text-center sm:text-left">
                                         Course Content
                                     </h3>
-
-                                    <ul className="grid grid-cols-1 gap-3 sm:gap-4">
-                                        {[
-                                            "Presentation Plan, Working Plan, Center Line, Excavation Plan",
-                                            "Water Tank Detail, 2D Elevation, RCC Slab Detail",
-                                            "Door/Window Schedule, Beam & Staircase Detail",
-                                            "Electrical, Plumbing, Sanitary, AC & Flooring Plan",
-                                        ].map((item, index) => (
+                                    <ul
+                                        className="
+                                                    grid grid-cols-1
+                                                    sm:grid-cols-2
+                                                    lg:grid-cols-2
+                                                    gap-3 sm:gap-4
+                                                    "
+                                    >
+                                        {contentItems.map((item, index) => (
                                             <li
                                                 key={index}
                                                 className="
-                            bg-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 
-                            font-bold border-l-4 border-yellow-400 
-                            text-gray-800 text-base sm:text-lg md:text-xl 
-                            shadow-sm hover:shadow-md transition-all
-                            hover:translate-x-1
-                        "
+                                                        bg-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4
+                                                        font-bold border-l-4 border-yellow-400
+                                                        text-gray-800 text-base sm:text-lg md:text-xl
+                                                        shadow-sm hover:shadow-md transition-all
+                                                        hover:translate-x-1"
                                             >
                                                 {item}
                                             </li>
@@ -157,7 +163,7 @@ function CivilArch() {
                         {/* ============================================================================ */}
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo title="Interior Design Course" priceWithDiscount="7496" originalPrice='24,986' />
+                            <CourseInfo title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='29,999' />
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -390,27 +396,9 @@ function CivilArch() {
                         {/* <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
                             <QuickPayment />
                         </div> */}
-                        <div className="fixed bottom-4 right-4 z-50 ">
-                            <QuickPayment price='14999'/>
-                            {/* <p className="mt-5 text-xl sm:text-2xl text-center flex items-center justify-center gap-3">
-                                <span className="font-semibold text-gray-800">
-                                    Pre-skill Required:
-                                </span>
-
-                                <span
-                                    className="
-      text-lg sm:text-2xl font-extrabold text-white
-      bg-gradient-to-r from-yellow-500 to-orange-500
-      px-6 py-2 rounded-2xl
-      shadow-[0_0_15px_rgba(255,165,0,0.5)]
-      animate-pulse
-      transition-all duration-300
-      hover:scale-110 hover:shadow-[0_0_25px_rgba(255,165,0,0.8)]
-    "
-                                >
-                                    AutoCAD
-                                </span>
-                            </p> */}
+                        {/* Floating Buy Now Button */}
+                        <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
+                            <QuickPayment price="7496" />
                         </div>
 
 
