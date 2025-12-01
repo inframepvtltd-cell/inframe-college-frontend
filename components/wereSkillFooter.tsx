@@ -9,20 +9,20 @@ const WereSkillFooter = () => {
             <div className="container mx-auto px-6 lg:px-16 text-center text-sm opacity-80">
                 <p className="font-bold">
                     © 2025 wereskill is a Unit of Inframe Educational Society Registered under the Rajasthan Society Act. All rights reserved
-                    Privacy Policy · Cancellation and Refund · Terms & Conditions · Shipping and Delivery <br />
+                    Privacy Policy ·<br />
                     <Link href={"/privacy-policy"} className="hover:underline">
                         Privacy Policy
                     </Link>{" "}
                     ·{" "}
-                    <Link href={"/cancellation-and-refund"} className="hover:underline">
+                    <Link href={"/RefundCancellationPolicy"} className="hover:underline">
                         Cancellation and Refund
                     </Link>{" "}
                     ·{" "}
-                    <Link href={"/terms-and-conditions"} className="hover:underline">
+                    <Link href={"/TermsAndConditions"} className="hover:underline">
                         Terms & Conditions
                     </Link>{" "}
                     ·{" "}
-                    <Link href={"/shipping-policy"} className="hover:underline">
+                    <Link href={"/DeliveryAndShippingPolicy"} className="hover:underline">
                         Shipping and Delivery
                     </Link>
                 </p>
