@@ -77,7 +77,7 @@ function CivilArch() {
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection offPercentage="50%" />
+            <HeroSection offPercentage="70%" />
             <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
                     src="/landingImages/we banner.png"
@@ -163,7 +163,7 @@ function CivilArch() {
                         {/* ============================================================================ */}
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='29,999' />
+                            <CourseInfo title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='49,996' />
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -398,7 +398,7 @@ function CivilArch() {
                         </div> */}
                         {/* Floating Buy Now Button */}
                         <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
-                            <QuickPayment price="7496" />
+                            <QuickPayment price="14999" />
                         </div>
 
 

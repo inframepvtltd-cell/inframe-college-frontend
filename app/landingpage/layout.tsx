@@ -10,7 +10,7 @@ export default function LandingPageLayout({
 }) {
   return (
     <div className="min-h-screen">
-      <LandingNavbar />
+      <LandingNavbar logo="https://inframecollege.org/wp-content/uploads/2021/05/inframecollege.org_.png"/>
       <main>{children}</main>
     </div>
   );

@@ -66,7 +66,7 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
                             <div className="text-right">
                                 <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
                                 <div className="text-lg md:text-2xl lg:text-3xl font-bold text-green-100">
-                                    50%
+                                    70%
                                 </div>
                             </div>
 

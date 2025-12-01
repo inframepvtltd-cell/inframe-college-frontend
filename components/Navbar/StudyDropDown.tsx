@@ -280,7 +280,7 @@ const DropdownContent = ({
 
                         {/* Program Links - Limited to 4 in vertical layout */}
                         <div className="space-y-3">
-                          {item.links.slice(0, 4).map((link: any, idx: number) => (
+                          {item.links.slice(0, 100).map((link: any, idx: number) => (
                             <div key={idx} className="flex items-center gap-3 group/link">
                               <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0 group-hover/link:scale-125 transition-transform duration-300" />
                               <Link
@@ -295,11 +295,11 @@ const DropdownContent = ({
                               </Link>
                             </div>
                           ))}
-                          {item.links.length > 4 && (
+                          {/* {item.links.length > 4 && (
                             <div className="text-xs text-yellow-600 font-medium mt-2 text-center">
                               +{item.links.length - 4} more programs
                             </div>
-                          )}
+                          )} */}
                         </div>
 
                         {/* Explore Button */}
