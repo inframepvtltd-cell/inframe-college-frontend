@@ -8,8 +8,11 @@ import { LOGO } from "../utils/constant";
 import { Button } from "@/components/ui/button";
 
 import { Phone } from "lucide-react";
+interface Logo {
+  logo: string
+}
 
-const LandingNavbar = () => {
+const LandingNavbar = ({ logo }: Logo) => {
   return (
     <header className="fixed w-full bg-white border shadow-sm z-50 py-4 font-sans">
       <div className="max-w-7xl mx-auto px-4">
@@ -19,7 +22,7 @@ const LandingNavbar = () => {
               <span className="font-bold text-xl">
                 <Link href="/">
                   <Image
-                    src={LOGO}
+                    src={logo}
                     alt="Inframe College Logo"
                     width={150}
                     height={10}

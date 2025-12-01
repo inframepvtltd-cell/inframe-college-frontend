@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 
 function QuickPayment({ price }: { price: string }) {
     const router = useRouter();
+    console.log(typeof price);
 
     const handleBuyNow = async () => {
         const options = {
@@ -36,6 +37,8 @@ function QuickPayment({ price }: { price: string }) {
                 color: "#FACC15", // yellow theme
             },
         };
+        console.log(options);
+
         const rzp = new window.Razorpay(options);
         rzp.open();
     };

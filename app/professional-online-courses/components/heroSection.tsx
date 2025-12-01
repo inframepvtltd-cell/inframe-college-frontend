@@ -2,19 +2,29 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+
 interface HeroSectionProps {
-  offPercentage: string;
+    offPercentage: string;
 }
 
-export default function HeroSection({ offPercentage }: HeroSectionProps)  {
+export default function HeroSection({ offPercentage }: HeroSectionProps) {
+    const [mounted, setMounted] = useState(false);
+
     const [timeLeft, setTimeLeft] = useState({
         hours: 3,
         minutes: 12,
         seconds: 0,
     });
 
+    // Ensure hydration match
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     // TIMER LOGIC
     useEffect(() => {
+        if (!mounted) return;
+
         const interval = setInterval(() => {
             setTimeLeft((prev) => {
                 let { hours, minutes, seconds } = prev;
@@ -27,43 +37,52 @@ export default function HeroSection({ offPercentage }: HeroSectionProps)  {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [mounted]);
 
     return (
-        <div className="w-full  bg-black">
-
-            {/* ===========================================================
-               🔥 HEADER BAR (OFFER + SEATS + TIMER)
-            ============================================================ */}
+        <div className="w-full bg-black">
             <div className="w-full bg-white/10 backdrop-blur-2xl border-b border-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.3)] py-2 z-20 relative overflow-hidden">
 
-
                 <div className="max-w-6xl mx-auto">
-                    {/* MARQUEE WRAPPER */}
                     <div className="relative overflow-hidden">
-                        {/* The track contains 2 copies of the same content for seamless loop */}
                         <div className="marquee-track">
                             {[0, 1].map((copy) => (
                                 <div className="marquee-group" key={copy}>
-                                    {/* You can create a small function to render the repeated block */}
+
                                     <div className="marquee-item">
-                                        <span className="text-yellow-400 text-sm sm:text-lg font-bold animate-pulse">🎉 NEW YEAR {offPercentage} OFF 🎉</span>
+                                        <span className="text-yellow-400 text-sm sm:text-lg font-bold animate-pulse">
+                                            🎉 NEW YEAR {offPercentage} OFF 🎉
+                                        </span>
                                     </div>
 
                                     <div className="marquee-item">
                                         <div className="flex items-center gap-2 text-yellow-400">
                                             <span className="text-xs text-white font-medium hidden sm:inline">Ends in:</span>
-                                            <span className="text-lg sm:text-2xl font-bold">
-                                                {timeLeft.hours.toString().padStart(2, "0")}
-                                            </span>
-                                            <span className="text-lg sm:text-2xl font-bold">:</span>
-                                            <span className="text-lg sm:text-2xl font-bold">
-                                                {timeLeft.minutes.toString().padStart(2, "0")}
-                                            </span>
-                                            <span className="text-lg sm:text-2xl font-bold">:</span>
-                                            <span className="text-lg sm:text-2xl font-bold">
-                                                {timeLeft.seconds.toString().padStart(2, "0")}
-                                            </span>
+
+                                            {mounted ? (
+                                                <>
+                                                    <span className="text-lg sm:text-2xl font-bold">
+                                                        {timeLeft.hours.toString().padStart(2, "0")}
+                                                    </span>
+                                                    <span className="text-lg sm:text-2xl font-bold">:</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">
+                                                        {timeLeft.minutes.toString().padStart(2, "0")}
+                                                    </span>
+                                                    <span className="text-lg sm:text-2xl font-bold">:</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">
+                                                        {timeLeft.seconds.toString().padStart(2, "0")}
+                                                    </span>
+                                                </>
+                                            ) : (
+                                                // 👇 Server renders fixed time so HTML matches
+                                                <>
+                                                    <span className="text-lg sm:text-2xl font-bold">03</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">:</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">12</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">:</span>
+                                                    <span className="text-lg sm:text-2xl font-bold">00</span>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
 
@@ -73,34 +92,14 @@ export default function HeroSection({ offPercentage }: HeroSectionProps)  {
                                         </div>
                                     </div>
 
-                                    {/* small spacer to visually separate repeated blocks */}
                                     <div className="w-8" />
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-    
+
             </div>
-            {/* ===========================================================
-               📸 RESPONSIVE BACKGROUND IMAGE SECTION
-            ============================================================ */}
-            {/* <div className="relative w-full overflow-hidden">
-                <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh]">
-                    <Image
-                        src={backgroundImage}
-                        alt="Hero Banner"
-                        fill
-                        priority
-                        className="object-cover object-center"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                    />
-
-                </div>
-            </div> */}
-
-
-
         </div>
     );
 }

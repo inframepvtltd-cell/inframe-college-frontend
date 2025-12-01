@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import QuickPayment from "../../app/professional-online-courses/components/quickPayment"
 
 interface Software {
     id: string
@@ -31,6 +32,8 @@ export default function CustomizeCourse({ courseTitle, availableSoftware }: Cour
     const [selectedSoftware, setSelectedSoftware] = useState<string[]>([])
     const [showCustomizeModal, setShowCustomizeModal] = useState(false)
 
+
+
     const graphicDesignSoftware = [
         { id: "1", name: "Adobe Photoshop", price: 1999, category: "design" },
         { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
@@ -52,18 +55,7 @@ export default function CustomizeCourse({ courseTitle, availableSoftware }: Cour
             buttonText: "Customize Now",
             type: 'custom'
         },
-        // {
-        //     id: "2",
-        //     title: "All Access course Pack",
-        //     tag: "Popular",
-        //     description: "Access All Software Tools",
-        //     refundPeriod: "Lifetime",
-        //     originalPrice: 31455,
-        //     discountedPrice: 3999,
-        //     discountPercentage: 85,
-        //     buttonText: "Know More",
-        //     type: 'all-access'
-        // }
+
     ]
 
     const toggleSoftware = (softwareId: string) => {
@@ -83,7 +75,9 @@ export default function CustomizeCourse({ courseTitle, availableSoftware }: Cour
 
     const calculateDiscountPrice = (totalPrice: number) => {
         // Apply 45% discount for custom pack
-        return Math.round(totalPrice * 0.55)
+        console.log(totalPrice);
+
+        return totalPrice
     }
 
     const handleCustomizeClick = () => {
@@ -110,6 +104,12 @@ export default function CustomizeCourse({ courseTitle, availableSoftware }: Cour
         buttonText: "Customize Now",
         type: 'custom'
     };
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
 
     return (
         <>
@@ -290,23 +290,8 @@ export default function CustomizeCourse({ courseTitle, availableSoftware }: Cour
                                 >
                                     Cancel
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        console.log("Selected software:", selectedSoftware)
-                                        console.log("Total price:", calculateDiscountPrice(calculateTotalPrice()))
-                                        setShowCustomizeModal(false)
-                                    }}
-                                    disabled={selectedSoftware.length === 0}
-                                    className={`
-                                    flex-1 px-6 py-3 rounded-xl font-semibold transition-all duration-300
-                                    ${selectedSoftware.length === 0
-                                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                            : 'bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white hover:scale-105 shadow-lg'
-                                        }
-                                `}
-                                >
-                                    Pay ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
-                                </button>
+
+                                <QuickPayment price={String(calculateTotalPrice())} />
                             </div>
                         </div>
                     </div>
