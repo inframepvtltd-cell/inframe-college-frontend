@@ -25,8 +25,9 @@ export default function PageClient() {
             <CourseFeatures />
  <CustomizeCourse
                       courseTitle="Graphic Design"
-                      availableSoftware={graphicDesignSoftware}
-                  />                  <WhyChooseUs />
+                      // availableSoftware={graphicDesignSoftware}
+                  />        
+                            <WhyChooseUs />
         </div>
     );
 }

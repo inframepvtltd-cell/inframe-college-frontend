@@ -5,8 +5,8 @@ import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
 import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
 import Customizecourse from "../../../../components/courseDetails/CustomizePack";
-import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 import PageClient from "../../../../components/demometa";
+import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
@@ -23,14 +23,27 @@ function CourseContent() {
   //   script.async = true;
   //   document.body.appendChild(script);
   // }, []);
-          const graphicDesignSoftware = [
+  const graphicDesignSoftware = [
     { id: "1", name: "Adobe Photoshop", price: 1999, category: "design" },
     { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
-    { id: "3", name: "Figma", price: 1499, category: "ui-ux" },
-    { id: "4", name: "Canva Pro", price: 999, category: "design" },
-    { id: "5", name: "Adobe InDesign", price: 1799, category: "publishing" },
-    { id: "6", name: "CorelDRAW", price: 1599, category: "design" }
-  ]
+    { id: "3", name: "Corel", price: 1599, category: "design" },
+    { id: "4", name: "Adobe Indesign", price: 1499, category: "ui-ux" },
+
+    { id: "5", name: "Maya", price: 999, category: "design" },
+    { id: "6", name: "Blender", price: 999, category: "design" },
+    { id: "7", name: "Adobe Animate", price: 999, category: "design" },
+    { id: "8", name: "Adobe Audition", price: 999, category: "design" },
+    { id: "9", name: "Adobe Premiere Pro", price: 999, category: "design" },
+
+    { id: "10", name: "Adobe After Effects", price: 1799, category: "publishing" },
+    { id: "11", name: "Nuke", price: 1799, category: "publishing" },
+    { id: "12", name: "ZBrush Arnold", price: 1799, category: "publishing" },
+    { id: "13", name: "Adobe XD", price: 1799, category: "design" },
+  ];
+
+
+  //   Adobe illustrator, Adobe indesign, Adobe photoshop, Corel, Maya , Blender, Adobe animate, adobe 
+  // audition, Adobe preimere Pro, Adobe aftereffect, Nuke, Zbrush arnold, adobe xd.
   return (
     <div className="bg-white text-black mt-20">
       <CourseHero price="1499" />
@@ -39,14 +52,14 @@ function CourseContent() {
       <ComboPack />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
+      <CustomizeCourse
+        courseTitle="Interior Design"
+        // availableSoftware={graphicDesignSoftware}
+      />            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       <CourseFeatures />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       {/* < DreamsSection /> */}
 
- <CustomizeCourse
-                      courseTitle="Graphic Design"
-                      availableSoftware={graphicDesignSoftware}
-                  />            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       < DreamsSection />
 
       <WhyChooseUs />

@@ -16,7 +16,6 @@ export const metadata = {
 };
 
 function CourseContent() {
-
     return (
         <div className="bg-white text-black mt-20">
             <CourseHero price="1499" />
@@ -26,14 +25,11 @@ function CourseContent() {
             {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <CustomizeCourse
-                courseTitle="Interior Design"
+                courseTitle="Graphic Design"
             // availableSoftware={graphicDesignSoftware}
             />
 
             <CourseFeatures />
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-            {/* < DreamsSection /> */}
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
             < DreamsSection />
 
             <WhyChooseUs />
