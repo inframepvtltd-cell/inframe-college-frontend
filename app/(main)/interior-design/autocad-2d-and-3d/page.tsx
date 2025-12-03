@@ -38,15 +38,15 @@ function CourseContent() {
 
       <ComboPack />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+      <CustomizeCourse
+                           courseTitle="Interior Design"
+                          //  availableSoftware={graphicDesignSoftware}
+                       />      
 
       <CourseFeatures />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       {/* < DreamsSection /> */}
 
-      <CustomizeCourse
-                           courseTitle="Graphic Design"
-                           availableSoftware={graphicDesignSoftware}
-                       />      
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       < DreamsSection />
 

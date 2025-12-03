@@ -83,7 +83,7 @@ const StudyDropDown = () => {
 
       {/* Desktop Dropdown */}
       {!isMobile && isDropdownOpen && (
-        <div className="absolute left-0 mt-3 z-50 w-screen max-w-[1200px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-8 max-h-[85vh] overflow-y-auto animate-in fade-in-0 zoom-in-95 duration-300">
+        <div className="absolute left-0 mt-3 z-50 w-screen max-w-[1000px] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-8 max-h-[85vh] overflow-y-auto animate-in fade-in-0 zoom-in-95 duration-300">
           <DropdownContent
             allCategories={allCategories}
             selectedCategory={selectedCategory}
