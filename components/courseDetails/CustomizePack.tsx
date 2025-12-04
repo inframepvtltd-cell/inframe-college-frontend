@@ -65,7 +65,6 @@ const AvailableSoftware = {
 };
 
 
-
 export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
     // -------------------- USING IT --------------------
     let course: keyof typeof AvailableSoftware | "" = "";
@@ -284,62 +283,109 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
                         </div>
 
                         {/* CTA Button Section */}
-                        <div className="pt-8 border-t border-gray-200/50">
-                            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                                {/* Timer/Countdown - Optional add */}
-                                <div className="flex-1 text-center sm:text-left">
-                                    {/* <div className="inline-flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-gray-900 to-black rounded-xl shadow-lg">
-                                        <svg className="w-5 h-5 text-amber-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <div>
-                                            <div className="text-xs text-gray-300">Offer ends in</div>
-                                            <div className="text-lg font-bold text-white">24:59:59</div>
+                        <div className="pt-6 sm:pt-8 border-t border-gray-200/50">
+                            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8">
+                                {/* Left Column - Trust Indicators for Desktop */}
+                                <div className="hidden lg:block flex-1">
+                                    <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-md mx-auto">
+                                        <div className="text-center">
+                                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+                                                5,000+
+                                            </div>
+                                            <div className="text-gray-600 text-sm sm:text-base mt-1">Happy Students</div>
                                         </div>
-                                    </div> */}
+
+                                        <div className="text-center relative">
+                                            <div className="absolute inset-0 w-px h-full bg-gradient-to-b from-transparent via-gray-300 to-transparent left-0"></div>
+                                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+                                                4.8/5
+                                            </div>
+                                            <div className="text-gray-600 text-sm sm:text-base mt-1">Average Rating</div>
+                                            <div className="absolute inset-0 w-px h-full bg-gradient-to-b from-transparent via-gray-300 to-transparent right-0"></div>
+                                        </div>
+
+                                        <div className="text-center">
+                                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+                                                98%
+                                            </div>
+                                            <div className="text-gray-600 text-sm sm:text-base mt-1">Satisfaction</div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {/* Main CTA Button */}
-                                <button
-                                    onClick={() => handleBuy(coursePackage)}
-                                    className="relative px-10 py-5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 
-                            text-white font-bold text-lg rounded-xl shadow-2xl 
-                            hover:shadow-3xl transition-all duration-300 hover:-translate-y-1
-                            active:scale-95 group/btn overflow-hidden"
-                                >
-                                    {/* Button shine effect */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                            -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
+                                {/* Center Column - Main CTA Button */}
+                                <div className="w-full lg:w-auto">
+                                    <button
+                                        onClick={() => handleBuy(coursePackage)}
+                                        className="relative w-full lg:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 
+                                                bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 
+                                                text-white font-bold text-base sm:text-lg lg:text-xl rounded-lg sm:rounded-xl 
+                                                shadow-lg sm:shadow-xl lg:shadow-2xl 
+                                                hover:shadow-2xl sm:hover:shadow-3xl 
+                                                transition-all duration-300 hover:-translate-y-0.5 sm:hover:-translate-y-1
+                                                active:scale-95 group/btn overflow-hidden"
+                                    >
+                                        {/* Button shine effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                     -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
 
-                                    <div className="relative flex items-center justify-center gap-3">
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                                        </svg>
-                                        <span className="text-xl">Customize Now</span>
-                                        <svg className="w-5 h-5 animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
+                                        <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                                            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                            </svg>
+                                            <span className="text-base sm:text-lg lg:text-xl">Customize Now</span>
+                                            <svg className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </div>
+
+                                        {/* Button glow */}
+                                        <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 
+                     rounded-lg sm:rounded-xl opacity-20 blur-md -z-10 group-hover/btn:opacity-40 transition-opacity duration-300"></div>
+                                    </button>
+                                </div>
+
+                                {/* Right Column - Mobile Trust Indicators */}
+                                <div className="lg:hidden w-full">
+                                    <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                                        <div className="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100/50 rounded-xl border border-gray-200">
+                                            <div className="text-xl sm:text-2xl font-bold text-gray-900">5,000+</div>
+                                            <div className="text-gray-600 text-xs sm:text-sm mt-1">Students</div>
+                                        </div>
+
+                                        <div className="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100/50 rounded-xl border border-gray-200">
+                                            <div className="text-xl sm:text-2xl font-bold text-gray-900">4.8/5</div>
+                                            <div className="text-gray-600 text-xs sm:text-sm mt-1">Rating</div>
+                                        </div>
+
+                                        <div className="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100/50 rounded-xl border border-gray-200">
+                                            <div className="text-xl sm:text-2xl font-bold text-gray-900">98%</div>
+                                            <div className="text-gray-600 text-xs sm:text-sm mt-1">Satisfaction</div>
+                                        </div>
                                     </div>
-
-                                    {/* Button glow */}
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 
-                            rounded-xl opacity-20 blur-md -z-10 group-hover/btn:opacity-40 transition-opacity duration-300"></div>
-                                </button>
+                                </div>
                             </div>
 
-                            {/* Trust Indicators */}
-                            <div className="flex flex-wrap justify-center items-center gap-6 mt-8 pt-6 border-t border-gray-100 text-sm text-gray-500">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                    {/* <span>✅ {coursePackage.enrolled}+ Students Enrolled</span> */}
+                            {/* Trust Badges Row - Always Visible */}
+                            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100 text-xs sm:text-sm text-gray-500">
+                                <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-full border border-green-100">
+                                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span className="font-medium">✅ 5,000+ Enrolled</span>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                                    <span>⭐ 4.9/5 Rating</span>
+
+                                <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-full border border-blue-100">
+                                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                                    <span className="font-medium">⭐ 4.9/5 Rating</span>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                                    <span>🕒 Lifetime Access</span>
+
+                                <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-full border border-amber-100">
+                                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                                    <span className="font-medium">🕒 Lifetime Access</span>
+                                </div>
+
+                                <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full border border-purple-100">
+                                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                                    <span className="font-medium">📱 Mobile Friendly</span>
                                 </div>
                             </div>
                         </div>
@@ -351,98 +397,204 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
             {/* Customize Modal */}
             {showCustomizeModal && (
                 <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-3 sm:p-4">
-                    <div className="bg-white rounded-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100">
-
+                    <div className="bg-white rounded-2xl max-w-7xl w-full max-h-full flex flex-col shadow-2xl border border-gray-100 overflow-hidden">
                         {/* Modal Header */}
-                        <div className="p-4 sm:p-6 border-b border-gray-200 bg-orange-50 sticky top-0 shadow-sm">
+                        <div className="p-5 sm:p-4 border-b border-amber-200 bg-gradient-to-r from-yellow-500 via-yellow-500 to-yellow-500 sticky top-0 z-10 shadow-lg">
                             <div className="flex justify-between items-center">
-                                <div>
-                                    <h2 className="text-xl sm:text-2xl font-extrabold text-gray-800 flex items-center gap-2">
-                                        <span className="text-amber-500">✨</span>
-                                        Customize Your {courseTitle} Package
-                                    </h2>
-                                    <p className="text-gray-600 mt-1 text-xs sm:text-sm">
-                                        Select the software tools you want to learn
-                                    </p>
+                                <div className="flex items-center gap-4">
+                                    {/* Animated Icon Badge */}
+
+
+
+                                    {/* Text Content */}
+                                    <div>
+                                        <h2 className="text-xl sm:text-xl lg:text-2xl font-extrabold text-white flex items-center gap-1">
+                                            Customize Your{" "}
+                                            <span className="text-white bg-black/20 px-3 py-1 rounded-full border border-white/30">
+                                                {courseTitle}
+                                            </span>{" "}
+                                            Package
+                                        </h2>
+                                        <p className="text-white/90 mt-2 text-sm sm:text-base flex items-center gap-2">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                            </svg>
+                                            Select your preferred software tools and build your perfect learning journey
+                                        </p>
+                                    </div>
                                 </div>
+
+                                {/* Close Button with Animation */}
                                 <button
                                     onClick={() => setShowCustomizeModal(false)}
-                                    className="text-gray-500 hover:text-gray-700 text-2xl w-10 h-10 rounded-full hover:bg-gray-200 flex items-center justify-center transition-all"
+                                    className="relative group"
                                 >
-                                    ×
+                                    <div className="absolute -inset-1 bg-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="relative bg-white/20 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center border-2 border-white/30 hover:border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:rotate-90">
+                                        <span className="text-white text-2xl font-bold group-hover:scale-110 transition-transform duration-300">
+                                            ×
+                                        </span>
+                                    </div>
+                                    <div className="absolute -top-8 right-0 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                                        Close
+                                    </div>
                                 </button>
                             </div>
+
+
                         </div>
 
-                        {/* Software Selection */}
-                        <div className="p-4 sm:p-6">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                                {availableSoftware.map((software) => (
-                                    <div
-                                        key={software.id}
-                                        onClick={() => toggleSoftware(software.id)}
-                                        className={`
-                                        border-2 rounded-2xl p-4 cursor-pointer transition-all duration-300 
-                                        hover:scale-[1.02] hover:shadow-lg bg-white
-                                        ${selectedSoftware.includes(software.id)
-                                                ? 'border-amber-400 ring-2 ring-amber-200 bg-amber-50 shadow-md'
-                                                : 'border-gray-200'}
-                                    `}
-                                    >
-                                        <div className="flex justify-between items-center">
-                                            <div className="flex-1">
-                                                <h3 className="font-semibold text-gray-800 text-base sm:text-lg">{software.name}</h3>
-                                                <p className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full inline-block mt-1">
-                                                    {software.category}
-                                                </p>
-                                            </div>
+                        {/* Scrollable Content Area */}
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                            {/* Software Selection */}
+                            <div className="mb-6">
+                                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                    <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                    </svg>
+                                    Available Software Tools
+                                </h3>
 
-                                            {/* Checkbox */}
-                                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
-                                            ${selectedSoftware.includes(software.id)
-                                                    ? 'bg-amber-500 border-amber-500 text-white'
-                                                    : 'border-gray-300 bg-white'}
-                                        `}>
-                                                {selectedSoftware.includes(software.id) && "✓"}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {availableSoftware.map((software) => (
+                                        <div
+                                            key={software.id}
+                                            onClick={() => toggleSoftware(software.id)}
+                                            className={`
+                                                    border-2 rounded-2xl p-4 cursor-pointer transition-all duration-300 
+                                                    hover:scale-[1.02] hover:shadow-lg bg-white group
+                                                    ${selectedSoftware.includes(software.id)
+                                                    ? 'border-gray-400 ring-2 ring-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 shadow-md'
+                                                    : 'border-gray-200 hover:border-gray-300'}
+                `}
+                                        >
+                                            <div className="flex items-start gap-3">
+                                                {/* Software Icon */}
+                                                {/* <div className={`p-3 rounded-xl ${selectedSoftware.includes(software.id)
+                                                    ? 'bg-gradient-to-br from-yellow-400 to-yellow-500'
+                                                    : 'bg-gradient-to-br from-gray-100 to-gray-200'
+                                                    }`}>
+                                                    {software.icon || getSoftwareIcon(software.name)}
+                                                </div> */}
+
+                                                <div className="flex-1">
+                                                    <div className="flex justify-between items-start">
+                                                        <div>
+                                                            <h3 className="font-semibold text-gray-800 text-base sm:text-lg">{software.name}</h3>
+                                                            <p className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full inline-block mt-1">
+                                                                {software.category}
+                                                            </p>
+                                                        </div>
+
+                                                        {/* Checkbox */}
+                                                        <div className={`
+                        w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all
+                        ${selectedSoftware.includes(software.id)
+                                                                ? 'bg-yellow-500 border-yellow-500 text-white transform scale-110'
+                                                                : 'border-gray-300 bg-white group-hover:border-yellow-400'}
+                      `}>
+                                                            {selectedSoftware.includes(software.id) && (
+                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Description */}
+                                                    <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+                                                        {/* {software.description || `Learn professional ${software.name} skills`} */}
+                                                    </p>
+
+                                                    {/* Price */}
+                                                    <div className="flex justify-between items-center mt-3">
+                                                        <span className="text-amber-600 font-bold text-lg">
+                                                            ₹{software.price.toLocaleString()}
+                                                        </span>
+                                                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                                            {/* {software.duration || "30+ hours"} */}
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div className="text-right mt-2 text-amber-600 font-bold">
-                                            ₹{software.price.toLocaleString()}
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
 
                             {/* Price Summary */}
-                            <div className="bg-amber-50 rounded-2xl p-4 border border-amber-100 shadow-sm mb-6">
+                            <div className="bg-gradient-to-r from-gray-50 to-gray-50 rounded-2xl p-5 border border-amber-100 shadow-sm mb-6">
                                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                    💰 Price Summary
-                                    <span className="text-xs text-yellow-600">({selectedSoftware.length} selected)</span>
+                                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Price Summary
+                                    <span className="text-xs bg-yellow-500 text-white px-2 py-1 rounded-full">
+                                        {selectedSoftware.length} {selectedSoftware.length === 1 ? 'software' : 'softwares'} selected
+                                    </span>
                                 </h3>
 
-                                <div className="border-t pt-3 flex justify-between text-lg font-bold">
-                                    <span>Final Price</span>
-                                    <span className="text-orange-600">
-                                        ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
-                                    </span>
+                                <div className="space-y-3">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-700">Individual Software Total</span>
+                                        <span className="font-medium">₹{calculateTotalPrice().toLocaleString()}</span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center text-green-600">
+                                        <span>Package Discount (30%)</span>
+                                        <span className="font-medium">-₹{(calculateTotalPrice() * 0.3).toLocaleString()}</span>
+                                    </div>
+
+                                    <div className="border-t border-amber-200 pt-3 mt-3">
+                                        <div className="flex justify-between items-center text-lg font-bold">
+                                            <div className="flex items-center gap-2">
+                                                <span>Final Price</span>
+                                                {selectedSoftware.length > 1 && (
+                                                    <span className="text-xs bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full">
+                                                        Save ₹{(calculateTotalPrice() * 0.3).toLocaleString()}
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-orange-600 text-2xl">
+                                                    ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
+                                                </div>
+                                                {selectedSoftware.length > 1 && (
+                                                    <div className="text-gray-500 text-sm line-through">
+                                                        ₹{calculateTotalPrice().toLocaleString()}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Action Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-4">
+                        {/* Fixed Action Buttons at Bottom */}
+                        <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 sm:p-6 shadow-lg">
+                            <div className="flex flex-col sm:flex-row gap-4 max-w-5xl mx-auto w-full">
                                 <button
                                     onClick={() => setShowCustomizeModal(false)}
-                                    className="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition-all"
+                                    className="flex-1 px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2 hover:border-gray-400 group"
                                 >
+                                    <svg className="w-5 h-5 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
                                     Cancel
                                 </button>
 
                                 <button
                                     onClick={() => handleBuyNow(String(calculateTotalPrice()))}
-                                    className="flex-1 px-6 py-3 bg-amber-500 text-white rounded-xl font-semibold hover:bg-amber-600 transition-all"
+                                    className="flex-1 px-2 py-4 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl font-bold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-1 group shadow-lg"
                                 >
+                                    <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    </svg>
                                     Buy Now
+                                    <span className="ml-1 bg-white/20 px-2 py-1 rounded-full text-xs">
+                                        ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
+                                    </span>
                                 </button>
                             </div>
                         </div>

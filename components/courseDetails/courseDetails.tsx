@@ -175,7 +175,7 @@ const CourseHero = ({ price }: { price: string }) => {
 
                         {/* Additional Info */}
                         <div className="text-center lg:text-left text-gray-600">
-                            <p>✅ 30-day money-back guarantee</p>
+                            {/* <p>✅ 30-day money-back guarantee</p> */}
                             <p>✅ Full lifetime access</p>
                             <p>✅ Access on mobile and TV</p>
                             <p>✅ Certificate of completion</p>
