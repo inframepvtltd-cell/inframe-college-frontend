@@ -69,17 +69,25 @@ const StudyDropDown = () => {
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Enhanced Toggle Button */}
-      <Button
-        className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 hover:from-yellow-500 hover:via-amber-500 hover:to-orange-500 text-black font-bold px-6 py-2 h-auto rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-yellow-400"
-        onClick={toggleDropdown}
-        aria-expanded={isDropdownOpen}
-        aria-haspopup="true"
-      >
-        Study Programs
-        <ChevronDown
-          className={`h-4 w-4 ml-2 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
-        />
-      </Button>
+<Button
+  className="hover:text-white relative bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-400 hover:from-amber-400 hover:via-yellow-500 hover:to-orange-500 text-gray-900 font-bold px-3 py-5 rounded-xl border-2 border-white/30 shadow-lg hover:shadow-xl hover:shadow-amber-200/50 transition-all duration-300 group overflow-hidden active:scale-95"
+  onClick={toggleDropdown}
+  aria-expanded={isDropdownOpen}
+  aria-haspopup="true"
+>
+  {/* Shine effect */}
+  <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+  
+  {/* Inner glow */}
+  <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-xl"></span>
+  
+  <span className="relative  flex items-center justify-center">
+    Study Programs
+    <ChevronDown
+      className={`h-5 w-5 ml-3 transition-all duration-300 ${isDropdownOpen ? "rotate-180" : ""} group-hover:translate-y-0.5`}
+    />
+  </span>
+</Button> 
 
       {/* Desktop Dropdown */}
       {!isMobile && isDropdownOpen && (

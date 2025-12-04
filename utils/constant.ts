@@ -327,7 +327,7 @@ export const categories = [
           // { text: "AutoCad ", href: "#" },
           { text: "Interior Design Bundle Course", href: "#" },
           { text: "AutoCad 2D And 3D", href: "#" },
-          { text: "Sketchup", href: "#" },
+          { text: "sketchup", href: "#" },
           { text: "3D Max And Vray", href: "#" },
           { text: "Lumion", href: "#" },
           { text: "Revit", href: "#" },
@@ -346,7 +346,11 @@ export const categories = [
           { text: "B.SC in Fashion Design", href: "#" },
           { text: "One Year Diploma in Fashion Design", href: "#" },
           { text: "Three Year Diploma in Fashion Design", href: "#" },
-          // { text: "AutoCad", href: "#" },
+
+          { text: "Adobe Illustrator", href: "#" },
+          { text: "Corel", href: "#" },
+          { text: "Fashion Design Bundle Course", href: "#" },
+          { text: "Photoshop", href: "#" },
 
         ],
         category: "Design",
@@ -364,12 +368,12 @@ export const categories = [
           { text: "AutoCad", href: "#" },
 
           { text: "Graphic design Bundle course", href: "#" },
-          { text: "Motion Design  Bundle course", href: "#" },
+          { text: "Motion Design Bundle course", href: "#" },
           { text: "Adobe illustrator", href: "#" },
           { text: "adobe indesign", href: "#" },
           { text: "corel draw", href: "#" },
           { text: "adobe photoshop", href: "#" },
-          { text: "Adobe preimere Pro", href: "#" },
+          { text: "Adobe Preimere Pro", href: "#" },
           { text: "Adobe aftereffect", href: "#" },
           { text: "Maya", href: "#" },
           { text: "Blender", href: "#" },
@@ -385,6 +389,16 @@ export const categories = [
           { text: "B.Des In UI UX Design", href: "#" },
           { text: "One Year Diploma in UI UX Design", href: "#" },
           // { text: "AutoCad", href: "#" },
+
+          { text: "uiux design bundle course", href: "#" },
+          { text: "Adobe illustrator", href: "#" },
+          { text: "Photoshop", href: "#" },
+          { text: "adobe indesign", href: "#" },
+          { text: "Adobe XD", href: "#" },
+          { text: "Figma", href: "#" },
+          { text: "sketch", href: "#" },
+
+
 
         ],
         category: "Design",
@@ -435,7 +449,12 @@ export const categories = [
             text: "Six Month Certificate Course in Digital Marketing",
             href: "#",
           },
-          // { text: "AutoCad", href: "#" },
+          { text: "Google Ads", href: "#" },
+          { text: "Meta Ads", href: "#" },
+          { text: "Linkdin Marketing", href: "#" },
+          { text: "YouTube Ads And Marketing", href: "#" },
+          { text: "Whatsapp, SMS, Email Marketing With Designing", href: "#" },
+          { text: "Affiliate Marketing", href: "#" },
 
         ],
         category: "Business",
@@ -473,8 +492,6 @@ export const categories = [
             text: "Learn advanced advertising and marketing strategies",
             href: "#",
           },
-          // { text: "AutoCad", href: "#" },
-
         ],
         category: "Business",
         image:
