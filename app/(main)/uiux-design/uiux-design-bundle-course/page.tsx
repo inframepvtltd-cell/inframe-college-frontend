@@ -41,7 +41,7 @@ function CourseContent() {
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
       <CustomizeCourse
-        courseTitle="Interior Design"
+        courseTitle="UIUX Design"
         // availableSoftware={graphicDesignSoftware}
       />         {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       <CourseFeatures />

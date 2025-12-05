@@ -45,10 +45,7 @@ function CourseContent() {
             />
 
             <CourseFeatures />
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-            {/* < DreamsSection /> */}
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-            < DreamsSection />
+          < DreamsSection />
 
             <WhyChooseUs />
 

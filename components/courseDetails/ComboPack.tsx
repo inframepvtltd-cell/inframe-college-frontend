@@ -71,7 +71,7 @@ const AvailableSoftware = {
 export default function ComboPack() {
     const router = useRouter();
 
-const courseTitle = "Graphic Design"
+    const courseTitle = "Graphic Design"
     let course: keyof typeof AvailableSoftware | "" = "";
     if (courseTitle === "Graphic Design") {
         course = "graphic_design";
@@ -268,7 +268,7 @@ const courseTitle = "Graphic Design"
         <div className="w-full lg:p-0 bg-gradient-to-b from-white to-amber-50/30 py-8 lg:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
                 {/* Header Section */}
-                <div className="text-center mb-10 lg:mb-14">
+                <div className="text-center mb-4 lg:mb-4">
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                         Interested In Our{" "}
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">
