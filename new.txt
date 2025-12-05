@@ -44,7 +44,7 @@ Corel
 adobe illustrator 
 Photoshop
 
-
+===================\\
 Animation and vfx
 Animation and vfx Bundle course
 Maya 
@@ -55,15 +55,15 @@ Adobe aftereffect
 
 
 
-
+====================================
 Jewellery design
 Jewellery design Bundle course
 Corel 
 adobe illustrator 
 Photoshop 
 rhino
-
-Fine arts
+==============================================
+Fine arts =======
 Fine Arts Bundle course
 Pro create
 Adobe illustrator

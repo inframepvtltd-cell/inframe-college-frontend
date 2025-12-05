@@ -1,10 +1,7 @@
-// "use client"
-// import { useEffect } from "react";
 import ComboPack from "../../../../components/courseDetails/ComboPack";
 import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
 import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
-// import Customizecourse from "../../../../components/courseDetails/CustomizePack";
 import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 import PageClient from "../../../../components/demometa";
 import DreamsSection from "../../../../components/DreamSection";
@@ -16,17 +13,15 @@ export const metadata = {
 };
 
 function CourseContent() {
+
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero price="1499" />
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+            <CourseHero title="Graphic Designing" price="1499" />
 
             <ComboPack />
-            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <CustomizeCourse
                 courseTitle="Graphic Design"
-            // availableSoftware={graphicDesignSoftware}
             />
 
             <CourseFeatures />

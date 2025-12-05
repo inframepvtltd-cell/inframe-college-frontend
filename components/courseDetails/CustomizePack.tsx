@@ -40,7 +40,7 @@ const softwareIcons = {
     "Photoshop": "/software logos/pngegg (24).png",
     "Adobe Illustrator": "/software logos/pngegg (25).png",
     "Figma": "/software logos/pngegg (31).png",
-    "Adobe Photoshop": "/software logos/pngegg (24).png", // same icon for full name
+    "Adobe Photoshop": "/software logos/pngegg (24).png",
 };
 
 const AvailableSoftware = {
@@ -99,6 +99,12 @@ const AvailableSoftware = {
         { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
         { id: "3", name: "Photoshop", price: 1599, category: "design" },
         { id: "3", name: "Rhino", price: 1599, category: "design" }
+    ],
+    fine_arts: [
+        { id: "1", name: "Corel", price: 1999, category: "design" },
+        { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
+        { id: "3", name: "Photoshop", price: 1599, category: "design" },
+        { id: "3", name: "Rhino", price: 1599, category: "design" }
     ]
 };
 
@@ -118,6 +124,9 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
         course = "fashion_design";
     } else if (courseTitle === "Jewellery Design") {
         course = "jewellery_design";
+    }
+    else if (courseTitle === "Fine Arts") {
+        course = "fine_arts";
     }
     const availableSoftware = AvailableSoftware[course as keyof typeof AvailableSoftware]
 
@@ -214,7 +223,7 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
 
     return (
         <>
-            <div className="max-w-7xl mx-auto px-4 sm:px-3 lg:px-3">
+            <div className="max-w-7xl mx-auto px-4 sm:px-3 lg:px-3 pt-10">
                 <div className="relative group">
                     {/* Animated gradient border effect */}
                     <div className="absolute -inset-1  rounded-2xl opacity-70 group-hover:opacity-100 blur-xl transition-all duration-1000 animate-pulse-slow"></div>

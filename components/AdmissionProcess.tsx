@@ -166,7 +166,7 @@ export default function Application() {
   ];
 
 
-  
+
   // Helper function
   // const toKebabCase = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
@@ -400,7 +400,7 @@ export default function Application() {
                     </label>
                     <select
                       className="w-full p-2 border rounded"
-                      // disabled={!selectedSpecialization}
+                    // disabled={!selectedSpecialization}
                     >
                       <option>
                         {selectedSpecialization
@@ -456,17 +456,17 @@ export default function Application() {
                 </label>
               </div>
 
-              
+
             </div>
             <div className="mt-8 flex flex-wrap justify-between items-center gap-4">
-  <button
-    className="bg-gray-300 text-gray-800 py-2 px-6 rounded font-medium min-w-[120px]"
-    onClick={() => handlePreviousPage("program")}
-  >
-    Previous
-  </button>
+              <button
+                className="bg-gray-300 text-gray-800 py-2 px-6 rounded font-medium min-w-[120px]"
+                onClick={() => handlePreviousPage("program")}
+              >
+                Previous
+              </button>
 
-  {/* <button
+              {/* <button
     className={`
       bg-yellow-400 text-white font-bold py-3 px-6 rounded-full
       transition-all duration-300 transform hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-md
@@ -479,20 +479,20 @@ export default function Application() {
   >
     Next Step
   </button> */}
-  <button
-    className={`
+              <button
+                className={`
       bg-yellow-400 text-white font-bold py-3 px-6 rounded-full
       transition-all duration-300 transform hover:bg-yellow-500 hover:-translate-y-1 hover:shadow-md
       focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50
       min-w-[150px]
       ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
     `}
-    onClick={() => (handleNextPage("program"))}
-    // disabled={disabled}
-  >
-    Next Step
-  </button>
-</div>
+                onClick={() => (handleNextPage("program"))}
+              // disabled={disabled}
+              >
+                Next Step
+              </button>
+            </div>
 
           </div>
         )}
@@ -500,9 +500,9 @@ export default function Application() {
         {activePage === "payment" && (
           <div>
             <Script
-        id="razorpay-checkout-js"
-        src="https://checkout.razorpay.com/v1/checkout.js"
-      />
+              id="razorpay-checkout-js"
+              src="https://checkout.razorpay.com/v1/checkout.js"
+            />
             <PaymentSection
               amount="2000"
               payUrl="/quick-payment"
@@ -690,18 +690,17 @@ const PaymentSection: React.FC<PaymentSectionProps> = ({
               target="_blank"
               onClick={(e) => !agreed && e.preventDefault()}
             > */}
-              <button
+            <button
               onClick={processPayment}
-                className={`px-4 py-2 rounded-md text-white ${
-                  agreed
-                    ? "bg-yellow-400 hover:bg-yellow-500"
-                    : "bg-gray-300 cursor-not-allowed"
+              className={`px-4 py-2 rounded-md text-white ${agreed
+                ? "bg-yellow-400 hover:bg-yellow-500"
+                : "bg-gray-300 cursor-not-allowed"
                 }`}
-                disabled={!agreed}
-                
-              >
-                Pay Amount
-              </button>
+              disabled={!agreed}
+
+            >
+              Pay Amount
+            </button>
             {/* </a> */}
           </div>
 
@@ -715,7 +714,7 @@ const PaymentSection: React.FC<PaymentSectionProps> = ({
               Ensure that all details are correct before proceeding. We are not
               liable for incorrect information.
             </p>
-            
+
           </div>
         </div>
       </div>

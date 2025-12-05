@@ -28,7 +28,8 @@ const Footer = () => {
 
             <li>
               <a
-                href="https://admission.inframeschool.com/"
+                // href="https://admission.inframeschool.com/"
+                  href="https://admission-portal-one.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-500 transition duration-300"
@@ -297,35 +298,35 @@ const Footer = () => {
           </p>
           <div className="flex space-x-6 mt-8">
             <Link
-              href="#"
+              href="https://www.facebook.com/Inframecollege/"
               className="text-blue-500 hover:text-blue-600 transition duration-300"
             >
               <Facebook size={30} />
             </Link>
             <Link
-              href="#"
+              href="https://www.youtube.com/channel/UCK_0MkRS4bmfyr3KLxi9-VA"
               className="text-red-500 hover:text-red-600 transition duration-300"
             >
               <Youtube size={30} />
             </Link>
             <Link
-              href="#"
+              href="https://www.instagram.com/inframejodhpur/?hl=en"
               className="text-pink-500 hover:text-pink-600 transition duration-300"
             >
               <Instagram size={30} />
             </Link>
             <Link
-              href="#"
+              href="https://www.linkedin.com/company/inframe-school-of-art-design-business/?viewAsMember=true"
               className="text-blue-700 hover:text-blue-800 transition duration-300"
             >
               <Linkedin size={30} />
             </Link>
-            <Link
+            {/* <Link
               href="#"
               className="text-sky-500 hover:text-sky-600 transition duration-300"
             >
               <Twitter size={30} />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
