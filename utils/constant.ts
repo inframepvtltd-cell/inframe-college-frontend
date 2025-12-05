@@ -347,9 +347,9 @@ export const categories = [
           { text: "One Year Diploma in Fashion Design", href: "#" },
           { text: "Three Year Diploma in Fashion Design", href: "#" },
 
+          { text: "Fashion Design Bundle Course", href: "#" },
           { text: "Adobe Illustrator", href: "#" },
           { text: "Corel", href: "#" },
-          { text: "Fashion Design Bundle Course", href: "#" },
           { text: "Photoshop", href: "#" },
 
         ],
@@ -414,7 +414,12 @@ export const categories = [
           { text: "One Year Diploma in Animation and VFX", href: "#" },
           { text: "Two Year Diploma in Animation and VFX", href: "#" },
           { text: "Three Year Diploma in Animation and VFX", href: "#" },
-          // { text: "AutoCad", href: "#" },
+          { text: "Animation and vfx Bundle course", href: "#" },
+          { text: "Maya", href: "#" },
+          { text: "Blender", href: "#" },
+          { text: "Adobe animate", href: "#" },
+          { text: "Adobe preimere Pro", href: "#" },
+          { text: "Adobe aftereffect", href: "#" },
         ],
         category: "Design",
         image:
@@ -428,7 +433,11 @@ export const categories = [
           { text: "One Year Diploma in CAD Jewellery", href: "#" },
           { text: "Six Month Certificate Course in Jewellery Design", href: "#" },
           { text: "Six Month Certificate Course in CAD Jewellery", href: "#" },
-          // { text: "AutoCad", href: "#" },
+          { text: "Jewellery design Bundle course", href: "#" },
+          { text: "Corel", href: "#" },
+          { text: "Adobe illustrator", href: "#" },
+          { text: "Photoshop", href: "#" },
+          { text: "Rhino", href: "#" },
 
         ],
         category: "Design",
@@ -510,7 +519,12 @@ export const categories = [
           { text: "B.SC in Fine Arts", href: "#" },
           { text: "One Year Diploma in Fine Arts", href: "#" },
           { text: "Three Year Diploma in Fine Arts", href: "#" },
-          // { text: "AutoCad", href: "#" },
+
+          { text: "Fine Arts Bundle course", href: "#" },
+          { text: "Pro create", href: "#" },
+          { text: "Adobe illustrator", href: "#" },
+          { text: "Corel Draw", href: "#" },
+          { text: "sketch", href: "#" },
 
         ],
         category: "Art",

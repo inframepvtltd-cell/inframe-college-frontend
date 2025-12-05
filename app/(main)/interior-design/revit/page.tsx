@@ -34,7 +34,7 @@ function CourseContent() {
     ]
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero price="1499" />
+            <CourseHero title="Interior design" price="1499" />
             {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <ComboPack />

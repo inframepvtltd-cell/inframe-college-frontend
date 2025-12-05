@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero price="1499" />
+            <CourseHero title="Fashion designing" price="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

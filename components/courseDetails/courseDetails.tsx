@@ -3,8 +3,9 @@
 import CourseContent from './courseContent';
 import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation";
-const CourseHero = ({ price }: { price: string }) => {
+const CourseHero = ({ title, price }: { title: string, price: string }) => {
     const router = useRouter();
+    console.log(title);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -64,7 +65,7 @@ const CourseHero = ({ price }: { price: string }) => {
     ];
     // Static course data (can be replaced with API data later)
     const courseData = {
-        title: "Graphic Designing actively for free",
+        title: "actively for free",
         description: "This course is presented to students to enhance more benefits of our available courses and you will also learn some new technologies to improve yourself.",
         price: "1200 Rs/-",
         originalPrice: "5000 Rs",
@@ -91,7 +92,7 @@ const CourseHero = ({ price }: { price: string }) => {
         <div className="min-h-full bg-white">
 
             {/* Main Content */}
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-2 py-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
 
                     {/* Left Column - Video and Course Info */}
@@ -107,7 +108,7 @@ const CourseHero = ({ price }: { price: string }) => {
                         </div>
 
                         {/* Course Description */}
-                        <div className="bg-gray-50 p-6 rounded-lg">
+                        <div className="bg-gray-50 p-2 rounded-lg">
                             <h2 className="text-xl font-semibold text-gray-800 mb-4">About this course</h2>
                             <div className="space-y-4 text-gray-600">
                                 <p>{courseData.description}</p>
@@ -121,17 +122,17 @@ const CourseHero = ({ price }: { price: string }) => {
                     {/* Right Column - Course Details and Actions */}
                     <div className="space-y-6">
                         {/* Course Header */}
-                        <div className="text-center lg:text-left">
+                        <div className="text-left lg:text-left">
                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                {courseData.title}
+                                {title} {courseData.title}
                             </h1>
 
                             {/* Price Section */}
-                            <div className="flex items-center justify-center lg:justify-start space-x-4 mb-4">
+                            <div className="flex items-center justify-start lg:justify-start space-x-4 mb-4">
                                 <span className="text-3xl font-bold text-yellow-500">{courseData.price}</span>
                                 <span className="text-xl text-gray-500 line-through">{courseData.originalPrice}</span>
                                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                    {courseData.discount}
+                                    {title}{courseData.discount}
                                 </span>
                             </div>
                         </div>
@@ -147,7 +148,11 @@ const CourseHero = ({ price }: { price: string }) => {
                         </div>
 
                         {/* Additional Info Cards */}
-                        <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-6">
+                        {/* <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-6">
+                            <div className="flex items-center bg-green-100 px-4 py-3 rounded-lg">
+                                <span className="text-green-600 mr-2 text-xl">🔄</span>
+                                <span className="text-green-800 font-medium">100% Refund</span>
+                            </div>
                             <div className="flex items-center bg-gray-100 px-4 py-3 rounded-lg">
                                 <span className="text-gray-600 mr-2 text-xl">📧</span>
                                 <span className="text-gray-800 font-medium">Email</span>
@@ -156,11 +161,7 @@ const CourseHero = ({ price }: { price: string }) => {
                                 <span className="text-yellow-600 mr-2 text-xl">🚀</span>
                                 <span className="text-yellow-800 font-medium">Upskill</span>
                             </div>
-                            <div className="flex items-center bg-green-100 px-4 py-3 rounded-lg">
-                                <span className="text-green-600 mr-2 text-xl">🔄</span>
-                                <span className="text-green-800 font-medium">100% Refund</span>
-                            </div>
-                        </div>
+                        </div> */}
 
                         {/* Dynamic Purchase Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -174,7 +175,7 @@ const CourseHero = ({ price }: { price: string }) => {
                         </div>
 
                         {/* Additional Info */}
-                        <div className="text-center lg:text-left text-gray-600">
+                        <div className="text-left lg:text-left text-gray-600">
                             {/* <p>✅ 30-day money-back guarantee</p> */}
                             <p>✅ Full lifetime access</p>
                             <p>✅ Access on mobile and TV</p>

@@ -195,29 +195,37 @@ export default function ComboPack() {
         },
     ];
 
-    var settings = {
+    const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 700,
         slidesToShow: 3,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3500,
+        cssEase: "cubic-bezier(0.22, 0.61, 0.36, 1)", // smooth effect
+        centerMode: true,
+        centerPadding: "0px",
+        pauseOnHover: true,
+
         responsive: [
             {
-                breakpoint: 1024, // tablets
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
+                    centerPadding: "20px"
+                }
             },
             {
-                breakpoint: 640, // mobiles
+                breakpoint: 700,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
+                    centerMode: false
+                }
+            }
+        ]
     };
+
 
     const handleBuyNow = (price: string): void => {
         console.log(price)
@@ -271,7 +279,7 @@ export default function ComboPack() {
                 <div className="text-center mb-4 lg:mb-4">
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                         Interested In Our{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-500 to-yellow-500">
                             Combo Pack?
                         </span>
                     </h3>
@@ -286,7 +294,7 @@ export default function ComboPack() {
                             <div className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-amber-300 h-full relative">
 
                                 {/* Card Header with Gradient */}
-                                <div className="bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-600 p-5 relative">
+                                <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 p-5 relative">
                                     {/* Pattern overlay */}
                                     <div className="absolute inset-0 opacity-10">
                                         <div className="absolute inset-0" style={{
@@ -296,11 +304,7 @@ export default function ComboPack() {
                                     </div>
 
                                     <div className="flex items-center justify-between relative z-10">
-                                        <img
-                                            src={item.image}
-                                            className="w-16 h-16 object-contain bg-white/90 p-2 rounded-xl shadow-lg border-2 border-white"
-                                            alt={item.heading}
-                                        />
+                                    
                                         <div className="flex flex-col items-end">
                                             {/* Rating */}
                                             <div className="flex items-center bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -308,7 +312,7 @@ export default function ComboPack() {
                                                     {[...Array(5)].map((_, i) => (
                                                         <svg
                                                             key={i}
-                                                            className="w-4 h-4 text-yellow-300"
+                                                            className="w-4 h-4 text-white"
                                                             fill="currentColor"
                                                             viewBox="0 0 20 20"
                                                         >
@@ -325,14 +329,14 @@ export default function ComboPack() {
                                 </div>
 
                                 {/* Content Section */}
-                                <div className="p-5">
+                                <div className="p-3">
 
                                     <div className="p-1">
-                                        <div className="space-y-4 mb-6">
+                                        <div className="space-y-4 mb-3">
                                             {item.content.map((subItem, idx) => (
                                                 <div
                                                     key={idx}
-                                                    className="flex items-center p-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl hover:from-amber-100 hover:to-orange-100 transition-colors duration-200"
+                                                    className="flex items-center p-3 bg-gradient-to-r from-gray-50 to-gray-50 rounded-xl hover:from-gray-100 hover:to-gray-100 transition-colors duration-200"
                                                 >
                                                     <div className="flex-shrink-0">
                                                         <img
@@ -365,7 +369,7 @@ export default function ComboPack() {
                                     </div>
 
                                     {/* Price & Button Section */}
-                                    <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 mb-4 border border-amber-200">
+                                    <div className=" bg-gradient-to-r from-gray-50 to-gray-50 rounded-xl p-2 mb-0 border border-amber-200">
                                         <div className="flex items-center justify-between mb-3">
                                             <div>
                                                 <div className="text-3xl font-bold text-gray-900">₹2,999</div>
@@ -385,7 +389,7 @@ export default function ComboPack() {
                                         {/* Buy Now Button */}
                                         <button
                                             onClick={() => handleBuyNow(String(calculateTotalPrice()))}
-                                            className="w-full bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 hover:from-amber-500 hover:via-orange-600 hover:to-yellow-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg group/btn relative overflow-hidden">
+                                            className="w-full bg-gradient-to-r  from-yellow-400 via-yellow-500 to-yellow-500 hover:from-amber-500 hover:via-yellow-600 hover:to-yellow-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg group/btn relative overflow-hidden">
                                             <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></span>
                                             <span className="relative flex items-center justify-center">
                                                 Buy Now
