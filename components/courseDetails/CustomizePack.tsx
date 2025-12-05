@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation";
-import { log } from "console";
+import { OptimizedBottomBar, SoftwareCard } from "./CustmoizeModel";
 
 interface Software {
     id: string
@@ -31,6 +31,17 @@ interface CoursePackage {
 interface Price {
     price: string
 }
+const softwareIcons = {
+    "AutoCAD": "/logos/pngegg (17).png",
+    "V-Ray": "/logos/pngegg (20).png",
+    "SketchUp": "/logos/pngegg (18).png",
+    "3dsMax": "/logos/pngegg (19).png",
+    "Rhino": "/logos/pngegg (23).png",
+    "Photoshop": "/software logos/pngegg (24).png",
+    "Adobe Illustrator": "/software logos/pngegg (25).png",
+    "Figma": "/software logos/pngegg (31).png",
+    "Adobe Photoshop": "/software logos/pngegg (24).png", // same icon for full name
+};
 
 const AvailableSoftware = {
     graphic_design: [
@@ -48,7 +59,6 @@ const AvailableSoftware = {
         { id: "12", name: "ZBrush Arnold", price: 1799, category: "publishing" },
         { id: "13", name: "Adobe XD", price: 1799, category: "design" }
     ],
-
     interior_design: [
         { id: "1", name: "Rhino", price: 1999, category: "design" },
         { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
@@ -61,6 +71,34 @@ const AvailableSoftware = {
         { id: "9", name: "Vray", price: 999, category: "design" },
         { id: "10", name: "Corona", price: 1799, category: "publishing" },
         { id: "11", name: "Revit", price: 1799, category: "publishing" },
+    ],
+    uiux_design: [
+        { id: "1", name: "sketch", price: 1999, category: "design" },
+        { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
+        { id: "3", name: "Adobe Photoshop", price: 1599, category: "design" },
+        { id: "4", name: "Adobe Indesign", price: 1499, category: "ui-ux" },
+        { id: "5", name: "Adobe XD", price: 999, category: "design" },
+        { id: "6", name: "Figma", price: 999, category: "design" }
+    ],
+    digital_marketing: [
+        { id: "1", name: "Google Ads", price: 1999, category: "design" },
+        { id: "2", name: "Meta Ads", price: 1999, category: "design" },
+        { id: "3", name: "Linkdin", price: 1599, category: "design" },
+        { id: "4", name: "YouTube", price: 1499, category: "ui-ux" },
+        { id: "5", name: "Whatsapp Marketing", price: 999, category: "design" },
+        { id: "6", name: "SMS Marketing", price: 999, category: "design" },
+        { id: "7", name: "Affiliate Marketing ", price: 999, category: "design" }
+    ],
+    fashion_design: [
+        { id: "1", name: "Corel", price: 1999, category: "design" },
+        { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
+        { id: "3", name: "Photoshop", price: 1599, category: "design" }
+    ],
+    jewellery_design: [
+        { id: "1", name: "Corel", price: 1999, category: "design" },
+        { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
+        { id: "3", name: "Photoshop", price: 1599, category: "design" },
+        { id: "3", name: "Rhino", price: 1599, category: "design" }
     ]
 };
 
@@ -72,6 +110,14 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
         course = "graphic_design";
     } else if (courseTitle === "Interior Design") {
         course = "interior_design";
+    } else if (courseTitle === "UIUX Design") {
+        course = "uiux_design";
+    } else if (courseTitle === "Digital Marketing") {
+        course = "digital_marketing";
+    } else if (courseTitle === "Fashion Design") {
+        course = "fashion_design";
+    } else if (courseTitle === "Jewellery Design") {
+        course = "jewellery_design";
     }
     const availableSoftware = AvailableSoftware[course as keyof typeof AvailableSoftware]
 
@@ -151,7 +197,7 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
         id: "1",
         title: "Customized Course Pack",
         tag: "New",
-        description: "Choose Any Courses (2, 3, 4 or more)",
+        description: "Choose Any Courses (2, 3 or more)",
         refundPeriod: "1 year",
         originalPrice: 2796,
         discountedPrice: 1499,
@@ -171,7 +217,7 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
             <div className="max-w-7xl mx-auto px-4 sm:px-3 lg:px-3">
                 <div className="relative group">
                     {/* Animated gradient border effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 rounded-2xl opacity-70 group-hover:opacity-100 blur-xl transition-all duration-1000 animate-pulse-slow"></div>
+                    <div className="absolute -inset-1  rounded-2xl opacity-70 group-hover:opacity-100 blur-xl transition-all duration-1000 animate-pulse-slow"></div>
 
                     {/* Main Card with floating effect */}
                     <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100/50 shadow-2xl hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-[1.005] backdrop-blur-sm">
@@ -194,15 +240,15 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
                         {/* Header Section */}
                         <div className="mb-6">
                             {/* Title with gradient text */}
-                            <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-amber-400 via-yellow-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
+                            <h3 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-amber-400 via-yellow-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
                                 {coursePackage.title}
                             </h3>
 
                             {/* Tags & Badges */}
                             <div className="flex flex-wrap items-center gap-3 mb-6">
-                                <span className="px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 font-semibold rounded-full text-sm border border-amber-200 shadow-sm">
+                                {/* <span className="px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 font-semibold rounded-full text-sm border border-amber-200 shadow-sm">
                                     {coursePackage.tag}
-                                </span>
+                                </span> */}
 
                                 {/* Discount Badge with animation */}
                                 <div className="relative overflow-hidden">
@@ -219,35 +265,19 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
                         </div>
 
                         {/* Description with icon */}
-                        <div className="mb-3 p-2 bg-gradient-to-r from-amber-50/50 to-orange-50/30 rounded-xl border border-amber-100">
+                        <div className="mb-3 p-1 bg-gradient-to-r from-amber-50/50 to-orange-50/30 rounded-xl border border-amber-100">
                             <div className="flex items-start gap-4">
-                                <div className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg shadow-md">
-                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="p-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg shadow-md">
+                                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
                                 </div>
-                                <p className="text-gray-800 text-lg leading-relaxed font-medium flex-1">
+                                <p className="text-gray-800 text-sm leading-relaxed font-medium flex-1">
                                     {coursePackage.description}
                                 </p>
                             </div>
                         </div>
 
-                        {/* Refund Banner with glow */}
-                        <div className="mb-3 relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 opacity-10 blur-xl"></div>
-                            <div className="relative p-2 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-200/50 shadow-sm">
-                                <div className="flex items-center justify-center gap-3 text-green-800 font-bold text-base">
-                                    <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full shadow-md">
-                                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-center">
-                                        🔒 100% Money-Back Guarantee for {coursePackage.refundPeriod}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Discount Progress Bar with animated fill */}
                         <div className="mb-4">
@@ -393,211 +423,103 @@ export default function CustomizeCourse({ courseTitle }: CoursePackProps) {
                 </div>
             </div>
 
-
-            {/* Customize Modal */}
             {showCustomizeModal && (
-                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-3 sm:p-4">
-                    <div className="bg-white rounded-2xl max-w-7xl w-full max-h-full flex flex-col shadow-2xl border border-gray-100 overflow-hidden">
-                        {/* Modal Header */}
-                        <div className="p-5 sm:p-4 border-b border-amber-200 bg-gradient-to-r from-yellow-500 via-yellow-500 to-yellow-500 sticky top-0 z-10 shadow-lg">
-                            <div className="flex justify-between items-center">
-                                <div className="flex items-center gap-4">
-                                    {/* Animated Icon Badge */}
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
+                    <div className="bg-white rounded-2xl w-full max-w-7xl max-h-[90vh] flex flex-col shadow-2xl border border-gray-100 overflow-hidden">
+                        {/* Modal Header - Optimized */}
+                        <div className="p-4 sm:p-6 border-b border-amber-200 bg-gradient-to-r from-yellow-500 to-amber-500 sticky top-0 z-10">
+                            <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                                        <div className="flex items-center gap-2 flex-shrink-0">
+                                            <div className="bg-white/20 p-2 rounded-full">
+                                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </div>
+                                            <h2 className="text-lg sm:text-xl font-extrabold text-white truncate">
+                                                Customize Your Package
+                                            </h2>
+                                        </div>
 
-
-
-                                    {/* Text Content */}
-                                    <div>
-                                        <h2 className="text-xl sm:text-xl lg:text-2xl font-extrabold text-white flex items-center gap-1">
-                                            Customize Your{" "}
-                                            <span className="text-white bg-black/20 px-3 py-1 rounded-full border border-white/30">
+                                        <div className="bg-black/10 px-3 py-2 rounded-lg border border-white/20 sm:ml-4 flex-shrink min-w-0">
+                                            <p className="text-white/90 text-sm sm:text-base font-medium truncate">
                                                 {courseTitle}
-                                            </span>{" "}
-                                            Package
-                                        </h2>
-                                        <p className="text-white/90 mt-2 text-sm sm:text-base flex items-center gap-2">
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                            </svg>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <svg className="w-4 h-4 text-white/80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        <p className="text-white/80 text-xs sm:text-sm truncate">
                                             Select your preferred software tools and build your perfect learning journey
                                         </p>
                                     </div>
                                 </div>
 
-                                {/* Close Button with Animation */}
+                                {/* Close Button */}
                                 <button
                                     onClick={() => setShowCustomizeModal(false)}
-                                    className="relative group"
+                                    className="relative group flex-shrink-0 ml-2"
+                                    aria-label="Close modal"
                                 >
-                                    <div className="absolute -inset-1 bg-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                    <div className="relative bg-white/20 backdrop-blur-sm w-10 h-10 rounded-full flex items-center justify-center border-2 border-white/30 hover:border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:rotate-90">
-                                        <span className="text-white text-2xl font-bold group-hover:scale-110 transition-transform duration-300">
-                                            ×
+                                    <div className="bg-white/20 w-10 h-10 rounded-full flex items-center justify-center border border-white/30 hover:border-white/50 transition-colors">
+                                        <span className="text-white text-xl font-bold">×</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Virtualized Scrollable Content Area */}
+                        <div className="flex-1 overflow-y-auto overscroll-contain"
+                            style={{ willChange: 'transform', contain: 'content' }}>
+                            <div className="p-4 sm:p-6">
+                                {/* Software Selection - Optimized */}
+                                <div className="mb-6">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex items-center gap-2">
+                                            <div className="bg-yellow-100 p-2 rounded-lg flex-shrink-0">
+                                                <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                                </svg>
+                                            </div>
+                                            <h3 className="text-lg sm:text-xl font-bold text-gray-800">
+                                                Available Software Tools
+                                            </h3>
+                                        </div>
+                                        <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full flex-shrink-0">
+                                            {availableSoftware.length} tools
                                         </span>
                                     </div>
-                                    <div className="absolute -top-8 right-0 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                                        Close
-                                    </div>
-                                </button>
-                            </div>
 
-
-                        </div>
-
-                        {/* Scrollable Content Area */}
-                        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-                            {/* Software Selection */}
-                            <div className="mb-6">
-                                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                    <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                                    </svg>
-                                    Available Software Tools
-                                </h3>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                    {availableSoftware.map((software) => (
-                                        <div
-                                            key={software.id}
-                                            onClick={() => toggleSoftware(software.id)}
-                                            className={`
-                                                    border-2 rounded-2xl p-4 cursor-pointer transition-all duration-300 
-                                                    hover:scale-[1.02] hover:shadow-lg bg-white group
-                                                    ${selectedSoftware.includes(software.id)
-                                                    ? 'border-gray-400 ring-2 ring-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 shadow-md'
-                                                    : 'border-gray-200 hover:border-gray-300'}
-                `}
-                                        >
-                                            <div className="flex items-start gap-3">
-                                                {/* Software Icon */}
-                                                {/* <div className={`p-3 rounded-xl ${selectedSoftware.includes(software.id)
-                                                    ? 'bg-gradient-to-br from-yellow-400 to-yellow-500'
-                                                    : 'bg-gradient-to-br from-gray-100 to-gray-200'
-                                                    }`}>
-                                                    {software.icon || getSoftwareIcon(software.name)}
-                                                </div> */}
-
-                                                <div className="flex-1">
-                                                    <div className="flex justify-between items-start">
-                                                        <div>
-                                                            <h3 className="font-semibold text-gray-800 text-base sm:text-lg">{software.name}</h3>
-                                                            <p className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full inline-block mt-1">
-                                                                {software.category}
-                                                            </p>
-                                                        </div>
-
-                                                        {/* Checkbox */}
-                                                        <div className={`
-                        w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all
-                        ${selectedSoftware.includes(software.id)
-                                                                ? 'bg-yellow-500 border-yellow-500 text-white transform scale-110'
-                                                                : 'border-gray-300 bg-white group-hover:border-yellow-400'}
-                      `}>
-                                                            {selectedSoftware.includes(software.id) && (
-                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                            )}
-                                                        </div>
-                                                    </div>
-
-                                                    {/* Description */}
-                                                    <p className="text-gray-600 text-sm mt-2 line-clamp-2">
-                                                        {/* {software.description || `Learn professional ${software.name} skills`} */}
-                                                    </p>
-
-                                                    {/* Price */}
-                                                    <div className="flex justify-between items-center mt-3">
-                                                        <span className="text-amber-600 font-bold text-lg">
-                                                            ₹{software.price.toLocaleString()}
-                                                        </span>
-                                                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                                                            {/* {software.duration || "30+ hours"} */}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Price Summary */}
-                            <div className="bg-gradient-to-r from-gray-50 to-gray-50 rounded-2xl p-5 border border-amber-100 shadow-sm mb-6">
-                                <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Price Summary
-                                    <span className="text-xs bg-yellow-500 text-white px-2 py-1 rounded-full">
-                                        {selectedSoftware.length} {selectedSoftware.length === 1 ? 'software' : 'softwares'} selected
-                                    </span>
-                                </h3>
-
-                                <div className="space-y-3">
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-gray-700">Individual Software Total</span>
-                                        <span className="font-medium">₹{calculateTotalPrice().toLocaleString()}</span>
-                                    </div>
-
-                                    <div className="flex justify-between items-center text-green-600">
-                                        <span>Package Discount (30%)</span>
-                                        <span className="font-medium">-₹{(calculateTotalPrice() * 0.3).toLocaleString()}</span>
-                                    </div>
-
-                                    <div className="border-t border-amber-200 pt-3 mt-3">
-                                        <div className="flex justify-between items-center text-lg font-bold">
-                                            <div className="flex items-center gap-2">
-                                                <span>Final Price</span>
-                                                {selectedSoftware.length > 1 && (
-                                                    <span className="text-xs bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full">
-                                                        Save ₹{(calculateTotalPrice() * 0.3).toLocaleString()}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="text-right">
-                                                <div className="text-orange-600 text-2xl">
-                                                    ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
-                                                </div>
-                                                {selectedSoftware.length > 1 && (
-                                                    <div className="text-gray-500 text-sm line-through">
-                                                        ₹{calculateTotalPrice().toLocaleString()}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
+                                    {/* Virtualized Grid Container */}
+                                    <div
+                                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+                                        style={{ transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
+                                    >
+                                        {availableSoftware.map((software) => (
+                                            <SoftwareCard
+                                                key={software.id}
+                                                software={software}
+                                                isSelected={selectedSoftware.includes(software.id)}
+                                                onToggle={() => toggleSoftware(software.id)}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Fixed Action Buttons at Bottom */}
-                        <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 sm:p-6 shadow-lg">
-                            <div className="flex flex-col sm:flex-row gap-4 max-w-5xl mx-auto w-full">
-                                <button
-                                    onClick={() => setShowCustomizeModal(false)}
-                                    className="flex-1 px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2 hover:border-gray-400 group"
-                                >
-                                    <svg className="w-5 h-5 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                    Cancel
-                                </button>
-
-                                <button
-                                    onClick={() => handleBuyNow(String(calculateTotalPrice()))}
-                                    className="flex-1 px-2 py-4 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl font-bold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-1 group shadow-lg"
-                                >
-                                    <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                                    </svg>
-                                    Buy Now
-                                    <span className="ml-1 bg-white/20 px-2 py-1 rounded-full text-xs">
-                                        ₹{calculateDiscountPrice(calculateTotalPrice()).toLocaleString()}
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
+                        {/* Optimized Bottom Bar - Memoized Price Calculation */}
+                        <OptimizedBottomBar
+                            selectedCount={selectedSoftware.length}
+                            totalPrice={calculateTotalPrice()}
+                            discountedPrice={calculateDiscountPrice(calculateTotalPrice())}
+                            onCancel={() => setShowCustomizeModal(false)}
+                            onBuyNow={() => handleBuyNow(String(calculateTotalPrice()))}
+                        />
                     </div>
                 </div>
             )}
