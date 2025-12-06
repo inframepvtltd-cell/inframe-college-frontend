@@ -12,9 +12,9 @@ function Page() {
             <UIUXDesignComponent
                 title="UI/UX Design Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design."
-                description="Design world-class user experiences with a premium UI UX Course.
-"
+                content1="At Inframe, you can choose from various UI UX programs including B.Des in UI UX Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a UI UX Design Course in Agra, these programs help you build strong digital design and user experience skills. By the end of the course, you will have a professional portfolio and the ability to design user-focused digital solutions."
+                content2="You will study user research, information architecture, wireframing, prototyping, visual design, typography, color structure, and usability testing. Training includes tools such as Figma, Adobe XD, Sketch, Illustrator, and advanced prototyping software. These skills open career paths like UI Designer, UX Researcher, Interaction Designer, and Product Designer."
+                description="Design world-class user experiences with a premium UI UX Course."
                 index={0}
                 category=""
                 software={["Photoshop", "Illustrator", "Corel Draw", "Maya", "After Effects", "Blender"]}

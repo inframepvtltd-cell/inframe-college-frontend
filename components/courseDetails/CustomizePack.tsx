@@ -98,13 +98,13 @@ const AvailableSoftware = {
         { id: "1", name: "Corel", price: 1999, category: "design" },
         { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
         { id: "3", name: "Photoshop", price: 1599, category: "design" },
-        { id: "3", name: "Rhino", price: 1599, category: "design" }
+        { id: "4", name: "Rhino", price: 1599, category: "design" }
     ],
     fine_arts: [
         { id: "1", name: "Corel", price: 1999, category: "design" },
         { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
         { id: "3", name: "Photoshop", price: 1599, category: "design" },
-        { id: "3", name: "Rhino", price: 1599, category: "design" }
+        { id: "4", name: "Rhino", price: 1599, category: "design" }
     ]
 };
 

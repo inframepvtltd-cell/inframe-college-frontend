@@ -11,7 +11,8 @@ function Page() {
             <DigitalMarketingComponent
                 title="Digital Marketing Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Vocation (B.VOC) in Digital Marketing is a comprehensive three-year program focused on modern marketing strategies. Students learn social media marketing, SEO, content marketing, and data analytics. The curriculum includes hands-on projects, industry certifications, and real-world campaign management experience."
+                content1="At Inframe, you can choose from multiple Digital Marketing courses such as B.Des (Digital Marketing), BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you want a Digital Marketing Course in Ahmedabad, these programs are designed to build a strong foundation in online marketing, content strategy, analytics, and campaign management. By the end, you will have a polished portfolio and strong confidence to manage digital marketing for brands and businesses."
+                content2="The curriculum includes SEO, social media marketing, content creation and marketing, email marketing, PPC advertising, web analytics, branding, and comprehensive digital marketing strategy. Students are trained in tools such as Google Analytics, Google Ads, Facebook/Instagram Ads Manager, SEO software, and content-creation tools to run and optimize campaigns. These skills make you eligible for roles like Digital Marketer, SEO Specialist, Social Media Manager, Content Strategist, and Digital Marketing Analyst."
                 description="Unlock online growth with a professional Digital Marketing Course.
 "
                 index={0}

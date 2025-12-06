@@ -11,7 +11,9 @@ function Page() {
             <DigitalMarketingComponent
                 title="Digital Marketing Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Vocation (B.VOC) in Digital Marketing is a comprehensive three-year program focused on modern marketing strategies. Students learn social media marketing, SEO, content marketing, and data analytics. The curriculum includes hands-on projects, industry certifications, and real-world campaign management experience."
+                content1="At Inframe, you can choose from various Digital Marketing programs such as B.Des (Digital Marketing), BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you want a Digital Marketing Course in Delhi, these courses provide extensive training in all facets of online marketing — from strategy and content to analytics and campaign management. Once you complete the program, you’ll have a professionally curated portfolio and the confidence to manage digital marketing for brands and businesses."
+                content2="
+The course curriculum covers SEO, social media marketing, content marketing, email marketing, PPC advertising, web analytics, branding, and full-scale digital marketing strategy. Students get hands-on training using tools like Google Analytics, Google Ads, Facebook/Instagram Ads Manager, SEO tools, and content creation software to handle campaigns efficiently. These competencies enable you to take up roles like Digital Marketer, SEO Specialist, Social Media Manager, Content Strategist, or Digital Marketing Analyst."
                 description="Transform your career with a next-gen Digital Marketing Course.
 "
                 index={0}

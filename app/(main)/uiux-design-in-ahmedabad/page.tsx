@@ -13,7 +13,9 @@ function Page() {
             <UIUXDesignComponent
                 title="UI/UX Design Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design."
+                content1="At Inframe, you can select from B.Des in UI UX Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma programs. If you want a UI UX Design Course in Ahmedabad, these programs offer complete training to master digital product design, research, and prototyping. You will finish your course with a professional portfolio showcasing your skills."
+                content2="The course covers user research, information architecture, wireframing, prototyping, visual design principles, typography, color theory, and usability testing. You will also train on advanced tools like Figma, Adobe XD, Sketch, Illustrator, and prototyping software. These abilities open career opportunities such as UI Designer, UX Researcher, Product Designer, and UX Strategist.
+"
                 description="Master interface design through an advanced UI UX Course.
 "
                 index={0}

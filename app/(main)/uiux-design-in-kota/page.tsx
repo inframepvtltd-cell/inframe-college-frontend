@@ -12,7 +12,9 @@ function Page() {
             <UIUXDesignComponent
                 title="UI/UX Design Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design."
+                content1="At Inframe, you can choose from multiple UI UX design programs such as B.Des in UI UX Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a UI UX Design Course in Kota, these programs help you build strong creative, analytical, and technical skills required for modern digital design. By the end of the course, you will have a professional portfolio and the confidence to design intuitive, user-friendly digital products."
+                content2="You will learn user research, information architecture, wireframing, prototyping, visual design, typography, color theory, and usability testing. The course also provides hands-on training on Figma, Adobe XD, Sketch, Illustrator, and advanced prototyping tools to help you design intuitive interfaces and interactive user flows. These skills prepare you for careers such as UI Designer, UX Researcher, Product Designer, and Interaction Designer.
+"
                 description="Build job-ready skills with a practical UI UX Course.
 "
                 index={0}

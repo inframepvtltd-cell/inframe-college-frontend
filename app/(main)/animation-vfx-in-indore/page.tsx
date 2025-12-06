@@ -12,7 +12,8 @@ function Page() {
             <AnimationVFXComponent
                 title="Animation VFX Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design."
+                content1="At Inframe, you have access to multiple Animation & VFX programs such as B.Des in Animation & VFX, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for an Animation & VFX Course in Indore, these courses provide comprehensive training in animation, VFX, motion graphics, and digital content creation. By the end of the course, you will have a professional portfolio and the ability to create animations and visual-effects for a variety of media."
+                content2="You will learn 2D/3D animation, VFX fundamentals, storyboarding, character and environment design, motion graphics, compositing, video editing, and storytelling. You will also get hands-on training with industry software like Adobe After Effects, Premiere Pro, Autodesk Maya, Blender, and other VFX/compositing tools. These skills make you eligible for roles like Animator, VFX Artist, Motion Graphic Designer, Compositor, or Multimedia Content Creator."
                 description="Build confidence as you animate characters from sketch to screen.
 "
                 index={0}

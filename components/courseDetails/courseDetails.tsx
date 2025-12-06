@@ -108,9 +108,9 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                         </div>
 
                         {/* Course Description */}
-                        <div className="bg-gray-50 p-2 rounded-lg">
-                            <h2 className="text-xl font-semibold text-gray-800 mb-4">About this course</h2>
-                            <div className="space-y-4 text-gray-600">
+                        <div className="bg-gray-50 p-4  rounded-lg">
+                            <h2 className="text-2xl  font-extrabold text-gray-800 mb-4">About this course</h2>
+                            <div className="space-y-4 text-gray-600 text-justify">
                                 <p>{courseData.description}</p>
                                 <p>{courseData.description}</p>
                                 <p>{courseData.description}</p>
@@ -122,20 +122,31 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                     {/* Right Column - Course Details and Actions */}
                     <div className="space-y-6">
                         {/* Course Header */}
-                        <div className="text-left lg:text-left">
-                            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <div className="text-justify p-2 w-full">
+                            {/* Title */}
+                            <h1 className="text-2xl   text-left sm:text-3xl md:text-4xl font-extrabold  text-gray-900 leading-tight mb-4">
                                 {title} {courseData.title}
                             </h1>
 
                             {/* Price Section */}
-                            <div className="flex items-center justify-start lg:justify-start space-x-4 mb-4">
-                                <span className="text-3xl font-bold text-yellow-500">{courseData.price}</span>
-                                <span className="text-xl text-gray-500 line-through">{courseData.originalPrice}</span>
-                                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                    {title}{courseData.discount}
+                            <div className="flex flex-wrap items-center gap-4 ">
+                                {/* Current Price */}
+                                <span className="text-2xl sm:text-4xl font-bold text-yellow-500">
+                                    ₹{courseData.price}
+                                </span>
+
+                                {/* Original Price */}
+                                <span className="text-lg sm:text-xl text-gray-500 line-through">
+                                    ₹{courseData.originalPrice}
+                                </span>
+
+                                {/* Discount Badge */}
+                                <span className="bg-green-100 text-green-800 px-2 py-1.5 rounded-sm text-sm sm:text-base font-semibold shadow-sm">
+                                    {title} {courseData.discount}% OFF
                                 </span>
                             </div>
                         </div>
+
 
                         {/* Course Features Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
@@ -147,21 +158,6 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                             ))}
                         </div>
 
-                        {/* Additional Info Cards */}
-                        {/* <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-6">
-                            <div className="flex items-center bg-green-100 px-4 py-3 rounded-lg">
-                                <span className="text-green-600 mr-2 text-xl">🔄</span>
-                                <span className="text-green-800 font-medium">100% Refund</span>
-                            </div>
-                            <div className="flex items-center bg-gray-100 px-4 py-3 rounded-lg">
-                                <span className="text-gray-600 mr-2 text-xl">📧</span>
-                                <span className="text-gray-800 font-medium">Email</span>
-                            </div>
-                            <div className="flex items-center bg-yellow-100 px-4 py-3 rounded-lg">
-                                <span className="text-yellow-600 mr-2 text-xl">🚀</span>
-                                <span className="text-yellow-800 font-medium">Upskill</span>
-                            </div>
-                        </div> */}
 
                         {/* Dynamic Purchase Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
@@ -176,7 +172,6 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
 
                         {/* Additional Info */}
                         <div className="text-left lg:text-left text-gray-600">
-                            {/* <p>✅ 30-day money-back guarantee</p> */}
                             <p>✅ Full lifetime access</p>
                             <p>✅ Access on mobile and TV</p>
                             <p>✅ Certificate of completion</p>
