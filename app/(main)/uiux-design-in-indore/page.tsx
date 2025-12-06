@@ -12,7 +12,8 @@ function Page() {
             <UIUXDesignComponent
                 title="UI/UX Design Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Design (B.Des) in UI & UX Design is a four-year program focusing on creating exceptional digital experiences. Students learn user research, information architecture, interaction design, and prototyping. The curriculum covers both theoretical principles and practical applications of user-centered design, preparing graduates for roles in digital product design."
+                content1="At Inframe, you can choose from multiple UI UX programs such as B.Des in UI UX Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a UI UX Design Course in Indore, these programs provide strong design foundations along with advanced digital skills. By course completion, you will have a polished portfolio and the ability to design user-friendly digital interfaces."
+                content2="You will study user research, wireframing, prototyping, information architecture, visual design, typography, color systems, and usability testing. You will also get hands-on training in software like Figma, Adobe XD, Sketch, Illustrator, and prototyping tools. These skills prepare you for careers such as UI Designer, UX Analyst, Product Designer, and Interaction Designer."
                 description="Train with experts in a high-end UI UX Course.
 "
                 index={0}

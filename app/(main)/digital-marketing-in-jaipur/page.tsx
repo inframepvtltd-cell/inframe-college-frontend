@@ -12,7 +12,10 @@ function Page() {
             <DigitalMarketingComponent
                 title="Digital Marketing Course"
                 duration="4 Years Full-Time"
-                content="The Bachelor of Vocation (B.VOC) in Digital Marketing is a comprehensive three-year program focused on modern marketing strategies. Students learn social media marketing, SEO, content marketing, and data analytics. The curriculum includes hands-on projects, industry certifications, and real-world campaign management experience."
+                content1="At Inframe, you can choose from various Digital Marketing programs such as B.Des (Digital Marketing), BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you want a Digital Marketing Course in Jaipur, these courses are designed to build your marketing knowledge, digital strategy skills, and technical competence needed by modern businesses. Upon completion, you will have a polished portfolio and the confidence to run and manage full-scale digital marketing initiatives."
+                content2="
+You will learn search engine optimization, social media marketing, content creation and marketing, email marketing, PPC advertising, web analytics, digital branding, and overall marketing strategy. You will also get hands-on training on tools like Google Analytics, Google Ads, Facebook/Instagram Ads Manager, various SEO tools, and content-creation software. These competencies equip you for roles like Digital Marketer, Social Media Manager, SEO Specialist, Content Strategist, or Performance Analyst.
+"
                 description="Learn content and social strategy in our Digital Marketing Course.
 "
                 index={0}

@@ -1,12 +1,6 @@
 'use client'
 
 import React, { useState } from "react";
-// import {
-//   Card,
-//   CardContent,
-//   CardHeader,
-//   CardTitle,
-// } from "../../components/ui/card";
 import { ChevronDown } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
@@ -24,7 +18,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, children }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center py-4 text-left"
       >
-        <span className="text-lg hover:text-yellow-400 transition-colors">
+        <span className="text-lg hover:text-yellow-500 transition-colors">
           {title}
         </span>
         <ChevronDown
@@ -45,7 +39,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, children }) => {
 const FAQSection = () => (
   <Card className="bg-zinc-100 text-black border-none my-12">
     <CardHeader>
-      <CardTitle className="text-3xl text-yellow-400">
+      <CardTitle className="text-3xl text-yellow-500">
         Frequently Asked Questions
       </CardTitle>
     </CardHeader>
@@ -81,6 +75,8 @@ const FAQSection = () => (
               reserved categories).
             </li>
           </ul>
+
+
         </AccordionItem>
         <AccordionItem title="What are the eligibility criteria for the diploma and professional programs?">
           <p>

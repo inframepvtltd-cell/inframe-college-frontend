@@ -238,7 +238,8 @@ interface CourseContentProps {
     title: string;
     duration: string;
     description: string;
-    content: string;
+    content1: string;
+    content2: string;
     index: number;
     category: string;
     curriculum?: CurriculumType;
@@ -251,7 +252,7 @@ const DigitalMarketingComponent = ({
     title,
     duration,
     description,
-    content,
+    content1, content2,
     index = 0,
     category,
     curriculum,
@@ -349,8 +350,9 @@ const DigitalMarketingComponent = ({
                         <h2 className={`text-3xl font-bold mb-6 ${poppins.className}`}>
                             Course Overview
                         </h2>
-                        < p className="text-lg leading-relaxed text-gray-700" > {content} </p>
-                    </div>
+ < p className="text-lg leading-relaxed text-gray-700" > {content1} </p>
+                        < p className="text-lg leading-relaxed text-gray-700" > {content2} </p>
+                                      </div>
                     < div className="sm:w-[413px] p-14 sm:h-[300px] rounded-lg border bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600" >
                         <h3
                             className={`text-2xl ${poppins.className} text-center py-5 font-bold text-black`}

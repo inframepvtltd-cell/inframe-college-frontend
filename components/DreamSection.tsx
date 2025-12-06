@@ -21,7 +21,7 @@ const DreamsSection = () => {
     setIsFormOpen(true);
   };
   return (
-    <div className={`max-w-7xl mx-auto px-4 my-16  ${poppins.className}`}>
+    <div className={`max-w-7xl mx-auto px-0 my-6  ${poppins.className}`}>
       <div className="bg-gradient-to-r from-yellow-600 to-yellow-400 text-gray-900 rounded-xl shadow-xl p-6 lg:p-10 flex flex-col lg:flex-row items-center justify-between">
         {/* Text Section */}
         <div className="space-y-3 text-center lg:text-left">
@@ -48,7 +48,6 @@ const DreamsSection = () => {
             setIsFormOpen={setIsFormOpen}
             isScrolled={false}
           />
-
         </div>
       </div>
     </div>
