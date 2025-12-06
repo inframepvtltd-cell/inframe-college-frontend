@@ -20,7 +20,7 @@ export default function PageClient() {
   ]
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero price="1499" />
+            <CourseHero title="Digital Markteting" price="1499" />
             <ComboPack />
             <CourseFeatures />
  <CustomizeCourse
