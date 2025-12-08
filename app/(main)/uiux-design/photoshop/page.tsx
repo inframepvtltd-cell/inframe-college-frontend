@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  courseMetaContent="Focused on Adobe Photoshop, this course teaches students how to manipulate, enhance, and creatively edit images. From photo retouching to digital painting and compositing, learners develop the skills needed for photography, advertising, and graphic design industries."  courseName="photoshop"  title="UIUX designing" price="1499" />
     
 
       <ComboPack />

@@ -18,15 +18,15 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
-    
+      <CourseHero  offerPrice="699" courseMetaContent="This course teaches Adobe InDesign for professional page layout and design. Students learn how to create compelling brochures, magazines, eBooks, and other print and digital publications with a focus on typography, master pages, and prepress preparation." courseName="Adobe Indesign" title="UIUX designing" price="1499" />
+
 
       <ComboPack />
-    
+
 
       <CustomizeCourse
         courseTitle="UIUX design"
-      />       
+      />
       <CourseFeatures />
 
 

@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  courseMetaContent="The Figma Course introduces learners to collaborative interface design using this cloud-based tool. Students master designing user interfaces, creating interactive prototypes, and working in teams remotely, making it essential for modern UX/UI projects."  courseName="Figma"  title="UIUX designing" price="1499" />
     
 
       <ComboPack />

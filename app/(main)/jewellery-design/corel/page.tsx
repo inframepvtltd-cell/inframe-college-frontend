@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
+      <CourseHero courseMetaContent="Master CorelDRAW and Corel PHOTO-PAINT tools for vector illustration and photo editing. This course is designed for graphic designers and marketers aiming for precision in branding, print, and digital media projects." courseName="Corel"   title="Jewellery designing" offerPrice="1499" price="2499" />
     
 
       <ComboPack />

@@ -15,7 +15,7 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="This Photoshop Course is designed to equip you with practical, industry-relevant skills to master image editing, retouching, and graphic design. You’ll learn how to use Photoshop tools effectively to create professional-grade visuals for digital and print media. The course covers everything from basic photo corrections to advanced techniques like masking, layers, and compositing. Whether you’re starting from scratch or looking to sharpen your existing skills, this course prepares you to work confidently on real projects and build a strong creative portfolio." courseName="Photoshop"  title="Interior designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 

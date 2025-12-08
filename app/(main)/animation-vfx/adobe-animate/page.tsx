@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero courseMetaContent="Create interactive animations and multimedia content using Adobe Animate. This course teaches you how to design vector animations, develop web banners, and build engaging HTML5 content with practical workflows." courseName="Adobe Animate"   title="Animation and VFX" price="2499" offerPrice="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

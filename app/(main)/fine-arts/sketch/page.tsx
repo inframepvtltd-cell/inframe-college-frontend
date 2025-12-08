@@ -15,7 +15,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fine Arts" price="1499" />
+            <CourseHero offerPrice="699" price="1499" courseMetaContent="Learn Sketch, the industry-standard tool for UI/UX design, wireframing, and prototyping. This course emphasizes user-centered design principles and practical skills to create sleek, interactive digital interfaces." title="Fine Arts"  courseName="Sketch"  />
 
             <ComboPack />
 

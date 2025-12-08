@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fashion designing" price="1499" />
+            <CourseHero courseMetaContent="Get hands-on expertise in Adobe Photoshop for photo editing, compositing, retouching, and digital art creation. Learn advanced techniques to transform images, create visual effects, and prepare assets for marketing and media."  courseName="Photoshop"   title="Fashion designing" price="1999" offerPrice="899" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

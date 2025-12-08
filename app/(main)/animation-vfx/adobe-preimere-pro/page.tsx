@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero courseMetaContent="Gain expertise in video editing and post-production with Adobe Premiere Pro. Learn timeline editing, color grading, audio mixing, and exporting to produce professional-quality videos for all platforms." offerPrice="1499" courseName="Adobe preimere pro"  title="Animation and VFX" price="2499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

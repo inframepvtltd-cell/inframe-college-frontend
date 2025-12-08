@@ -12,6 +12,7 @@ const poppins = Poppins({
 });
 
 
+
 const breadcrumbPages: Record<string, { name: string; url: string }> = {
   "/about": { name: "About Us", url: "https://www.inframeschool.com/about" },
   "/courses": { name: "Courses", url: "https://www.inframeschool.com/courses" },
@@ -37,6 +38,7 @@ export const metadata = {
     google: "dGWC26ZkV6A4Ue6fhZdXFh5gMfWQDF3Q-3qpLE71h5M",
   },
 };
+
 
 export default async function RootLayout({
   children,
@@ -87,6 +89,70 @@ export default async function RootLayout({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
+
+    <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Inframe School of Art, Design & Business",
+        "url": "https://www.inframeschool.com/",
+        "logo": "https://www.inframeschool.com/assets/images/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/",
+          "https://www.instagram.com/",
+          "https://www.youtube.com/"
+        ],
+        "description":
+          "Inframe School offers professional courses in Interior Design, Fashion Design, Graphic Design, UI/UX, Photography and Business specialization programs."
+      })
+    }}
+  />
+  <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "School",
+      "name": "Inframe School of Art, Design & Business",
+      "image": "https://www.inframeschool.com/assets/images/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "First Floor, 9B, Pal Link Rd, Marudhar Nagar, Shyam Nagar",
+        "addressLocality": "Jodhpur",
+        "addressRegion": "Rajasthan",
+        "postalCode": "342008",
+        "addressCountry": "IN"
+      },
+      "url": "https://www.inframeschool.com/",
+      "telephone": "+91 96499 64970",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "26.2389",
+        "longitude": "73.0243"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ]
+    }),
+  }}
+/>
+
+
+
     </Head>
 
       <body>

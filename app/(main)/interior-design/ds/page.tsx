@@ -15,7 +15,9 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="The D5 Course is tailored to teach you cutting-edge real-time rendering and visualization techniques using D5 Render. You’ll learn how to create stunning, photorealistic 3D visuals quickly and efficiently, perfect for architects, designers, and visualization artists.
+
+From lighting and materials to animation and VR integration, this course covers all the essential tools to bring your designs to life. Whether you want to impress clients or enhance your portfolio, mastering D5 Render will give you a powerful edge in the visualization industry." courseName="DS"  title="Interior designing" price="1499"  offerPrice="699"/>
 
             <ComboPack />
 

@@ -16,7 +16,12 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="
+This course teaches you Photoshop the way professionals actually use it — editing images with precision, creating clean composites, retouching correctly, and building graphics that look polished instead of amateur.
+
+You’ll learn the essentials: layers, masks, selection tools, retouching methods, color correction, smart objects, text design, and export workflows. Every lesson is practical and project-driven, so you build real skill instead of memorizing buttons.
+
+If you want Photoshop skills that hold up in real client work, this course gives you exactly that — assuming you’re ready to practice and apply what you learn."offerPrice="699" courseName="Adobe photoshop"  title="Graphic Designing" price="1499" />
 
             <ComboPack />
 

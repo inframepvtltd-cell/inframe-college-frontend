@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseName="Blender" courseMetaContent="This course covers Blender, the powerful open-source 3D creation suite. Students learn modeling, sculpting, animation, texturing, and rendering workflows. The course aims to provide a complete foundation for creating professional 3D art and animations for various industries, including gaming, film, and digital media." title="Graphic Designing" price="1499" offerPrice="699"/>
 
             <ComboPack />
 

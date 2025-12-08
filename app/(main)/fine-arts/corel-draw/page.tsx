@@ -15,7 +15,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fine Arts" price="1499" />
+            <CourseHero courseMetaContent="Develop advanced skills in CorelDRAW for vector graphics, layout design, and branding. This course is suited for graphic designers who want to produce impactful print and digital media projects efficiently."  courseName="Corel draw"   offerPrice="1499" price="699"  title="Fine Arts"  />
 
             <ComboPack />
 

@@ -14,7 +14,7 @@ export const metadata = {
 function CourseContent() {
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
+      <CourseHero offerPrice="699" courseMetaContent="This course trains students on Sketch, a popular design tool for macOS used in UI/UX design. Emphasizing vector editing, prototyping, and collaboration, students learn to produce intuitive digital products, from wireframes to fully interactive prototypes." courseName="Sketchup"  title="UIUX designing" price="1499" />
       <ComboPack />
       <CustomizeCourse courseTitle="UIUX Design"
       />       

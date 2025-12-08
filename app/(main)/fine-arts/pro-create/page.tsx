@@ -15,7 +15,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fine Arts" price="1499" />
+            <CourseHero courseMetaContent="Unlock your digital drawing and painting potential with Procreate on iPad. This course focuses on brush techniques, layering, and creative workflows to develop professional-quality illustrations and concept art." offerPrice="699"  courseName="Fine Arts"   price="1499"  title="Fine Arts"  />
 
             <ComboPack />
 

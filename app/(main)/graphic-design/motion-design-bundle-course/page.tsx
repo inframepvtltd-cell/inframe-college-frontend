@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent=" This Motion Design Bundle Course covers essential tools and techniques to master dynamic visual storytelling. You’ll learn Adobe Illustrator, InDesign, Corel Draw, and Photoshop for graphic creation, then dive into Adobe Premiere Pro and After Effects for powerful video editing and animation. Advanced 3D skills with Maya and Blender complete your skill set, preparing you to create stunning motion graphics and animations from start to finish." courseName="Motion design bundle course"  title="Graphic Designing" offerPrice="699" price="11992" />
 
             <ComboPack />
 

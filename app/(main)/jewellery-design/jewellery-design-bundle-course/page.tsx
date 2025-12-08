@@ -18,15 +18,19 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
-    
+      <CourseHero courseMetaContent="This Jewellery Design Bundle Course builds the essential digital skills needed to create professional jewellery concepts and production-ready designs. You start with CorelDRAW to make clean sketches, technical drawings, stone settings, and layout sheets used by manufacturers. Then you move into Adobe Illustrator, where you create precise vector illustrations, motifs, and presentation boards for clients or portfolio work.
+
+You also learn Adobe Photoshop to add textures, metal finishes, gemstone effects, lighting, and detailed product enhancements that make designs look realistic. Finally, you train in Rhino, the leading CAD software for jewellery, where you model rings, pendants, earrings, and intricate 3D designs that can be rendered or sent directly for manufacturing.
+
+By the end of this course, you can sketch, illustrate, enhance, and model jewellery designs with industry-standard tools — giving you the practical skills needed to work with brands, clients, or production teams."   courseName="Jewellery Design bundle Course" title="Jewellery designing" price="9996"  offerPrice="1499" />
+
 
       <ComboPack />
-    
+
 
       <CustomizeCourse
         courseTitle="Jewellery Design"
-      />       
+      />
       <CourseFeatures />
 
 

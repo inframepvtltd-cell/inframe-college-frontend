@@ -18,15 +18,15 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
-    
+      <CourseHero  offerPrice="699"  courseMetaContent="This course provides comprehensive training in Adobe Illustrator, the industry standard for vector graphic design. Students learn to create logos, icons, typography, and complex illustrations with precision. The curriculum covers essential tools, advanced techniques, and workflow optimization for print and digital media projects." courseName="Adobe Illustrator" title="UIUX designing" price="1499" />
+
 
       <ComboPack />
-    
+
 
       <CustomizeCourse
         courseTitle="UIUX Design"
-      />       
+      />
       <CourseFeatures />
 
 

@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
+      <CourseHero courseMetaContent="Master Rhino 3D modeling software for precision in product design, architecture, and engineering. This course teaches NURBS modeling, rendering, and CAD workflows critical for technical and creative projects."  courseName="Rhino"  title="Jewellery designing" price="2499" offerPrice="1499" />
     
 
       <ComboPack />

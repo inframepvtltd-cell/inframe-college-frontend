@@ -16,7 +16,9 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="This Graphic Design Bundle Course is designed to equip you with practical skills in industry-standard software — Adobe Illustrator, Adobe InDesign, CorelDRAW, and Adobe Photoshop. You’ll learn how to create stunning visuals, layouts, and graphics that meet professional design standards.
+
+Whether you’re starting from scratch or want to sharpen your existing skills, this course offers hands-on projects and real-world applications to help you master each tool efficiently. By the end, you’ll have the confidence and competence to produce compelling designs for print, digital media, branding, and more." courseName="Graphic design bundle course" title="Graphic Designing" price="5996"  offerPrice="1499"/>
 
             <ComboPack />
 

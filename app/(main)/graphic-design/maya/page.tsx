@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="The Maya Course offers in-depth training in 3D modeling, animation, and rendering with Autodesk Maya. Students will develop skills in character rigging, texturing, lighting, and simulation, enabling them to create high-quality assets for films, games, and visual effects industries." courseName="Maya"  title="Graphic Designing" offerPrice="699" price="1499" />
 
             <ComboPack />
 

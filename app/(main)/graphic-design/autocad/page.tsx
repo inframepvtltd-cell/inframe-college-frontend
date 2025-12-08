@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="" courseName="AutoCad" title="Graphic Designing" price="1499" offerPrice="699"/>
 
             <ComboPack />
 

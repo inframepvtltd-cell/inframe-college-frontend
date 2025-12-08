@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
+      <CourseHero courseMetaContent="Learn vector-based design with Adobe Illustrator, focusing on logo creation, typography, and complex illustrations. This course prepares you for creating scalable graphics that work across print and digital platforms." courseName="Adobe Illustrator"   title="Jewellery designing" offerPrice="1499" price="2499"/>
     
 
       <ComboPack />

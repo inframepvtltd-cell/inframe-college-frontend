@@ -16,7 +16,12 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fashion designing" price="1499" />
+            <CourseHero   courseName="Fashion Design Bundle Course" courseMetaContent="
+This Fashion Design Bundle Course trains you in the essential digital tools used in modern fashion studios. You begin with CorelDRAW to create flat sketches, garment outlines, measurement sheets, and production-ready templates. Then you move into Adobe Illustrator, where you design vector illustrations, technical flats, trims, and clean line sheets used for professional fashion presentations.
+
+You also learn Adobe Photoshop to create fabric textures, pattern repeats, print designs, and color variations. Photoshop also helps you edit images and build polished lookbooks and concept sheets.
+
+By the end of this course, you can sketch, illustrate, edit, and prepare digital fashion designs that are ready for portfolios, clients, and production teams — giving you the core skills required in the fashion industry." title="Fashion designing" price="5997" offerPrice="1499"/>
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

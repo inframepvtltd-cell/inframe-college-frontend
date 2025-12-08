@@ -15,7 +15,9 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="Our Lumion Course is built for people who want to master real-time 3D visualization fast. We focus on practical skills that let you create stunning architectural renders and animations without wasting time on useless theory. From importing your models to applying materials, lighting, and effects, this course breaks down everything you need to deliver jaw-dropping presentations that impress clients and stakeholders.
+
+No shortcuts, no fluff—just solid training with Lumion’s powerful tools, so you can turn your designs into vivid, lifelike experiences. Access the course anytime and get the skills that set you apart in the competitive world of architectural visualization." courseName="Lumion course" title="Interior designing" price="1499"  offerPrice="699"/>
 
             <ComboPack />
 

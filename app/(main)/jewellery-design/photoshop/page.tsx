@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
+      <CourseHero courseMetaContent="Get skilled in Adobe Photoshop for photo editing, compositing, and digital painting. This course covers essential tools, retouching techniques, and creative workflows for photographers, designers, and artists."  courseName="Photoshop"  title="Jewellery designing" offerPrice="1499" price="2499" />
     
 
       <ComboPack />

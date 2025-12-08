@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="This course focuses on motion graphics and visual effects using Adobe After Effects. Students learn how to create dynamic animations, motion titles, and cinematic visual effects. The program is tailored to prepare learners for roles in film production, video marketing, and multimedia storytelling." courseName="Adobe aftereffect"   title="Graphic Designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 

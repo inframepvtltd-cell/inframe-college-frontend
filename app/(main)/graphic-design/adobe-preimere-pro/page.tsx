@@ -16,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent=" The Adobe Premiere Pro Course trains students in professional video editing techniques using this industry-leading software. Covering everything from basic editing workflows to color correction, sound editing, and effects, students gain the ability to produce polished video content for films, commercials, and online platforms."  courseName="Adobe preimere pro"  title="Graphic Designing" offerPrice="699"price="1499" />
 
             <ComboPack />
 

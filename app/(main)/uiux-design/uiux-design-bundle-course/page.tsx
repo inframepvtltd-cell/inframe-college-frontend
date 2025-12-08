@@ -1,5 +1,3 @@
-// "use client"
-// import { useEffect } from "react";
 import ComboPack from "../../../../components/courseDetails/ComboPack";
 import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
@@ -16,25 +14,16 @@ export const metadata = {
 };
 
 function CourseContent() {
-  // const [isFormOpen, setIsFormOpen] = useState(false);
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
-  //   script.async = true;
-  //   document.body.appendChild(script);
-  // }, []);
-  const graphicDesignSoftware = [
-    { id: "1", name: "Adobe Photoshop", price: 1999, category: "design" },
-    { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
-    { id: "3", name: "Figma", price: 1499, category: "ui-ux" },
-    { id: "4", name: "Canva Pro", price: 999, category: "design" },
-    { id: "5", name: "Adobe InDesign", price: 1799, category: "publishing" },
-    { id: "6", name: "CorelDRAW", price: 1599, category: "design" }
-  ]
+
+
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero title="UIUX designing" price="1499" />
+      <CourseHero offerPrice="1499" courseMetaContent="This UI/UX Design Bundle Course gives you the complete skillset to design modern, functional digital interfaces. You start with Adobe Illustrator and Photoshop to create icons, UI graphics, and clean visual assets. InDesign helps you build neat documentation and case-study layouts.
+
+Then you move into real product-design tools: Adobe XD for wireframes and interactive prototypes, Figma for interface design and team collaboration, and Sketch for Mac-based UI workflows.
+
+You finish with the ability to plan user flows, design polished screens, create components, and build interactive prototypes that look good and work smoothly — exactly what product teams expect from a UI/UX designer." courseName="UiUX design bundle" title="UIUX designing" price="8994" />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
       <ComboPack />
@@ -42,7 +31,7 @@ function CourseContent() {
 
       <CustomizeCourse
         courseTitle="UIUX Design"
-        // availableSoftware={graphicDesignSoftware}
+      // availableSoftware={graphicDesignSoftware}
       />         {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
       <CourseFeatures />
       {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}

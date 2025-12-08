@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fashion designing" price="1499" />
+            <CourseHero courseMetaContent="Learn CorelDRAW from the ground up to create professional vector graphics, logos, layouts, and illustrations. This course covers essential tools, design principles, and project workflows to make you job-ready for branding and digital design."  courseName="Corel"  title="Fashion designing" price="1999" offerPrice="899" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

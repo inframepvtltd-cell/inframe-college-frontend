@@ -33,6 +33,7 @@ Adobe Photoshop,Autocad, 3dsmax, Sketchup, Lumion, Vray, Revit
 Bdes in interior design 
 Adobe Photoshop,adobe illustrator, Autocad, 3dsmax, Sketchup, Lumion, Vray,Corona, Revit, blender, 
 Rhino 
+
 ANIMATION AND VFX DESIGN 
 6 animation and vfx 
 Maya , Blender, Adobe animate, Adobe preimere Pro, Adobe aftereffect 

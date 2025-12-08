@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero  courseMetaContent="Master industry-standard 3D modeling, animation, and rendering techniques with Autodesk Maya. This course covers character rigging, texturing, and visual effects, preparing you for professional work in film, games, and animation studios." courseName="Maya"   title="Animation and VFX" price="2499" offerPrice="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

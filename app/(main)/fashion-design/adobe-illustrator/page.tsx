@@ -16,7 +16,7 @@ export const metadata = {
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fashion designing" price="1499" />
+            <CourseHero courseMetaContent="Master Adobe Illustrator for precision vector art, icon design, typography, and complex illustrations. This course equips you with skills to deliver clean, scalable graphics for print, web, and multimedia projects." courseName="Adobe Illustrator"   title="Fashion designing" price="1999" offerPrice="899" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

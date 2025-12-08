@@ -15,7 +15,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fine Arts" price="1499" />
+            <CourseHero courseMetaContent=""  courseName="Adobe aftereffect"   offerPrice="1499" price="699"    title="Fine Arts" />
 
             <ComboPack />
 

@@ -3,7 +3,8 @@
 import CourseContent from './courseContent';
 import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation";
-const CourseHero = ({ title, price }: { title: string, price: string }) => {
+import { AboutTheCourse } from './AboutTheCourse';
+const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }: { courseMetaContent: string, courseName: string, title: string, price: string, offerPrice: string }) => {
     const router = useRouter();
     console.log(title);
 
@@ -76,7 +77,7 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
             { title: 'Use On Desktop, Tablet & Mobile', icon: '📱' },
             { title: 'Full Lifetime Access', icon: '🎯' },
             { title: 'Certificate Of Completion', icon: '📜' },
-            { title: '24 Lessons (6Hr. 0 Min.)', icon: '📚' },
+            { title: '24 Lessons', icon: '📚' },
             { title: 'Language - Hindi', icon: '🗣️' },
             { title: 'Learn At Your Own Pace', icon: '🚀' },
         ],
@@ -87,6 +88,7 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
         duration: "6 hours"
     };
 
+    const paragraphs = courseMetaContent.split(". ").map(p => p.trim()).filter(p => p);
 
     return (
         <div className="min-h-full bg-white">
@@ -96,10 +98,10 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
 
                     {/* Left Column - Video and Course Info */}
-                    <div className="space-y-1">
-                        {/* Video Card */}
-                        {/* Video Player */}
-                        <div className="w-full h-64 sm:h-80 bg-black rounded-lg overflow-hidden ">
+                    <div className="flex flex-col gap-5">
+
+                        {/* Video */}
+                        <div className="w-full h-64 sm:h-80 bg-black rounded-xl overflow-hidden shadow-lg">
                             <video
                                 src="https://www.w3schools.com/html/mov_bbb.mp4"
                                 controls
@@ -107,42 +109,49 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                             />
                         </div>
 
-                        {/* Course Description */}
-                        <div className="bg-gray-50 p-4  rounded-lg">
-                            <h2 className="text-2xl  font-extrabold text-gray-800 mb-4">About this course</h2>
-                            <div className="space-y-4 text-gray-600 text-justify">
-                                <p>{courseData.description}</p>
-                                <p>{courseData.description}</p>
-                                <p>{courseData.description}</p>
-                                <p>{courseData.description}</p>
+                        {/* About Course (Scrollable) */}
+                        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm 
+                    h-80 overflow-y-auto custom-scrollbar">
+                            <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-gray-600 text-transparent bg-clip-text mb-2">
+                                About this course
+                            </h2>
+
+                            <div className="space-y-3 text-gray-700 text-justify">
+                                {paragraphs.map((text, index) => (
+                                    <p key={index}>{text}.</p>
+                                ))}
                             </div>
                         </div>
+
                     </div>
+
 
                     {/* Right Column - Course Details and Actions */}
                     <div className="space-y-6">
                         {/* Course Header */}
                         <div className="text-justify p-2 w-full">
                             {/* Title */}
-                            <h1 className="text-2xl   text-left sm:text-3xl md:text-4xl font-extrabold  text-gray-900 leading-tight mb-4">
-                                {title} {courseData.title}
+                            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-4 
+                                text-left bg-gradient-to-r from-yellow-400 to-gray-600 text-transparent bg-clip-text">
+                                {courseName} <span className="text-gray-900"></span>
                             </h1>
+
 
                             {/* Price Section */}
                             <div className="flex flex-wrap items-center gap-4 ">
                                 {/* Current Price */}
                                 <span className="text-2xl sm:text-4xl font-bold text-yellow-500">
-                                    ₹{courseData.price}
+                                    ₹{offerPrice}
                                 </span>
 
                                 {/* Original Price */}
                                 <span className="text-lg sm:text-xl text-gray-500 line-through">
-                                    ₹{courseData.originalPrice}
+                                    ₹{price}
                                 </span>
 
                                 {/* Discount Badge */}
                                 <span className="bg-green-100 text-green-800 px-2 py-1.5 rounded-sm text-sm sm:text-base font-semibold shadow-sm">
-                                    {title} {courseData.discount}% OFF
+                                    {title} {courseData.discount}
                                 </span>
                             </div>
                         </div>
@@ -164,7 +173,7 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
 
                             <button
                                 onClick={handleBuyNow}
-                                className="flex-1 px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors text-lg"
+                                className="flex-1 px-8 py-4 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-700 transition-colors text-lg"
                             >
                                 Buy Now
                             </button>
@@ -181,6 +190,17 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
             </div>
 
 
+            {/* <div className="max-w-7xl mx-auto py-0 px-2">
+                <h1 className="text-2xl font-bold mb-6 text-gray-900">
+                    Course Content
+                </h1>
+                <CourseContent
+                    sectionTitle="Section 1"
+                    totalLectures={24}
+                    totalDuration="6Hr 0Min"
+                    lectures={lectures}
+                />
+            </div> */}
             <div className="max-w-7xl mx-auto py-0 px-2">
                 <h1 className="text-2xl font-bold mb-6 text-gray-900">
                     Course Content
@@ -192,6 +212,7 @@ const CourseHero = ({ title, price }: { title: string, price: string }) => {
                     lectures={lectures}
                 />
             </div>
+
 
         </div>
     );

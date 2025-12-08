@@ -16,7 +16,12 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="This course cuts straight to the point. You’ll learn Illustrator the way professionals actually use it — creating clean vector graphics, logos, icons, and brand assets through hands-on, structured projects. No fluff, no pointless theory.
+
+You’ll work through the essentials: shapes, paths, typography, color systems, gradients, brushes, and export workflows. Every lesson builds practical skill, so by the end you can produce client-ready designs with confidence instead of guessing your way through the software.
+
+If you’re serious about learning Illustrator properly, this course gives you the skills — as long as you’re willing to practice and push yourself."  courseName="Adobe Illustrator"  title="Graphic Designing" price="1499" offerPrice="699" />
+      
 
             <ComboPack />
 

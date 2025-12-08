@@ -15,7 +15,7 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="" courseName="AutoCad course"  title="Interior designing" price="1499"  offerPrice="699"/>
 
             <ComboPack />
 

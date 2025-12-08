@@ -16,7 +16,12 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="This course teaches you CorelDRAW through practical, real design work. You’ll learn to create vector graphics, logos, layouts, and branding assets with clear, step-by-step lessons. No filler, no wasted time.
+
+You’ll build skills in shapes, curves, typography, color control, tracing, and proper export settings — everything needed to produce professional-quality designs on your own.
+
+If you want solid CorelDRAW skills that actually hold up in real projects, this course gives you exactly that — as long as you put in the effort."
+                courseName="Corel draw" title="Graphic Designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 

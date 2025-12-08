@@ -15,7 +15,9 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="This SketchUp Course teaches you how to create clean and accurate 3D models for interiors and architecture.
+You learn essential tools, components, materials, scenes, and layout basics so you can build models quickly without confusion.
+The course trains you to work with a studio-level workflow—organized files, efficient modeling, and presentation-ready outputs." courseName="Sketchup"  title="Interior designing"  offerPrice="699" price="1499" />
 
             <ComboPack />
 

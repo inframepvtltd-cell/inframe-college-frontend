@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  courseMetaContent="This course focuses on Adobe XD, a leading tool for UI/UX design and prototyping. Students learn how to design interactive web and mobile app interfaces, create wireframes, and develop prototypes to streamline the user experience design process." courseName="Adobe XD"   title="UIUX designing" price="1499" />
     
 
       <ComboPack />

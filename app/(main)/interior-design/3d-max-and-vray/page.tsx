@@ -15,7 +15,10 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero courseMetaContent="
+Our 3ds Max + V-Ray course is designed to turn beginners into skilled 3D artists who can confidently create professional-quality 3D models and realistic visualizations. We cut the fluff and focus on industry-standard techniques and workflows used by top studios worldwide. Whether you're aiming for architectural visualization, game design, or product rendering, this course gives you practical skills with hands-on projects and clear instructions.
+
+We don’t promise empty certifications — we deliver real skills that employers and clients demand. Learn modeling, texturing, lighting, and rendering with V-Ray at your own pace, backed by lifetime access and expert suppor" courseName="3D Max and Vray" title="Interior designing" price="1499" offerPrice="699"/>
 
             <ComboPack />
 
