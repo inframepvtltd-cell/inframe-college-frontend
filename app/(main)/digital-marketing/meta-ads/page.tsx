@@ -11,15 +11,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Meta Ads Course: Learn Real Targeting That Converts",
+    description: "This Meta Ads course teaches practical campaign setup, audience targeting, creatives, and optimization—so you stop boosting posts and start running ads that actually perform.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="Unlock the power of Meta (Facebook & Instagram) advertising. Learn to create compelling campaigns, audience targeting, budget optimization, and performance tracking. Turn social media into a lead and sales generating machine."  courseName="Meta Ads"   title="Digital Markteting" price="1999" offerPrice="899" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"  courseMetaContent="Unlock the power of Meta (Facebook & Instagram) advertising. Learn to create compelling campaigns, audience targeting, budget optimization, and performance tracking. Turn social media into a lead and sales generating machine."  courseName="Meta Ads Course"   title="Digital Markteting" price="1999" offerPrice="899" />
             {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <ComboPack />

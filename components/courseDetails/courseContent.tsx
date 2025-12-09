@@ -14,6 +14,7 @@ interface CourseContentProps {
   totalLectures: number;
   totalDuration: string;
   lectures: Lecture[];
+  noOfLessons: string;
 }
 
 const CourseContent: React.FC<CourseContentProps> = ({
@@ -21,6 +22,7 @@ const CourseContent: React.FC<CourseContentProps> = ({
   totalLectures,
   totalDuration,
   lectures,
+  noOfLessons,
 }) => {
  return (
   <div className="w-full rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm">
@@ -31,7 +33,7 @@ const CourseContent: React.FC<CourseContentProps> = ({
         {sectionTitle}
       </h2>
       <p className="text-sm text-gray-600">
-        {totalLectures} Lectures
+        {noOfLessons} Lectures
       </p>
     </div>
 

@@ -11,15 +11,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+        title: "Google Ads Course: Master Real Campaign Strategy",
+    description: "Learn how to build, optimize, and scale real Google Ads campaigns—from keyword research to smart bidding—so you stop wasting budget and start driving results.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="Master the art of Google Ads to drive targeted traffic, boost conversions, and maximize ROI. Learn campaign setup, keyword research, ad copywriting, bidding strategies, and analytics to run profitable ads that get real business results."  courseName="Google Ads"   title="Digital Markteting" price="1999" offerPrice="899" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent="Master the art of Google Ads to drive targeted traffic, boost conversions, and maximize ROI. Learn campaign setup, keyword research, ad copywriting, bidding strategies, and analytics to run profitable ads that get real business results."  courseName="Google Ads Course"   title="Digital Markteting" price="1999" offerPrice="899" />
             {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <ComboPack />

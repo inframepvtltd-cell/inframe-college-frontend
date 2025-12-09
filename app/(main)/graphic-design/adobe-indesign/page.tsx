@@ -8,19 +8,19 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Adobe InDesign Layout Design Essentials",
+    description: "Learn professional layout design with InDesign. Build brochures, magazines, and digital pages through practical lessons focused on precision and real workflow skills.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="This course teaches InDesign the way it’s meant to be used — with precision, structure, and zero shortcuts. You’ll learn how to build professional layouts for magazines, brochures, portfolios, and digital publications without relying on guesswork or messy templates.
+            <CourseHero noOfHours="12.5" noOfLessons="34"   courseMetaContent="This course teaches InDesign the way it’s meant to be used — with precision, structure, and zero shortcuts. You’ll learn how to build professional layouts for magazines, brochures, portfolios, and digital publications without relying on guesswork or messy templates.
 
 You’ll master the core tools: page grids, typography systems, styles, master pages, spacing logic, image placement, and print-ready export settings. Every lesson is project-focused, forcing you to design real layouts instead of passively watching tutorials.
 
-If you want to handle layout design like a professional — not a hobbyist — this course gives you that skillset, provided you’re ready to put in the effort." courseName="Adobe Indesign" title="Graphic Designing" price="1499"  offerPrice="699"/>
+If you want to handle layout design like a professional — not a hobbyist — this course gives you that skillset, provided you’re ready to put in the effort." courseName="Adobe Indesign Course" title="Graphic Designing" price="1499"  offerPrice="699"/>
 
             <ComboPack />
 

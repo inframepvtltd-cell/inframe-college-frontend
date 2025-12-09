@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Fashion Design Bundle: Corel, Illustrator & Photoshop",
+    description: "Learn fashion design using CorelDRAW, Adobe Illustrator, and Photoshop in one complete bundle. Create stunning fashion illustrations and graphics with expert tools.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero   courseName="Fashion Design Bundle Course" courseMetaContent="
+            <CourseHero  noOfHours="12.5" noOfLessons="150"    courseName="Fashion Design Bundle Course" courseMetaContent="
 This Fashion Design Bundle Course trains you in the essential digital tools used in modern fashion studios. You begin with CorelDRAW to create flat sketches, garment outlines, measurement sheets, and production-ready templates. Then you move into Adobe Illustrator, where you design vector illustrations, technical flats, trims, and clean line sheets used for professional fashion presentations.
 
 You also learn Adobe Photoshop to create fabric textures, pattern repeats, print designs, and color variations. Photoshop also helps you edit images and build polished lookbooks and concept sheets.

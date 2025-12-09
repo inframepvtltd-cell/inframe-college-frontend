@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Adobe Illustrator Course: Real Vector Design Skills",
+    description: "Learn Illustrator the right way—shapes, paths, typography, branding, and clean vector workflows—so you can create professional designs that actually stand out.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="Master Adobe Illustrator for precision vector art, icon design, typography, and complex illustrations. This course equips you with skills to deliver clean, scalable graphics for print, web, and multimedia projects." courseName="Adobe Illustrator"   title="Fashion designing" price="1999" offerPrice="899" />
+            <CourseHero  noOfHours="12.5" noOfLessons="26"   courseMetaContent="Master Adobe Illustrator for precision vector art, icon design, typography, and complex illustrations. This course equips you with skills to deliver clean, scalable graphics for print, web, and multimedia projects." courseName="Adobe Illustrator Course"   title="Fashion designing" price="1999" offerPrice="899" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

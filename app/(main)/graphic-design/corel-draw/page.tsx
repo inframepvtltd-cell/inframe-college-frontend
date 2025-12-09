@@ -8,20 +8,20 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "CorelDRAW Vector & Layout Design Course",
+    description: "Master CorelDRAW through hands-on projects. Learn vector design, logos, layouts, and print-ready exports with clear, practical lessons built for real-world work.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="This course teaches you CorelDRAW through practical, real design work. You’ll learn to create vector graphics, logos, layouts, and branding assets with clear, step-by-step lessons. No filler, no wasted time.
+            <CourseHero noOfHours="12.5" noOfLessons="42"   courseMetaContent="This course teaches you CorelDRAW through practical, real design work. You’ll learn to create vector graphics, logos, layouts, and branding assets with clear, step-by-step lessons. No filler, no wasted time.
 
 You’ll build skills in shapes, curves, typography, color control, tracing, and proper export settings — everything needed to produce professional-quality designs on your own.
 
 If you want solid CorelDRAW skills that actually hold up in real projects, this course gives you exactly that — as long as you put in the effort."
-                courseName="Corel draw" title="Graphic Designing" price="1499" offerPrice="699" />
+                courseName="Corel Draw Course" title="Graphic Designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 

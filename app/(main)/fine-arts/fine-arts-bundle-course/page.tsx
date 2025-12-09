@@ -7,19 +7,19 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Fine Arts Bundle: Procreate, Illustrator & Corel",
+    description: "Master fine arts with Procreate, Adobe Illustrator, CorelDRAW, and Sketch in one creative bundle. Develop your artistic skills for digital and traditional art.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseName="Fine Arts bundle course" courseMetaContent="This Fine Arts Bundle Course is built to actually make you skilled, not just “familiar” with drawing apps. You’ll learn how to create professional-level artwork using Procreate, Adobe Illustrator, CorelDRAW, and traditional sketching techniques.
+            <CourseHero noOfHours="12.5" noOfLessons="150" courseName="Fine Arts Bundle Course" courseMetaContent="This Fine Arts Bundle Course is built to actually make you skilled, not just “familiar” with drawing apps. You’ll learn how to create professional-level artwork using Procreate, Adobe Illustrator, CorelDRAW, and traditional sketching techniques.
 
 Instead of spoon-feeding theory, the course pushes you to practice real projects—digital illustrations, vector art, branding sketches, and hand-drawn concepts—so you build a portfolio that can actually get you work.
 
-You’ll understand how each tool works in the real world: Procreate for digital painting, Illustrator for clean vector design, CorelDRAW for layout and graphics, and sketching to sharpen your core creative fundamentals. The goal is simple—turn you into someone who can draw, design, and present ideas with confidence." title="Fine Arts" offerPrice="1499" price="699" />
+You’ll understand how each tool works in the real world: Procreate for digital painting, Illustrator for clean vector design, CorelDRAW for layout and graphics, and sketching to sharpen your core creative fundamentals. The goal is simple—turn you into someone who can draw, design, and present ideas with confidence." title="Fine Arts" offerPrice="699" price="1499" />
 
             <ComboPack />
 

@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Adobe InDesign: Professional Layout & Design",
+  description: "Learn Adobe InDesign to create stunning layouts for magazines, brochures, and ebooks. Master typography, page design, and publishing tools efficiently.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  offerPrice="699" courseMetaContent="This course teaches Adobe InDesign for professional page layout and design. Students learn how to create compelling brochures, magazines, eBooks, and other print and digital publications with a focus on typography, master pages, and prepress preparation." courseName="Adobe Indesign" title="UIUX designing" price="1499" />
+      <CourseHero noOfHours="12.5" noOfLessons="34"    offerPrice="699" courseMetaContent="This course teaches Adobe InDesign for professional page layout and design. Students learn how to create compelling brochures, magazines, eBooks, and other print and digital publications with a focus on typography, master pages, and prepress preparation." courseName="Adobe Indesign Course" title="UIUX designing" price="1499" />
 
 
       <ComboPack />

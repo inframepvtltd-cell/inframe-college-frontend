@@ -9,33 +9,24 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "UI/UX Design Bundle: Adobe & Figma Tools",
+  description: "Learn UI/UX design using Adobe Illustrator, Photoshop, InDesign, XD, Figma, and Sketch in one easy-to-follow bundle. Perfect for creating modern digital designs.",
 };
 
 function CourseContent() {
-
-
-
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero offerPrice="1499" courseMetaContent="This UI/UX Design Bundle Course gives you the complete skillset to design modern, functional digital interfaces. You start with Adobe Illustrator and Photoshop to create icons, UI graphics, and clean visual assets. InDesign helps you build neat documentation and case-study layouts.
+      <CourseHero noOfHours="12.5" noOfLessons="150" offerPrice="1499" courseMetaContent="This UI/UX Design Bundle Course gives you the complete skillset to design modern, functional digital interfaces. You start with Adobe Illustrator and Photoshop to create icons, UI graphics, and clean visual assets. InDesign helps you build neat documentation and case-study layouts.
 
-Then you move into real product-design tools: Adobe XD for wireframes and interactive prototypes, Figma for interface design and team collaboration, and Sketch for Mac-based UI workflows.
+      Then you move into real product-design tools: Adobe XD for wireframes and interactive prototypes, Figma for interface design and team collaboration, and Sketch for Mac-based UI workflows.
 
-You finish with the ability to plan user flows, design polished screens, create components, and build interactive prototypes that look good and work smoothly — exactly what product teams expect from a UI/UX designer." courseName="UiUX design bundle" title="UIUX designing" price="8994" />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+      You finish with the ability to plan user flows, design polished screens, create components, and build interactive prototypes that look good and work smoothly — exactly what product teams expect from a UI/UX designer." courseName="UiUX Design Bundle Course" title="UIUX designing" price="8994" />
 
       <ComboPack />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
-      <CustomizeCourse
-        courseTitle="UIUX Design"
-      // availableSoftware={graphicDesignSoftware}
-      />         {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+      <CustomizeCourse courseTitle="UIUX Design" />
+
       <CourseFeatures />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-      {/* < DreamsSection /> */}
 
       < DreamsSection />
 

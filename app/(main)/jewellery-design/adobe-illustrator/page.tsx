@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Adobe Illustrator Course: Precision Vector Design Skills",
+  description: "Master Adobe Illustrator essentials—vector creation, typography, and branding—to produce sharp, scalable designs that meet professional standards without wasting time.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero courseMetaContent="Learn vector-based design with Adobe Illustrator, focusing on logo creation, typography, and complex illustrations. This course prepares you for creating scalable graphics that work across print and digital platforms." courseName="Adobe Illustrator"   title="Jewellery designing" offerPrice="1499" price="2499"/>
+      <CourseHero  noOfHours="12.5" noOfLessons="21"   courseMetaContent="Learn vector-based design with Adobe Illustrator, focusing on logo creation, typography, and complex illustrations. This course prepares you for creating scalable graphics that work across print and digital platforms." courseName="Adobe Illustrator"   title="Jewellery designing Course" offerPrice="1499" price="2499"/>
     
 
       <ComboPack />

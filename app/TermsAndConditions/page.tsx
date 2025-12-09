@@ -13,7 +13,7 @@ export default function TermsAndConditions() {
         <p className="text-gray-600 mb-6 leading-relaxed">
           Welcome to our website. If you continue to browse and use this website, you are agreeing to comply 
           with and be bound by the following terms and conditions of use, which together with our privacy 
-          policy govern <span className="font-medium text-gray-800">WereSkill SCHOOL OF ART DESIGN & BUSINESS</span> 
+          policy govern <span className="font-medium text-gray-800">WereSkill</span> 
           relationship with you in relation to this website. If you disagree with any part of these terms 
           and conditions, please do not use our website.
         </p>
@@ -21,7 +21,7 @@ export default function TermsAndConditions() {
         {/* About Info */}
         <div className="space-y-4 mb-10">
           <p className="text-gray-600 leading-relaxed">
-            The term <span className="font-medium text-gray-800">WereSkill SCHOOL OF ART DESIGN & BUSINESS’</span> 
+            The term <span className="font-medium text-gray-800">WereSkill’</span> 
             or <span className="font-medium">‘us’</span> or <span className="font-medium">‘we’</span> refers to the owner 
             of the website whose registered office is:
           </p>

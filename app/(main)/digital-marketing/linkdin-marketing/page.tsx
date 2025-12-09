@@ -11,15 +11,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "LinkedIn Marketing Course: Build Authority Fast",
+    description: "Learn how to grow reach, generate leads, and position yourself as an industry authority on LinkedIn using smart content, targeting, and data-driven marketing.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="Leverage LinkedIn’s professional network to build your brand, generate qualified leads, and grow business connections. Master profile optimization, content strategies, paid ads, and analytics tailored for B2B success."  courseName="Linkdin Marketing" offerPrice="899"  title="Digital Markteting" price="1999" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent="Leverage LinkedIn’s professional network to build your brand, generate qualified leads, and grow business connections. Master profile optimization, content strategies, paid ads, and analytics tailored for B2B success."  courseName="Linkdin Marketing Course" offerPrice="899"  title="Digital Markteting" price="1999" />
             <ComboPack />
 
             <CustomizeCourse

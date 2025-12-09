@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Blender Course: Master 3D Modeling & Animation Fast",
+    description: "Get hands-on with Blender—modeling, sculpting, texturing, and animation—to build professional 3D assets and animations without wasting time on unnecessary features.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="Learn Blender’s powerful open-source 3D creation suite from modeling and sculpting to animation and video editing. This course is hands-on and project-focused, ideal for aspiring artists and designers who want full creative control." courseName="Blender"   title="Animation and VFX" price="2499" offerPrice="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="44"   courseMetaContent="Learn Blender’s powerful open-source 3D creation suite from modeling and sculpting to animation and video editing. This course is hands-on and project-focused, ideal for aspiring artists and designers who want full creative control." courseName="Blender Course"   title="Animation and VFX" price="2499" offerPrice="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

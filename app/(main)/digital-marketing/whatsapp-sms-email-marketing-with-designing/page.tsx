@@ -11,16 +11,17 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "WhatsApp, SMS & Email Marketing with Design Skills",
+    description: "Get sharp at high-converting messaging—WhatsApp, SMS, and email—plus the design basics needed to craft clean, persuasive campaigns that actually get clicks and responses.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent="WhatsApp, SMS, Email Marketing with Designing Course
-Combine messaging marketing with effective design skills to create high-converting campaigns. Learn how to craft messages, automate workflows, and design visual content that grabs attention and drives sales across WhatsApp, SMS, and email platforms.z"  courseName="Whatsapp sms email marketing with designing"   title="Digital Markteting" price="1999" offerPrice="899" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"  courseMetaContent="WhatsApp, SMS, Email Marketing with Designing Course
+Combine messaging marketing with effective design skills to create high-converting campaigns. Learn how to craft messages, automate workflows, and design visual content that grabs attention and drives sales across WhatsApp, SMS, and email platforms.z"  courseName="Whatsapp, Sms, Email Marketing With 
+Designing Course"   title="Digital Markteting" price="1999" offerPrice="899" />
             {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
             <ComboPack />

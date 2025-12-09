@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Photoshop Course: Photo Editing & Graphic Design",
+  description: "Master Photoshop to enhance photos and create stunning graphics. Learn essential tools for retouching, compositing, and digital artwork from scratch.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  offerPrice="699"  courseMetaContent="Focused on Adobe Photoshop, this course teaches students how to manipulate, enhance, and creatively edit images. From photo retouching to digital painting and compositing, learners develop the skills needed for photography, advertising, and graphic design industries."  courseName="photoshop"  title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  noOfHours="12.5" noOfLessons="26"    courseMetaContent="Focused on Adobe Photoshop, this course teaches students how to manipulate, enhance, and creatively edit images. From photo retouching to digital painting and compositing, learners develop the skills needed for photography, advertising, and graphic design industries."  courseName="Photoshop Course"  title="UIUX designing" price="1499" />
     
 
       <ComboPack />

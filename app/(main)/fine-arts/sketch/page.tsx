@@ -7,15 +7,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Sketch Course: Fast & Clean UI Design Techniques",
+    description: "Learn Sketch essentials—symbols, artboards, and prototyping—to design intuitive, scalable user interfaces that are ready for real-world apps and websites.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero offerPrice="699" price="1499" courseMetaContent="Learn Sketch, the industry-standard tool for UI/UX design, wireframing, and prototyping. This course emphasizes user-centered design principles and practical skills to create sleek, interactive digital interfaces." title="Fine Arts"  courseName="Sketch"  />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   offerPrice="699" price="1499" courseMetaContent="Learn Sketch, the industry-standard tool for UI/UX design, wireframing, and prototyping. This course emphasizes user-centered design principles and practical skills to create sleek, interactive digital interfaces." title="Fine Arts"  courseName="Sketch Course"  />
 
             <ComboPack />
 

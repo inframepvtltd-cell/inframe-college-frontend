@@ -22,6 +22,14 @@ const category = {
         "B.SC in Interior Design",
         "1 Year Diploma in Interior Design",
         "3 Year Diploma in Interior Design",
+        "Interior Design Bundle Course",
+        "AutoCad 2D And 3D",
+        "Sketchup",
+        "3D Max And Vray",
+        "Lumion",
+        "Revit",
+        "D5",
+        "Photoshop",
       ],
       image:
         "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -34,6 +42,10 @@ const category = {
         "B.SC in Fashion Design",
         "1 Year Diploma in Fashion Design",
         "3 Year Diploma in Fashion Design",
+        "Fashion Design Bundle Course",
+        "Adobe Illustrator",
+        "Corel",
+        "Photoshop",
       ],
       image: "/fashion-1.JPG",
     },
@@ -45,6 +57,17 @@ const category = {
         "B.SC in Graphic Design",
         "1 Year Diploma in Graphic Design",
         "3 Year Diploma in Graphic Design",
+
+        "Graphic design Bundle course",
+        "Motion Design Bundle course",
+        "Adobe Illustrator",
+        "Adobe Indesign",
+        "Corel Draw",
+        "Adobe Photoshop",
+        "Adobe Preimere Pro",
+        "Adobe aftereffect",
+        "Maya",
+        "Blender",
       ],
       image:
         "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -54,6 +77,14 @@ const category = {
       programs: [
         "B. Des In UI & UX Design",
         "1 Year Diploma in UI & UX Design",
+
+        "uiux design bundle course",
+        "Adobe illustrator",
+        "Photoshop",
+        "Adobe indesign",
+        "Adobe XD",
+        "Figma",
+        "Sketch",
       ],
       image:
         "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -67,6 +98,14 @@ const category = {
         "1 Year Diploma in Animation and VFX",
         "2 Year Diploma in Animation and VFX",
         "3 Year Diploma in Animation and VFX",
+
+        "Animation and vfx Bundle course",
+        "Maya",
+        "Blender",
+        "Adobe animate",
+        "Adobe preimere Pro",
+        "Adobe aftereffect",
+
       ],
       image:
         "https://images.unsplash.com/photo-1628494391268-c9935bc384d5?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -79,6 +118,12 @@ const category = {
         "1 Year Diploma in CAD Jewellery",
         "6 Month Certificate Course in Jewellery Design",
         "6 Month Certificate Course in CAD Jewellery",
+
+        "Jewellery design Bundle course",
+        "Corel",
+        "Adobe illustrator",
+        "Photoshop",
+        "Rhino",
       ],
       image:
         "https://images.unsplash.com/photo-1606293926249-ed22e446d476?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -91,6 +136,14 @@ const category = {
         "B.VOC in Fine Arts",
         "1 Year Diploma in Painting",
         "3 Year Diploma in Fine Arts",
+
+
+        "Fine Arts Bundle course",
+        "Pro create",
+        "Adobe illustrator",
+        "Corel Draw",
+        "sketch",
+
       ],
       image:
         "https://plus.unsplash.com/premium_photo-1673514503009-912ffc6ff956?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -103,6 +156,14 @@ const category = {
         "B.VOC in Digital Marketing",
         "1 Year Diploma in Digital Marketing",
         "6 Month Certificate Course in Digital Marketing",
+
+        "Google Ads",
+        "Meta Ads",
+        "Linkdin Marketing",
+        "YouTube Ads And Marketing",
+        "Whatsapp SMS Email Marketing With Designing",
+        "Affiliate Marketing",
+
       ],
       image: "/fetchpik.com-HAfwcPu9n1.jpg",
     },
@@ -176,24 +237,37 @@ const poppins = Poppins({
 // };
 
 const formatCourseSlug = (title: string): string => {
+  // console.log(title);
+  // console.log("==============");
+
   const slugMap: { [key: string]: string } = {
     "Interior Design": "interior-design",
     "Fashion Design": "fashion-design",
     "Graphic Design": "graphic-design",
-    "UIUX-Design": "uiux-design", // folder slug stays uiux-design
+    "UIUX-Design": "uiux-design",
     "Animation-VFX": "animation-vfx",
     "Jewellery Design": "jewellery-design",
     "Fine Arts": "fine-arts",
     "Digital Marketing": "digital-marketing",
     "Entrepreneurship Skill": "entrepreneurship-skill",
-    "Media-Entertainment": "media-entertainment"
+    "Media-Entertainment": "media-entertainment",
+
+    // Bundle slugs (fixed)
+    "Interior Design Bundle Course": "interior-design-bundle-course",
+    "Graphic Design Bundle Course": "graphic-design-bundle-course",
+    "Fine Arts Bundle Course": "fine-arts-bundle-course",
+    "Fashion Design Bundle Course": "fashion-design-bundle-course",
+    "Jewellery design Bundle course": "jewellery-design-bundle-course",
+    "Animation and vfx Bundle course": "animation-and-vfx-bundle-course",
+    "Uiux design bundle course": "uiux-design-bundle-course",
+    "Motion Design Bundle course": "motion-design-bundle-course",
   };
 
   return slugMap[title] || title.replace(/\s+/g, "-").toLowerCase();
 };
 
 const getDegreeType = (programText: string, courseTitle: string): string => {
-  // SPECIAL CASE: Animation-VFX needs "animation-and-vfx"
+
   let programCourseSlug =
     courseTitle === "Animation-VFX"
       ? "animation-and-vfx"
@@ -217,8 +291,13 @@ const getDegreeType = (programText: string, courseTitle: string): string => {
   } else if (programText.includes("6 Month Certificate")) {
     return `six-month-certificate-course-in-${programCourseSlug}`;
   }
+  else {
+    console.log(programText.replace(/\s+/g, "-").toLowerCase());
+    
+    return programText.replace(/\s+/g, "-").toLowerCase();
+  }
 
-  return `program-in-${programCourseSlug}`;
+  // return `program-in-${programCourseSlug}`;
 };
 
 

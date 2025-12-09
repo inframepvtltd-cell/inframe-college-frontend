@@ -1,36 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/navigation";
-// import { useRouter } from "next/router";
-
-interface Software {
-    id: string
-    name: string
-    price: number
-    category: string
-}
-
-interface CoursePackProps {
-    courseTitle: string
-    // availableSoftware: Software[]
-}
-
-interface CoursePackage {
-    id: string
-    title: string
-    tag: string
-    description: string
-    refundPeriod: string
-    originalPrice: number
-    discountedPrice: number
-    discountPercentage: number
-    buttonText: string
-    type: 'custom' | 'all-access'
-}
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 interface Price {
     price: string
 }
@@ -273,7 +248,7 @@ export default function ComboPack() {
         }, 0)
     }
     return (
-        <div className="w-full lg:p-0 bg-gradient-to-b from-white to-amber-50/30 py-8 lg:py-16">
+        <div className="w-full lg:p-0 bg-gradient-to-b from-white to-gray-200/30 py-8 lg:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
                 {/* Header Section */}
                 <div className="text-left mb-4 lg:mb-4">
@@ -290,8 +265,8 @@ export default function ComboPack() {
 
                 <Slider {...settings}>
                     {comboData.map((item, index) => (
-                        <div key={index} className="px-2 sm:px-3">
-                            <div className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-amber-300 h-full relative">
+                        <div key={index} className="px-0 sm:px-3">
+                            <div className="group bg-white rounded-2xl  hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-amber-300 h-full relative">
 
                                 {/* Card Header with Gradient */}
                                 <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 p-5 relative">
@@ -304,7 +279,7 @@ export default function ComboPack() {
                                     </div>
 
                                     <div className="flex items-center justify-between relative z-10">
-                                    
+
                                         <div className="flex flex-col items-end">
                                             {/* Rating */}
                                             <div className="flex items-center bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">

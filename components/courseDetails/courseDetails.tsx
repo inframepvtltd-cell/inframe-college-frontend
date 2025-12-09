@@ -4,7 +4,7 @@ import CourseContent from './courseContent';
 import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation";
 import { AboutTheCourse } from './AboutTheCourse';
-const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }: { courseMetaContent: string, courseName: string, title: string, price: string, offerPrice: string }) => {
+const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, noOfHours, noOfLessons }: { noOfHours: string, noOfLessons: string, courseMetaContent: string, courseName: string, title: string, price: string, offerPrice: string }) => {
     const router = useRouter();
     console.log(title);
 
@@ -18,7 +18,7 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
     const handleBuyNow = async () => {
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Razorpay test key
-            amount: price + "00",//149900,
+            amount: offerPrice + "00",//149900,
             currency: "INR",
             name: "Inframe College",
             description: "Interior Design Course Enrollment",
@@ -64,7 +64,6 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
         { title: "Astra Theme Sidebar Options", duration: "24:04" },
         { title: "Creating Content On The Homepage With Elementor", duration: "55:04" },
     ];
-    // Static course data (can be replaced with API data later)
     const courseData = {
         title: "actively for free",
         description: "This course is presented to students to enhance more benefits of our available courses and you will also learn some new technologies to improve yourself.",
@@ -72,15 +71,16 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
         originalPrice: "5000 Rs",
         discount: "76% OFF",
         features: [
-            { title: 'Language - Hindi', icon: '🌐' },
+            { title: 'Language - Hinglish', icon: '🌐' },
             { title: 'Can Watch Anytime', icon: '⏰' },
             { title: 'Use On Desktop, Tablet & Mobile', icon: '📱' },
             { title: 'Full Lifetime Access', icon: '🎯' },
             { title: 'Certificate Of Completion', icon: '📜' },
-            { title: '24 Lessons', icon: '📚' },
-            { title: 'Language - Hindi', icon: '🗣️' },
+            { title: `${noOfLessons} Lessons`, icon: '📚' },
             { title: 'Learn At Your Own Pace', icon: '🚀' },
+            { title: 'Beginner Friendly', icon: '💡' }, // added to make 8
         ],
+
         videoThumbnail: "/api/placeholder/400/250", // You can replace this with actual image
         instructor: "John Doe",
         rating: 4.8,
@@ -129,32 +129,36 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
                     {/* Right Column - Course Details and Actions */}
                     <div className="space-y-6">
                         {/* Course Header */}
-                        <div className="text-justify p-2 w-full">
+                        <div className="p-2 w-full text-justify">
+
                             {/* Title */}
                             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-4 
-                                text-left bg-gradient-to-r from-yellow-400 to-gray-600 text-transparent bg-clip-text">
-                                {courseName} <span className="text-gray-900"></span>
+      text-left bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 
+      text-transparent bg-clip-text drop-shadow-sm">
+                                {courseName}
                             </h1>
 
-
                             {/* Price Section */}
-                            <div className="flex flex-wrap items-center gap-4 ">
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-5 mt-2">
+
                                 {/* Current Price */}
-                                <span className="text-2xl sm:text-4xl font-bold text-yellow-500">
+                                <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-green-600 drop-shadow-sm">
                                     ₹{offerPrice}
                                 </span>
 
                                 {/* Original Price */}
-                                <span className="text-lg sm:text-xl text-gray-500 line-through">
+                                <span className="text-lg sm:text-xl md:text-2xl text-red-500 font-semibold line-through">
                                     ₹{price}
                                 </span>
 
                                 {/* Discount Badge */}
-                                <span className="bg-green-100 text-green-800 px-2 py-1.5 rounded-sm text-sm sm:text-base font-semibold shadow-sm">
-                                    {title} {courseData.discount}
+                                <span className="bg-green-600/10 text-green-700 px-3 py-1.5 rounded-md 
+        text-sm sm:text-base font-semibold shadow-sm border border-green-700/20">
+                                    {courseData.discount}
                                 </span>
                             </div>
                         </div>
+
 
 
                         {/* Course Features Grid */}
@@ -189,18 +193,6 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
                 </div>
             </div>
 
-
-            {/* <div className="max-w-7xl mx-auto py-0 px-2">
-                <h1 className="text-2xl font-bold mb-6 text-gray-900">
-                    Course Content
-                </h1>
-                <CourseContent
-                    sectionTitle="Section 1"
-                    totalLectures={24}
-                    totalDuration="6Hr 0Min"
-                    lectures={lectures}
-                />
-            </div> */}
             <div className="max-w-7xl mx-auto py-0 px-2">
                 <h1 className="text-2xl font-bold mb-6 text-gray-900">
                     Course Content
@@ -210,6 +202,7 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice }:
                     totalLectures={24}
                     totalDuration="6Hr 0Min"
                     lectures={lectures}
+                    noOfLessons={noOfLessons}
                 />
             </div>
 
