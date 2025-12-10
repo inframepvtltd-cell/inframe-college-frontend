@@ -293,7 +293,7 @@ const getDegreeType = (programText: string, courseTitle: string): string => {
   }
   else {
     console.log(programText.replace(/\s+/g, "-").toLowerCase());
-    
+
     return programText.replace(/\s+/g, "-").toLowerCase();
   }
 
