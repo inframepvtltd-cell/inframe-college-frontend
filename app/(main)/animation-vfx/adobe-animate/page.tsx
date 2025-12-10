@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+        title: "Adobe Animate Course: Create Smooth & Engaging Animation.",
+    description: "Master Adobe Animate for web and multimedia—frame-by-frame, motion tweens, and interactive content—so you produce clean, professional animations that grab attention.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent="Create interactive animations and multimedia content using Adobe Animate. This course teaches you how to design vector animations, develop web banners, and build engaging HTML5 content with practical workflows." courseName="Adobe Animate Course"   title="Animation and VFX" price="2499" offerPrice="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

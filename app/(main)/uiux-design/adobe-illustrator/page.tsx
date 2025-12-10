@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Adobe Illustrator: Vector Art & Logo Design",
+  description: "Learn Adobe Illustrator to design clean vector graphics and logos. Master drawing tools, typography, and color techniques for professional creative projects.",
 };
 
 function CourseContent() {
@@ -18,15 +18,15 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
-    
+      <CourseHero noOfHours="12.5" noOfLessons="26"    offerPrice="699"  courseMetaContent="This course provides comprehensive training in Adobe Illustrator, the industry standard for vector graphic design. Students learn to create logos, icons, typography, and complex illustrations with precision. The curriculum covers essential tools, advanced techniques, and workflow optimization for print and digital media projects." courseName="Adobe Illustrator Course" title="UIUX designing" price="1499" />
+
 
       <ComboPack />
-    
+
 
       <CustomizeCourse
         courseTitle="UIUX Design"
-      />       
+      />
       <CourseFeatures />
 
 

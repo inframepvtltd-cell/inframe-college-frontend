@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Adobe XD Course: UI/UX Design Essentials",
+  description: "Learn Adobe XD to design and prototype user-friendly interfaces. Master wireframing, interactive design, and collaboration tools for seamless app and web projects.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  noOfHours="12.5" noOfLessons="150"   courseMetaContent="This course focuses on Adobe XD, a leading tool for UI/UX design and prototyping. Students learn how to design interactive web and mobile app interfaces, create wireframes, and develop prototypes to streamline the user experience design process." courseName="Adobe XD Course"   title="UIUX designing" price="1499" />
     
 
       <ComboPack />

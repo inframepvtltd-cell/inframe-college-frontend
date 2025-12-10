@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "CorelDRAW Course: Expert Vector & Layout Design Skills",
+  description: "Master CorelDRAW for vector art, branding, and print design with practical projects that teach you to create precise, professional-quality graphics from start to finish.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="Jewellery designing" price="1499" />
+      <CourseHero noOfHours="12.5" noOfLessons="42"   courseMetaContent="Master CorelDRAW and Corel PHOTO-PAINT tools for vector illustration and photo editing. This course is designed for graphic designers and marketers aiming for precision in branding, print, and digital media projects." courseName="Corel Draw  Course"   title="Jewellery designing" offerPrice="1499" price="2499" />
     
 
       <ComboPack />

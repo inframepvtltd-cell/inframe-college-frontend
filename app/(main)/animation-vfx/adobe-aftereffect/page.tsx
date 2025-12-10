@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Adobe After Effects Course: Master Motion Graphics",
+    description: "Learn keyframe animation, visual effects, and compositing in Adobe After Effects to create professional motion graphics and stunning video effects efficiently.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="21"   courseMetaContent="Dive into motion graphics and visual effects with Adobe After Effects. This course covers keyframing, compositing, 3D effects, and animation to help you produce cinematic effects and dynamic motion design."          courseName="Adobe AfterEffect Course"   title="Animation and VFX" price="2499" offerPrice="1499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

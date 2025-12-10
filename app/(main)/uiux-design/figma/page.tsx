@@ -9,8 +9,8 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "Figma Course: Practical UI/UX Skills That Matter",
+  description: "This Figma course cuts the fluff and teaches real UI/UX workflow—wireframes, components, prototypes, and clean layouts you can use in client projects.",
 };
 
 function CourseContent() {
@@ -18,7 +18,7 @@ function CourseContent() {
 
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero  title="UIUX designing" price="1499" />
+      <CourseHero  offerPrice="699"  noOfHours="12.5" noOfLessons="150"   courseMetaContent="The Figma Course introduces learners to collaborative interface design using this cloud-based tool. Students master designing user interfaces, creating interactive prototypes, and working in teams remotely, making it essential for modern UX/UI projects."  courseName="Figma Course"  title="UIUX designing" price="1499" />
     
 
       <ComboPack />

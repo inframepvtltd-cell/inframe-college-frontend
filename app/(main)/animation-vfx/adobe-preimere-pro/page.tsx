@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Adobe Premiere Pro Course: Edit Like a Pro Fast",
+    description: "Learn practical video editing with Adobe Premiere Pro—cutting, transitions, color grading, and export workflows—to create polished videos that stand out professionally.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Animation and VFX" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent="Gain expertise in video editing and post-production with Adobe Premiere Pro. Learn timeline editing, color grading, audio mixing, and exporting to produce professional-quality videos for all platforms." offerPrice="1499" courseName="Adobe Preimere Pro Course"  title="Animation and VFX" price="2499" />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Animation and VFX" />

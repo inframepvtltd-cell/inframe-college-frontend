@@ -8,15 +8,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Adobe Premiere Pro: Video Editing Masterclass",
+    description: "Learn Adobe Premiere Pro to edit professional videos with ease. Master cutting, transitions, effects, and color grading for high-quality video production.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent=" The Adobe Premiere Pro Course trains students in professional video editing techniques using this industry-leading software. Covering everything from basic editing workflows to color correction, sound editing, and effects, students gain the ability to produce polished video content for films, commercials, and online platforms."  courseName="Adobe Preimere Pro Course"  title="Graphic Designing" offerPrice="699"price="1499" />
 
             <ComboPack />
 

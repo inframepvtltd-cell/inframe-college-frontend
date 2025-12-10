@@ -9,14 +9,14 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "CorelDRAW Course: Sharp Design Skills for Real Work",
+    description: "Learn practical CorelDRAW tools—vector design, logos, layouts, and print-ready artwork—so you can produce clean, professional designs without wasting time on guesswork.",
 };
 
 function CourseContent() {
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fashion designing" price="1499" />
+            <CourseHero courseMetaContent="Learn CorelDRAW from the ground up to create professional vector graphics, logos, layouts, and illustrations. This course covers essential tools, design principles, and project workflows to make you job-ready for branding and digital design."  courseName="Corel Draw Course"  title="Fashion Designing" price="1999" offerPrice="899"  noOfHours="12.5" noOfLessons="42"  />
             <ComboPack />
             <CustomizeCourse
                 courseTitle="Fashion Design" />

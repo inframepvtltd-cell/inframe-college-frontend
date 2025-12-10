@@ -7,15 +7,17 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Revit Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "AutoCAD 2D & 3D: Complete Design Course",
+    description: "Learn AutoCAD 2D and 3D to create precise technical drawings and 3D models. Master essential skills for architecture, engineering, and design professionals.",
 };
 
 function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Interior designing" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="47"   courseMetaContent="This AutoCAD 2D & 3D Course gives you the skills to create precise technical drawings and solid 3D models used in real architectural and interior projects.
+You learn drafting tools, layers, dimensioning, annotations, layouts, and complete 3D workflows without any unnecessary theory.
+The course trains you to work exactly the way studios expect—clean drawings, accurate models, and professional presentation files." courseName="AutoCad 2D and 3D Course"  title="Interior designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 

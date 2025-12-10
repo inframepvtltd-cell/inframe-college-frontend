@@ -1,5 +1,3 @@
-// "use client"
-// import { useEffect } from "react";
 import ComboPack from "../../../../components/courseDetails/ComboPack";
 import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
@@ -11,42 +9,24 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-  title: "AutoCad Course | Inframe School",
-  description: "Learn user experience and interface design with real projects.",
+  title: "UI/UX Design Bundle: Adobe & Figma Tools",
+  description: "Learn UI/UX design using Adobe Illustrator, Photoshop, InDesign, XD, Figma, and Sketch in one easy-to-follow bundle. Perfect for creating modern digital designs.",
 };
 
 function CourseContent() {
-  // const [isFormOpen, setIsFormOpen] = useState(false);
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
-  //   script.async = true;
-  //   document.body.appendChild(script);
-  // }, []);
-  const graphicDesignSoftware = [
-    { id: "1", name: "Adobe Photoshop", price: 1999, category: "design" },
-    { id: "2", name: "Adobe Illustrator", price: 1999, category: "design" },
-    { id: "3", name: "Figma", price: 1499, category: "ui-ux" },
-    { id: "4", name: "Canva Pro", price: 999, category: "design" },
-    { id: "5", name: "Adobe InDesign", price: 1799, category: "publishing" },
-    { id: "6", name: "CorelDRAW", price: 1599, category: "design" }
-  ]
-
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero title="UIUX designing" price="1499" />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+      <CourseHero noOfHours="12.5" noOfLessons="150" offerPrice="1499" courseMetaContent="This UI/UX Design Bundle Course gives you the complete skillset to design modern, functional digital interfaces. You start with Adobe Illustrator and Photoshop to create icons, UI graphics, and clean visual assets. InDesign helps you build neat documentation and case-study layouts.
+
+      Then you move into real product-design tools: Adobe XD for wireframes and interactive prototypes, Figma for interface design and team collaboration, and Sketch for Mac-based UI workflows.
+
+      You finish with the ability to plan user flows, design polished screens, create components, and build interactive prototypes that look good and work smoothly — exactly what product teams expect from a UI/UX designer." courseName="UiUX Design Bundle Course" title="UIUX designing" price="8994" />
 
       <ComboPack />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
 
-      <CustomizeCourse
-        courseTitle="UIUX Design"
-        // availableSoftware={graphicDesignSoftware}
-      />         {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+      <CustomizeCourse courseTitle="UIUX Design" />
+
       <CourseFeatures />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-      {/* < DreamsSection /> */}
 
       < DreamsSection />
 

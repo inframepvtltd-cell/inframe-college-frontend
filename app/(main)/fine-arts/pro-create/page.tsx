@@ -7,15 +7,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Procreate Course: Master Digital Art & Illustration",
+    description: "Learn Procreate essentials—brush techniques, layering, and digital painting—to create stunning illustrations and artwork with precision and professional polish.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Fine Arts" price="1499" />
+            <CourseHero  noOfHours="12.5" noOfLessons="150"   courseMetaContent="Unlock your digital drawing and painting potential with Procreate on iPad. This course focuses on brush techniques, layering, and creative workflows to develop professional-quality illustrations and concept art." offerPrice="699"  courseName="Pro-Create Course"   price="1499"  title="Fine Arts"  />
 
             <ComboPack />
 

@@ -8,15 +8,15 @@ import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
 
 export const metadata = {
-    title: "Sketchup Course | Inframe School",
-    description: "Learn user experience and interface design with real projects.",
+    title: "Maya Course: 3D Modeling & Animation Basics",
+    description: "Learn Autodesk Maya to create 3D models and animations. Master essential tools for character design, rigging, and visual effects in film and games.",
 };
 
 function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Graphic Designing" price="1499" />
+            <CourseHero courseMetaContent="The Maya Course offers in-depth training in 3D modeling, animation, and rendering with Autodesk Maya. Students will develop skills in character rigging, texturing, lighting, and simulation, enabling them to create high-quality assets for films, games, and visual effects industries."  noOfHours="12.5" noOfLessons="42"  courseName="Maya Course"  title="Graphic Designing Course" offerPrice="699" price="1499" />
 
             <ComboPack />
 
