@@ -1,16 +1,10 @@
 "use client";
 
-import React from "react";
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-// } from "../components/ui/carousel";
-// import { Card } from "../components/ui/card";
-// import { testimonials } from "../utils/constant";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay/react";
+
 import { Star } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem } from "../../../components/ui/carousel";
 import { testimonials } from "../../../utils/constant";
