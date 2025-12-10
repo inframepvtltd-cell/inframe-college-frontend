@@ -40,28 +40,7 @@ function AutoCadComponent() {
   ]
   return (
     <div className="bg-white text-black mt-20">
-      <CourseHero title="Digital Markteting" price="1499" />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-
-      <ComboPack />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-
-       <CustomizeCourse
-                      courseTitle="Digital Markteting"
-                      // availableSoftware={graphicDesignSoftware}
-                  />      
-
-      <CourseFeatures />
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-      {/* < DreamsSection /> */}
-      {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
-      < DreamsSection />
-
-      <WhyChooseUs />
-
-      <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-        <FAQSection />
-      </div>
+ <h1>helloworld</h1>
     </div>
   );
 }
