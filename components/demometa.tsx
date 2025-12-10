@@ -20,14 +20,9 @@ export default function PageClient() {
   ]
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero title="Digital Markteting" price="1499" />
-            <ComboPack />
-            <CourseFeatures />
- <CustomizeCourse
-                      courseTitle="Graphic Design"
-                      // availableSoftware={graphicDesignSoftware}
-                  />        
-                            <WhyChooseUs />
+            {/* <CourseHero title="Digital Markteting" price="1499" /> */}
+
+            <p>hello world</p>
         </div>
     );
 }
