@@ -545,8 +545,10 @@ export interface FreeCoursesResponse {
 
 // Get the backend URL from environment variables
 // Hardcode the URLs to ensure they work in production
-export const BACKEND_URL = 'https://backend-rakj.onrender.com';
-export const API_BASE_URL = 'https://backend-rakj.onrender.com';
+export const BACKEND_URL = 'http://localhost:5500';
+export const API_BASE_URL = 'http://localhost:5500';
+// export const BACKEND_URL = 'https://backend-rakj.onrender.com';
+// export const API_BASE_URL = 'https://backend-rakj.onrender.com';
 
 // Export config for BackendStatus component
 export const config = {
@@ -832,8 +834,6 @@ export const API_ENDPOINTS = {
   HEALTH_CHECK: '/api/v1/health',
 };
 
-
-
 // Helper functions for common API calls
 export const apiHelpers = {
   // Health check
@@ -846,8 +846,6 @@ export const apiHelpers = {
       throw error;
     }
   },
-
-  
 
   // Submit application
   submitApplication: async (applicationData: any) => {
@@ -3401,3 +3399,4 @@ export const transformCurriculumData = (curriculumArray: any[]): any => {
 
   return curriculumObj;
 };
+

@@ -8,6 +8,10 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"], // Optimized for modern browsers
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
         protocol: 'https',
         hostname: 'miro.medium.com'
       },
@@ -94,7 +98,7 @@ const nextConfig = {
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
- 
+
     contentSecurityPolicy:
       "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; media-src 'none'; frame-src 'none';",
   },

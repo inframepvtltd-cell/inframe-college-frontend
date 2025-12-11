@@ -17,7 +17,7 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-const Navbar = () => {
+export const Navbar = () => {
   const [openSheet, setOpenSheet] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -169,4 +169,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+// export default Navbar;

@@ -832,8 +832,6 @@ export const API_ENDPOINTS = {
   HEALTH_CHECK: '/api/v1/health',
 };
 
-
-
 // Helper functions for common API calls
 export const apiHelpers = {
   // Health check
@@ -846,8 +844,6 @@ export const apiHelpers = {
       throw error;
     }
   },
-
-  
 
   // Submit application
   submitApplication: async (applicationData: any) => {

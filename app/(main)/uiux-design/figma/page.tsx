@@ -7,6 +7,7 @@ import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
 
 export const metadata = {
   title: "Figma Course: Practical UI/UX Skills That Matter",
@@ -35,8 +36,7 @@ function CourseContent() {
       <WhyChooseUs />
 
       <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-        <FAQSection />
-      </div>
+  <FAQComponent courseType="uiux" />      </div>
     </div>
   );
 }
