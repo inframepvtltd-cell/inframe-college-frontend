@@ -55,7 +55,8 @@ export function ContactUsForm({
       formData.append("email", data.email);
       formData.append("message", data.message);
 
-      const response = await fetch("https://formspree.io/f/xvgzkown", {
+      const response = await fetch("https://formspree.io/f/myzrbywp", {
+      // const response = await fetch("https://formspree.io/f/xvgzkown", {
         method: "POST",
         body: formData,
       });
