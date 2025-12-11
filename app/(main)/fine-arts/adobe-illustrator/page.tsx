@@ -5,6 +5,7 @@ import CustomizeCourse from "../../../../components/courseDetails/CustomizePack"
 import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
 
 export const metadata = {
     title: "Sketchup Course | Inframe School",
@@ -15,7 +16,7 @@ function CourseContent() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero courseMetaContent=""  noOfHours="12.5" noOfLessons="150"   courseName="Adobe Illustrator Course"   offerPrice="699" price="1499"    title="Fine Arts" />
+            <CourseHero courseMetaContent="" noOfHours="12.5" noOfLessons="150" courseName="Adobe Illustrator Course" offerPrice="699" price="1499" title="Fine Arts" />
 
             <ComboPack />
 
@@ -29,7 +30,7 @@ function CourseContent() {
             <WhyChooseUs />
 
             <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-                <FAQSection />
+                <FAQComponent courseType="finearts" />  
             </div>
         </div>
     );

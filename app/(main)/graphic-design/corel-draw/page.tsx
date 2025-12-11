@@ -3,9 +3,9 @@ import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
 import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
 import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
-import PageClient from "../../../../components/demometa";
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
 
 export const metadata = {
     title: "CorelDRAW Vector & Layout Design Course",
@@ -35,7 +35,7 @@ If you want solid CorelDRAW skills that actually hold up in real projects, this 
             <WhyChooseUs />
 
             <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-                <FAQSection />
+                <FAQComponent courseType="graphic" />
             </div>
         </div>
     );

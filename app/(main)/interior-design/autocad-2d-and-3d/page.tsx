@@ -5,6 +5,7 @@ import CustomizeCourse from "../../../../components/courseDetails/CustomizePack"
 import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
 
 export const metadata = {
     title: "AutoCAD 2D & 3D: Complete Design Course",
@@ -15,9 +16,9 @@ function Page() {
 
     return (
         <div className="bg-white text-black mt-20">
-            <CourseHero  noOfHours="12.5" noOfLessons="47"   courseMetaContent="This AutoCAD 2D & 3D Course gives you the skills to create precise technical drawings and solid 3D models used in real architectural and interior projects.
+            <CourseHero noOfHours="12.5" noOfLessons="47" courseMetaContent="This AutoCAD 2D & 3D Course gives you the skills to create precise technical drawings and solid 3D models used in real architectural and interior projects.
 You learn drafting tools, layers, dimensioning, annotations, layouts, and complete 3D workflows without any unnecessary theory.
-The course trains you to work exactly the way studios expect—clean drawings, accurate models, and professional presentation files." courseName="AutoCad 2D and 3D Course"  title="Interior designing" price="1499" offerPrice="699" />
+The course trains you to work exactly the way studios expect—clean drawings, accurate models, and professional presentation files." courseName="AutoCad 2D and 3D Course" title="Interior designing" price="1499" offerPrice="699" />
 
             <ComboPack />
 
@@ -29,7 +30,7 @@ The course trains you to work exactly the way studios expect—clean drawings, a
             <WhyChooseUs />
 
             <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-                <FAQSection />
+                <FAQComponent courseType="interior" />
             </div>
         </div>
     );

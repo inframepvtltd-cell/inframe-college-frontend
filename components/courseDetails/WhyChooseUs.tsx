@@ -46,6 +46,7 @@ export default function WhyChooseUs() {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }

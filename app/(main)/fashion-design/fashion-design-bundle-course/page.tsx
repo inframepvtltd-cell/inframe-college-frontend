@@ -4,9 +4,9 @@ import CourseHero from "../../../../components/courseDetails/courseDetails";
 import CourseFeatures from "../../../../components/courseDetails/courseFeature";
 import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
 import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
-import PageClient from "../../../../components/demometa";
 import DreamsSection from "../../../../components/DreamSection";
 import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
 
 export const metadata = {
     title: "Fashion Design Bundle: Corel, Illustrator & Photoshop",
@@ -31,7 +31,7 @@ By the end of this course, you can sketch, illustrate, edit, and prepare digital
             <WhyChooseUs />
 
             <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
-                <FAQSection />
+                <FAQComponent courseType="fashion" />
             </div>
         </div>
     );
