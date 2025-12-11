@@ -85,11 +85,6 @@ function QuickPayment({ price }: { price: string }) {
                 </div>
             </button>
 
-
-            {/* <p className="text-base sm:text-lg text-gray-600 flex items-center justify-center gap-2">
-                <span className="text-yellow-500">⚡</span>
-                Limited time offer - Don't miss out!
-            </p> */}
         </div>
     )
 }

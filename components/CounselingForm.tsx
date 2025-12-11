@@ -56,7 +56,8 @@ const CounselingForm = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await fetch("https://formspree.io/f/mvgzgpwl", {
+      // const response = await fetch("https://formspree.io/f/mvgzgpwl", {
+      const response = await fetch("https://formspree.io/f/myzrbywp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

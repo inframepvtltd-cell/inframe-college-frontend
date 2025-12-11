@@ -390,13 +390,6 @@ function CivilArch() {
                             </ul>
                         </div>
 
-                        {/* CTA Button */}
-                        {/* Floating Buy Now Button */}
-                        {/* Floating Buy Now Button */}
-                        {/* <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
-                            <QuickPayment />
-                        </div> */}
-                        {/* Floating Buy Now Button */}
                         <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
                             <QuickPayment price="14999" />
                         </div>
