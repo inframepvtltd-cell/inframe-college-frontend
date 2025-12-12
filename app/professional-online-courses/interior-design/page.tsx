@@ -377,7 +377,7 @@ function InteriorDesign() {
             </div>
 
             {/* Floating Buy Now Button */}
-            <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
+            <div className="fixed bottom-10 right-0 z-50 ">
                 <QuickPayment price="7496" courseName="Interior Design" />
             </div>
 

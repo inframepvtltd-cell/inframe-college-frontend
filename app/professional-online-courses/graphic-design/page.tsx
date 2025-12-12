@@ -367,9 +367,14 @@ export default function LandingPage() {
             </div>
             {/* CTA Button */}
             {/* Floating Buy Now Button */}
-            <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
+            {/* <div className="fixed bottom-4 right-4 z-50 animate-bounce hover:animate-pulse">
+                <QuickPayment price="5496" courseName="Graphic Design" />
+            </div> */}
+
+            <div className="fixed bottom-10 right-0 z-50 ">
                 <QuickPayment price="5496" courseName="Graphic Design" />
             </div>
+
 
             {/* Footer */}
             <div className="animate-fade-in-up">
