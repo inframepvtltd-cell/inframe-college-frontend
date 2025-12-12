@@ -118,7 +118,7 @@ const ApplyNowForm = ({
 
     try {
       const response = await fetch("https://formspree.io/f/myzrbywp", {
-      // const response = await fetch("https://formspree.io/f/mvgzrnyl", {
+        // const response = await fetch("https://formspree.io/f/mvgzrnyl", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
