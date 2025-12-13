@@ -101,7 +101,7 @@ export default function LandingPage() {
                 <div className="container mx-auto min-w-full px-4 sm:px-0">
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
-                        <CourseInfo theme="purple" projects="50" title="Graphic Design Course" priceWithDiscount="5,996" originalPrice='19,987' />
+                        <CourseInfo theme="purple" projects="50" title="Graphic Design Course" priceWithDiscount="1,499" originalPrice='5,996' />
 
                         {/* pricing banner Section */}
                         <div className="relative mt-5 w-full h-[25vh] sm:h-[45vh] md:h-[86vh] overflow-hidden">
@@ -405,7 +405,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
             </div> */}
 
             <div className="fixed bottom-10 right-0 z-50 ">
-                <QuickPayment price="5996" courseName="Graphic Design" />
+                <QuickPayment price="1499" courseName="Graphic Design" />
             </div>
 
 
