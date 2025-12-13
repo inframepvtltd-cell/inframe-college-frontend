@@ -5,7 +5,8 @@ import "./globals.css";
 import Head from "next/head"; // Import Next.js Head component
 import Script from "next/script";
 import { headers } from "next/headers";
-
+// import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -181,6 +182,12 @@ export default async function RootLayout({
 
 
         {children}
+         {/* <Toaster position="top-right" /> */}
+         <Toaster
+          position="top-center"
+          richColors
+          closeButton
+        />
       </body>
     </html>
   );

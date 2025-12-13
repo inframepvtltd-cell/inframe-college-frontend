@@ -1,6 +1,8 @@
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react'
 
 function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string, priceWithDiscount: string, originalPrice: string, }) {
+    const router = useRouter();
     const features = [
         "Become an Interior Designer",
         "Master 4+ Industry Tools",
@@ -13,6 +15,52 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
         "Access to Downloadable Study Material",
         "Lifetime Access to Recorded Sessions"
     ];
+    console.log(originalPrice);
+    console.log(priceWithDiscount);
+
+
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
+    const handleBuyNow = async () => {
+        const options = {
+            key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Razorpay test key
+            amount: priceWithDiscount + "00",//149900,
+            currency: "INR",
+            name: "Inframe College",
+            description: "Interior Design Course Enrollment",
+            image: "/pixelcut-export4.png",
+            handler: function (response: { razorpay_payment_id: string; }) {
+                // alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                router.push("/order-confirmation");
+            },
+            method: {
+                upi: true,
+                card: true,
+                netbanking: true,
+                wallet: true,
+            },
+
+            prefill: {
+                name: "",
+                email: "",
+                contact: "",
+            },
+            notes: {
+                course: "Interior Design",
+            },
+            theme: {
+                color: "#FACC15", // yellow theme
+            },
+        };
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+    };
 
     return (
         <div className="w-full flex justify-center">
@@ -60,6 +108,17 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
                                     ₹{priceWithDiscount}
                                 </div>
                                 <div className="text-xs md:text-sm opacity-90 mt-1">Lifetime Access</div>
+                                <button
+                                    onClick={handleBuyNow}
+                                    className="relative overflow-hidden bg-gradient-to-r 
+          from-black via-gray-900 to-black text-white
+          px-2 py-3 sm:px-8 sm:py-4  rounded-lg
+          text-lg sm:text-2xl font-semibold border border-yellow-400 shadow-xl mb-4
+          hover:scale-[1.03] active:scale-95 transition-all duration-300
+          shine-btn"
+                                >
+                                    Proceed To
+                                </button>
                             </div>
 
                             {/* YOU SAVE */}
