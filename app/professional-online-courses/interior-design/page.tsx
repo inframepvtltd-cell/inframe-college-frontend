@@ -18,6 +18,7 @@ import TestimonialCarousel from '../../../components/TestimonialSection ';
 
 // import { SiAutodesk, SiSketchup, SiAdobephotoshop } from "react-icons/si";
 import { FaCubes } from "react-icons/fa";
+import FAQComponent from '../components/FaqComponent';
 // import RevitIcon from "./RevitIcon"; // custom SVG component
 function InteriorDesign() {
     const router = useRouter();
@@ -38,18 +39,20 @@ function InteriorDesign() {
 
     const works = [
         "/landingImages/interior-design/2 daining render copy.jpg",
-        "/landingImages/interior-design/Celebrity-Homes-Mollywood-Malayalam-Actor-Anoop-Menons-Guest-House-Done-by-Dlife-interiors-.jpg",
         "/landingImages/interior-design/fainal nighat ji render 1.jpg",
-        "/landingImages/interior-design/FINAL-LIV-2-360x300.webp",
-        "/landingImages/interior-design/hq720.jpg",
-        "/landingImages/interior-design/images.jpg",
-        "/landingImages/interior-design/istockphoto-1365110240-612x612.jpg",
-        "/landingImages/interior-design/istockphoto-1490571644-612x612.jpg",
         "/landingImages/interior-design/nighat ji dining 1 render .jpg",
         "/landingImages/interior-design/nighat ji second render copy.jpg",
         "/landingImages/interior-design/open restaurant jalore 3d.jpg",
-        "/landingImages/interior-design/pexels-fotoaibe-1571458.jpg",
-        // "/landingImages/interior-design/premium_photo-1663126298656-33616be83c   32.jpg",
+
+        "/landingImages/civil/SURESH JI  3D 2.jpg",
+        "/landingImages/civil/resort 3d render 1 ..jpg",
+        "/landingImages/civil/pawan ji   3d render.jpg",
+        "/landingImages/civil/open restaurant 2 3d.jpg",
+        "/landingImages/civil/3d render 3.jpg",
+        "/landingImages/civil/3d render 2.jpg",
+        "/landingImages/civil/3d House 3 render.jpg",
+        "/landingImages/interior-design/fainal nighat ji render 1.jpg",
+        "/landingImages/interior-design/hq720.jpg"
     ];
 
     const targetAudience = [
@@ -108,13 +111,13 @@ function InteriorDesign() {
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo title="Interior Design Course" priceWithDiscount="7496" originalPrice='24,986' />
+                            <CourseInfo theme="yellow" projects="" title="Interior Design Course" priceWithDiscount="10,493" originalPrice='34,977' />
                         </div>
 
                         {/* Pricing Banner Section */}
                         <div className="relative mt-5 w-full h-[27vh] sm:h-[45vh] md:h-[85vh] overflow-hidden">
                             <Image
-                                src={"/landingImages/course landscape-01-01.jpg"}
+                                src={"/landingImages/course landscape-01-01-01.jpg"}
                                 alt="Hero Banner"
                                 fill
                                 priority
@@ -199,11 +202,11 @@ function InteriorDesign() {
                                                 leading-relaxed
                                             ">
                                     This is a
-                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course</span>
+                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course </span>
                                     that includes
-                                    <span className="font-bold"> Pre-Recorded Video Lessons</span>
+                                    <span className="font-bold"> Pre-Recorded Video Lessons </span>
                                     along with
-                                    <span className="font-bold"> Live Doubt-Clearing Sessions</span>
+                                    <span className="font-bold"> Live Doubt-Clearing Sessions </span>
                                     for complete support.
                                 </p>
 
@@ -283,7 +286,7 @@ function InteriorDesign() {
                         {/* Projects Highlight */}
                         <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 sm:p-8  border-l-4 border-yellow-500 border-2 0 mb-12 sm:mb-16 text-center shadow-lg">
                             <p className="text-xl sm:text-4xl text-black font-bold">
-                                🚀 Yes 4+ hands on projects that make your CV look great.
+                                🚀 Yes 8+ hands on projects that make your CV look great.
                             </p>
                         </div>
 
@@ -318,7 +321,9 @@ function InteriorDesign() {
                         <StudentsWork
                             images={works}
                             title="Our Students’ Creative Gallery"
-                            description="This gallery celebrates the visual imagination and storytelling power of our Graphic Design students. Every piece reflects a strong sense of creativity, brand awareness, and communication strategy. Students explore color psychology, layout balance, visual hierarchy, and creative composition to produce designs that speak clearly and emotionally. From bold advertising concepts to refined brand identities and artistic digital visuals, this work showcases their ability to transform ideas into eye-catching and meaningful designs. Their projects reflect both artistic expression and professional design thinking, ready for industry-level presentation."
+                            description="This gallery showcases the creative vision and technical expertise of our Interior Design students through detailed 3D visualizations and spatial concepts. The displayed works represent a blend of design thinking, aesthetics, functionality, and digital precision.
+
+                            Each 3D model and rendered space reflects the student’s understanding of form, material, lighting, and spatial planning. From residential interiors to commercial concepts, these projects demonstrate how ideas are transformed into realistic, immersive environments using advanced 3D software."
                         />
 
                         <div className="w-44 mb-10 h-1 bg-yellow-500 mx-auto rounded-full"></div>
@@ -328,7 +333,7 @@ function InteriorDesign() {
                         {/* CEO Banner Section */}
                         <div className="relative w-full h-[28vh] sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
                             <Image
-                                src={"/landingImages/website.png"}
+                               src={"/landingImages/by fb sir.png"}
                                 alt="Hero Banner"
                                 fill
                                 priority
@@ -337,27 +342,57 @@ function InteriorDesign() {
                         </div>
 
                         {/* Final CTA Section */}
-                        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 mt-10 p-6 sm:p-8 text-center shadow-xl border-2 border-yellow-300">
-                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-black mb-2">
-                                🎁 Special New Year Offer!
+                        {/* Final CTA Section */}
+                        <div className="mt-5 
+                bg-gradient-to-r from-yellow-400 to-yellow-500 
+                px-5 sm:px-8 lg:px-12 
+                py-8 sm:py-10 lg:py-12 
+                text-center shadow-xl border border-yellow-300">
+
+                            {/* Heading */}
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl 
+                   font-extrabold text-black mb-3">
+                                🎁 Special New Year Offer
                             </h3>
 
-                            <p className="text-black font-semibold text-base sm:text-lg mb-4">
-                                Enroll now and get exclusive benefits:
+                            {/* Subheading */}
+                            <p className="text-black font-semibold 
+                  text-base sm:text-lg lg:text-xl 
+                  mb-6">
+                                Enroll now and get exclusive benefits
                             </p>
 
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 max-w-xl mx-auto">
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Free Portfolio Building
+                            {/* Benefits */}
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 
+                   gap-4 sm:gap-5 
+                   max-w-3xl mx-auto">
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Free Portfolio Building
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> 1-on-1 Career Guidance
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    1-on-1 Career Guidance
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Industry Certifications
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Industry Certifications
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Lifetime Access to Resources
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Lifetime Access
                                 </li>
                             </ul>
                         </div>
@@ -369,7 +404,8 @@ function InteriorDesign() {
                         {/* FAQ Section */}
                         <div className="w-full flex justify-center">
                             <div className="w-full max-w-4xl animate-slide-up-smooth">
-                                <FAQSection />
+                                {/* <FAQSection /> */}
+                                <FAQComponent courseType="interior" />
                             </div>
                         </div>
                     </div>
@@ -378,7 +414,7 @@ function InteriorDesign() {
 
             {/* Floating Buy Now Button */}
             <div className="fixed bottom-10 right-0 z-50 ">
-                <QuickPayment price="7496" courseName="Interior Design" />
+                <QuickPayment price="10493" courseName="Interior Design" />
             </div>
 
             {/* Footer */}

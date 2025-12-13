@@ -12,8 +12,8 @@ import FAQSection from '../components/faq';
 import StudentsWork from '../components/studentsWork';
 import TestimonialCarousel from '../../../components/TestimonialSection ';
 import FeaturesSection from '../components/featureSection';
-
 import { useRef } from "react";
+import FAQComponent from '../components/FaqComponent';
 
 export default function LandingPage() {
     const router = useRouter();
@@ -35,11 +35,11 @@ export default function LandingPage() {
         "/graphic-design/logo making.jpg",
         "/graphic-design/BANNER.jpg",
         "/graphic-design/1000045472.jpg",
-        "/graphic-design/61MEWLSO1tL._SL1080_.jpg",
+        // "/graphic-design/61MEWLSO1tL._SL1080_.jpg",
         "/graphic-design/object design.jpg",
         "/graphic-design/watch design-01 - Copy.jpg",
         "/graphic-design/vector pen tool.jpg",
-        "/graphic-design/youtube thumnail.png",
+        // "/graphic-design/youtube thumnail.png",
     ];
     useEffect(() => {
         const script = document.createElement("script");
@@ -89,7 +89,7 @@ export default function LandingPage() {
             <HeroSection offPercentage="70%" />
             <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
-                    src="/landingImages/we banner.png"
+                    src="/landingImages/website1.png"
                     alt="Hero Banner"
                     fill
                     priority
@@ -101,12 +101,12 @@ export default function LandingPage() {
                 <div className="container mx-auto min-w-full px-4 sm:px-0">
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
-                        <CourseInfo title="Graphic Design Course" priceWithDiscount="5496" originalPrice='18,320' />
+                        <CourseInfo theme="purple" projects="50" title="Graphic Design Course" priceWithDiscount="5,996" originalPrice='19,987' />
 
                         {/* pricing banner Section */}
                         <div className="relative mt-5 w-full h-[25vh] sm:h-[45vh] md:h-[86vh] overflow-hidden">
                             <Image
-                                src={"/landingImages/GrapLandscape-01.jpg"}
+                                src={"/landingImages/Grap Landscape-01-01.jpg"}
                                 alt="Hero Banner"
                                 fill
                                 priority
@@ -190,11 +190,11 @@ export default function LandingPage() {
                                                 leading-relaxed
                                             ">
                                     This is a
-                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course</span>
+                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course </span>
                                     that includes
-                                    <span className="font-bold"> Pre-Recorded Video Lessons</span>
+                                    <span className="font-bold"> Pre-Recorded Video Lessons </span>
                                     along with
-                                    <span className="font-bold"> Live Doubt-Clearing Sessions</span>
+                                    <span className="font-bold"> Live Doubt-Clearing Sessions </span>
                                     for complete support.
                                 </p>
 
@@ -273,7 +273,7 @@ export default function LandingPage() {
                         {/* Projects Highlight */}
                         <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 sm:p-8  border-l-4 border-yellow-500 border-2 0 mb-12 sm:mb-16 text-center shadow-lg">
                             <p className="text-xl sm:text-4xl text-black font-bold">
-                                🚀 Yes 4+ hands on projects that make your CV look great.
+                                🚀 Yes 50+ hands on projects that make your CV look great.
                             </p>
                         </div>
 
@@ -311,7 +311,9 @@ export default function LandingPage() {
                         <StudentsWork
                             images={works}
                             title="Our Students’ Creative Gallery"
-                            description="This gallery celebrates the visual imagination and storytelling power of our Graphic Design students. Every piece reflects a strong sense of creativity, brand awareness, and communication strategy. Students explore color psychology, layout balance, visual hierarchy, and creative composition to produce designs that speak clearly and emotionally. From bold advertising concepts to refined brand identities and artistic digital visuals, this work showcases their ability to transform ideas into eye-catching and meaningful designs. Their projects reflect both artistic expression and professional design thinking, ready for industry-level presentation."
+                            description="This gallery showcases the creative thinking and visual communication skills of our Graphic Design students. The displayed works represent a wide range of design disciplines, including branding, typography, illustration, advertising, layout design, and digital media.
+
+Each project reflects the student’s ability to translate ideas into impactful visual solutions, balancing creativity with clarity and purpose. Through thoughtful use of color, form, imagery, and typography, these designs communicate messages that are engaging, meaningful, and visually compelling."
                         />
 
                         <div className="w-44 mb-10 h-1 bg-yellow-500 mx-auto rounded-full"></div>
@@ -319,9 +321,9 @@ export default function LandingPage() {
                         {/* placement partners */}
                         <Carrousal />
                         {/* CEO Banner Section */}
-                        <div className="relative w-full h-[28vh] sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
+                        <div className="relative w-full h-[28vh] bg-blue-950 sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
                             <Image
-                                src={"/landingImages/website.png"}
+                                src={"/landingImages/by fb sir.png"}
                                 alt="Hero Banner"
                                 fill
                                 priority
@@ -330,27 +332,57 @@ export default function LandingPage() {
                         </div>
 
                         {/* Final CTA Section */}
-                        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 mt-10 p-6 sm:p-8 text-center shadow-xl border-2 border-yellow-300 ">
-                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-black mb-2">
-                                🎁 Special New Year Offer!
+                        {/* Final CTA Section */}
+                        <div className="mt-5 
+                bg-gradient-to-r from-yellow-400 to-yellow-500 
+                px-5 sm:px-8 lg:px-12 
+                py-8 sm:py-10 lg:py-12 
+                text-center shadow-xl border border-yellow-300">
+
+                            {/* Heading */}
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl 
+                   font-extrabold text-black mb-3">
+                                🎁 Special New Year Offer
                             </h3>
 
-                            <p className="text-black font-semibold text-base sm:text-lg mb-4">
-                                Enroll now and get exclusive benefits:
+                            {/* Subheading */}
+                            <p className="text-black font-semibold 
+                  text-base sm:text-lg lg:text-xl 
+                  mb-6">
+                                Enroll now and get exclusive benefits
                             </p>
 
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 max-w-xl mx-auto">
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Free Portfolio Building
+                            {/* Benefits */}
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 
+                   gap-4 sm:gap-5 
+                   max-w-3xl mx-auto">
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Free Portfolio Building
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> 1-on-1 Career Guidance
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    1-on-1 Career Guidance
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Industry Certifications
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Industry Certifications
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Lifetime Access to Resources
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Lifetime Access
                                 </li>
                             </ul>
                         </div>
@@ -358,9 +390,10 @@ export default function LandingPage() {
                         <FeaturesSection />
 
                         <div className="w-full flex justify-center">
-                            <div className="w-full max-w-4xl animate-slide-up-smooth">
-                                <FAQSection />
-                            </div>
+                            {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
+                            {/* <FAQSection /> */}
+                            <FAQComponent courseType="graphic" />
+                            {/* </div> */}
                         </div>
                     </div>
                 </div>
@@ -372,7 +405,7 @@ export default function LandingPage() {
             </div> */}
 
             <div className="fixed bottom-10 right-0 z-50 ">
-                <QuickPayment price="5496" courseName="Graphic Design" />
+                <QuickPayment price="5996" courseName="Graphic Design" />
             </div>
 
 
