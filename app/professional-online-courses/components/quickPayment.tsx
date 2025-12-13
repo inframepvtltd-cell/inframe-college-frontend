@@ -118,6 +118,18 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
                     ondismiss: function () {
                         toast.warning("Payment was cancelled", {
                             description: "No amount was charged. You can try again anytime.",
+                            duration: 5000,
+                            position: 'top-center', // or 'bottom-center'
+                            classNames: {
+                                toast: 'w-full max-w-md text-lg',
+                                title: 'text-xl font-semibold',
+                                description: 'text-base',
+                            },
+                            style: {
+                                minWidth: '450px',
+                                padding: '24px',
+                                margin: '0 auto',
+                            },
                         });
                         console.log("Razorpay closed by user");
                         setLoading(false);
@@ -147,44 +159,112 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
     };
 
     const handleFormSubmit = async (e: React.FormEvent) => {
+        
         e.preventDefault();
-        setShowForm(false)
-        // toast.loading("Verifying your details...", { id: "verify" });
-        const toastId = toast.loading("Verifying your details...");
+        setShowForm(false);
 
-        await sendLeadEmail();
+        // 🔄 Elegant loading toast
+        const toastId = toast.loading(
+            <div className="flex items-center gap-4">
+                <div className="relative h-12 w-12">
+                    <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-yellow-400 border-t-transparent animate-spin"></div>
+                </div>
 
-        const url = "https://script.google.com/macros/s/AKfycbyuRyKXdCQX-IEMbRLuJxEFbzx5Xeq0_OZcY_aWeJE_q4_AU8AaGP2BFsFhoJr7IHDx/exec"
+                <div className="space-y-1">
+                    <p className="font-semibold text-gray-900 text-lg">
+                        Verifying your details
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                        Preparing payment for <span className="font-medium">{courseName}</span>
+                    </p>
+                </div>
+            </div>,
+            {
+                position: "top-center",
+                duration: Infinity,
+                style: {
+                    minWidth: "360px",
+                    padding: "22px 26px",
+                    borderRadius: "18px",
+                    background: "#ffffff",
+                    boxShadow: "0 25px 70px rgba(0,0,0,0.18)",
+                },
+            }
+        );
+
         try {
-            await fetch("/api/add-to-sheet", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: user.name,
-                    email: user.email,
-                    contact: user.contact,
-                    courseName,
-                    price,
+            await Promise.all([
+                sendLeadEmail(),
+                fetch("/api/add-to-sheet", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                        contact: user.contact,
+                        courseName,
+                        price,
+                    }),
                 }),
-            });
+            ]);
 
-            // toast.success("Details verified. Redirecting to payment 🚀", {
-            //     id: "verify",
-            // });
-            toast.success("Details verified. Redirecting to payment", {
-                id: toastId,
-            });
-            setTimeout(handleBuyNow, 800);
-            console.log("Data added to Google Sheet successfully");
+            // ✅ Success toast
+            toast.success(
+                <div className="text-center space-y-1">
+                    <p className="font-bold text-lg text-green-800">
+                        🎉 Verification Complete
+                    </p>
+                    <p className="text-gray-700 text-sm">
+                        Redirecting you to secure payment
+                    </p>
+                    <p className="text-green-700 font-semibold text-lg mt-1">
+                        ₹{price}
+                    </p>
+                </div>,
+                {
+                    id: toastId,
+                    duration: 2200,
+                    position: "top-center",
+                    style: {
+                        minWidth: "360px",
+                        padding: "22px 26px",
+                        borderRadius: "18px",
+                        background: "#ecfdf5",
+                        border: "2px solid #6ee7b7",
+                    },
+                }
+            );
+
+            setTimeout(handleBuyNow, 2200);
+
         } catch (err) {
-            // console.error("Failed to insert data into Google Sheet", err);
-            toast.error("Verification failed. Please try again.", {
-                id: toastId,
-            });
+            // ❌ Error toast
+            toast.error(
+                <div className="text-center space-y-1">
+                    <p className="font-bold text-lg text-red-800">
+                        ⚠️ Verification Failed
+                    </p>
+                    <p className="text-gray-700 text-sm">
+                        Please try again or contact support
+                    </p>
+                </div>,
+                {
+                    id: toastId,
+                    duration: 4000,
+                    position: "top-center",
+                    style: {
+                        minWidth: "360px",
+                        padding: "22px 26px",
+                        borderRadius: "18px",
+                        background: "#fef2f2",
+                        border: "2px solid #fca5a5",
+                    },
+                }
+            );
         }
-
-        // handleBuyNow();
     };
+
 
 
     return (
@@ -202,7 +282,7 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
           shine-btn"
                 >
 
-                    {loading ? "Opening Payment Gateway..." : `Proceed to Pay`}
+                    {loading ? "Opening Payment Gateway..." : `Enroll Now`}
                     {/* {loading ? "Processing..." : "Buy Now"} */}
                 </button>
             </div>
@@ -262,7 +342,7 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
 
                                 className="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold"
                             >
-                                {loading ? "Processing..." : `Proceed to Pay ₹${price}`}
+                                {loading ? "Processing..." : `Enroll Now ₹${price}`}
                             </button>
 
                             <button
