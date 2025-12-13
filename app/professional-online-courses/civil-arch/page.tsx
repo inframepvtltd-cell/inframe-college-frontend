@@ -163,7 +163,7 @@ function CivilArch() {
                         {/* ============================================================================ */}
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='49,996' />
+                            <CourseInfo projects="4" title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='49,996' theme="yellow"/>
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -245,19 +245,18 @@ function CivilArch() {
 
                                 {/* Description */}
                                 <p className="
-                                                text-sm sm:text-lg lg:text-xl 
-                                                text-black 
-                                                font-medium 
-                                                max-w-3xl mx-auto 
-                                                leading-relaxed
-                                            ">
-                                    This is a
-                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course</span>
-                                    that includes
-                                    <span className="font-bold"> Pre-Recorded Video Lessons</span>
-                                    along with
-                                    <span className="font-bold"> Live Doubt-Clearing Sessions</span>
-                                    for complete support.
+                                        text-sm sm:text-base lg:text-lg
+                                        text-gray-800
+                                        max-w-3xl mx-auto
+                                        leading-relaxed
+                                        ">
+                                    Learn at your own pace with our
+                                    <span className="mx-1 font-semibold text-red-600">100% online course </span>
+                                    featuring
+                                    <span className="font-semibold text-gray-900"> high-quality pre-recorded videos </span>
+                                    and
+                                    <span className="font-semibold text-gray-900"> live doubt-clearing sessions </span>
+                                    for continuous guidance and support.
                                 </p>
 
                             </div>
@@ -365,30 +364,60 @@ function CivilArch() {
                         </div>
 
                         {/* Final CTA Section */}
-                        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 mt-10 p-6 sm:p-8 text-center shadow-xl border-2 border-yellow-300">
-                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-black mb-2">
-                                🎁 Special New Year Offer!
+                        <div className="mt-5 
+                bg-gradient-to-r from-yellow-400 to-yellow-500 
+                px-5 sm:px-8 lg:px-12 
+                py-8 sm:py-10 lg:py-12 
+                text-center shadow-xl border border-yellow-300">
+
+                            {/* Heading */}
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl 
+                   font-extrabold text-black mb-3">
+                                🎁 Special New Year Offer
                             </h3>
 
-                            <p className="text-black font-semibold text-base sm:text-lg mb-4">
-                                Enroll now and get exclusive benefits:
+                            {/* Subheading */}
+                            <p className="text-black font-semibold 
+                  text-base sm:text-lg lg:text-xl 
+                  mb-6">
+                                Enroll now and get exclusive benefits
                             </p>
 
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 max-w-xl mx-auto">
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Free Portfolio Building
+                            {/* Benefits */}
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 
+                   gap-4 sm:gap-5 
+                   max-w-3xl mx-auto">
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Free Portfolio Building
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> 1-on-1 Career Guidance
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    1-on-1 Career Guidance
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Industry Certifications
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Industry Certifications
                                 </li>
-                                <li className="flex items-center justify-center text-black font-medium">
-                                    <span className="text-green-600 mr-2">✓</span> Lifetime Access to Resources
+
+                                <li className="flex items-center justify-center sm:justify-start 
+                       gap-3 text-black font-semibold 
+                       text-base sm:text-lg lg:text-xl">
+                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
+                                    Lifetime Access
                                 </li>
                             </ul>
                         </div>
+
 
                         <div className="fixed bottom-10 right-0 z-50 ">
                             <QuickPayment price="14999" courseName="Civil Architecture" />

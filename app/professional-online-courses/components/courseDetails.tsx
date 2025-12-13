@@ -18,7 +18,7 @@ interface UserDetails {
     email: string;
     contact: string;
 }
-function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string, priceWithDiscount: string, originalPrice: string, }) {
+function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }: { projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
     const [user, setUser] = useState<UserDetails>({
@@ -32,7 +32,7 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
     const features = [
         "Become an Interior Designer",
         "Master 4+ Industry Tools",
-        "Work on 4+ Hands-on Real Projects",
+        `Work on ${projects} Hands-on Real Projects`,
         "Live Doubt Support on App",
         "Weekly Faculty Interaction via App",
         "Portfolio & Resume Building Support",
@@ -41,17 +41,7 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
         "Access to Downloadable Study Material",
         "Lifetime Access to Recorded Sessions"
     ];
-    console.log(originalPrice);
-    console.log(priceWithDiscount);
 
-
-
-    // useEffect(() => {
-    //     const script = document.createElement("script");
-    //     script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    //     script.async = true;
-    //     document.body.appendChild(script);
-    // }, []);
     useEffect(() => {
         if (typeof window !== "undefined" && window.Razorpay) {
             setRazorpayLoaded(true);
@@ -337,7 +327,7 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
                                 </div>
 
                                 {/* YOU SAVE */}
-                                <div className="text-right">
+                                <div className="text-right text-white">
                                     <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
                                     <div className="text-lg md:text-2xl lg:text-3xl font-bold text-green-100">
                                         70%
