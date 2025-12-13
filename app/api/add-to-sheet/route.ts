@@ -1,29 +1,20 @@
-import { google } from "googleapis";
+import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-    try {
-        const { name, email, contact, courseName, price } = await request.json();
+export async function POST(req: Request) {
+    const body = await req.json();
 
-        const auth = new google.auth.JWT({
-            email: process.env.GOOGLE_CLIENT_EMAIL,
-            key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-            scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-        });
+    const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyuRyKXdCQX-IEMbRLuJxEFbzx5Xeq0_OZcY_aWeJE_q4_AU8AaGP2BFsFhoJr7IHDx/exec";
 
-        const sheets = google.sheets({ version: "v4", auth });
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+    });
 
-        await sheets.spreadsheets.values.append({
-            spreadsheetId: process.env.GOOGLE_SHEET_ID,
-            range: "Sheet1!A:F",
-            valueInputOption: "USER_ENTERED",
-            requestBody: {
-                values: [[name, email, contact, courseName, price, new Date().toLocaleString()]],
-            },
-        });
+    const text = await res.text();
 
-        return Response.json({ success: true });
-    } catch (error) {
-        console.error("Google Sheet Error:", error);
-        return Response.json({ success: false, error }, { status: 500 });
-    }
+    return NextResponse.json({ success: true, data: text });
 }
