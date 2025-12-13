@@ -378,7 +378,7 @@ function InteriorDesign() {
 
             {/* Floating Buy Now Button */}
             <div className="fixed bottom-10 right-0 z-50 ">
-                <QuickPayment price="7496" courseName="Interior Design" />
+                <QuickPayment price="5" courseName="Interior Design" />
             </div>
 
             {/* Footer */}
