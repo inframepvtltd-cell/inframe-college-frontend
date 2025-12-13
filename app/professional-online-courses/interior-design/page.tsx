@@ -111,7 +111,7 @@ function InteriorDesign() {
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo theme="yellow" projects="" title="Interior Design Course" priceWithDiscount="10,493" originalPrice='34,977' />
+                            <CourseInfo theme="yellow" projects="" title="Interior Design Course" priceWithDiscount="1,499" originalPrice='10,493' />
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -414,7 +414,7 @@ function InteriorDesign() {
 
             {/* Floating Buy Now Button */}
             <div className="fixed bottom-10 right-0 z-50 ">
-                <QuickPayment price="10493" courseName="Interior Design" />
+                <QuickPayment price="1499" courseName="Interior Design" />
             </div>
 
             {/* Footer */}
