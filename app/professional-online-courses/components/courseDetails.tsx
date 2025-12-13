@@ -117,7 +117,7 @@ function CourseInfo({ title, priceWithDiscount, originalPrice }: { title: string
           hover:scale-[1.03] active:scale-95 transition-all duration-300
           shine-btn"
                                 >
-                                    Proceed To
+                                    Proceed To Pay
                                 </button>
                             </div>
 
