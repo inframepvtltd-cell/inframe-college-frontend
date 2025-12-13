@@ -32,7 +32,7 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
     const features = [
         "Become an Interior Designer",
         "Master 4+ Industry Tools",
-        `Work on ${projects} Hands-on Real Projects`,
+        `Work on ${projects}+ Hands-on Real Projects`,
         "Live Doubt Support on App",
         "Weekly Faculty Interaction via App",
         "Portfolio & Resume Building Support",
