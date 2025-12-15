@@ -78,6 +78,24 @@ export default async function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <Head>
+        <Script
+          id="meta-pixel"
+          strategy="afterInteractive"
+        >
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '7718921828171683');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+
         {/* Title & Description */}
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -91,70 +109,70 @@ export default async function RootLayout({
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
 
-    <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Inframe School of Art, Design & Business",
-        "url": "https://www.inframeschool.com/",
-        "logo": "https://www.inframeschool.com/assets/images/logo.png",
-        "sameAs": [
-          "https://www.facebook.com/",
-          "https://www.instagram.com/",
-          "https://www.youtube.com/"
-        ],
-        "description":
-          "Inframe School offers professional courses in Interior Design, Fashion Design, Graphic Design, UI/UX, Photography and Business specialization programs."
-      })
-    }}
-  />
-  <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "School",
-      "name": "Inframe School of Art, Design & Business",
-      "image": "https://www.inframeschool.com/assets/images/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "First Floor, 9B, Pal Link Rd, Marudhar Nagar, Shyam Nagar",
-        "addressLocality": "Jodhpur",
-        "addressRegion": "Rajasthan",
-        "postalCode": "342008",
-        "addressCountry": "IN"
-      },
-      "url": "https://www.inframeschool.com/",
-      "telephone": "+91 96499 64970",
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "26.2389",
-        "longitude": "73.0243"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      ]
-    }),
-  }}
-/>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              "name": "Inframe School of Art, Design & Business",
+              "url": "https://www.inframeschool.com/",
+              "logo": "https://www.inframeschool.com/assets/images/logo.png",
+              "sameAs": [
+                "https://www.facebook.com/",
+                "https://www.instagram.com/",
+                "https://www.youtube.com/"
+              ],
+              "description":
+                "Inframe School offers professional courses in Interior Design, Fashion Design, Graphic Design, UI/UX, Photography and Business specialization programs."
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "School",
+              "name": "Inframe School of Art, Design & Business",
+              "image": "https://www.inframeschool.com/assets/images/logo.png",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "First Floor, 9B, Pal Link Rd, Marudhar Nagar, Shyam Nagar",
+                "addressLocality": "Jodhpur",
+                "addressRegion": "Rajasthan",
+                "postalCode": "342008",
+                "addressCountry": "IN"
+              },
+              "url": "https://www.inframeschool.com/",
+              "telephone": "+91 96499 64970",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "26.2389",
+                "longitude": "73.0243"
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                  ],
+                  "opens": "09:00",
+                  "closes": "18:00"
+                }
+              ]
+            }),
+          }}
+        />
 
 
 
-    </Head>
+      </Head>
 
       <body>
         {/* Google Analytics (placed inside <body>, not inside <Head>) */}
@@ -180,10 +198,18 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
 
-
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=7718921828171683&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         {children}
-         {/* <Toaster position="top-right" /> */}
-         <Toaster
+        {/* <Toaster position="top-right" /> */}
+        <Toaster
           position="top-center"
           richColors
           closeButton

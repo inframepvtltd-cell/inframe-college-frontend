@@ -117,7 +117,7 @@ export default function LandingPage() {
                         </div>
 
                         {/* AI Description Section */}
-                        <div className="my-2 px-1 sm:px-8 lg:px-20">
+                        <div className="my-2 px-0 sm:px-8 lg:px-20">
                             <div className="bg-gradient-to-r from-black via-gray-900 to-black 
                     text-white rounded shadow-2xl p-6 sm:p-10 
                     border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
@@ -180,7 +180,7 @@ export default function LandingPage() {
                     overflow-hidden">
 
                                     {/* Subtle background pattern */}
-                                
+
 
                                     {/* Content container */}
                                     <div className="relative">
@@ -292,13 +292,13 @@ export default function LandingPage() {
                                                 </div>
                                             </div>
 
-                                       
+
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Decorative corner accents */}
-                               
+
                             </div>
                         </div>
 
