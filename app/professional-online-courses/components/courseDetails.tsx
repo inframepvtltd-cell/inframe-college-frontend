@@ -304,7 +304,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                         {/* Compact Price Card */}
                         <div
                             className=
-                            {`bg-gradient-to-br from-${themes[courseType]} to-${themes[courseType]}
+                            {`bg-gradient-to-br from-${themes[courseType]} to-gray-200
                                 rounded-xl
                                 p-4 md:p-6 lg:p-8
                                 shadow-xl
@@ -336,7 +336,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                 {/* YOU SAVE */}
                                 <div className="text-right text-white">
                                     <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
-                                    <div className="text-lg md:text-2xl lg:text-3xl font-bold text-green-100">
+                                    <div className="text-lg md:text-2xl lg:text-3xl font-bold text-white-100">
                                         {percentageOff}
                                     </div>
                                 </div>
@@ -364,7 +364,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                 {features.map((feature, index) => (
                                     <div
                                         key={index}
-                                        className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-white
+                                        className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-gray-300
                 p-2  border border-${themes[courseType]} 
                 shadow-md hover:shadow-xl transition-all duration-200`}
                                     >
