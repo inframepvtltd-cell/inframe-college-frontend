@@ -168,44 +168,143 @@ export default function LandingPage() {
                         </div>
 
                         {/* Course Level & Online Mode Notice */}
-                        <div className="px-4 sm:px-8 lg:px-20 my-10">
-                            <div className=
-                                {`bg-gradient-to-r from-[${theme}] to-[${theme}]
-                                    p-6 sm:p-8 lg:p-12 
-                                     border border-[${theme}]
-                                    shadow-md 
-                                    animate-scale-in
-                                    text-center`}
-                            >
+                        <div className="px-0 sm:px-4 lg:px-0 my-6">
+                            {/* Professional Education Card */}
+                            <div className="relative">
+                                {/* Main Card */}
+                                <div className="bg-gradient-to-br from-[#731e88] via-[#5a176b] to-[#3a0f45] 
+                    border border-[#8a2ca3]/30 
+                    
+                    px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
+                    shadow-xl
+                    overflow-hidden">
 
-                                {/* Heading */}
-                                <h3 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white mb-3">
-                                    🎓 Designed for Class 10+ Students & Above
-                                </h3>
+                                    {/* Subtle background pattern */}
+                                
 
-                                {/* Description */}
-                                <p className="
-                                                text-sm sm:text-lg lg:text-xl 
-                                                text-white 
-                                                font-medium 
-                                                max-w-3xl mx-auto 
-                                                leading-relaxed
-                                            ">
-                                    This is a
-                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course </span>
-                                    that includes
-                                    <span className="font-bold"> Pre-Recorded Video Lessons </span>
-                                    along with
-                                    <span className="font-bold"> Live Doubt-Clearing Sessions </span>
-                                    for complete support.
-                                </p>
+                                    {/* Content container */}
+                                    <div className="relative">
+                                        {/* Header with Icon */}
+                                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                                            <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                                </svg>
+                                            </div>
 
+                                            <div className="text-center sm:text-left">
+                                                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
+                                                    Designed for Class 10+ Students & Career Beginners
+                                                </h3>
+                                                <div className="h-1 w-16 bg-gradient-to-r from-white/50 to-transparent rounded-full mx-auto sm:mx-0" />
+                                            </div>
+                                        </div>
+
+                                        {/* Main Description */}
+                                        <div className="max-w-4xl mx-auto">
+                                            <p className="text-white/90 text-base sm:text-lg lg:text-xl leading-relaxed text-center">
+                                                This comprehensive program is delivered as a
+                                                <span className="relative mx-2">
+                                                    <span className="text-white font-semibold bg-white/10 px-2 py-1 rounded">100% Online Course</span>
+                                                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#ff6b6b] rounded-full animate-pulse" />
+                                                </span>
+                                                combining structured pre-recorded video lessons with interactive live sessions for optimal learning outcomes.
+                                            </p>
+
+                                            {/* Feature Highlights */}
+                                            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                {/* Pre-Recorded Lessons */}
+                                                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-5 border border-white/10">
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#8a2ca3] to-[#5a176b] rounded-lg flex items-center justify-center">
+                                                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-semibold text-lg mb-2">Pre-Recorded Video Lessons</h4>
+                                                            <ul className="space-y-2">
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Learn at your own pace and schedule
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Access course materials 24/7
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Revisit complex topics anytime
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Live Sessions */}
+                                                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-5 border border-white/10">
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#8a2ca3] to-[#5a176b] rounded-lg flex items-center justify-center">
+                                                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-semibold text-lg mb-2">Live Interactive Sessions</h4>
+                                                            <ul className="space-y-2">
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Weekly doubt-clearing with experts
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Real-time Q&A and discussions
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-white/80 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-white/50 rounded-full" />
+                                                                    Peer collaboration opportunities
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Additional Benefits */}
+                                            <div className="mt-8 pt-6 border-t border-white/10">
+                                                <h4 className="text-white font-semibold text-center mb-4">Additional Learning Support</h4>
+                                                <div className="flex flex-wrap justify-center gap-4">
+                                                    {[
+                                                        "Assignments with Feedback",
+                                                        "Progress Tracking",
+                                                        "Mentor Support",
+                                                        "Certificate of Completion"
+                                                    ].map((item, index) => (
+                                                        <div key={index} className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full">
+                                                            <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <span className="text-white/80 text-sm">{item}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                       
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Decorative corner accents */}
+                               
                             </div>
                         </div>
 
                         {/* ======== */}
                         {/* Icons Section */}
-                        <section ref={sectionRef} className="py-16 bg-gradient-to-b from-gray-50 to-white">
+                        <section ref={sectionRef} className="py-16 bg-gradient-to-b from-purple-100 to-white-100">
                             <div className="text-center mb-10 px-4">
                                 <h2 className="text-4xl sm:text-5xl font-bold mb-6">
                                     <span className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-600 bg-clip-text text-transparent bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-1000">
@@ -321,6 +420,149 @@ Each project reflects the student’s ability to translate ideas into impactful 
 
                         <div className="w-44 mb-10 h-1 bg-yellow-500 mx-auto rounded-full"></div>
 
+
+                        {/* Final CTA Section */}
+                        <div className="mt-8 sm:mt-10 lg:mt-12 pb-2">
+                            {/* Professional Offer Card */}
+                            <div className="relative bg-gradient-to-br from-[#731e88] via-[#5a176b] to-[#3a0f45]  shadow-2xl overflow-hidden border border-[#8a2ca3]">
+
+                                {/* Subtle geometric pattern */}
+                                <div className="absolute inset-0 opacity-5">
+                                    <div className="absolute top-0 left-0 w-64 h-64 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full" />
+                                    <div className="absolute bottom-0 right-0 w-96 h-96 translate-x-1/3 translate-y-1/3 bg-white rounded-full" />
+                                </div>
+
+                                {/* Decorative corner accents */}
+                                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-white/10 rounded-tl-xl" />
+                                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-white/10 rounded-tr-xl" />
+                                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-white/10 rounded-bl-xl" />
+                                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-white/10 rounded-br-xl" />
+
+                                {/* Content container */}
+                                <div className="relative px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 md:py-12">
+
+                                    {/* Limited Time Badge */}
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#8a2ca3] to-[#5a176b] rounded-full mb-8 border border-white/10 shadow-lg">
+                                        <div className="w-2 h-2 bg-[#ff6b6b] rounded-full animate-pulse" />
+                                        <span className="text-white font-semibold text-sm tracking-wide">LIMITED TIME OFFER</span>
+                                    </div>
+
+                                    {/* Heading */}
+                                    <div className="mb-6">
+                                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
+                                            New Year Enrollment Special
+                                        </h3>
+                                        <div className="h-1 w-20 bg-gradient-to-r from-white/50 to-transparent rounded-full" />
+                                    </div>
+
+                                    {/* Subheading */}
+                                    {/* <p className="text-white/90 text-lg sm:text-xl mb-8 md:mb-10 max-w-2xl mx-auto font-light">
+                                        Enroll before January 31st to unlock premium benefits designed to accelerate your career growth
+                                    </p> */}
+
+                                    {/* Benefits Grid */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+                                        {[
+                                            {
+                                                title: "Portfolio Development",
+                                                description: "Professional portfolio consultation and optimization"
+                                            },
+                                            {
+                                                title: "Career Guidance",
+                                                description: "Personalized 1-on-1 mentorship sessions"
+                                            },
+                                            {
+                                                title: "Certifications",
+                                                description: "Industry-recognized certification upon completion"
+                                            },
+                                            {
+                                                title: "Lifetime Access",
+                                                description: "Course material and future updates included"
+                                            }
+                                        ].map((benefit, index) => (
+                                            <div
+                                                key={index}
+                                                className="group bg-white/5 backdrop-blur-sm rounded-lg p-5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
+                                            >
+                                                <div className="flex items-start gap-4">
+                                                    {/* Number indicator */}
+                                                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#8a2ca3] to-[#5a176b] rounded-lg flex items-center justify-center">
+                                                        <span className="text-white font-bold text-sm">{index + 1}</span>
+                                                    </div>
+
+                                                    {/* Content */}
+                                                    <div>
+                                                        <h4 className="text-white font-semibold text-base md:text-lg mb-1 group-hover:text-white/90 transition-colors">
+                                                            {benefit.title}
+                                                        </h4>
+                                                        <p className="text-white/70 text-sm md:text-base leading-relaxed">
+                                                            {benefit.description}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Hover indicator line */}
+                                                <div className="h-0.5 bg-gradient-to-r from-transparent via-white/20 to-transparent w-0 group-hover:w-full transition-all duration-500 mt-4" />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* CTA Section */}
+                                    <div className="text-center">
+                                        {/* <button className="group relative inline-flex items-center gap-3 bg-white text-[#731e88] font-semibold px-8 py-4 rounded-lg text-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 overflow-hidden">
+                                            <span className="relative z-10">Secure Your Spot Now</span>
+                                            <svg
+                                                className="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            </svg>
+
+                                            <div className="absolute inset-0 bg-gradient-to-r from-white via-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        </button> */}
+
+                                        {/* Additional info */}
+                                        {/* <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-white/80 text-sm">
+                                            <div className="flex items-center gap-2">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                                                </svg>
+                                                <span>Offer expires in: <span className="font-semibold text-white">2 days</span></span>
+                                            </div>
+
+                                            <div className="hidden sm:block w-px h-4 bg-white/30" />
+
+                                            <div className="flex items-center gap-2">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                                <span>No payment required today</span>
+                                            </div>
+                                        </div> */}
+
+                                        {/* Stats bar (optional) */}
+                                        {/* <div className="mt-8 pt-6 border-t border-white/10">
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-white/80">
+                                                <div className="text-center">
+                                                    <div className="text-2xl font-bold text-white mb-1">98%</div>
+                                                    <div className="text-sm">Placement Rate</div>
+                                                </div>
+                                                <div className="text-center">
+                                                    <div className="text-2xl font-bold text-white mb-1">500+</div>
+                                                    <div className="text-sm">Students Enrolled</div>
+                                                </div>
+                                                <div className="text-center col-span-2 sm:col-span-1">
+                                                    <div className="text-2xl font-bold text-white mb-1">4.8★</div>
+                                                    <div className="text-sm">Student Rating</div>
+                                                </div>
+                                            </div>
+                                        </div> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {/* placement partners */}
                         <Carrousal />
                         {/* CEO Banner Section */}
@@ -335,67 +577,14 @@ Each project reflects the student’s ability to translate ideas into impactful 
                         </div>
 
                         {/* Final CTA Section */}
-                        {/* Final CTA Section */}
-                        <div className="mt-5 
-                bg-gradient-to-r from-yellow-400 to-yellow-500 
-                px-5 sm:px-8 lg:px-12 
-                py-8 sm:py-10 lg:py-12 
-                text-center shadow-xl border border-yellow-300">
 
-                            {/* Heading */}
-                            <h3 className="text-2xl sm:text-3xl lg:text-4xl 
-                   font-extrabold text-black mb-3">
-                                🎁 Special New Year Offer
-                            </h3>
-
-                            {/* Subheading */}
-                            <p className="text-black font-semibold 
-                  text-base sm:text-lg lg:text-xl 
-                  mb-6">
-                                Enroll now and get exclusive benefits
-                            </p>
-
-                            {/* Benefits */}
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 
-                   gap-4 sm:gap-5 
-                   max-w-3xl mx-auto">
-
-                                <li className="flex items-center justify-center sm:justify-start 
-                       gap-3 text-black font-semibold 
-                       text-base sm:text-lg lg:text-xl">
-                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
-                                    Free Portfolio Building
-                                </li>
-
-                                <li className="flex items-center justify-center sm:justify-start 
-                       gap-3 text-black font-semibold 
-                       text-base sm:text-lg lg:text-xl">
-                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
-                                    1-on-1 Career Guidance
-                                </li>
-
-                                <li className="flex items-center justify-center sm:justify-start 
-                       gap-3 text-black font-semibold 
-                       text-base sm:text-lg lg:text-xl">
-                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
-                                    Industry Certifications
-                                </li>
-
-                                <li className="flex items-center justify-center sm:justify-start 
-                       gap-3 text-black font-semibold 
-                       text-base sm:text-lg lg:text-xl">
-                                    <span className="text-green-700 text-xl sm:text-2xl">✔</span>
-                                    Lifetime Access
-                                </li>
-                            </ul>
-                        </div>
 
                         <FeaturesSection courseType='graphic' />
 
                         <div className="w-full flex justify-center">
                             {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
                             {/* <FAQSection /> */}
-                            <FAQComponent  courseType="graphic" />
+                            <FAQComponent courseType="graphic" />
                             {/* </div> */}
                         </div>
                     </div>
