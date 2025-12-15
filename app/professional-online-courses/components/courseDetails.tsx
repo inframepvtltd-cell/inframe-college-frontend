@@ -304,7 +304,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                         {/* Compact Price Card */}
                         <div
                             className=
-                            {`bg-gradient-to-br from-${themes[courseType]} to-gray-200
+                            {`bg-gradient-to-br from-${themes[courseType]} to-${themes[courseType]} 
                                 rounded-xl
                                 p-4 md:p-6 lg:p-8
                                 shadow-xl
@@ -364,7 +364,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                 {features.map((feature, index) => (
                                     <div
                                         key={index}
-                                        className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-gray-300
+                                        className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-${themes[courseType]}
                 p-2  border border-${themes[courseType]} 
                 shadow-md hover:shadow-xl transition-all duration-200`}
                                     >

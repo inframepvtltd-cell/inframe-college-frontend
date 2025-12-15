@@ -128,8 +128,8 @@ function InteriorDesign() {
                         {/* AI Description Section */}
                         <div className="my-2 px-1 sm:px-8 lg:px-20">
                             <div className="bg-gradient-to-r from-black via-gray-900 to-black 
-                    text-white  shadow-2xl p-6 sm:p-10 
-                    border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
+                            text-white  shadow-2xl p-6 sm:p-10 
+                            border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
 
                                 {/* Soft Glow Background */}
                                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.15),transparent_70%)]"></div>
@@ -178,41 +178,140 @@ function InteriorDesign() {
 
 
                         {/* Course Level & Online Mode Notice */}
-                        <div className="px-4 sm:px-8 lg:px-20 my-10">
-                            <div className="
-                                bg-gradient-to-r from-yellow-300 to-yellow-400 
-                                    p-6 sm:p-8 lg:p-12 
-                                    rounded-xl border border-yellow-300 
-                                    shadow-md 
-                                    animate-scale-in
-                                    text-center
-                                ">
+                        <div className="px-0 sm:px-4 lg:px-0 my-6">
+                            {/* Professional Education Card */}
+                            <div className="relative">
+                                {/* Main Card */}
+                                <div className="bg-gradient-to-br from-[#f7d61a] via-[#e9ca1a] to-[#ffd51a] 
+                    border border-yellow-400/30 
+                   
+                    px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
+                    shadow-xl
+                    overflow-hidden">
 
-                                {/* Heading */}
-                                <h3 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-black mb-3">
-                                    🎓 Designed for Class 10+ Students & Above
-                                </h3>
+                                    {/* Subtle background pattern */}
+                                    <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-white/15 to-transparent rounded-full -translate-y-24 translate-x-12" />
+                                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-white/10 to-transparent rounded-full translate-y-12 -translate-x-8" />
 
-                                {/* Description */}
-                                <p className="
-                                                text-sm sm:text-lg lg:text-xl 
-                                                text-black 
-                                                font-medium 
-                                                max-w-3xl mx-auto 
-                                                leading-relaxed
-                                            ">
-                                    This is a
-                                    <span className="text-red-600 font-bold animate-pulse"> 100% Online Course </span>
-                                    that includes
-                                    <span className="font-bold"> Pre-Recorded Video Lessons </span>
-                                    along with
-                                    <span className="font-bold"> Live Doubt-Clearing Sessions </span>
-                                    for complete support.
-                                </p>
+                                    {/* Content container */}
+                                    <div className="relative">
+                                        {/* Header with Icon */}
+                                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                                            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center border border-white/30 shadow-sm">
+                                                <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                                </svg>
+                                            </div>
 
+                                            <div className="text-center sm:text-left">
+                                                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+                                                    Designed for Class 10+ Students & Career Beginners
+                                                </h3>
+                                                <div className="h-1 w-16 bg-gradient-to-r from-gray-900/50 to-transparent rounded-full mx-auto sm:mx-0" />
+                                            </div>
+                                        </div>
+
+                                        {/* Main Description */}
+                                        <div className="max-w-4xl mx-auto">
+                                            <p className="text-gray-800 text-base sm:text-lg lg:text-xl leading-relaxed text-center font-medium">
+                                                This comprehensive program is delivered as a
+                                                <span className="relative mx-2">
+                                                    <span className="text-gray-900 font-bold bg-white/50 px-3 py-1.5 rounded-md shadow-sm border border-white/50">100% Online Course</span>
+                                                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                                                </span>
+                                                combining structured pre-recorded video lessons with interactive live sessions for optimal learning outcomes.
+                                            </p>
+
+                                            {/* Feature Highlights */}
+                                            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                {/* Pre-Recorded Lessons */}
+                                                <div className="bg-white/50 backdrop-blur-sm rounded-lg p-5 border border-white/70 shadow-sm">
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#e6d219] to-[#cfb817] rounded-lg flex items-center justify-center shadow-sm">
+                                                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-gray-900 font-semibold text-lg mb-2">Pre-Recorded Video Lessons</h4>
+                                                            <ul className="space-y-2">
+                                                                <li className="flex items-center gap-2 text-gray-700 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
+                                                                    Learn at your own pace and schedule
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-gray-700 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
+                                                                    Access course materials 24/7
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Live Sessions */}
+                                                <div className="bg-white/50 backdrop-blur-sm rounded-lg p-5 border border-white/70 shadow-sm">
+                                                    <div className="flex items-start gap-4">
+                                                        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#e6d219] to-[#cfb817] rounded-lg flex items-center justify-center shadow-sm">
+                                                            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-gray-900 font-semibold text-lg mb-2">Live Interactive Sessions</h4>
+                                                            <ul className="space-y-2">
+
+                                                                <li className="flex items-center gap-2 text-gray-700 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
+                                                                    Real-time Q&A and discussions
+                                                                </li>
+                                                                <li className="flex items-center gap-2 text-gray-700 text-sm">
+                                                                    <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
+                                                                    Peer collaboration opportunities
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Additional Benefits */}
+                                            <div className="mt-8 pt-6 border-t border-white/30">
+                                                <h4 className="text-gray-900 font-semibold text-center mb-4">Additional Learning Support</h4>
+                                                <div className="flex flex-wrap justify-center gap-4">
+                                                    {[
+                                                        "Assignments with Feedback",
+                                                        "Progress Tracking",
+                                                        "Mentor Support",
+                                                        "Certificate of Completion"
+                                                    ].map((item, index) => (
+                                                        <div key={index} className="flex items-center gap-2 px-4 py-2 bg-white/70 rounded-full shadow-sm border border-white/50">
+                                                            <svg className="w-4 h-4 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                            </svg>
+                                                            <span className="text-gray-800 text-sm font-medium">{item}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Stats Section */}
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Decorative corner accents */}
+                                <div className="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-yellow-600/50 rounded-tl" />
+                                <div className="absolute -top-1 -right-1 w-4 h-4 border-t border-r border-yellow-600/50 rounded-tr" />
+                                <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b border-l border-yellow-600/50 rounded-bl" />
+                                <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-yellow-600/50 rounded-br" />
                             </div>
                         </div>
-
                         {/* ======== */}
                         {/* Icons Section */}
                         <section ref={sectionRef} className="py-16 bg-gradient-to-b from-gray-50 to-white">
