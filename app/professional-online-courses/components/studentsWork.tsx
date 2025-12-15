@@ -27,9 +27,8 @@ function StudentsWork({
                 </h2>
 
                 {/* Description */}
-                <p className="text-center text-gray-600 max-w-full mx-auto text-base sm:text-lg mb-6 leading-relaxed">
+                <p className="text-justify text-gray-600 max-w-6xl mx-auto text-base sm:text-lg mb-6 leading-relaxed">
                     {description}
-                    {/* <div className="mt-4 mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-gray-900 to-gray-700"></div> */}
                 </p>
 
                 {/* Optional little underline accent */}

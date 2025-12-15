@@ -14,6 +14,8 @@ import TestimonialCarousel from '../../../components/TestimonialSection ';
 import FeaturesSection from '../components/featureSection';
 import { useRef } from "react";
 import FAQComponent from '../components/FaqComponent';
+import Certificate from '../components/certificateComponent';
+import CertificateCard from '../components/certificateComponent';
 
 export default function LandingPage() {
     const router = useRouter();
@@ -580,6 +582,13 @@ Each project reflects the student’s ability to translate ideas into impactful 
 
 
                         <FeaturesSection courseType='graphic' />
+
+                        <CertificateCard
+                            title="Become A Certified Digital Marketing Expert"
+                            subtitle="Upon successful completion of the course, you will receive certification from Jaipuria, a renowned institution that adds substantial credibility to your certificate and strengthens your resume."
+                            imageUrl="/certificate.png"
+                        />
+
 
                         <div className="w-full flex justify-center">
                             {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
