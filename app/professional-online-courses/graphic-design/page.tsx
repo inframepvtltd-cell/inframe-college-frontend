@@ -17,7 +17,7 @@ import FAQComponent from '../components/FaqComponent';
 
 export default function LandingPage() {
     const router = useRouter();
-
+    const theme = '#731e88'
     const tools = [
         { name: "Photoshop", image: "/software logos/pngegg (24).png", color: "from-purple-100 to-pink-100", textColor: "text-purple-600" },
         { name: "Adobe Illustrator", image: "/software logos/pngegg (25).png", color: "from-blue-100 to-indigo-100", textColor: "text-blue-700" },
@@ -86,8 +86,10 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection offPercentage="70%" />
-            <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
+            <HeroSection offPercentage="86%" />
+            {/* <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden"> */}
+            <div className="relative w-full h-[31vh] sm:h-[60vh] md:h-[70vh] lg:h-[96vh] overflow-hidden">
+
                 <Image
                     src="/landingImages/website1.png"
                     alt="Hero Banner"
@@ -101,7 +103,7 @@ export default function LandingPage() {
                 <div className="container mx-auto min-w-full px-4 sm:px-0">
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
-                        <CourseInfo theme="purple" projects="50" title="Graphic Design Course" priceWithDiscount="1,499" originalPrice='5,996' />
+                        <CourseInfo theme="#731e88" percentageOff="86%" projects="50" title="Graphic Design Course" priceWithDiscount="1,499" originalPrice='5,996' courseType="graphic" />
 
                         {/* pricing banner Section */}
                         <div className="relative mt-5 w-full h-[25vh] sm:h-[45vh] md:h-[86vh] overflow-hidden">
@@ -117,7 +119,7 @@ export default function LandingPage() {
                         {/* AI Description Section */}
                         <div className="my-2 px-1 sm:px-8 lg:px-20">
                             <div className="bg-gradient-to-r from-black via-gray-900 to-black 
-                    text-white rounded-2xl shadow-2xl p-6 sm:p-10 
+                    text-white rounded shadow-2xl p-6 sm:p-10 
                     border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
 
                                 {/* Soft Glow Background */}
@@ -129,14 +131,14 @@ export default function LandingPage() {
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-sm sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center relative z-10">
+                                <p className="text-sm sm:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto text-center relative z-10">
                                     Master industry-leading tools like
-                                    <span className="text-yellow-400 font-semibold"> Photoshop</span>,
-                                    <span className="text-yellow-400 font-semibold"> Illustrator</span>,
-                                    <span className="text-yellow-400 font-semibold"> Corel Draw</span>,
-                                    <span className="text-yellow-400 font-semibold"> InDesign</span>,
+                                    <span className={`text-[${theme}] font-semibold`}> Photoshop</span>,
+                                    <span className={`text-[${theme}] font-semibold`}> Illustrator</span>,
+                                    <span className={`text-[${theme}] font-semibold`}> Corel Draw</span>,
+                                    <span className={`text-[${theme}] font-semibold`}> InDesign</span>,
                                     and more — with the help of our intelligent
-                                    <span className="text-yellow-400 font-bold"> AI-powered learning assistant.</span>
+                                    <span className={`text-[${theme}] font-bold`}> AI-powered learning assistant.</span>
                                 </p>
 
                                 {/* Feature List */}
@@ -159,7 +161,7 @@ export default function LandingPage() {
                                 </ul>
 
                                 {/* Bottom Highlight Text */}
-                                <p className="text-center text-yellow-400 mt-8 text-base sm:text-lg font-bold relative z-10">
+                                <p className={`text-center text-[${theme}] mt-8 text-base sm:text-xl font-bold relative z-10`}>
                                     AI Assistant — Your Personal Guide for Every Software You Learn
                                 </p>
                             </div>
@@ -167,24 +169,24 @@ export default function LandingPage() {
 
                         {/* Course Level & Online Mode Notice */}
                         <div className="px-4 sm:px-8 lg:px-20 my-10">
-                            <div className="
-                                bg-gradient-to-r from-yellow-300 to-yellow-400 
+                            <div className=
+                                {`bg-gradient-to-r from-[${theme}] to-[${theme}]
                                     p-6 sm:p-8 lg:p-12 
-                                    rounded-xl border border-yellow-300 
+                                     border border-[${theme}]
                                     shadow-md 
                                     animate-scale-in
-                                    text-center
-                                ">
+                                    text-center`}
+                            >
 
                                 {/* Heading */}
-                                <h3 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-black mb-3">
+                                <h3 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white mb-3">
                                     🎓 Designed for Class 10+ Students & Above
                                 </h3>
 
                                 {/* Description */}
                                 <p className="
                                                 text-sm sm:text-lg lg:text-xl 
-                                                text-black 
+                                                text-white 
                                                 font-medium 
                                                 max-w-3xl mx-auto 
                                                 leading-relaxed
@@ -241,17 +243,17 @@ export default function LandingPage() {
                                     <div
                                         key={index}
                                         className="
-                bg-white
-                border border-gray-300
-                shadow-sm
-                hover:shadow-xl
-                transition-all duration-300
-                rounded-2xl p-6
-                flex items-center gap-4
-                hover:border-gray-400
-                hover:-translate-y-1
-                relative
-            ">
+                                        bg-white
+                                        border border-gray-300
+                                        shadow-sm
+                                        hover:shadow-xl
+                                        transition-all duration-300
+                                        rounded-2xl p-6
+                                        flex items-center gap-4
+                                        hover:border-gray-400
+                                        hover:-translate-y-1
+                                        relative
+                                        ">
                                         {/* Highlight Glow */}
                                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-200/40 via-yellow-200/40 to-orange-200/40 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
@@ -271,8 +273,9 @@ export default function LandingPage() {
                         </div>
 
                         {/* Projects Highlight */}
-                        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 sm:p-8  border-l-4 border-yellow-500 border-2 0 mb-12 sm:mb-16 text-center shadow-lg">
-                            <p className="text-xl sm:text-4xl text-black font-bold">
+                        <div className={`bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 sm:p-8  border-l-4 border-yellow-500 border-2 0 mb-12 sm:mb-16 text-center shadow-lg`}>
+
+                            <p className="text-xl sm:text-4xl text-black font-bold`">
                                 🚀 Yes 50+ hands on projects that make your CV look great.
                             </p>
                         </div>
@@ -321,7 +324,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
                         {/* placement partners */}
                         <Carrousal />
                         {/* CEO Banner Section */}
-                        <div className="relative w-full h-[28vh] bg-blue-950 sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
+                        <div className="relative w-full h-[28vh] sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
                             <Image
                                 src={"/landingImages/by fb sir.png"}
                                 alt="Hero Banner"
@@ -387,12 +390,12 @@ Each project reflects the student’s ability to translate ideas into impactful 
                             </ul>
                         </div>
 
-                        <FeaturesSection />
+                        <FeaturesSection courseType='graphic' />
 
                         <div className="w-full flex justify-center">
                             {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
                             {/* <FAQSection /> */}
-                            <FAQComponent courseType="graphic" />
+                            <FAQComponent theme="#731e88" courseType="graphic" />
                             {/* </div> */}
                         </div>
                     </div>

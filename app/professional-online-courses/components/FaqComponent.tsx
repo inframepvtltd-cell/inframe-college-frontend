@@ -32,9 +32,10 @@ interface CourseMeta {
 
 interface FAQComponentProps {
     courseType?: CourseType;
+    theme: string
 }
 
-const FAQComponent: React.FC<FAQComponentProps> = ({ courseType = "interior" }) => {
+const FAQComponent: React.FC<FAQComponentProps> = ({ theme, courseType = "interior" }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -43,6 +44,11 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType = "interior" }) 
         e.preventDefault();
         setIsFormOpen(true);
     };
+
+    const themes: any = {
+        interior: 'yellow-500',
+        graphic: '[#731e88]'
+    }
 
     // FAQ data organized by course type
     const faqData: FAQData = {
@@ -964,16 +970,16 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType = "interior" }) 
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-9 pb-10">
+        <div className="max-w-7xl mx-auto p-0 pt-10 pb-10">
 
             {/* Header */}
             <div className="mb-10 text-center">
                 <h1
-                    className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-yellow-500"
+                    className={`text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-${themes[courseType]}`}
                 >
                     {meta.title} FAQs
                 </h1>
-                <div className="w-24 h-1 mx-auto mt-3 bg-yellow-500 rounded-full"></div>
+                <div className={`w-24 h-1 mx-auto mt-3 bg-${themes[courseType]} rounded-full`}></div>
 
                 <p className="text-gray-600 dark:text-gray-300 text-lg mt-4">
                     Everything you need to know about the course
@@ -989,7 +995,7 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType = "interior" }) 
                         <div
                             key={index}
                             className={`rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 
-          transition-all duration-300 hover:shadow-md hover:border-yellow-400/50`}
+          transition-all duration-300 hover:shadow-md hover:border-${themes[courseType]}`}
                         >
                             {/* Header */}
                             <button
@@ -1004,7 +1010,7 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType = "interior" }) 
                                 {/* Chevron */}
                                 <div
                                     className={`p-2 rounded-full transition-all duration-500 ${isOpen
-                                        ? "bg-yellow-500 text-white rotate-180"
+                                        ? `bg-${themes[courseType]} text-white rotate-18`
                                         : "bg-gray-100 dark:bg-gray-800 text-gray-500"
                                         }`}
                                 >
