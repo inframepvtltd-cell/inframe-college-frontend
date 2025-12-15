@@ -395,7 +395,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
                         <div className="w-full flex justify-center">
                             {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
                             {/* <FAQSection /> */}
-                            <FAQComponent theme="#731e88" courseType="graphic" />
+                            <FAQComponent  courseType="graphic" />
                             {/* </div> */}
                         </div>
                     </div>

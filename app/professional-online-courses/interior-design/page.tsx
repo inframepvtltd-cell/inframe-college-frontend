@@ -111,7 +111,7 @@ function InteriorDesign() {
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo courseType="interior"  percentageOff="86%"  theme="yellow" projects="8" title="Interior Design Course" priceWithDiscount="1,499" originalPrice='10,493' />
+                            <CourseInfo courseType="interior" percentageOff="86%" theme="yellow" projects="8" title="Interior Design Course" priceWithDiscount="1,499" originalPrice='10,493' />
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -405,7 +405,7 @@ function InteriorDesign() {
                         <div className="w-full flex justify-center">
                             <div className="w-full max-w-4xl animate-slide-up-smooth">
                                 {/* <FAQSection /> */}
-                                <FAQComponent theme="yellow-600" courseType="interior" />
+                                <FAQComponent courseType="interior" />
                             </div>
                         </div>
                     </div>

@@ -32,10 +32,10 @@ interface CourseMeta {
 
 interface FAQComponentProps {
     courseType?: CourseType;
-    theme: string
+   
 }
 
-const FAQComponent: React.FC<FAQComponentProps> = ({ theme, courseType = "interior" }) => {
+const FAQComponent: React.FC<FAQComponentProps> = ({  courseType = "interior" }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const [isFormOpen, setIsFormOpen] = useState(false);
