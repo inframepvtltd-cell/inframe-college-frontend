@@ -163,7 +163,7 @@ function CivilArch() {
                         {/* ============================================================================ */}
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo projects="4" title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='49,996' theme="yellow"/>
+                            <CourseInfo courseType="civil"  percentageOff="86%"  projects="4" title="Civil & Architecture Drawing Course (2D)" priceWithDiscount="14,999" originalPrice='49,996' theme="yellow"/>
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -424,7 +424,7 @@ function CivilArch() {
                         </div>
 
 
-                        <FeaturesSection />
+                        <FeaturesSection courseType="civil" />
                         <div className="my-12 sm:my-10 px-4 sm:px-8 lg:px-60">
                             <FAQSection />
                         </div>

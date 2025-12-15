@@ -92,10 +92,10 @@ function InteriorDesign() {
     return (
         <div className="min-h-screen min-w-full bg-white">
             {/* Hero Section */}
-            <HeroSection offPercentage="70%" />
+            <HeroSection offPercentage="75%" />
 
             {/* Hero Banner Image */}
-            <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
+            <div className="relative w-full h-[31vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                 <Image
                     src="/landingImages/we banner.png"
                     alt="Hero Banner"
@@ -111,7 +111,7 @@ function InteriorDesign() {
                     <div className="min-w-full mx-auto">
                         {/* Main Course Info */}
                         <div className="animate-slide-up">
-                            <CourseInfo theme="yellow" projects="" title="Interior Design Course" priceWithDiscount="1,499" originalPrice='10,493' />
+                            <CourseInfo courseType="interior" percentageOff="86%" theme="yellow" projects="8" title="Interior Design Course" priceWithDiscount="1,499" originalPrice='10,493' />
                         </div>
 
                         {/* Pricing Banner Section */}
@@ -128,7 +128,7 @@ function InteriorDesign() {
                         {/* AI Description Section */}
                         <div className="my-2 px-1 sm:px-8 lg:px-20">
                             <div className="bg-gradient-to-r from-black via-gray-900 to-black 
-                    text-white rounded-2xl shadow-2xl p-6 sm:p-10 
+                    text-white  shadow-2xl p-6 sm:p-10 
                     border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
 
                                 {/* Soft Glow Background */}
@@ -333,7 +333,7 @@ function InteriorDesign() {
                         {/* CEO Banner Section */}
                         <div className="relative w-full h-[28vh] sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
                             <Image
-                               src={"/landingImages/by fb sir.png"}
+                                src={"/landingImages/by fb sir.png"}
                                 alt="Hero Banner"
                                 fill
                                 priority
@@ -399,7 +399,7 @@ function InteriorDesign() {
 
                         {/* Features Section */}
 
-                        <FeaturesSection />
+                        <FeaturesSection courseType='interior' />
 
                         {/* FAQ Section */}
                         <div className="w-full flex justify-center">

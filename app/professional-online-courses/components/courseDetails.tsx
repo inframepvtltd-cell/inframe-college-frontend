@@ -18,7 +18,11 @@ interface UserDetails {
     email: string;
     contact: string;
 }
-function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }: { projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+const themes: any = {
+    interior: 'yellow-400',
+    graphic: '[#731e88]'
+}
+function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: string, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
     const [user, setUser] = useState<UserDetails>({
@@ -278,7 +282,8 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
     return (
         <>
             <div className="w-full flex justify-center">
-                <div className="bg-white shadow-2xl border border-gray-200 rounded-2xl 
+                <div className="bg-white  border border-gray-200 
+
                     p-3 sm:p-3 max-w-7xl w-full">
 
                     {/* Header */}
@@ -289,7 +294,7 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
                             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight">
                                 {title}
                             </h2>
-                            <p className="text-xl sm:text-2xl text-yellow-600 font-bold mt-2 flex items-center justify-center gap-2">
+                            <p className={`text-xl sm:text-2xl text-${themes[courseType]} font-bold mt-2 flex items-center justify-center gap-2`}>
                                 <span className="text-2xl">🎓</span>
                                 Learn from Industry Masters
                                 <span className="text-2xl">⚡</span>
@@ -297,14 +302,16 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
                         </div>
 
                         {/* Compact Price Card */}
-                        <div className="
-    bg-gradient-to-br from-yellow-400 to-orange-500 
-    rounded-xl 
-    p-4 md:p-6 lg:p-8
-    shadow-xl 
-    border-2 border-yellow-300 
-    max-w-xl md:max-w-2xl mx-auto
-">
+                        <div
+                            className=
+                            {`bg-gradient-to-br from-${themes[courseType]} to-${themes[courseType]}
+                                rounded-xl
+                                p-4 md:p-6 lg:p-8
+                                shadow-xl
+                                border-2 border-gray-400
+                                max-w-xl md:max-w-2xl mx-auto`}
+                        >
+
                             <div className="flex items-center justify-between ">
 
                                 {/* WAS */}
@@ -330,7 +337,7 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
                                 <div className="text-right text-white">
                                     <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
                                     <div className="text-lg md:text-2xl lg:text-3xl font-bold text-green-100">
-                                        70%
+                                        {percentageOff}
                                     </div>
                                 </div>
 
@@ -353,16 +360,16 @@ function CourseInfo({ projects, title, priceWithDiscount, originalPrice, theme }
                         </h3>
 
                         <div className="w-full flex justify-center">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-3xl w-full">
+                            <div className="grid grid-cols-1 sm:grid-cols-2  gap-2 sm:gap-3 max-w-full w-full">
                                 {features.map((feature, index) => (
                                     <div
                                         key={index}
-                                        className="flex items-center bg-gradient-to-r from-yellow-50 to-white
-                p-2 rounded-xl border border-yellow-200
-                shadow-md hover:shadow-xl transition-all duration-200"
+                                        className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-white
+                p-2  border border-${themes[courseType]} 
+                shadow-md hover:shadow-xl transition-all duration-200`}
                                     >
-                                        <span className="text-yellow-500 mr-3 text-2xl">✅</span>
-                                        <span className="font-semibold text-gray-900 text-base sm:text-lg">
+                                        <span className={`text-${themes[courseType]} mr-3 text-2xl`}>✅</span>
+                                        <span className="font-semibold text-white text-base sm:text-lg">
                                             {feature}
                                         </span>
                                     </div>
