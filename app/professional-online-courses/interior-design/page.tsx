@@ -19,6 +19,7 @@ import TestimonialCarousel from '../../../components/TestimonialSection ';
 // import { SiAutodesk, SiSketchup, SiAdobephotoshop } from "react-icons/si";
 import { FaCubes } from "react-icons/fa";
 import FAQComponent from '../components/FaqComponent';
+import CertificateCard from '../components/certificateComponent';
 // import RevitIcon from "./RevitIcon"; // custom SVG component
 function InteriorDesign() {
     const router = useRouter();
@@ -500,6 +501,11 @@ function InteriorDesign() {
 
                         <FeaturesSection courseType='interior' />
 
+                        <CertificateCard
+                            title="Become A Certified Digital Marketing Expert"
+                            subtitle="Upon successful completion of the course, you will receive certification from Jaipuria, a renowned institution that adds substantial credibility to your certificate and strengthens your resume."
+                            imageUrl="/certificate.png"
+                        />
                         {/* FAQ Section */}
                         <div className="w-full flex justify-center">
                             <div className="w-full max-w-4xl animate-slide-up-smooth">

@@ -28,84 +28,6 @@ interface FAQComponentProps {
 const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    // Theme configuration
-    // const themeClasses: Record<CourseType, CourseMeta> = {
-    //     interior: {
-    //         title: "Interior Design Course",
-    //         text: "text-yellow-500",
-    //         bg: "bg-yellow-500",
-    //         border: "border-yellow-500",
-    //         hoverBorder: "hover:border-yellow-500",
-    //         gradient: "from-yellow-400 to-yellow-600",
-    //     },
-    //     uiux: {
-    //         title: "UI/UX Design Course",
-    //         text: "text-blue-500",
-    //         bg: "bg-blue-500",
-    //         border: "border-blue-500",
-    //         hoverBorder: "hover:border-blue-500",
-    //         gradient: "from-blue-500 to-cyan-500",
-    //     },
-    //     motion: {
-    //         title: "Motion Graphic Design Course",
-    //         text: "text-orange-500",
-    //         bg: "bg-orange-500",
-    //         border: "border-orange-500",
-    //         hoverBorder: "hover:border-orange-500",
-    //         gradient: "from-orange-500 to-red-500",
-    //     },
-    //     digital: {
-    //         title: "Digital Marketing Course",
-    //         text: "text-green-500",
-    //         bg: "bg-green-500",
-    //         border: "border-green-500",
-    //         hoverBorder: "hover:border-green-500",
-    //         gradient: "from-green-500 to-emerald-500",
-    //     },
-    //     fashion: {
-    //         title: "Fashion Design Course",
-    //         text: "text-fuchsia-500",
-    //         bg: "bg-fuchsia-500",
-    //         border: "border-fuchsia-500",
-    //         hoverBorder: "hover:border-fuchsia-500",
-    //         gradient: "from-fuchsia-500 to-purple-500",
-    //     },
-    //     animation: {
-    //         title: "Animation & VFX Course",
-    //         text: "text-red-500",
-    //         bg: "bg-red-500",
-    //         border: "border-red-500",
-    //         hoverBorder: "hover:border-red-500",
-    //         gradient: "from-red-500 to-orange-500",
-    //     },
-    //     jewellery: {
-    //         title: "Jewellery Design Course",
-    //         text: "text-yellow-500",
-    //         bg: "bg-yellow-500",
-    //         border: "border-yellow-500",
-    //         hoverBorder: "hover:border-yellow-500",
-    //         gradient: "from-yellow-500 to-amber-500",
-    //     },
-    //     finearts: {
-    //         title: "Fine Arts Course",
-    //         text: "text-indigo-500",
-    //         bg: "bg-indigo-500",
-    //         border: "border-indigo-500",
-    //         hoverBorder: "hover:border-indigo-500",
-    //         gradient: "from-indigo-500 to-violet-500",
-    //     },
-    //     graphic: {
-    //         title: "Graphic Design Course",
-    //         text: "text-[#731e88]",
-    //         bg: "bg-[#731e88]",
-    //         border: "border-[#731e88]",
-    //         hoverBorder: "hover:border-[#731e88]",
-    //         gradient: "from-[#731e88] to-[#9b4db3]",
-    //     },
-    // };
-
-
-
     // Memoized values for performance
     const currentFAQs = useMemo(() => FAQ_DATA[courseType], [courseType]);
     const meta = useMemo(() => themeClasses[courseType], [courseType]);
@@ -120,34 +42,40 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
 
         return (
             <div
-                className={`rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900
-                    transition-all duration-300 hover:shadow-md ${meta.hoverBorder}`}
+                className={`group rounded-lg border transition-all duration-300 
+                    ${isOpen 
+                        ? `border-gray-300 dark:border-gray-600 shadow-md ${meta.border} shadow-${meta.text.replace('text-', '')}/10` 
+                        : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    } 
+                    bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50`}
             >
                 <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full p-5 flex justify-between items-center transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl"
+                    className="w-full p-4 sm:p-5 flex justify-between items-center gap-3 transition-colors"
                     aria-expanded={isOpen}
                     aria-label={`Toggle FAQ: ${faq.question}`}
                 >
-                    <span className="text-[16px] md:text-lg font-semibold text-gray-800 dark:text-white text-left flex-1 mr-4">
+                    <span className={`text-[15px] sm:text-base font-semibold text-left flex-1 transition-colors
+                        ${isOpen ? `text-gray-900 dark:text-white ${meta.text}` : 'text-gray-800 dark:text-gray-200'}`}>
                         {faq.question}
                     </span>
                     <div
-                        className={`p-2 rounded-full transition-all duration-500 flex-shrink-0 ${isOpen
-                            ? `${meta.bg} text-white rotate-180`
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-500"
+                        className={`flex-shrink-0 p-1.5 rounded-full transition-all duration-300 
+                            ${isOpen
+                                ? `${meta.bg} text-white rotate-180 shadow-sm`
+                                : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-700'
                             }`}
                     >
-                        <ChevronDown className="w-5 h-5" />
+                        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                 </button>
                 <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                        }`}
+                    className={`overflow-hidden transition-all duration-300 ease-in-out 
+                        ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
-                    <div className="p-5 pt-0">
-                        <div className={`pl-4 border-l-2 ${meta.border}`}>
-                            <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <div className="px-4 sm:px-5 pb-4 sm:pb-5">
+                        <div className={`pl-3 border-l-2 ${meta.border} ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+                            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed pl-2">
                                 {faq.answer}
                             </p>
                         </div>
@@ -158,26 +86,35 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
     }, [openIndex, meta]);
 
     return (
-        <div className="max-w-7xl mx-auto p-0 pt-10 pb-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             {/* Header */}
-            <div className="mb-10 text-center">
-                <h1
-                    className={`text-3xl md:text-5xl font-extrabold bg-gradient-to-r bg-clip-text  ${meta.gradient}`}
-                >
+            <div className="mb-8 sm:mb-10 text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 
+                    dark:from-gray-800 dark:to-gray-900 rounded-full mb-4">
+                    <div className={`w-2 h-2 rounded-full ${meta.bg} animate-pulse`} />
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Frequently Asked Questions</span>
+                </div>
+                
+                <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${meta.gradient} mb-3`}>
                     {meta.title} FAQs
                 </h1>
-                <p className="text-gray-600 dark:text-gray-300 text-lg mt-4">
-                    Everything you need to know about the course
+                
+                <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                    Find answers to common questions about our {meta.title.toLowerCase()}
                 </p>
-                <div className={`w-24 h-1 mx-auto mt-3 rounded-full ${meta.bg}`} />
+                
+                <div className={`h-0.5 w-16 mx-auto mt-4 rounded-full ${meta.bg}`} />
             </div>
 
             {/* FAQ List */}
-            <div className="space-y-4">
+            <div className="space-y-3">
                 {currentFAQs.map((faq, index) => (
                     <FAQItemComponent key={index} faq={faq} index={index} />
                 ))}
             </div>
+
+            {/* Contact CTA */}
+          
         </div>
     );
 };
