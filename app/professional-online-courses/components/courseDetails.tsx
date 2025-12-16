@@ -281,8 +281,8 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
 
     return (
         <>
-            <div className="w-full flex justify-center">
-                <div className="bg-white  border border-gray-200 
+            <div className="w-full flex justify-center  bg-gradient-to-b from-purple-100 to-white-100">
+                <div className="  border border-gray-200   bg-gradient-to-b from-purple-100 to-white-100
 
                     p-3 sm:p-3 max-w-7xl w-full">
 
