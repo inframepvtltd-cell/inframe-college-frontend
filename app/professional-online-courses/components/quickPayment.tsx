@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import OrderConfirmationModal from "./orderConfirmation";
 declare global {
     interface Window {
         Razorpay: any;
@@ -22,6 +23,8 @@ interface UserDetails {
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     const router = useRouter();
 
+    // Add new state for order confirmation
+    const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [user, setUser] = useState<UserDetails>({
         name: "",
@@ -31,6 +34,24 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
     const [loading, setLoading] = useState(false);
     const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+    const [orderDetails, setOrderDetails] = useState({
+        subtotal: "0",
+        tax: "0",
+        total: "0"
+    });
+
+    // Calculate order details
+    useEffect(() => {
+        const subtotal = parseFloat(price);
+        const tax = subtotal * 0.18; // 18% GST
+        const total = subtotal + tax;
+
+        setOrderDetails({
+            subtotal: subtotal.toFixed(2),
+            tax: tax.toFixed(2),
+            total: total.toFixed(2)
+        });
+    }, [price]);
 
     // Load Razorpay script
     useEffect(() => {
@@ -88,24 +109,39 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         return true;
     };
 
-    // RAZORPAY PAYMENT
-    const handleBuyNow = async () => {
+    // Handle form submission to show order confirmation
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
         if (!validateForm()) return;
 
-        if (!razorpayLoaded)
-            return alert("Payment gateway loading... try again.");
+        // Show order confirmation page instead of immediately proceeding
+        setShowForm(false);
+        setShowOrderConfirmation(true);
+    };
 
+    // Proceed to payment after order confirmation
+    const handleProceedToPayment = async () => {
+        if (!razorpayLoaded) {
+            return alert("Payment gateway loading... try again.");
+        }
+
+        setShowOrderConfirmation(false);
         setLoading(true);
 
         try {
-            const amountInPaisa = Math.round(parseFloat(price) * 100);
+            const subtotal = parseFloat(price);
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
+
+            const amountInPaisa = Math.round(total * 100);
 
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: amountInPaisa,
                 currency: "INR",
                 name: "Inframe College",
-                description: "Course Payment",
+                description: `Course Payment: ${courseName}`,
                 image: "/pixelcut-export4.png",
 
                 handler: function (response: any) {
@@ -120,7 +156,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         toast.warning("Payment was cancelled", {
                             description: "No amount was charged. You can try again anytime.",
                             duration: 5000,
-                            position: 'top-center', // or 'bottom-center'
+                            position: 'top-center',
                             classNames: {
                                 toast: 'w-full max-w-md text-lg',
                                 title: 'text-xl font-semibold',
@@ -159,14 +195,10 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         }
     };
 
-    const handleFormSubmit = async (e: React.FormEvent) => {
-        
-        e.preventDefault();
-        setShowForm(false);
-
-        // 🔄 Elegant loading toast
+    // Submit data to backend APIs
+    const submitUserData = async () => {
         const toastId = toast.loading(
-            <div className={ className ? "flex items-center gap-4" : "text-center flex flex-col items-center gap-4"}>
+            <div className={className ? "flex items-center gap-4" : "text-center flex flex-col items-center gap-4"}>
                 <div className="relative h-12 w-12">
                     <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
                     <div className="absolute inset-0 rounded-full border-4 border-yellow-400 border-t-transparent animate-spin"></div>
@@ -174,10 +206,10 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
                 <div className="space-y-1">
                     <p className="font-semibold text-gray-900 text-lg">
-                        Verifying your details
+                        Processing your order
                     </p>
                     <p className="text-gray-600 text-sm">
-                        Preparing payment for <span className="font-medium">{courseName}</span>
+                        Please wait while we prepare your payment
                     </p>
                 </div>
             </div>,
@@ -214,13 +246,10 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             toast.success(
                 <div className="text-center space-y-1">
                     <p className="font-bold text-lg text-green-800">
-                        🎉 Verification Complete
+                        🎉 Order Processed
                     </p>
                     <p className="text-gray-700 text-sm">
-                        Redirecting you to secure payment
-                    </p>
-                    <p className="text-green-700 font-semibold text-lg mt-1">
-                        ₹{price}
+                        Redirecting to secure payment
                     </p>
                 </div>,
                 {
@@ -237,14 +266,14 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 }
             );
 
-            setTimeout(handleBuyNow, 2200);
+            setTimeout(handleProceedToPayment, 2200);
 
         } catch (err) {
             // ❌ Error toast
             toast.error(
                 <div className="text-center space-y-1">
                     <p className="font-bold text-lg text-red-800">
-                        ⚠️ Verification Failed
+                        ⚠️ Order Processing Failed
                     </p>
                     <p className="text-gray-700 text-sm">
                         Please try again or contact support
@@ -266,7 +295,11 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         }
     };
 
-
+    // Handle Place Order button click
+    const handlePlaceOrder = () => {
+        setShowOrderConfirmation(false);
+        submitUserData();
+    };
 
     return (
         <>
@@ -282,13 +315,11 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
           hover:scale-[1.03] active:scale-95 transition-all duration-300
           shine-btn"
                 >
-
-                    {loading ? "Opening Payment Gateway..." : `Enroll Now`}
-                    {/* {loading ? "Processing..." : "Buy Now"} */}
+                    {loading ? "Processing..." : `Enroll Now`}
                 </button>
             </div>
 
-            {/* Modal */}
+            {/* User Details Form Modal */}
             {showForm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div
@@ -340,32 +371,122 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                             <button
                                 type="submit"
                                 disabled={loading}
-
-                                className="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold"
+                                className="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors"
                             >
-                                {loading ? "Processing..." : `Enroll Now ₹${price}`}
+                                Review Order
                             </button>
 
                             <button
                                 type="button"
                                 onClick={() => setShowForm(false)}
-                                className="w-full bg-gray-300 py-2 rounded-lg"
+                                className="w-full bg-gray-300 hover:bg-gray-400 py-2 rounded-lg transition-colors"
                             >
                                 Cancel
                             </button>
                         </form>
-
-                        {!razorpayLoaded && (
-                            <p className="mt-4 text-center text-sm text-yellow-700">
-                                Loading payment gateway...
-                            </p>
-                        )}
                     </div>
                 </div>
+            )}
+
+            {/* Order Confirmation Modal */}
+            {showOrderConfirmation && (
+                // <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                //     <div
+                //         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                //         onClick={() => !loading && setShowOrderConfirmation(false)}
+                //     />
+
+                //     <div className="relative bg-white p-8 rounded-xl shadow-2xl w-full max-w-md animate-fadeIn">
+                //         <div className="text-center mb-6">
+                //             <h2 className="text-2xl font-bold text-gray-900">YOUR ORDER</h2>
+                //         </div>
+
+                //         {/* Order Details */}
+                //         <div className="mb-6">
+                //             <div className="flex justify-between items-center mb-2 pb-2 border-b">
+                //                 <div>
+                //                     <p className="font-semibold text-lg">PRODUCT</p>
+                //                     <p className="text-gray-700">{courseName}</p>
+                //                     <p className="text-sm text-gray-500">QTY: 1</p>
+                //                 </div>
+                //                 <p className="font-bold text-lg">${price}</p>
+                //             </div>
+
+                //             <div className="space-y-2 mt-4">
+                //                 <div className="flex justify-between">
+                //                     <span className="text-gray-700">Subtotal</span>
+                //                     <span className="font-medium">${orderDetails.subtotal}</span>
+                //                 </div>
+                //                 <div className="flex justify-between">
+                //                     <span className="text-gray-700">GST @18%</span>
+                //                     <span className="font-medium">${orderDetails.tax}</span>
+                //                 </div>
+                //                 <div className="flex justify-between pt-3 border-t border-gray-300">
+                //                     <span className="font-bold text-lg">TOTAL</span>
+                //                     <span className="font-bold text-xl text-green-700">${orderDetails.total}</span>
+                //                 </div>
+                //             </div>
+                //         </div>
+
+                //         {/* Payment Method */}
+                //         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                //             <p className="font-semibold mb-2">Payment Method</p>
+                //             <div className="flex items-center justify-between">
+                //                 <span className="text-gray-700">Credit Card / Debit Card / NetBanking</span>
+                //                 <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Razorpay</span>
+                //             </div>
+                //         </div>
+
+                //         {/* Action Buttons */}
+                //         <div className="space-y-3">
+                //             <button
+                //                 onClick={handlePlaceOrder}
+                //                 disabled={loading}
+                //                 className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50"
+                //             >
+                //                 {loading ? (
+                //                     <span className="flex items-center justify-center">
+                //                         <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                //                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                //                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                //                         </svg>
+                //                         Processing...
+                //                     </span>
+                //                 ) : (
+                //                     "Place Order & Pay"
+                //                 )}
+                //             </button>
+
+                //             <button
+                //                 type="button"
+                //                 onClick={() => setShowOrderConfirmation(false)}
+                //                 className="w-full bg-gray-200 hover:bg-gray-300 py-3 rounded-lg font-medium transition-colors"
+                //                 disabled={loading}
+                //             >
+                //                 Edit Details
+                //             </button>
+                //         </div>
+
+                //         {/* User Info Summary */}
+                //         <div className="mt-6 pt-4 border-t border-gray-200">
+                //             <p className="text-sm text-gray-600 mb-1">Order for: <span className="font-medium">{user.name}</span></p>
+                //             <p className="text-sm text-gray-600">Contact: <span className="font-medium">{user.email}</span> | <span className="font-medium">{user.contact}</span></p>
+                //         </div>
+                //     </div>
+                // </div>
+                <OrderConfirmationModal
+                    open={showOrderConfirmation}
+                    loading={loading}
+                    courseName={courseName}
+                    price={price}
+                    orderDetails={orderDetails}
+                    user={user}
+                    onConfirm={handlePlaceOrder}
+                    onClose={() => setShowOrderConfirmation(false)}
+                />
             )}
         </>
     );
 }
 
 export default QuickPayment;
-

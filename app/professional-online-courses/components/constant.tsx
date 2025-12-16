@@ -15,13 +15,15 @@ interface CourseMeta {
     hoverBorder: string;
     gradient: string;
     rbg?: string;
+    fontColour?: string;
 }
 
 export const themeClasses: Record<CourseType, CourseMeta> = {
     interior: {
         title: "Interior Design Course",
         text: "text-yellow-500",
-        bg: "bg-yellow-500",
+        fontColour: 'black',
+        bg: "bg-yellow-700",
         rbg: "bg-gradient-to-b from-yellow-200 to-white-100",
         border: "border-yellow-500",
         hoverBorder: "hover:border-yellow-500",
