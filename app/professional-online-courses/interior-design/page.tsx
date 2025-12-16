@@ -99,7 +99,7 @@ function InteriorDesign() {
                 {/* Hero Section */}
 
                 {/* Hero Banner Image */}
-                <div className="relative w-full h-[31vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
+                <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                     <Image
                         src="/landingImages/we banner.png"
                         alt="Hero Banner"
@@ -452,8 +452,8 @@ function InteriorDesign() {
                             <div className="mt-8 sm:mt-10 lg:mt-12 pb-2">
                                 {/* Professional Offer Card */}
                                 <div className="relative bg-gradient-to-br 
-                                            from-yellow-300
-                                            via-yellow-400
+                                            from-yellow-400
+                                            via-yellow-500
                                             to-amber-500
                                             shadow-2xl
                                             overflow-hidden
@@ -492,7 +492,7 @@ function InteriorDesign() {
 
 
                                         {/* Benefits Grid */}
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-2 md:mb-12">
                                             {[
                                                 {
                                                     title: "Portfolio Development",
@@ -513,12 +513,12 @@ function InteriorDesign() {
                                             ].map((benefit, index) => (
                                                 <div
                                                     key={index}
-                                                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
+                                                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-2 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
                                                 >
                                                     <div className="flex items-start gap-4">
                                                         {/* Number indicator */}
                                                         <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-[#8a2ca3] to-[#5a176b] rounded-lg flex items-center justify-center">
-                                                            <span className="text-white font-bold text-sm">{index + 1}</span>
+                                                            <span className="text-white font-bold text-lg">{index + 1}</span>
                                                         </div>
 
                                                         {/* Content */}
@@ -526,7 +526,7 @@ function InteriorDesign() {
                                                             <h4 className="text-white font-semibold text-base md:text-lg mb-1 group-hover:text-white/90 transition-colors">
                                                                 {benefit.title}
                                                             </h4>
-                                                            <p className="text-white/70 text-sm md:text-base leading-relaxed">
+                                                            <p className="text-white text-sm md:text-base leading-relaxed">
                                                                 {benefit.description}
                                                             </p>
                                                         </div>

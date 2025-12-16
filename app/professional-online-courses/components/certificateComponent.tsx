@@ -53,7 +53,7 @@ export default function CertificateCard({
 
 
                     {/* Decorative line */}
-              
+
                 </div>
 
                 {/* Certificate Preview */}
@@ -168,38 +168,38 @@ export default function CertificateCard({
                         </div>
 
 
-                        
-                    {/* Certification Benefits */}
-             <div className="mt-6 sm:mt-8 border-t border-gray-200 dark:border-gray-700 pt-5 sm:pt-7">
-    <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white text-center mb-5">
-        Why This Certification Matters
-    </h3>
 
-    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-10 max-w-3xl mx-auto">
-        {[
-            "Recognized certification",
-            "Enhance your professional credibility",
-            "Stand out in job applications",
-            "Digital certificate for LinkedIn profile",
-        ].map((item) => (
-            <li
-                key={item}
-                className="flex items-start justify-center"
-            >
-                {/* Fixed-width wrapper for perfect alignment */}
-                <div className="flex items-center gap-3 max-w-[320px] text-center">
-                    {/* <span
+                        {/* Certification Benefits */}
+                        <div className="mt-6 sm:mt-8 border-t border-gray-200 dark:border-gray-700 pt-5 sm:pt-7">
+                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white text-center mb-5">
+                                Why This Certification Matters
+                            </h3>
+
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-10 max-w-3xl mx-auto">
+                                {[
+                                    "Recognized certification",
+                                    "Enhance your professional credibility",
+                                    "Stand out in job applications",
+                                    "Digital certificate for LinkedIn profile",
+                                ].map((item) => (
+                                    <li
+                                        key={item}
+                                        className="flex items-start justify-center"
+                                    >
+                                        {/* Fixed-width wrapper for perfect alignment */}
+                                        <div className="flex items-center gap-3 max-w-[320px] text-center">
+                                            {/* <span
                         className={`w-2 h-2 rounded-full flex-shrink-0 ${meta.bg}`}
                         aria-hidden="true"
                     /> */}
-                    <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-snug">
-                        {item}
-                    </span>
-                </div>
-            </li>
-        ))}
-    </ul>
-</div>
+                                            <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-snug">
+                                                {item}
+                                            </span>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
 
                     </div>
