@@ -95,11 +95,11 @@ function InteriorDesign() {
         <>
             <HeroSection offPercentage="75%" />
             {/* <div className="min-h-screen min-w-full bg-white"> */}
-            <div className="min-h-full min-w-full  bg-yellow-100 pt-12 pb-24">
+            <div className="min-h-full min-w-full   pt-11 pb-5">
                 {/* Hero Section */}
 
                 {/* Hero Banner Image */}
-                <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
+                <div className="relative w-full h-[26vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                     <Image
                         src="/landingImages/we banner.png"
                         alt="Hero Banner"
@@ -186,7 +186,7 @@ function InteriorDesign() {
                                 {/* Professional Education Card */}
                                 <div className="relative">
                                     {/* Main Card */}
-                                    <div className=" bg-gradient-to-b from-yellow-400 to-yellow-300   
+                                    <div className=" bg-yellow-400
                     border border-yellow-400/30 
                    
                     px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
@@ -318,7 +318,7 @@ function InteriorDesign() {
                             </div>
                             {/* ======== */}
                             {/* Icons Section */}
-                            <section ref={sectionRef} className="py-6 bg-gradient-to-b from-yellow-200 to-white">
+                            <section ref={sectionRef} className="py-6 bg-gradient-to-b from-yellow-300 to-white">
                                 <div className="text-center mb-10 px-4">
                                     <h2 className="text-4xl sm:text-5xl font-bold mb-6">
                                         <span className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-600 bg-clip-text text-transparent bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-1000">
@@ -573,11 +573,11 @@ function InteriorDesign() {
                         {/* Price Info */}
                         <div className="flex items-center gap-2 sm:gap-4 whitespace-nowrap overflow-hidden">
 
-                            <span className="text-sm sm:text-lg text-red-500 line-through">
-                                ₹5,996
+                            <span className="text-xl sm:text-lg text-red-500 line-through">
+                                ₹10,493
                             </span>
 
-                            <span className="text-lg sm:text-3xl font-bold text-green-600">
+                            <span className="text-2xl sm:text-3xl font-bold text-green-600">
                                 ₹1,499
                             </span>
 
@@ -585,7 +585,7 @@ function InteriorDesign() {
                                 Lifetime Access
                             </span>
 
-                            <span className="text-[10px] sm:text-sm font-bold text-white bg-green-600 px-2 py-0.5 sm:px-3 sm:py-1 rounded">
+                            <span className="text-[12px] sm:text-sm font-bold text-white bg-green-600 px-2 py-0.5 sm:px-3 sm:py-1 rounded">
                                 SAVE 86%
                             </span>
                         </div>

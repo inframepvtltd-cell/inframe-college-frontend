@@ -19,6 +19,7 @@ interface UserDetails {
     email: string;
     contact: string;
 }
+
 const themes: any = {
     interior: 'yellow-400',
     graphic: '[#731e88]'
@@ -286,20 +287,19 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
 
     return (
         <>
-            <div className="w-full flex justify-center  bg-gradient-to-b from-purple-100 to-white-100">
-                <div className="  border border-gray-200   bg-gradient-to-b from-purple-100 to-white-100
+            <div className={`w-full flex justify-center `}>
+                <div className="   border-gray-200   bg-gradient-to-b from-gray-100 to-white-100
 
                     p-3 sm:p-3 max-w-7xl w-full">
 
                     {/* Header */}
                     <div className="text-center mb-6">
-
                         {/* Title Section */}
                         <div className="mb-4">
                             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight">
                                 {title}
                             </h2>
-                            <p className={`text-xl sm:text-2xl text-${themes[courseType]} font-bold mt-2 flex items-center justify-center gap-2`}>
+                            <p className={`text-xl sm:text-2xl text-black/3 font-bold mt-2 flex items-center justify-center gap-2`}>
                                 <span className="text-2xl">🎓</span>
                                 Learn from Industry Masters
                                 <span className="text-2xl">⚡</span>
@@ -320,7 +320,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                             <div className="flex items-center justify-between ">
 
                                 {/* WAS */}
-                                <div className="text-left text-white">
+                                <div className="text-left text-red-700 font-bold ">
                                     <div className="text-xs md:text-sm opacity-90">WAS</div>
                                     <div className="text-lg md:text-2xl lg:text-3xl line-through opacity-80">
                                         ₹{originalPrice}
@@ -329,17 +329,17 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
 
                                 {/* NOW ONLY */}
                                 <div className="text-center ">
-                                    <div className="text-xs md:text-sm opacity-90 text-white">NOW ONLY</div>
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-black text-white">
+                                    <div className="text-xs md:text-sm opacity-90 text-black/90">NOW ONLY</div>
+                                    <div className="text-3xl md:text-4xl lg:text-5xl font-black text-black">
                                         ₹{priceWithDiscount}
                                     </div>
-                                    <div className="text-xs md:text-sm opacity-90 mt-1 text-white">Lifetime Access</div>
+                                    <div className="text-xs md:text-sm opacity-90 mt-1 text-black">Lifetime Access</div>
 
                                     <QuickPayment price={priceWithDiscount} courseName={title} />
                                 </div>
 
                                 {/* YOU SAVE */}
-                                <div className="text-right text-white">
+                                <div className="text-right text-green-600 font-bold">
                                     <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
                                     <div className="text-lg md:text-2xl lg:text-3xl font-bold text-white-100">
                                         {percentageOff}
@@ -372,7 +372,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                         className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-${themes[courseType]}
                                             p-2  border border-${themes[courseType]} 
                                             shadow-md hover:shadow-xl transition-all duration-200`}
-                                                                >
+                                    >
                                         <span className={`text-${themes[courseType]} mr-3 text-2xl`}>✅</span>
                                         <span className="font-semibold text-white text-base sm:text-lg">
                                             {feature}

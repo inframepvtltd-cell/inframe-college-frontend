@@ -86,7 +86,7 @@ export default function LandingPage() {
 
     return (
         <>
-            <HeroSection offPercentage="86%" />
+            <HeroSection offPercentage="75%" />
             <div className="min-h-full min-w-full  bg-purple-100 pt-12 pb-24">
                 {/* Hero Section */}
                 {/* <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden"> */}
@@ -105,7 +105,7 @@ export default function LandingPage() {
                     <div className="container mx-auto min-w-full px-4 sm:px-0">
                         <div className="min-w-full mx-auto ">
                             {/* Main Course Info */}
-                            <CourseInfo theme="#731e88" percentageOff="86%" projects="50" title="Graphic Design Course" priceWithDiscount="1,499" originalPrice='5,996' courseType="graphic" />
+                            <CourseInfo theme="#731e88" percentageOff="75%" projects="50" title="Graphic Design Course" priceWithDiscount="1,499" originalPrice='5,996' courseType="graphic" />
 
                             {/* pricing banner Section */}
                             <div className="relative mt-5 w-full h-[25vh] sm:h-[45vh] md:h-[86vh] overflow-hidden">
@@ -632,7 +632,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
                             </span>
 
                             <span className="text-[10px] sm:text-sm font-bold text-white bg-green-600 px-2 py-0.5 sm:px-3 sm:py-1 rounded">
-                                SAVE 86%
+                                SAVE 75%
                             </span>
                         </div>
 
