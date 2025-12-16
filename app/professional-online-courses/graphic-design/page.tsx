@@ -468,7 +468,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
 
 
                                         {/* Benefits Grid */}
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-2 md:mb-12">
                                             {[
                                                 {
                                                     title: "Portfolio Development",
@@ -489,7 +489,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
                                             ].map((benefit, index) => (
                                                 <div
                                                     key={index}
-                                                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-5 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
+                                                    className="group bg-white/5 backdrop-blur-sm rounded-lg p-2 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
                                                 >
                                                     <div className="flex items-start gap-4">
                                                         {/* Number indicator */}

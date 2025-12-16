@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { toast } from "sonner";
 import QuickPayment from './quickPayment';
+import { themeClasses } from './constant';
 declare global {
     interface Window {
         Razorpay: any;
@@ -22,7 +23,11 @@ const themes: any = {
     interior: 'yellow-400',
     graphic: '[#731e88]'
 }
-function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: string, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+
+type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+    const meta = useMemo(() => themeClasses[courseType], [courseType]);
+
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
     const [user, setUser] = useState<UserDetails>({
@@ -365,9 +370,9 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                     <div
                                         key={index}
                                         className={`flex items-center bg-gradient-to-r from-${themes[courseType]} to-${themes[courseType]}
-                p-2  border border-${themes[courseType]} 
-                shadow-md hover:shadow-xl transition-all duration-200`}
-                                    >
+                                            p-2  border border-${themes[courseType]} 
+                                            shadow-md hover:shadow-xl transition-all duration-200`}
+                                                                >
                                         <span className={`text-${themes[courseType]} mr-3 text-2xl`}>✅</span>
                                         <span className="font-semibold text-white text-base sm:text-lg">
                                             {feature}
