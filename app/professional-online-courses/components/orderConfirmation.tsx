@@ -52,6 +52,10 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
           <h2 className="text-xl sm:text-2xl font-extrabold text-black">
             Order Summary
           </h2>
+          {/* GST FREE BADGE */}
+          <span className="inline-block mt-2 text-xs font-semibold bg-black text-yellow-400 px-3 py-1 rounded-full">
+            GST FREE
+          </span>
         </div>
 
         {/* Body */}
@@ -72,13 +76,14 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
               <span className="font-medium">₹{orderDetails.subtotal}</span>
             </div>
 
-            <div className="flex justify-between">
-              <span className="text-gray-600">GST (18%)</span>
-              <span className="font-medium">₹{orderDetails.tax}</span>
+            {/* GST FREE LINE */}
+            <div className="flex justify-between text-green-600">
+              <span>GST</span>
+              <span className="font-medium">₹0 (Included)</span>
             </div>
 
             <div className="flex justify-between border-t pt-3 text-base font-bold">
-              <span>Total</span>
+              <span>Total Payable</span>
               <span className="text-green-600">
                 ₹{orderDetails.total}
               </span>
