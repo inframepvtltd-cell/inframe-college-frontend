@@ -14,7 +14,85 @@ interface CourseMeta {
     border: string;
     hoverBorder: string;
     gradient: string;
+    rbg?: string;
 }
+
+export const themeClasses: Record<CourseType, CourseMeta> = {
+    interior: {
+        title: "Interior Design Course",
+        text: "text-yellow-500",
+        bg: "bg-yellow-500",
+        rbg: "bg-gradient-to-b from-yellow-200 to-white-100",
+        border: "border-yellow-500",
+        hoverBorder: "hover:border-yellow-500",
+        gradient: "from-yellow-400 to-yellow-600",
+    },
+    uiux: {
+        title: "UI/UX Design Course",
+        text: "text-blue-500",
+        bg: "bg-blue-500",
+        border: "border-blue-500",
+        rbg: "bg-gradient-to-b from-purple-100 to-white-100",
+        hoverBorder: "hover:border-blue-500",
+        gradient: "from-blue-500 to-cyan-500",
+    },
+    motion: {
+        title: "Motion Graphic Design Course",
+        text: "text-orange-500",
+        bg: "bg-orange-500",
+        border: "border-orange-500",
+        hoverBorder: "hover:border-orange-500",
+        gradient: "from-orange-500 to-red-500",
+    },
+    digital: {
+        title: "Digital Marketing Course",
+        text: "text-green-500",
+        bg: "bg-green-500",
+        border: "border-green-500",
+        hoverBorder: "hover:border-green-500",
+        gradient: "from-green-500 to-emerald-500",
+    },
+    fashion: {
+        title: "Fashion Design Course",
+        text: "text-fuchsia-500",
+        bg: "bg-fuchsia-500",
+        border: "border-fuchsia-500",
+        hoverBorder: "hover:border-fuchsia-500",
+        gradient: "from-fuchsia-500 to-purple-500",
+    },
+    animation: {
+        title: "Animation & VFX Course",
+        text: "text-red-500",
+        bg: "bg-red-500",
+        border: "border-red-500",
+        hoverBorder: "hover:border-red-500",
+        gradient: "from-red-500 to-orange-500",
+    },
+    jewellery: {
+        title: "Jewellery Design Course",
+        text: "text-yellow-500",
+        bg: "bg-yellow-500",
+        border: "border-yellow-500",
+        hoverBorder: "hover:border-yellow-500",
+        gradient: "from-yellow-500 to-amber-500",
+    },
+    finearts: {
+        title: "Fine Arts Course",
+        text: "text-indigo-500",
+        bg: "bg-indigo-500",
+        border: "border-indigo-500",
+        hoverBorder: "hover:border-indigo-500",
+        gradient: "from-indigo-500 to-violet-500",
+    },
+    graphic: {
+        title: "Graphic Design Course",
+        text: "text-[#731e88]",
+        bg: "bg-[#731e88]",
+        border: "border-[#731e88]",
+        hoverBorder: "hover:border-[#731e88]",
+        gradient: "from-[#731e88] to-[#9b4db3]",
+    },
+};
 
 export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
     interior: [
@@ -877,77 +955,4 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
     ]
 };
 
-export const themeClasses: Record<CourseType, CourseMeta> = {
-    interior: {
-        title: "Interior Design Course",
-        text: "text-yellow-500",
-        bg: "bg-yellow-500",
-        border: "border-yellow-500",
-        hoverBorder: "hover:border-yellow-500",
-        gradient: "from-yellow-400 to-yellow-600",
-    },
-    uiux: {
-        title: "UI/UX Design Course",
-        text: "text-blue-500",
-        bg: "bg-blue-500",
-        border: "border-blue-500",
-        hoverBorder: "hover:border-blue-500",
-        gradient: "from-blue-500 to-cyan-500",
-    },
-    motion: {
-        title: "Motion Graphic Design Course",
-        text: "text-orange-500",
-        bg: "bg-orange-500",
-        border: "border-orange-500",
-        hoverBorder: "hover:border-orange-500",
-        gradient: "from-orange-500 to-red-500",
-    },
-    digital: {
-        title: "Digital Marketing Course",
-        text: "text-green-500",
-        bg: "bg-green-500",
-        border: "border-green-500",
-        hoverBorder: "hover:border-green-500",
-        gradient: "from-green-500 to-emerald-500",
-    },
-    fashion: {
-        title: "Fashion Design Course",
-        text: "text-fuchsia-500",
-        bg: "bg-fuchsia-500",
-        border: "border-fuchsia-500",
-        hoverBorder: "hover:border-fuchsia-500",
-        gradient: "from-fuchsia-500 to-purple-500",
-    },
-    animation: {
-        title: "Animation & VFX Course",
-        text: "text-red-500",
-        bg: "bg-red-500",
-        border: "border-red-500",
-        hoverBorder: "hover:border-red-500",
-        gradient: "from-red-500 to-orange-500",
-    },
-    jewellery: {
-        title: "Jewellery Design Course",
-        text: "text-yellow-500",
-        bg: "bg-yellow-500",
-        border: "border-yellow-500",
-        hoverBorder: "hover:border-yellow-500",
-        gradient: "from-yellow-500 to-amber-500",
-    },
-    finearts: {
-        title: "Fine Arts Course",
-        text: "text-indigo-500",
-        bg: "bg-indigo-500",
-        border: "border-indigo-500",
-        hoverBorder: "hover:border-indigo-500",
-        gradient: "from-indigo-500 to-violet-500",
-    },
-    graphic: {
-        title: "Graphic Design Course",
-        text: "text-[#731e88]",
-        bg: "bg-[#731e88]",
-        border: "border-[#731e88]",
-        hoverBorder: "hover:border-[#731e88]",
-        gradient: "from-[#731e88] to-[#9b4db3]",
-    },
-};
+

@@ -42,8 +42,8 @@ function Footer() {
     }, []);
 
     return (
-        <footer className="bg-gradient-to-b from-black to-gray-900 text-white border-t-4 border-yellow-500">
-            <div className="container mx-auto px-6 py-10 sm:py-5 text-center">
+        <footer className=" bg-gradient-to-b from-black to-gray-900 text-white border-t-4 border-yellow-500">
+            <div className=" container mx-auto px-6 py-10 sm:py-5 text-center">
 
                 {/* Main Description */}
                 <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
@@ -67,7 +67,7 @@ function Footer() {
                 <div className="my-8 h-px w-full max-w-xl mx-auto bg-gradient-to-r from-transparent via-gray-600 to-transparent" />
 
                 {/* Contact Section */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm sm:text-base">
+                <div className="pb-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm sm:text-base">
 
                     <span className="text-gray-300 hover:text-white transition">
                         📞 +91 9649 9649 37
@@ -83,7 +83,7 @@ function Footer() {
                         Visit Inframe School
                     </Link>
 
-                    <span className="text-gray-300 hover:text-white transition">
+                    <span className="text-gray-300 hover:text-white transition ">
                         📧 info@inframeschool.com
                     </span>
 

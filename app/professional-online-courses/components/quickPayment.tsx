@@ -10,6 +10,7 @@ declare global {
 interface QuickPaymentProps {
     price: string;
     courseName: string;
+    className?: string;
 }
 
 interface UserDetails {
@@ -18,7 +19,7 @@ interface UserDetails {
     contact: string;
 }
 
-function QuickPayment({ price, courseName }: QuickPaymentProps) {
+function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     const router = useRouter();
 
     const [showForm, setShowForm] = useState(false);
@@ -165,7 +166,7 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
 
         // 🔄 Elegant loading toast
         const toastId = toast.loading(
-            <div className="flex items-center gap-4">
+            <div className={ className ? "flex items-center gap-4" : "text-center flex flex-col items-center gap-4"}>
                 <div className="relative h-12 w-12">
                     <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
                     <div className="absolute inset-0 rounded-full border-4 border-yellow-400 border-t-transparent animate-spin"></div>
@@ -277,7 +278,7 @@ function QuickPayment({ price, courseName }: QuickPaymentProps) {
                     className="relative overflow-hidden bg-gradient-to-r 
           from-black via-gray-900 to-black text-white
           px-6 py-3 sm:px-8 sm:py-4 
-          text-xl sm:text-3xl font-semibold border border-yellow-400 shadow-xl mb-4
+          text-xl sm:text-3xl font-semibold border border-yellow-400 shadow-xl mb-0
           hover:scale-[1.03] active:scale-95 transition-all duration-300
           shine-btn"
                 >

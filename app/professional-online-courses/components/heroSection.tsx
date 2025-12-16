@@ -40,7 +40,8 @@ export default function HeroSection({ offPercentage }: HeroSectionProps) {
     }, [mounted]);
 
     return (
-        <div className="w-full bg-black">
+        // <div className="w-full bg-black  ">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-black dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 shadow-xl ">
             <div className="w-full bg-white/10 backdrop-blur-2xl border-b border-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.3)] py-2 z-20 relative overflow-hidden">
 
                 <div className="max-w-6xl mx-auto">
