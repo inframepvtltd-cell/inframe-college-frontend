@@ -1,6 +1,6 @@
 // FAQ data organized by course type
 // const faqData: any = {
-type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+type CourseType = 'civil' | 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
 
 interface FAQItem {
     question: string;
@@ -86,6 +86,14 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
     },
     graphic: {
         title: "Graphic Design Course",
+        text: "text-[#731e88]",
+        bg: "bg-[#731e88]",
+        border: "border-[#731e88]",
+        hoverBorder: "hover:border-[#731e88]",
+        gradient: "from-[#731e88] to-[#9b4db3]",
+    },
+    civil: {
+        title: "Civil & Architecture Drawing Course (2D)",
         text: "text-[#731e88]",
         bg: "bg-[#731e88]",
         border: "border-[#731e88]",
@@ -867,6 +875,93 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
         }
     ],
     graphic: [
+        {
+            question: "Do I need any design background before joining this course?",
+            answer:
+                "No. Zero experience is absolutely fine. What you do need is consistency. If you expect to become a designer just by watching videos without practicing, this course won’t magically fix that."
+        },
+        {
+            question: "What software do I need to install?",
+            answer:
+                "You need Adobe Illustrator, Adobe Photoshop, Adobe InDesign, and CorelDRAW. These are professional tools—not lightweight apps. If your system can’t run them smoothly, you may struggle."
+        },
+        {
+            question: "Will this course actually make me job-ready?",
+            answer:
+                "If you practice consistently, yes. If you only watch lessons without applying them, no. Skill comes from repetition. The course provides direction and tools—you have to execute."
+        },
+        {
+            question: "Can I learn all four software at the same time?",
+            answer:
+                "Yes, but it’s not recommended to jump randomly. Start with Illustrator or CorelDRAW for fundamentals, move to Photoshop, and then InDesign. A structured approach gives faster results."
+        },
+        {
+            question: "Is this course suitable for absolute beginners?",
+            answer:
+                "Yes, but expect a learning curve. The course keeps concepts simple, but graphic design requires patience. If you quit whenever something feels complicated, this field may not be for you."
+        },
+        {
+            question: "How long will it take me to learn everything?",
+            answer:
+                "It depends entirely on your consistency. A disciplined learner usually becomes comfortable in 6–8 weeks. Inconsistent learners may take several months."
+        },
+        {
+            question: "Will I get practical projects or only theory?",
+            answer:
+                "Yes, this course is highly practical. Every module includes real-world design tasks like posters, logos, social media creatives, branding layouts, magazine designs, and more."
+        },
+        {
+            question: "Is this course good for freelancing?",
+            answer:
+                "Absolutely. Illustrator and Photoshop alone can help you start freelancing. Adding InDesign and CorelDRAW puts you well above average. Freelancing success depends on skill and discipline."
+        },
+        {
+            question: "Can I follow this course on a mobile phone?",
+            answer:
+                "You can watch lessons on mobile using the Wereskill app, but you cannot practice on mobile. Graphic design is a desktop-based skill—there are no shortcuts."
+        },
+        {
+            question: "Will I receive a certificate after completing the course?",
+            answer:
+                "Yes, you will receive a Wereskill course completion certificate. However, clients hire based on your portfolio, not certificates. Strong projects matter more."
+        },
+        {
+            question: "What if I get stuck while learning?",
+            answer:
+                "You can ask questions through the app’s support or community section. Don’t struggle silently—asking questions helps you move faster."
+        },
+        {
+            question: "Does this course cover logo design, branding, posters, and social media ads?",
+            answer:
+                "Yes. Software training is combined with real design applications, including logos, branding, posters, social media creatives, advertisements, and layout designs."
+        },
+        {
+            question: "Do I need a powerful computer?",
+            answer:
+                "You don’t need a gaming PC, but a weak system will struggle. Minimum requirements: 8GB RAM, Intel i3 / Ryzen 3 or higher, and an SSD is highly recommended."
+        },
+        {
+            question: "Will I learn how to create a portfolio?",
+            answer:
+                "Yes. You’ll build a clean, beginner-friendly portfolio during the course. However, you must complete the projects—your portfolio won’t create itself."
+        },
+        {
+            question: "Can I start earning after completing this course?",
+            answer:
+                "Yes, if you apply the skills. You can start with logo design, social media creatives, business cards, posters, flyers, magazine layouts, and basic UI elements. Skills first—earnings follow."
+        },
+        {
+            question: "Does this course include internship, placement, or a job guarantee?",
+            answer:
+                "Yes. Wereskill provides internship opportunities, placement support, and a job guarantee program. However, your performance matters—assignments, practice, and portfolio completion decide results."
+        },
+        {
+            question: "Do you really provide placement and a job guarantee in graphic design?",
+            answer:
+                "Yes. Once your graphic design portfolio is ready, we arrange interviews and continuously push your profile until you get placed. That’s how the job guarantee works."
+        }
+    ],
+    civil: [
         {
             question: "Do I need any design background before joining this course?",
             answer:

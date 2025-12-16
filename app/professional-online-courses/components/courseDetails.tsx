@@ -24,7 +24,7 @@ const themes: any = {
     graphic: '[#731e88]'
 }
 
-type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic' | 'civil';
 function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
     const meta = useMemo(() => themeClasses[courseType], [courseType]);
 
