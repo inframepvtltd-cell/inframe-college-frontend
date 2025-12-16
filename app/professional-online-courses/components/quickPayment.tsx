@@ -42,16 +42,15 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
     // Calculate order details
     useEffect(() => {
-        const subtotal = parseFloat(price);
-        const tax = subtotal * 0.18; // 18% GST
-        const total = subtotal + tax;
+        const amount = parseFloat(price);
 
         setOrderDetails({
-            subtotal: subtotal.toFixed(2),
-            tax: tax.toFixed(2),
-            total: total.toFixed(2)
+            subtotal: amount.toFixed(2),
+            tax: "0.00",
+            total: amount.toFixed(2),
         });
     }, [price]);
+
 
     // Load Razorpay script
     useEffect(() => {
@@ -134,7 +133,9 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             const tax = subtotal * 0.18;
             const total = subtotal + tax;
 
-            const amountInPaisa = Math.round(total * 100);
+            // const amountInPaisa = Math.round(total * 100);
+            const amountInPaisa = Math.round(parseFloat(price) * 100);
+
 
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
