@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect, useRef } from "react";
 
 interface OrderDetails {
   subtotal: string;
@@ -35,6 +35,27 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   onConfirm,
   onClose,
 }: OrderConfirmationModalProps) {
+
+  const hasTrackedCheckout = useRef(false);
+
+  useEffect(() => {
+    if (
+      open &&
+      !hasTrackedCheckout.current &&
+      typeof window !== "undefined" &&
+      (window as any).fbq
+    ) {
+      (window as any).fbq("track", "InitiateCheckout", {
+        currency: "INR",
+        value: Number(orderDetails.total),
+        content_name: courseName,
+      });
+
+      hasTrackedCheckout.current = true;
+    }
+  }, [open]);
+
+
   if (!open) return null;
 
   return (

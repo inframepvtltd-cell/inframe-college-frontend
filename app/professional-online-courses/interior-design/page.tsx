@@ -2,29 +2,17 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from "next/navigation";
 import HeroSection from '../components/heroSection';
 import Footer from '../components/footer';
 import QuickPayment from '../components/quickPayment';
 import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
-import FAQSection from '../components/faq';
 import StudentsWork from '../components/studentsWork';
-import { SiAutodesk, SiSketchup, SiAdobephotoshop } from "react-icons/si";
-import { FaAutoprefixer, FaBuilding, FaCity, FaCube } from "react-icons/fa";
 import FeaturesSection from '../components/featureSection';
-import StudentReviewCarrousal from '../components/studentsReview';
 import TestimonialCarousel from '../../../components/TestimonialSection ';
-
-// import { SiAutodesk, SiSketchup, SiAdobephotoshop } from "react-icons/si";
-import { FaCubes } from "react-icons/fa";
 import FAQComponent from '../components/FaqComponent';
 import CertificateCard from '../components/certificateComponent';
-// import CertificateCard from '../components/certificateComponent';
-// import RevitIcon from "./RevitIcon"; // custom SVG component
 function InteriorDesign() {
-    const router = useRouter();
-
     const tools = [
         { name: "AutoCAD", image: "/software logos/pngegg (17).png", color: "from-pink-100 to-rose-100", textColor: "text-pink-600" },
         { name: "SketchUp", image: "/software logos/pngegg (18).png", color: "from-purple-100 to-pink-100", textColor: "text-purple-600" },
@@ -105,7 +93,7 @@ function InteriorDesign() {
                         alt="Hero Banner"
                         fill
                         priority
-                        className="object-contain sm:object-cover object-top animate-fade-in"
+                        className="object sm:object-cover object-top animate-fade-in"
                     />
                 </div>
 
@@ -119,18 +107,18 @@ function InteriorDesign() {
                             </div>
 
                             {/* Pricing Banner Section */}
-                            <div className="relative mt-5 w-full h-[27vh] sm:h-[45vh] md:h-[85vh] overflow-hidden">
+                            <div className="relative mt-5  w-full h-[27vh] sm:h-[45vh] md:h-[85vh] overflow-hidden">
                                 <Image
                                     src={"/landingImages/course landscape-01-01-01.jpg"}
                                     alt="Hero Banner"
                                     fill
                                     priority
-                                    className="object-contain object-top  transition-transform duration-700"
+                                    className="object-strech object-top  transition-transform duration-700"
                                 />
                             </div>
 
                             {/* AI Description Section */}
-                            <div className="my-2 px-1 sm:px-8 lg:px-20">
+                            <div className="my-0 px-0 pt-1 sm:px-8 lg:px-0 ">
                                 <div className="bg-gradient-to-r from-black via-gray-900 to-black 
                             text-white  shadow-2xl p-6 sm:p-10 
                             border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
