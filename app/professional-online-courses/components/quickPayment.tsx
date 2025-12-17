@@ -146,6 +146,15 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 image: "/pixelcut-export4.png",
 
                 handler: function (response: any) {
+
+                    if ((window as any).fbq) {
+                        (window as any).fbq("track", "Purchase", {
+                            currency: "INR",
+                            value: Number(price),
+                            content_name: courseName,
+                        });
+                    }
+
                     toast.success("Payment successful", {
                         description: "Thank you! Your course access will be activated shortly.",
                     });
@@ -307,14 +316,24 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             {/* Buy Now Button */}
             <div className="text-center">
                 <button
-                    onClick={() => setShowForm(true)}
+                    // onClick={() => setShowForm(true)}
+                    onClick={() => {
+                        if ((window as any).fbq) {
+                            (window as any).fbq("track", "AddToCart", {
+                                currency: "INR",
+                                value: Number(price),
+                                content_name: courseName,
+                            });
+                        }
+                        setShowForm(true);
+                    }}
                     disabled={loading}
                     className="relative overflow-hidden bg-gradient-to-r 
-          from-black via-gray-900 to-black text-white
-          px-6 py-3 sm:px-8 sm:py-4 
-          text-xl sm:text-3xl font-semibold border border-yellow-400 shadow-xl mb-0
-          hover:scale-[1.03] active:scale-95 transition-all duration-300
-          shine-btn"
+                            from-black via-gray-900 to-black text-white
+                            px-6 py-3 sm:px-8 sm:py-4 
+                            text-xl sm:text-3xl font-semibold border border-yellow-400 shadow-xl mb-0
+                            hover:scale-[1.03] active:scale-95 transition-all duration-300
+                            shine-btn"
                 >
                     {loading ? "Processing..." : `Enroll Now`}
                 </button>
@@ -391,90 +410,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
             {/* Order Confirmation Modal */}
             {showOrderConfirmation && (
-                // <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                //     <div
-                //         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-                //         onClick={() => !loading && setShowOrderConfirmation(false)}
-                //     />
-
-                //     <div className="relative bg-white p-8 rounded-xl shadow-2xl w-full max-w-md animate-fadeIn">
-                //         <div className="text-center mb-6">
-                //             <h2 className="text-2xl font-bold text-gray-900">YOUR ORDER</h2>
-                //         </div>
-
-                //         {/* Order Details */}
-                //         <div className="mb-6">
-                //             <div className="flex justify-between items-center mb-2 pb-2 border-b">
-                //                 <div>
-                //                     <p className="font-semibold text-lg">PRODUCT</p>
-                //                     <p className="text-gray-700">{courseName}</p>
-                //                     <p className="text-sm text-gray-500">QTY: 1</p>
-                //                 </div>
-                //                 <p className="font-bold text-lg">${price}</p>
-                //             </div>
-
-                //             <div className="space-y-2 mt-4">
-                //                 <div className="flex justify-between">
-                //                     <span className="text-gray-700">Subtotal</span>
-                //                     <span className="font-medium">${orderDetails.subtotal}</span>
-                //                 </div>
-                //                 <div className="flex justify-between">
-                //                     <span className="text-gray-700">GST @18%</span>
-                //                     <span className="font-medium">${orderDetails.tax}</span>
-                //                 </div>
-                //                 <div className="flex justify-between pt-3 border-t border-gray-300">
-                //                     <span className="font-bold text-lg">TOTAL</span>
-                //                     <span className="font-bold text-xl text-green-700">${orderDetails.total}</span>
-                //                 </div>
-                //             </div>
-                //         </div>
-
-                //         {/* Payment Method */}
-                //         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                //             <p className="font-semibold mb-2">Payment Method</p>
-                //             <div className="flex items-center justify-between">
-                //                 <span className="text-gray-700">Credit Card / Debit Card / NetBanking</span>
-                //                 <span className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Razorpay</span>
-                //             </div>
-                //         </div>
-
-                //         {/* Action Buttons */}
-                //         <div className="space-y-3">
-                //             <button
-                //                 onClick={handlePlaceOrder}
-                //                 disabled={loading}
-                //                 className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50"
-                //             >
-                //                 {loading ? (
-                //                     <span className="flex items-center justify-center">
-                //                         <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                //                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                //                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                //                         </svg>
-                //                         Processing...
-                //                     </span>
-                //                 ) : (
-                //                     "Place Order & Pay"
-                //                 )}
-                //             </button>
-
-                //             <button
-                //                 type="button"
-                //                 onClick={() => setShowOrderConfirmation(false)}
-                //                 className="w-full bg-gray-200 hover:bg-gray-300 py-3 rounded-lg font-medium transition-colors"
-                //                 disabled={loading}
-                //             >
-                //                 Edit Details
-                //             </button>
-                //         </div>
-
-                //         {/* User Info Summary */}
-                //         <div className="mt-6 pt-4 border-t border-gray-200">
-                //             <p className="text-sm text-gray-600 mb-1">Order for: <span className="font-medium">{user.name}</span></p>
-                //             <p className="text-sm text-gray-600">Contact: <span className="font-medium">{user.email}</span> | <span className="font-medium">{user.contact}</span></p>
-                //         </div>
-                //     </div>
-                // </div>
                 <OrderConfirmationModal
                     open={showOrderConfirmation}
                     loading={loading}

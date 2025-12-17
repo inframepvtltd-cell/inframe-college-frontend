@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from "next/navigation";
 import HeroSection from '../components/heroSection';
 import Footer from '../components/footer';
 import QuickPayment from '../components/quickPayment';
 import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
-import FAQSection from '../components/faq';
 import StudentsWork from '../components/studentsWork';
 import TestimonialCarousel from '../../../components/TestimonialSection ';
 import FeaturesSection from '../components/featureSection';
@@ -17,7 +15,8 @@ import FAQComponent from '../components/FaqComponent';
 import CertificateCard from '../components/certificateComponent';
 
 export default function LandingPage() {
-    const router = useRouter();
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
     const theme = '#731e88'
     const tools = [
         { name: "Photoshop", image: "/software logos/pngegg (24).png", color: "from-purple-100 to-pink-100", textColor: "text-purple-600" },
@@ -25,7 +24,6 @@ export default function LandingPage() {
         { name: "Corel Draw", image: "/software logos/pngegg (26).png", color: "from-orange-100 to-yellow-100", textColor: "text-orange-600" },
         { name: "Adobe_InDesign", image: "/software logos/Adobe_InDesign-Logo.wine-removebg-preview.png", color: "from-pink-100 to-rose-100", textColor: "text-pink-600" },
     ];
-
     const works = [
         "/graphic-design/stickers.png",
         "/graphic-design/sahil raza pen tool bird design.jpg",
@@ -36,19 +34,10 @@ export default function LandingPage() {
         "/graphic-design/logo making.jpg",
         "/graphic-design/BANNER.jpg",
         "/graphic-design/1000045472.jpg",
-        // "/graphic-design/61MEWLSO1tL._SL1080_.jpg",
         "/graphic-design/object design.jpg",
         "/graphic-design/watch design-01 - Copy.jpg",
         "/graphic-design/vector pen tool.jpg",
-        // "/graphic-design/youtube thumnail.png",
     ];
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.async = true;
-        document.body.appendChild(script);
-    }, []);
-
     const targetAudience = [
         "Beginners Who Want to Learn Design",
         "Students (10th, 12th & College)",
@@ -61,8 +50,13 @@ export default function LandingPage() {
         "Artists & Creative Enthusiasts"
     ];
 
-    const [isVisible, setIsVisible] = useState(false);
-    const sectionRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -88,16 +82,14 @@ export default function LandingPage() {
         <>
             <HeroSection offPercentage="75%" />
             <div className="min-h-full min-w-full  bg-purple-100 pt-12 pb-24">
-                {/* Hero Section */}
-                {/* <div className="relative w-full h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden"> */}
-                <div className="relative w-full h-[31vh] sm:h-[60vh] md:h-[70vh] lg:h-[96vh] overflow-hidden">
+                <div className="relative w-full h-[29vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
 
                     <Image
                         src="/landingImages/website1.png"
                         alt="Hero Banner"
                         fill
                         priority
-                        className="object-contain sm:object-cover object-top animate-fade-in"
+                        className="object-strech sm:object-cover object-top animate-fade-in"
                     />
                 </div>
 
@@ -114,15 +106,15 @@ export default function LandingPage() {
                                     alt="Hero Banner"
                                     fill
                                     priority
-                                    className="object-contain object-top  transition-transform duration-700"
+                                    className="object object-top  transition-transform duration-700"
                                 />
                             </div>
 
                             {/* AI Description Section */}
-                            <div className="my-2 px-0 sm:px-8 lg:px-20">
+                            <div className="my-2 px-0 sm:px-8 lg:px-0">
                                 <div className="bg-gradient-to-r from-black via-gray-900 to-black 
-                    text-white rounded shadow-2xl p-6 sm:p-10 
-                    border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
+                                                text-white rounded shadow-2xl p-6 sm:p-10 
+                                                border border-yellow-500/30 relative overflow-hidden animate-fade-in-up">
 
                                     {/* Soft Glow Background */}
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.15),transparent_70%)]"></div>
@@ -170,19 +162,12 @@ export default function LandingPage() {
                             </div>
 
                             {/* Course Level & Online Mode Notice */}
-                            <div className="px-0 sm:px-4 lg:px-0 my-6">
+                            <div className="px-0 sm:px-4 lg:px-0 my-2">
                                 {/* Professional Education Card */}
                                 <div className="relative">
                                     {/* Main Card */}
                                     <div className="bg-gradient-to-br from-[#731e88] via-[#5a176b] to-[#3a0f45] 
-                    border border-[#8a2ca3]/30 
-                    
-                    px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
-                    shadow-xl
-                    overflow-hidden">
-
-                                        {/* Subtle background pattern */}
-
+                                     border border-[#8a2ca3]/30 px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12 shadow-xl overflow-hidden">
 
                                         {/* Content container */}
                                         <div className="relative">
@@ -298,9 +283,6 @@ export default function LandingPage() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Decorative corner accents */}
-
                                 </div>
                             </div>
 
@@ -335,8 +317,7 @@ export default function LandingPage() {
                                 courseType='graphic'
                                 title="Become A Certified Digital Marketing Expert"
                                 subtitle="Upon Successful Completion of the Course, You Will Receive Certification From Inframe a Renowned Institution That Adds Substantial Credibility to Your Certificate and Strengthens Your Resume"
-                                imageUrl="/Certificate/inframe_certificate.png"//"/software logos/pngegg (24).png"
-                            // imageUrl="/certificate.png"
+                                imageUrl="/Certificate/inframe_certificate.png"
                             />
 
                             {/* Who Should Join */}
@@ -424,8 +405,7 @@ export default function LandingPage() {
                                 images={works}
                                 title="Our Students’ Creative Gallery"
                                 description="This gallery showcases the creative thinking and visual communication skills of our Graphic Design students. The displayed works represent a wide range of design disciplines, including branding, typography, illustration, advertising, layout design, and digital media.
-
-Each project reflects the student’s ability to translate ideas into impactful visual solutions, balancing creativity with clarity and purpose. Through thoughtful use of color, form, imagery, and typography, these designs communicate messages that are engaging, meaningful, and visually compelling."
+                                            Each project reflects the student’s ability to translate ideas into impactful visual solutions, balancing creativity with clarity and purpose. Through thoughtful use of color, form, imagery, and typography, these designs communicate messages that are engaging, meaningful, and visually compelling."
                             />
 
                             <div className="w-44 mb-10 h-1 bg-yellow-500 mx-auto rounded-full"></div>
@@ -464,8 +444,6 @@ Each project reflects the student’s ability to translate ideas into impactful 
                                             </h3>
                                             <div className="h-1 w-20 bg-gradient-to-r from-white/50 to-transparent rounded-full" />
                                         </div>
-
-
 
                                         {/* Benefits Grid */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-2 md:mb-12">
@@ -514,59 +492,7 @@ Each project reflects the student’s ability to translate ideas into impactful 
                                             ))}
                                         </div>
 
-                                        {/* CTA Section */}
-                                        <div className="text-center">
-                                            {/* <button className="group relative inline-flex items-center gap-3 bg-white text-[#731e88] font-semibold px-8 py-4 rounded-lg text-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 overflow-hidden">
-                                            <span className="relative z-10">Secure Your Spot Now</span>
-                                            <svg
-                                                className="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                            </svg>
 
-                                            <div className="absolute inset-0 bg-gradient-to-r from-white via-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                        </button> */}
-
-                                            {/* Additional info */}
-                                            {/* <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-white/80 text-sm">
-                                            <div className="flex items-center gap-2">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                                                </svg>
-                                                <span>Offer expires in: <span className="font-semibold text-white">2 days</span></span>
-                                            </div>
-
-                                            <div className="hidden sm:block w-px h-4 bg-white/30" />
-
-                                            <div className="flex items-center gap-2">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                </svg>
-                                                <span>No payment required today</span>
-                                            </div>
-                                        </div> */}
-
-                                            {/* Stats bar (optional) */}
-                                            {/* <div className="mt-8 pt-6 border-t border-white/10">
-                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-white/80">
-                                                <div className="text-center">
-                                                    <div className="text-2xl font-bold text-white mb-1">98%</div>
-                                                    <div className="text-sm">Placement Rate</div>
-                                                </div>
-                                                <div className="text-center">
-                                                    <div className="text-2xl font-bold text-white mb-1">500+</div>
-                                                    <div className="text-sm">Students Enrolled</div>
-                                                </div>
-                                                <div className="text-center col-span-2 sm:col-span-1">
-                                                    <div className="text-2xl font-bold text-white mb-1">4.8★</div>
-                                                    <div className="text-sm">Student Rating</div>
-                                                </div>
-                                            </div>
-                                        </div> */}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -584,32 +510,19 @@ Each project reflects the student’s ability to translate ideas into impactful 
                             </div>
 
                             {/* Final CTA Section */}
-
-
                             <FeaturesSection courseType='graphic' />
 
-
-
-
                             <div className="w-full flex justify-center  bg-gradient-to-b from-purple-100 to-white-100">
-                                {/* <div className="w-full max-w-4xl animate-slide-up-smooth"> */}
-                                {/* <FAQSection /> */}
                                 <FAQComponent courseType="graphic" />
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>
                 </div>
 
-
+                {/* Footer */}
                 <div className="animate-fade-in-up ">
                     <Footer />
                 </div>
-
-
-
-
-                {/* Footer */}
 
             </div>
             <div className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 shadow-xl">
@@ -644,10 +557,6 @@ Each project reflects the student’s ability to translate ideas into impactful 
                     </div>
                 </div>
             </div>
-
-
-
-
         </>
     );
 }

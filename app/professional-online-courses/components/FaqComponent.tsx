@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { FAQ_DATA, themeClasses } from './constant';
 
@@ -26,6 +26,9 @@ interface FAQComponentProps {
 }
 
 const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
+
+
+
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     // Memoized values for performance
@@ -43,8 +46,8 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
         return (
             <div
                 className={`group rounded-lg border transition-all duration-300 
-                    ${isOpen 
-                        ? `border-gray-300 dark:border-gray-600 shadow-md ${meta.border} shadow-${meta.text.replace('text-', '')}/10` 
+                    ${isOpen
+                        ? `border-gray-300 dark:border-gray-600 shadow-md ${meta.border} shadow-${meta.text.replace('text-', '')}/10`
                         : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                     } 
                     bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50`}
@@ -94,15 +97,15 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
                     <div className={`w-2 h-2 rounded-full ${meta.bg} animate-pulse`} />
                     <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Frequently Asked Questions</span>
                 </div>
-                
+
                 <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${meta.gradient} mb-3`}>
                     {meta.title} FAQs
                 </h1>
-                
+
                 <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                     Find answers to common questions about our {meta.title.toLowerCase()}
                 </p>
-                
+
                 <div className={`h-0.5 w-16 mx-auto mt-4 rounded-full ${meta.bg}`} />
             </div>
 
@@ -114,7 +117,7 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
             </div>
 
             {/* Contact CTA */}
-          
+
         </div>
     );
 };
