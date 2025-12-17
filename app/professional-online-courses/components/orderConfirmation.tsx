@@ -36,33 +36,24 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   onClose,
 }: OrderConfirmationModalProps) {
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Purchase", {
-        value: 1499,
-        currency: "INR",
-      });
-    }
-  }, []);
+const hasTrackedCheckout = useRef(false);
 
-  const hasTrackedCheckout = useRef(false);
+useEffect(() => {
+  if (
+    open &&
+    !hasTrackedCheckout.current &&
+    typeof window !== "undefined" &&
+    (window as any).fbq
+  ) {
+    (window as any).fbq("track", "InitiateCheckout", {
+      currency: "INR",
+      value: Number(orderDetails.total),
+      content_name: courseName,
+    });
 
-  useEffect(() => {
-    if (
-      open &&
-      !hasTrackedCheckout.current &&
-      typeof window !== "undefined" &&
-      (window as any).fbq
-    ) {
-      (window as any).fbq("track", "InitiateCheckout", {
-        currency: "INR",
-        value: Number(orderDetails.total),
-        content_name: courseName,
-      });
-
-      hasTrackedCheckout.current = true;
-    }
-  }, [open]);
+    hasTrackedCheckout.current = true;
+  }
+}, [open]);
 
 
 
