@@ -145,9 +145,9 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 description: `Course Payment: ${courseName}`,
                 image: "/pixelcut-export4.png",
 
-                handler: function (response: any) {
+                handler: function (response: any) {//new meta...
 
-                    if ((window as any).fbq) {
+                    if (typeof window !== "undefined" && (window as any).fbq) {
                         (window as any).fbq("track", "Purchase", {
                             currency: "INR",
                             value: Number(price),
@@ -158,9 +158,12 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                     toast.success("Payment successful", {
                         description: "Thank you! Your course access will be activated shortly.",
                     });
+
                     setLoading(false);
                     router.push("/order-confirmation");
                 },
+
+
                 modal: {
                     ondismiss: function () {
                         toast.warning("Payment was cancelled", {
@@ -327,6 +330,18 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         }
                         setShowForm(true);
                     }}
+
+                    // onClick={() => {
+                    //     if (typeof window !== "undefined" && (window as any).fbq) {
+                    //         (window as any).fbq("track", "AddToCart", {
+                    //             currency: "INR",
+                    //             value: Number(price),
+                    //             content_name: courseName,
+                    //         });
+                    //     }
+
+                    //     setShowForm(true); // your existing logic
+                    // }}
                     disabled={loading}
                     className="relative overflow-hidden bg-gradient-to-r 
                             from-black via-gray-900 to-black text-white
