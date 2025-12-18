@@ -28,6 +28,7 @@ function InteriorDesign() {
     }, []);
 
     const works = [
+
         "/landingImages/interior-design/2 daining render copy.jpg",
         "/landingImages/interior-design/fainal nighat ji render 1.jpg",
         "/landingImages/interior-design/nighat ji dining 1 render .jpg",
