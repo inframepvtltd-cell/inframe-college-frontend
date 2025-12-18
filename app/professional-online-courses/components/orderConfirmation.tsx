@@ -37,36 +37,58 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   onConfirm,
   onClose,
 }: OrderConfirmationModalProps) {
-  
-const hasTrackedPurchase = useRef(false);
 
-// useEffect(() => {
-//   if (
-//     open &&
-//     paymentSuccess &&
-//     !hasTrackedPurchase.current &&
-//     typeof window !== "undefined" &&
-//     (window as any).fbq
-//   ) {
-//     (window as any).fbq("track", "Purchase", {
-//       value: Number(price),
-//       currency: "INR",
-//       content_name: courseName,
-//     });
+  const hasTrackedPurchase = useRef(false);
 
-//     hasTrackedPurchase.current = true;
-//   }
-// }, [open, paymentSuccess]);
+  // useEffect(() => {
+  //   if (
+  //     open &&
+  //     paymentSuccess &&
+  //     !hasTrackedPurchase.current &&
+  //     typeof window !== "undefined" &&
+  //     (window as any).fbq
+  //   ) {
+  //     (window as any).fbq("track", "Purchase", {
+  //       value: Number(price),
+  //       currency: "INR",
+  //       content_name: courseName,
+  //     });
 
-useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).fbq) {
+  //     hasTrackedPurchase.current = true;
+  //   }
+  // }, [open, paymentSuccess]);
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && (window as any).fbq) {
+  //     (window as any).fbq("track", "Purchase", {
+  //       value: price, // exact paid amount (number)
+  //       currency: "INR",
+  //     });
+  //   }
+  // }, []);
+
+  // const hasTrackedPurchase = useRef(false);
+  alert("Rendering OrderConfirmationModal");
+  useEffect(() => {
+    if (
+      open &&
+      paymentSuccess &&
+      Number(price) > 0 &&
+      !hasTrackedPurchase.current &&
+      typeof window !== "undefined" &&
+      (window as any).fbq
+    ) {
       (window as any).fbq("track", "Purchase", {
-        value: price, // exact paid amount (number)
+        value: Number(price),
         currency: "INR",
+        content_name: courseName,
       });
-    }
-  }, []);
 
+      console.log("🔥 Meta Purchase fired:", price);
+
+      hasTrackedPurchase.current = true;
+    }
+  }, [open, paymentSuccess, price, courseName]);
 
   if (!open) return null;
 

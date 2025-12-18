@@ -99,7 +99,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={poppins.className}>
-      <Head>
+      <head>
         <Script
           id="meta-pixel"
           strategy="afterInteractive"
@@ -194,7 +194,7 @@ export default async function RootLayout({
 
 
 
-      </Head>
+      </head>
 
       <body>
         {/* Google Analytics (placed inside <body>, not inside <Head>) */}
