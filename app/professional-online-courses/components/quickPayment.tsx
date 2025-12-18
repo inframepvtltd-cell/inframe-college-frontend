@@ -185,6 +185,13 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 setLoading(false);
             });
 
+            if ((window as any).fbq) {
+                (window as any).fbq("track", "InitiateCheckout", {
+                  currency: "INR",
+                  value: Number(price),
+                  content_name: courseName,
+                });
+            }
             rzp.open();
         } catch (err) {
             console.error(err);

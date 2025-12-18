@@ -29,12 +29,14 @@ export async function POST(request: Request) {
 
   try {
     const order = await razorpay.orders.create(options);
+    console.log(order);
 
     return NextResponse.json(
       { orderId: order.id },
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     console.error(error);
     return NextResponse.json(
       { message: "Order creation failed" },
