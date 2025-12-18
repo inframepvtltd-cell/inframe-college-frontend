@@ -37,6 +37,7 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
 }: OrderConfirmationModalProps) {
 
 const hasTrackedCheckout = useRef(false);
+console.log(price);
 
 useEffect(() => {
   if (
@@ -88,14 +89,14 @@ useEffect(() => {
               <p className="font-semibold text-gray-900">{courseName}</p>
               <p className="text-xs text-gray-500 mt-1">Qty: 1</p>
             </div>
-            <p className="font-bold text-gray-900">₹{price}</p>
+            <p className="font-bold text-gray-900">₹{Math.round(parseFloat(price))}</p>
           </div>
 
           {/* Price Breakdown */}
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span className="font-medium">₹{orderDetails.subtotal}</span>
+              <span className="font-medium">₹{price}</span>
             </div>
 
             {/* GST FREE LINE */}
@@ -107,7 +108,7 @@ useEffect(() => {
             <div className="flex justify-between border-t pt-3 text-base font-bold">
               <span>Total Payable</span>
               <span className="text-green-600">
-                ₹{orderDetails.total}
+                ₹{price}
               </span>
             </div>
           </div>
