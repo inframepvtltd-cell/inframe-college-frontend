@@ -156,12 +156,18 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 description: `Course Payment: ${courseName}`,
                 image: "/pixelcut-export4.png",
 
+                // handler: function () {
+                //     setPaymentSuccess(true);
+                //     setShowOrderConfirmation(true);
+                //     toast.success("Payment successful");
+                //     router.push("/order-confirmation");
+                // },
                 handler: function () {
-                    setPaymentSuccess(true);
-                    setShowOrderConfirmation(true);
-                    toast.success("Payment successful");
+                    sessionStorage.setItem("purchase_amount", String(price));
+                    sessionStorage.setItem("purchase_event_id", crypto.randomUUID());
                     router.push("/order-confirmation");
                 },
+
 
                 prefill: {
                     name: user.name,
@@ -393,6 +399,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
             {/* Order Confirmation Modal */}
             {showOrderConfirmation && (
+
                 <OrderConfirmationModal
                     open={showOrderConfirmation}
                     loading={loading}
