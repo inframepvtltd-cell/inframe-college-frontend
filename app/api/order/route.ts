@@ -18,20 +18,28 @@ const razorpay = new Razorpay({
 });
 
 export async function POST(request: Request) {
-  const { amount } = await request.json() as { amount: string };
+  const { amount } = await request.json() as { amount: number };
 
   const options = {
-    amount: amount,
-    currency: 'INR', // Default
-    receipt: 'rcp1',
+    amount: Number(amount), // ✅ must be number in paisa
+    currency: "INR",
+    receipt: `rcpt_${Date.now()}`,
+    payment_capture: 1, // 🔥 THIS IS THE KEY LINE
   };
 
   try {
     const order = await razorpay.orders.create(options);
-    console.log(order);
-    return NextResponse.json({ orderId: order.id }, { status: 200 });
+
+    return NextResponse.json(
+      { orderId: order.id },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: 'Order creation failed' }, { status: 500 });
+    return NextResponse.json(
+      { message: "Order creation failed" },
+      { status: 500 }
+    );
   }
 }
+
