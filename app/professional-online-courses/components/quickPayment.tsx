@@ -22,7 +22,10 @@ interface UserDetails {
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     const router = useRouter();
-
+    const priceWithoutComma = price.replace(/,/g, "");
+    console.log(priceWithoutComma);
+    // let parsedPrice = parseFloat(price);
+    // console.log(parsedPrice)
     // Add new state for order confirmation
     const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
     const [showForm, setShowForm] = useState(false);
@@ -409,7 +412,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                     open={showOrderConfirmation}
                     loading={loading}
                     courseName={courseName}
-                    price={price}
+                    price={priceWithoutComma}
                     orderDetails={orderDetails}
                     user={user}
                     onConfirm={handlePlaceOrder}
