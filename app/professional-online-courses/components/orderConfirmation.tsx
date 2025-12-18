@@ -36,25 +36,25 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   onClose,
 }: OrderConfirmationModalProps) {
 
-const hasTrackedCheckout = useRef(false);
-console.log(price);
+  const hasTrackedCheckout = useRef(false);
+  console.log(price);
 
-useEffect(() => {
-  if (
-    open &&
-    !hasTrackedCheckout.current &&
-    typeof window !== "undefined" &&
-    (window as any).fbq
-  ) {
-    (window as any).fbq("track", "InitiateCheckout", {
-      currency: "INR",
-      value: Number(orderDetails.total),
-      content_name: courseName,
-    });
+  useEffect(() => {
+    if (
+      open &&
+      !hasTrackedCheckout.current &&
+      typeof window !== "undefined" &&
+      (window as any).fbq
+    ) {
+      (window as any).fbq("track", "InitiateCheckout", {
+        currency: "INR",
+        value: Number(orderDetails.total),
+        content_name: courseName,
+      });
 
-    hasTrackedCheckout.current = true;
-  }
-}, [open]);
+      hasTrackedCheckout.current = true;
+    }
+  }, [open]);
 
 
 
@@ -89,7 +89,8 @@ useEffect(() => {
               <p className="font-semibold text-gray-900">{courseName}</p>
               <p className="text-xs text-gray-500 mt-1">Qty: 1</p>
             </div>
-            <p className="font-bold text-gray-900">₹{Math.round(parseFloat(price))}</p>
+            <p className="font-bold text-gray-900">₹
+              {price}</p>
           </div>
 
           {/* Price Breakdown */}
