@@ -7,6 +7,7 @@ import Script from "next/script";
 import { headers } from "next/headers";
 // import { Toaster } from "react-hot-toast";
 import { Toaster } from "sonner";
+import FacebookPixel from "../components/FacebookPixel";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -114,9 +115,10 @@ export default async function RootLayout({
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '7718921828171683');
-            fbq('track', 'PageView');
           `}
         </Script>
+        {/* added PageView inside FacebookPixel.tsx to delegate on everypage and remove from above script*/}
+        {/* fbq('track', 'PageView'); */}
 
         {/* Title & Description */}
         {/* Favicon */}
@@ -197,6 +199,8 @@ export default async function RootLayout({
       </head>
 
       <body>
+      {/* Facebook PageView on route change */}
+      <FacebookPixel />
         {/* Google Analytics (placed inside <body>, not inside <Head>) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1Q0ED5JDYB"
