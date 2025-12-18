@@ -22,10 +22,7 @@ interface UserDetails {
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     const router = useRouter();
-    const priceWithoutComma = price.replace(/,/g, "");
-    console.log(priceWithoutComma);
-    // let parsedPrice = parseFloat(price);
-    // console.log(parsedPrice)
+
     // Add new state for order confirmation
     const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
     const [showForm, setShowForm] = useState(false);
@@ -124,84 +121,92 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
     // Proceed to payment after order confirmation
     const handleProceedToPayment = async () => {
-        if (!razorpayLoaded) return alert("Payment gateway loading...");
+        if (!razorpayLoaded) {
+            return alert("Payment gateway loading... try again.");
+        }
 
         setShowOrderConfirmation(false);
         setLoading(true);
 
         try {
-            // 1️⃣ CREATE ORDER
-            const orderRes = await fetch("/api/create-order", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    amount: Math.round(parseFloat(price) * 100),
-                }),
-            });
+            const subtotal = parseFloat(price);
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
 
-            const { orderId } = await orderRes.json();
-            if (!orderId) throw new Error("Order creation failed");
+            // const amountInPaisa = Math.round(total * 100);
+            const amountInPaisa = Math.round(parseFloat(price) * 100);
 
-            // 2️⃣ OPEN RAZORPAY
+
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                amount: Math.round(parseFloat(price) * 100),
+                amount: amountInPaisa,
                 currency: "INR",
                 name: "Inframe College",
                 description: `Course Payment: ${courseName}`,
-                order_id: orderId, // 🔥 FIX
+                image: "/pixelcut-export4.png",
+
+                handler: function (response: any) {//new meta...
+
+                    if (typeof window !== "undefined" && (window as any).fbq) {
+                        (window as any).fbq("track", "Purchase", {
+                            currency: "INR",
+                            value: Number(price),
+                            content_name: courseName,
+                        });
+                    }
+
+                    toast.success("Payment successful", {
+                        description: "Thank you! Your course access will be activated shortly.",
+                    });
+
+                    setLoading(false);
+                    router.push("/order-confirmation");
+                },
+
+
+                modal: {
+                    ondismiss: function () {
+                        toast.warning("Payment was cancelled", {
+                            description: "No amount was charged. You can try again anytime.",
+                            duration: 5000,
+                            position: 'top-center',
+                            classNames: {
+                                toast: 'w-full max-w-md text-lg',
+                                title: 'text-xl font-semibold',
+                                description: 'text-base',
+                            },
+                            style: {
+                                minWidth: '450px',
+                                padding: '24px',
+                                margin: '0 auto',
+                            },
+                        });
+                        console.log("Razorpay closed by user");
+                        setLoading(false);
+                    },
+                },
                 prefill: {
                     name: user.name,
                     email: user.email,
                     contact: user.contact,
                 },
                 theme: { color: "#FACC15" },
-
-                handler: async function (response: any) {
-                    const verifyRes = await fetch("/api/verify", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            razorpayOrderId: response.razorpay_order_id,
-                            razorpayPaymentId: response.razorpay_payment_id,
-                            razorpaySignature: response.razorpay_signature,
-                        }),
-                    });
-
-                    const result = await verifyRes.json();
-                    if (!result.isOk) {
-                        alert("Payment verification failed");
-                        return;
-                    }
-
-                    // PURCHASE EVENT
-                    if ((window as any).fbq) {
-                        (window as any).fbq("track", "Purchase", {
-                            value: Number(price),
-                            currency: "INR",
-                            content_name: courseName,
-                        });
-                    }
-
-                    toast.success("Payment successful");
-                    router.push("/order-confirmation");
-                },
-                modal: {
-                    ondismiss() {
-                        setLoading(false);
-                    },
-                },
             };
 
             const rzp = new window.Razorpay(options);
+
+            rzp.on("payment.failed", function (response: any) {
+                alert("Payment Failed");
+                setLoading(false);
+            });
+
             rzp.open();
-        } catch (err) {
-            console.error(err);
+        } catch (error: any) {
+            console.error("Payment init error:", error);
             alert("Payment failed to start");
             setLoading(false);
         }
     };
-
 
     // Submit data to backend APIs
     const submitUserData = async () => {
@@ -325,6 +330,18 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         }
                         setShowForm(true);
                     }}
+
+                    // onClick={() => {
+                    //     if (typeof window !== "undefined" && (window as any).fbq) {
+                    //         (window as any).fbq("track", "AddToCart", {
+                    //             currency: "INR",
+                    //             value: Number(price),
+                    //             content_name: courseName,
+                    //         });
+                    //     }
+
+                    //     setShowForm(true); // your existing logic
+                    // }}
                     disabled={loading}
                     className="relative overflow-hidden bg-gradient-to-r 
                             from-black via-gray-900 to-black text-white
@@ -391,7 +408,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                                 disabled={loading}
                                 className="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors"
                             >
-                                Enroll Now
+                                Review Order
                             </button>
 
                             <button
@@ -412,7 +429,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                     open={showOrderConfirmation}
                     loading={loading}
                     courseName={courseName}
-                    price={priceWithoutComma}
+                    price={price}
                     orderDetails={orderDetails}
                     user={user}
                     onConfirm={handlePlaceOrder}
