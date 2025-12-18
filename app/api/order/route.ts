@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   const { amount } = await request.json() as { amount: number };
 
   const options = {
-    amount: 1, // ✅ must be number in paisa
+    amount: Number(amount), // ✅ must be number in paisa
     currency: "INR",
     receipt: `rcpt_${Date.now()}`,
     payment_capture: 1, // 🔥 THIS IS THE KEY LINE
