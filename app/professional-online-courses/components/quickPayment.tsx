@@ -22,6 +22,7 @@ interface UserDetails {
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     const router = useRouter();
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
 
     // Add new state for order confirmation
     const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
@@ -120,69 +121,71 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     };
 
     // Proceed to payment after order confirmation
-const handleProceedToPayment = async () => {
-  if (!razorpayLoaded) {
-    alert("Payment gateway loading...");
-    return;
-  }
+    const handleProceedToPayment = async () => {
+        if (!razorpayLoaded) {
+            alert("Payment gateway loading...");
+            return;
+        }
 
-  setLoading(true);
+        setLoading(true);
 
-  try {
-    // ✅ amount in paisa
-    const amountInPaisa = Math.round(Number(price) * 100);
+        try {
+            // ✅ amount in paisa
+            const amountInPaisa = Math.round(Number(price) * 100);
 
-    // ✅ CREATE ORDER ON BACKEND
-    const orderRes = await fetch("/api/order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amountInPaisa }),
-    });
+            // ✅ CREATE ORDER ON BACKEND
+            const orderRes = await fetch("/api/order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: amountInPaisa }),
+            });
 
-    const { orderId } = await orderRes.json();
+            const { orderId } = await orderRes.json();
 
-    if (!orderId) {
-      throw new Error("Order creation failed");
-    }
+            if (!orderId) {
+                throw new Error("Order creation failed");
+            }
 
-    // ✅ RAZORPAY OPTIONS (WITH ORDER ID)
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      order_id: orderId, // 🔥 THIS STOPS REFUND
-      amount: amountInPaisa,
-      currency: "INR",
-      name: "Inframe College",
-      description: `Course Payment: ${courseName}`,
-      image: "/pixelcut-export4.png",
+            // ✅ RAZORPAY OPTIONS (WITH ORDER ID)
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                order_id: orderId, // 🔥 THIS STOPS REFUND
+                amount: amountInPaisa,
+                currency: "INR",
+                name: "Inframe College",
+                description: `Course Payment: ${courseName}`,
+                image: "/pixelcut-export4.png",
 
-      handler: function () {
-        toast.success("Payment successful");
-        router.push("/order-confirmation");
-      },
+                handler: function () {
+                    setPaymentSuccess(true);
+                    setShowOrderConfirmation(true);
+                    toast.success("Payment successful");
+                    router.push("/order-confirmation");
+                },
 
-      prefill: {
-        name: user.name,
-        email: user.email,
-        contact: user.contact,
-      },
+                prefill: {
+                    name: user.name,
+                    email: user.email,
+                    contact: user.contact,
+                },
 
-      theme: { color: "#FACC15" },
+                theme: { color: "#FACC15" },
+            };
+
+            const rzp = new (window as any).Razorpay(options);
+
+            rzp.on("payment.failed", () => {
+                toast.error("Payment failed");
+                setLoading(false);
+            });
+
+            rzp.open();
+        } catch (err) {
+            console.error(err);
+            alert("Payment failed to start");
+            setLoading(false);
+        }
     };
-
-    const rzp = new (window as any).Razorpay(options);
-
-    rzp.on("payment.failed", () => {
-      toast.error("Payment failed");
-      setLoading(false);
-    });
-
-    rzp.open();
-  } catch (err) {
-    console.error(err);
-    alert("Payment failed to start");
-    setLoading(false);
-  }
-};
 
 
     // Submit data to backend APIs
@@ -396,6 +399,7 @@ const handleProceedToPayment = async () => {
                     courseName={courseName}
                     price={price}
                     orderDetails={orderDetails}
+                    paymentSuccess={paymentSuccess}
                     user={user}
                     onConfirm={handlePlaceOrder}
                     onClose={() => setShowOrderConfirmation(false)}
