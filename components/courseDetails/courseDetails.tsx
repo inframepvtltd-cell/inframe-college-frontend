@@ -18,7 +18,7 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, n
     const handleBuyNow = async () => {
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Razorpay test key
-            amount: offerPrice + "00",//149900,
+            amount: 2 + "00",//149900,
             currency: "INR",
             name: "Inframe College",
             description: "Interior Design Course Enrollment",
