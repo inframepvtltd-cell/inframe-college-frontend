@@ -97,7 +97,7 @@ export default function LandingPage() {
                     <div className="container mx-auto min-w-full px-4 sm:px-0">
                         <div className="min-w-full mx-auto ">
                             {/* Main Course Info */}
-                            <CourseInfo theme="#731e88" percentageOff="75%" projects="50" title="Graphic Design Course" priceWithDiscount="2" originalPrice='5,996' courseType="graphic" />
+                            <CourseInfo theme="#731e88" percentageOff="75%" projects="50" title="Graphic Design Course" priceWithDiscount="1499" originalPrice='5,996' courseType="graphic" />
 
                             {/* pricing banner Section */}
                             <div className="relative mt-5 w-full h-[25vh] sm:h-[45vh] md:h-[86vh] overflow-hidden">
@@ -551,7 +551,7 @@ export default function LandingPage() {
 
                         {/* CTA */}
                         <div className="shrink-0">
-                            <QuickPayment price="2" courseName="Graphic Design" />
+                            <QuickPayment price="1499" courseName="Graphic Design" />
                         </div>
 
                     </div>

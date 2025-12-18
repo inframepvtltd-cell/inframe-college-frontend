@@ -144,6 +144,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 name: "Inframe College",
                 description: `Course Payment: ${courseName}`,
                 image: "/pixelcut-export4.png",
+                payment_capture: 1, // ==========================
 
                 handler: function (response: any) {//new meta...
 
@@ -330,18 +331,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         }
                         setShowForm(true);
                     }}
-
-                    // onClick={() => {
-                    //     if (typeof window !== "undefined" && (window as any).fbq) {
-                    //         (window as any).fbq("track", "AddToCart", {
-                    //             currency: "INR",
-                    //             value: Number(price),
-                    //             content_name: courseName,
-                    //         });
-                    //     }
-
-                    //     setShowForm(true); // your existing logic
-                    // }}
                     disabled={loading}
                     className="relative overflow-hidden bg-gradient-to-r 
                             from-black via-gray-900 to-black text-white
