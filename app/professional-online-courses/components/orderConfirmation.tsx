@@ -21,6 +21,7 @@ interface OrderConfirmationModalProps {
   price: string;
   orderDetails: OrderDetails;
   user: UserDetails;
+  paymentSuccess: boolean;
   onConfirm: () => void;
   onClose: () => void;
 }
@@ -31,31 +32,40 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   courseName,
   price,
   orderDetails,
+  paymentSuccess,
   user,
   onConfirm,
   onClose,
 }: OrderConfirmationModalProps) {
+  
+const hasTrackedPurchase = useRef(false);
 
-  const hasTrackedCheckout = useRef(false);
-  console.log(price);
+// useEffect(() => {
+//   if (
+//     open &&
+//     paymentSuccess &&
+//     !hasTrackedPurchase.current &&
+//     typeof window !== "undefined" &&
+//     (window as any).fbq
+//   ) {
+//     (window as any).fbq("track", "Purchase", {
+//       value: Number(price),
+//       currency: "INR",
+//       content_name: courseName,
+//     });
 
-  useEffect(() => {
-    if (
-      open &&
-      !hasTrackedCheckout.current &&
-      typeof window !== "undefined" &&
-      (window as any).fbq
-    ) {
-      (window as any).fbq("track", "InitiateCheckout", {
+//     hasTrackedPurchase.current = true;
+//   }
+// }, [open, paymentSuccess]);
+
+useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Purchase", {
+        value: price, // exact paid amount (number)
         currency: "INR",
-        value: Number(orderDetails.total),
-        content_name: courseName,
       });
-
-      hasTrackedCheckout.current = true;
     }
-  }, [open]);
-
+  }, []);
 
 
   if (!open) return null;
