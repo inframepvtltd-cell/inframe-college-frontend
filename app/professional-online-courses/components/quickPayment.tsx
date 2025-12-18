@@ -120,94 +120,70 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     };
 
     // Proceed to payment after order confirmation
-    const handleProceedToPayment = async () => {
-        if (!razorpayLoaded) {
-            return alert("Payment gateway loading... try again.");
-        }
+const handleProceedToPayment = async () => {
+  if (!razorpayLoaded) {
+    alert("Payment gateway loading...");
+    return;
+  }
 
-        setShowOrderConfirmation(false);
-        setLoading(true);
+  setLoading(true);
 
-        try {
-            const subtotal = parseFloat(price);
-            const tax = subtotal * 0.18;
-            const total = subtotal + tax;
+  try {
+    // ✅ amount in paisa
+    const amountInPaisa = Math.round(Number(price) * 100);
 
-            // const amountInPaisa = Math.round(total * 100);
-            const amountInPaisa = Math.round(parseFloat(price) * 100);
+    // ✅ CREATE ORDER ON BACKEND
+    const orderRes = await fetch("/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: amountInPaisa }),
+    });
 
+    const { orderId } = await orderRes.json();
 
-            const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                amount: amountInPaisa,
-                currency: "INR",
-                name: "Inframe College",
-                description: `Course Payment: ${courseName}`,
-                image: "/pixelcut-export4.png",
-                payment_capture: 1, // ==========================
+    if (!orderId) {
+      throw new Error("Order creation failed");
+    }
 
-                handler: function (response: any) {//new meta...
+    // ✅ RAZORPAY OPTIONS (WITH ORDER ID)
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      order_id: orderId, // 🔥 THIS STOPS REFUND
+      amount: amountInPaisa,
+      currency: "INR",
+      name: "Inframe College",
+      description: `Course Payment: ${courseName}`,
+      image: "/pixelcut-export4.png",
 
-                    if (typeof window !== "undefined" && (window as any).fbq) {
-                        (window as any).fbq("track", "Purchase", {
-                            currency: "INR",
-                            value: Number(price),
-                            content_name: courseName,
-                        });
-                    }
+      handler: function () {
+        toast.success("Payment successful");
+        router.push("/order-confirmation");
+      },
 
-                    toast.success("Payment successful", {
-                        description: "Thank you! Your course access will be activated shortly.",
-                    });
+      prefill: {
+        name: user.name,
+        email: user.email,
+        contact: user.contact,
+      },
 
-                    setLoading(false);
-                    router.push("/order-confirmation");
-                },
-
-
-                modal: {
-                    ondismiss: function () {
-                        toast.warning("Payment was cancelled", {
-                            description: "No amount was charged. You can try again anytime.",
-                            duration: 5000,
-                            position: 'top-center',
-                            classNames: {
-                                toast: 'w-full max-w-md text-lg',
-                                title: 'text-xl font-semibold',
-                                description: 'text-base',
-                            },
-                            style: {
-                                minWidth: '450px',
-                                padding: '24px',
-                                margin: '0 auto',
-                            },
-                        });
-                        console.log("Razorpay closed by user");
-                        setLoading(false);
-                    },
-                },
-                prefill: {
-                    name: user.name,
-                    email: user.email,
-                    contact: user.contact,
-                },
-                theme: { color: "#FACC15" },
-            };
-
-            const rzp = new window.Razorpay(options);
-
-            rzp.on("payment.failed", function (response: any) {
-                alert("Payment Failed");
-                setLoading(false);
-            });
-
-            rzp.open();
-        } catch (error: any) {
-            console.error("Payment init error:", error);
-            alert("Payment failed to start");
-            setLoading(false);
-        }
+      theme: { color: "#FACC15" },
     };
+
+    const rzp = new (window as any).Razorpay(options);
+
+    rzp.on("payment.failed", () => {
+      toast.error("Payment failed");
+      setLoading(false);
+    });
+
+    rzp.open();
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed to start");
+    setLoading(false);
+  }
+};
+
 
     // Submit data to backend APIs
     const submitUserData = async () => {
