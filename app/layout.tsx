@@ -114,7 +114,7 @@ export default async function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '7718921828171683');
+            fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
           `}
         </Script>
         {/* added PageView inside FacebookPixel.tsx to delegate on everypage and remove from above script*/}

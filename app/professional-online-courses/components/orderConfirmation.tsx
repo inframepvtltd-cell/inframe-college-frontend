@@ -68,7 +68,7 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
   // }, []);
 
   // const hasTrackedPurchase = useRef(false);
-  alert("Rendering OrderConfirmationModal");
+  // alert("Rendering OrderConfirmationModal");
   useEffect(() => {
     if (
       open &&
