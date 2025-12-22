@@ -144,13 +144,7 @@ const Footer = () => {
                 >
                   3-Year Diploma in Interior Design
                 </Link></li>
-              <li>
-                <Link
-                  href="/interior-design/autocad" // by ayaad
-                  className="hover:text-blue-500 transition duration-300"
-                >
-                  AutoCad
-                </Link></li>
+           
             </ul>
             <ul className="space-y-3">
               <li className="font-bold">Fashion Design</li>
