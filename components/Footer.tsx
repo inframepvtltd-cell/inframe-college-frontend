@@ -277,7 +277,7 @@ const Footer = () => {
           </p>
           <p className="mt-4 text-sm opacity-80">
             <strong>Admissions:</strong> +91 9649 9649 37
-            <br />three-year-diploma-in-interior-design
+            <br />
             <strong>Admin:</strong> +91 9649 9649 70
             <br />
             <strong>Email:</strong>{" "}
