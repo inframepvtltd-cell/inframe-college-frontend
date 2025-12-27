@@ -25,7 +25,7 @@ export default function AdmissionSidebar({ activePage, setActivePage }: Admissio
       </div>
       <ul>
         {pages.map((page) => (
-          <li 
+          <li
             key={page.id}
             className={`flex items-center p-4 cursor-pointer hover:bg-gray-800 ${activePage === page.id ? 'bg-gray-700' : ''}`}
             onClick={() => setActivePage(page.id)}
