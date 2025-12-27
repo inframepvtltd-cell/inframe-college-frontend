@@ -235,15 +235,15 @@ export default function AlumniSuccessStories() {
             <article className="prose prose-lg max-w-none">
               <section id="intro" ref={(el) => { sectionRefs.current["intro"] = el }} className="mb-12">
                 <p>
-                  At Inframe School, we take immense pride in the achievements of our alumni who have gone on to make 
-                  significant contributions to the design and creative industries. Their journeys from classroom to 
-                  career showcase the real-world impact of our education and the potential that lies ahead for current 
+                  At Inframe School, we take immense pride in the achievements of our alumni who have gone on to make
+                  significant contributions to the design and creative industries. Their journeys from classroom to
+                  career showcase the real-world impact of our education and the potential that lies ahead for current
                   and prospective students.
                 </p>
                 <p>
-                  The success stories featured here represent just a small sample of our accomplished graduates. Each 
-                  narrative highlights not only their professional achievements but also the unique ways in which 
-                  their education at Inframe School prepared them for the challenges and opportunities of the creative 
+                  The success stories featured here represent just a small sample of our accomplished graduates. Each
+                  narrative highlights not only their professional achievements but also the unique ways in which
+                  their education at Inframe School prepared them for the challenges and opportunities of the creative
                   industry.
                 </p>
                 <p>
@@ -253,10 +253,10 @@ export default function AlumniSuccessStories() {
               </section>
 
               {alumniStories.map((alumnus) => (
-                <section 
-                  id={alumnus.id} 
-                  ref={(el) => { sectionRefs.current[alumnus.id] = el }} 
-                  className="mb-12" 
+                <section
+                  id={alumnus.id}
+                  ref={(el) => { sectionRefs.current[alumnus.id] = el }}
+                  className="mb-12"
                   key={alumnus.id}
                 >
                   <Card className="mb-6 border-l-4 border-l-purple-400">
@@ -281,12 +281,12 @@ export default function AlumniSuccessStories() {
                           <h2 className="text-2xl font-bold mb-4">{alumnus.name} - {alumnus.position}</h2>
                           <h3 className="text-lg font-semibold text-gray-700 mb-3">Career Journey</h3>
                           <p className="mb-4">{alumnus.story}</p>
-                          
+
                           <h3 className="text-lg font-semibold text-gray-700 mb-3">Notable Achievement</h3>
                           <div className="bg-purple-50 p-4 rounded-md my-4">
                             <p>{alumnus.achievement}</p>
                           </div>
-                          
+
                           <h3 className="text-lg font-semibold text-gray-700 mb-3">Advice for Current Students</h3>
                           <blockquote className="border-l-4 border-purple-400 pl-4 italic my-4">
                             {`"${alumnus.advice}"`}
@@ -308,8 +308,8 @@ export default function AlumniSuccessStories() {
                       support each other and contribute to the school's legacy of excellence.`}
                     </p>
                     <p>
-                      Current students can connect with our alumni through mentorship programs, guest lectures, and 
-                      networking events throughout the academic year. For prospective students, these stories offer 
+                      Current students can connect with our alumni through mentorship programs, guest lectures, and
+                      networking events throughout the academic year. For prospective students, these stories offer
                       a glimpse into the potential outcomes of choosing Inframe School for your creative education.
                     </p>
                     <div className="bg-purple-50 p-4 rounded-md my-6 flex flex-col items-center text-center">

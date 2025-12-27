@@ -199,8 +199,8 @@ export default async function RootLayout({
       </head>
 
       <body>
-      {/* Facebook PageView on route change */}
-      <FacebookPixel />
+        {/* Facebook PageView on route change */}
+        <FacebookPixel />
         {/* Google Analytics (placed inside <body>, not inside <Head>) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-1Q0ED5JDYB"

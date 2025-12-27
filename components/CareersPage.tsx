@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,12 +24,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { 
-  Card, 
-  CardContent, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription
 } from "../components/ui/card";
 import {
   Tabs,
@@ -40,6 +40,7 @@ import {
 import { Badge } from "../components/ui/badge";
 import { AlertCircle, Check, Upload, BookOpen, Users, Target, MapPin, Briefcase } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { getAllCareers } from "../app/(main)/careers/api.ts/api";
 
 
 const poppins = Poppins({
@@ -50,7 +51,7 @@ const poppins = Poppins({
 const MAX_FILE_SIZE = 1024 * 1024; // 1MB
 const ACCEPTED_FILE_TYPES = [
   "application/pdf",
-  "application/msword", 
+  "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ];
 
@@ -113,6 +114,47 @@ const featuredJobs = [
 ];
 
 export default function CareersPage() {
+  const [careers, setCareers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedJob, setSelectedJob] = useState<null | {
+    id: string;
+    title: string;
+    type: string;
+    location: string;
+    description: string;
+    requirements: string[];
+  }>(null);
+
+  useEffect(() => {
+    async function loadCareers() {
+      try {
+        const res = await getAllCareers();
+
+        if (res.success) {
+          const formatted = res.data
+            .filter((job: any) => job.is_active)
+            .map((job: any) => ({
+              id: job.id,
+              title: job.title,
+              description: job.description,
+              location: job.place,
+              requirements: job.requirements,
+              type: job.part_time ? "Part-time" : "Full-time",
+            }));
+
+          setCareers(formatted);
+        }
+      } catch (err) {
+        console.error("Failed to fetch careers", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadCareers();
+  }, []);
+
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<{
     success: boolean;
@@ -138,19 +180,19 @@ export default function CareersPage() {
       formData.append("email", data.email);
       formData.append("phone", data.phone);
       formData.append("position", data.position);
-      
+
       // Add the file with the correct field name expected by Formspree
       if (data.resume && data.resume[0]) {
         formData.append("resume", data.resume[0], data.resume[0].name);
       }
-      
+
       if (data.coverLetter) {
         formData.append("coverLetter", data.coverLetter);
       }
 
       // Make sure we're not including any headers that would conflict with FormData's multipart/form-data
       const response = await fetch("https://formspree.io/f/myzrbywp", {
-      // const response = await fetch("https://formspree.io/f/mqaerebq", {
+        // const response = await fetch("https://formspree.io/f/mqaerebq", {
         method: "POST",
         body: formData,
         // Do not set Content-Type header, it will be set automatically with the boundary
@@ -165,7 +207,7 @@ export default function CareersPage() {
       } else {
         const errorText = await response.text();
         console.error("Form submission error:", errorText);
-        
+
         setFormStatus({
           success: false,
           message: "There was an error submitting your application. Please try again.",
@@ -173,7 +215,7 @@ export default function CareersPage() {
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      
+
       setFormStatus({
         success: false,
         message: "There was an error submitting your application. Please try again.",
@@ -210,7 +252,7 @@ export default function CareersPage() {
                   </h1>
                 </div>
                 <p className="text-xl text-white max-w-2xl">
-                Join our team and build a career where creativity thrives.
+                  Join our team and build a career where creativity thrives.
                 </p>
               </div>
             </div>
@@ -221,41 +263,54 @@ export default function CareersPage() {
       <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="openings" className="w-full">
           <TabsList className="grid w-full md:w-[400px] gap-3 grid-cols-2 mb-8 mx-auto">
-            <TabsTrigger 
-              value="openings" 
+            <TabsTrigger
+              value="openings"
               className="data-[state=active]:bg-yellow-500 border py-2 data-[state=active]:text-black"
             >
               Current Openings
             </TabsTrigger>
-            <TabsTrigger 
-              value="application" 
+            <TabsTrigger
+              value="application"
               className="data-[state=active]:bg-yellow-500 border py-2 data-[state=active]:text-black"
             >
               Apply Now
             </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="openings" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredJobs.map(job => (
-                <Card key={job.id} className="overflow-hidden border border-gray-200 transition-all hover:shadow-md">
-                  <CardHeader className="bg-gray-50 pb-4">
+              {careers.map((job) => (
+                <Card
+                  key={job.id}
+                  className="overflow-hidden border border-gray-200 rounded-lg transition-all hover:shadow-lg hover:scale-105 duration-200"
+                >
+                  <CardHeader className="bg-gray-50 pb-4 px-4">
                     <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg text-black">{job.title}</CardTitle>
-                      <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200">
+                      <CardTitle className="text-lg font-semibold text-black">
+                        {job.title}
+                      </CardTitle>
+                      <Badge
+                        variant="outline"
+                        className={`${job.type === "Full-time"
+                          ? "bg-green-100 text-green-800 border-green-200"
+                          : "bg-yellow-100 text-yellow-800 border-yellow-200"
+                          } py-1 px-2 text-xs rounded`}
+                      >
                         {job.type}
                       </Badge>
                     </div>
-                    <CardDescription className="flex items-center mt-1 text-gray-600">
+                    <CardDescription className="flex items-center mt-2 text-gray-600 text-sm">
                       <MapPin size={14} className="mr-1" /> {job.location}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-4">
-                    <p className="text-sm text-gray-600 mb-4">{job.description}</p>
+
+                  <CardContent className="pt-4 px-4">
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">{job.description}</p>
+
                     <div className="space-y-2">
-                      <h4 className="text-sm font-medium">Requirements:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        {job.requirements.map((req, idx) => (
+                      <h4 className="text-sm font-medium text-gray-800">Requirements:</h4>
+                      <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                        {job.requirements.map((req: string, idx: number) => (
                           <li key={idx} className="flex items-start">
                             <Check size={16} className="text-yellow-500 mr-2 mt-0.5" />
                             <span>{req}</span>
@@ -263,25 +318,25 @@ export default function CareersPage() {
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <Button 
-                        onClick={() => {
-                          const applicationTab = document.querySelector('[data-value="application"]');
-                          if (applicationTab) {
-                            (applicationTab as HTMLElement).click();
-                          }
-                        }}
-                        className="bg-yellow-500 hover:bg-yellow-600 text-black w-full"
+                  </CardContent>
+
+                  <div className="px-4 pb-4 pt-2 border-t border-gray-100 flex justify-center">
+                    <TabsList className="flex w-full justify-center gap-2">
+                      <TabsTrigger
+                        value="application"
+                        className="bg-yellow-500 text-black w-full max-w-[200px] py-2 rounded-md hover:bg-yellow-600 transition-colors"
                       >
                         Apply Now
-                      </Button>
-                    </div>
-                  </CardContent>
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
                 </Card>
               ))}
+
             </div>
           </TabsContent>
-          
+
+
           <TabsContent value="application">
             <Card className="max-w-3xl mx-auto border border-gray-200">
               <CardHeader className="bg-gray-50">
@@ -290,7 +345,7 @@ export default function CareersPage() {
                   Complete the form below to apply for a position at Inframe
                 </CardDescription>
               </CardHeader>
-              
+
               <CardContent className="pt-6">
                 {formStatus && (
                   <Alert className={`mb-6 ${formStatus.success ? "bg-green-50 text-green-800 border-green-200" : "bg-red-50 text-red-800 border-red-200"}`}>
@@ -299,7 +354,7 @@ export default function CareersPage() {
                     <AlertDescription>{formStatus.message}</AlertDescription>
                   </Alert>
                 )}
-                
+
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -310,9 +365,9 @@ export default function CareersPage() {
                           <FormItem>
                             <FormLabel>Full Name</FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="Enter your full name" 
-                                {...field} 
+                              <Input
+                                placeholder="Enter your full name"
+                                {...field}
                                 className="focus-visible:ring-yellow-500"
                               />
                             </FormControl>
@@ -320,7 +375,7 @@ export default function CareersPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="email"
@@ -340,7 +395,7 @@ export default function CareersPage() {
                         )}
                       />
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
@@ -349,9 +404,9 @@ export default function CareersPage() {
                           <FormItem>
                             <FormLabel>Phone Number</FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="+91 9876543210" 
-                                {...field} 
+                              <Input
+                                placeholder="+91 9876543210"
+                                {...field}
                                 className="focus-visible:ring-yellow-500"
                               />
                             </FormControl>
@@ -359,7 +414,7 @@ export default function CareersPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="position"
@@ -391,7 +446,7 @@ export default function CareersPage() {
                         )}
                       />
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name="resume"
@@ -435,7 +490,7 @@ export default function CareersPage() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="coverLetter"
@@ -453,21 +508,22 @@ export default function CareersPage() {
                         </FormItem>
                       )}
                     />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black" 
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Submitting..." : "Submit Application"}
                     </Button>
                   </form>
                 </Form>
+
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-        
+
         {/* Why Join Us Section */}
         <div className="mt-20">
           <h2 className="text-3xl font-bold text-center text-black mb-12">Why Join Inframe?</h2>
@@ -482,7 +538,7 @@ export default function CareersPage() {
                 <p className="text-gray-600 text-center">Work alongside creative professionals and help shape the next generation of designers in a stimulating environment.</p>
               </CardContent>
             </Card>
-            
+
             <Card className="border border-gray-200 hover:shadow-md transition-all">
               <div className="h-1 bg-yellow-500"></div>
               <CardHeader className="text-center">
@@ -493,7 +549,7 @@ export default function CareersPage() {
                 <p className="text-gray-600 text-center">Opportunities for continuous learning, industry connections, and career advancement in design education.</p>
               </CardContent>
             </Card>
-            
+
             <Card className="border border-gray-200 hover:shadow-md transition-all">
               <div className="h-1 bg-yellow-500"></div>
               <CardHeader className="text-center">
@@ -506,7 +562,7 @@ export default function CareersPage() {
             </Card>
           </div>
         </div>
-        
+
         {/* Current Openings CTA Section */}
         <div className="mt-16 bg-black text-white p-8 rounded-md">
           <div className="flex flex-col md:flex-row items-center justify-between">
@@ -516,7 +572,7 @@ export default function CareersPage() {
             </div>
             <div className="flex items-center">
               <Briefcase className="mr-3 text-yellow-500" />
-              <Button 
+              <Button
                 onClick={() => {
                   const applicationTab = document.querySelector('[data-value="application"]');
                   if (applicationTab) {

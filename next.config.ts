@@ -1,12 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["pixabay.com", "cdn.pixabay.com"], // Add more if needed
+    domains: ["pixabay.com", "cdn.pixabay.com", 'i0.wp.com'], // Add more if needed
 
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"], // Optimized for modern browsers
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "edwardgeorgelondon.com",
+        pathname: "/wp-content/uploads/**",
+      },
       {
         protocol: "https",
         hostname: "res.cloudinary.com",

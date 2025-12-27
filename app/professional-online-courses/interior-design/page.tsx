@@ -551,7 +551,6 @@ function InteriorDesign() {
                 <div className="animate-fade-in-up">
                     <Footer />
                 </div>
-
             </div>
 
 

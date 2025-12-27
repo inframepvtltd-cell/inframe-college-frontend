@@ -1,6 +1,7 @@
 import React from 'react'
-import CareersPage from '../../../components/CareersPage'
+// import CareersPage from '../../../components/CareersPage'
 import { Metadata } from 'next';
+import CareersPage from './components/CareerComponent';
 
 
 export const metadata: Metadata = {
