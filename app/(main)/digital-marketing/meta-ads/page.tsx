@@ -1,0 +1,48 @@
+// "use client"
+// import { useEffect } from "react";
+import ComboPack from "../../../../components/courseDetails/ComboPack";
+import CourseHero from "../../../../components/courseDetails/courseDetails";
+import CourseFeatures from "../../../../components/courseDetails/courseFeature";
+import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
+// import Customizecourse from "../../../../components/courseDetails/CustomizePack";
+import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
+import DreamsSection from "../../../../components/DreamSection";
+import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
+
+export const metadata = {
+    title: "Meta Ads Course: Learn Real Targeting That Converts",
+    description: "This Meta Ads course teaches practical campaign setup, audience targeting, creatives, and optimization—so you stop boosting posts and start running ads that actually perform.",
+};
+
+function CourseContent() {
+
+    return (
+        <div className="bg-white text-black mt-20">
+            <CourseHero  noOfHours="12.5" noOfLessons="150"  courseMetaContent="Unlock the power of Meta (Facebook & Instagram) advertising. Learn to create compelling campaigns, audience targeting, budget optimization, and performance tracking. Turn social media into a lead and sales generating machine."  courseName="Meta Ads Course"   title="Digital Markteting" price="1999" offerPrice="899" />
+            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+
+            <ComboPack />
+            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+
+            <CustomizeCourse
+                courseTitle="Graphic Design"
+            // availableSoftware={graphicDesignSoftware}
+            />
+
+            <CourseFeatures />
+            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+            {/* < DreamsSection /> */}
+            {/* <div className="w-44 mb-10 h-1 bg-gray-500 mx-auto rounded-full"></div> */}
+            < DreamsSection />
+
+            <WhyChooseUs />
+
+            <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
+               <FAQComponent courseType="digital" />
+            </div>
+        </div>
+    );
+}
+
+export default CourseContent;

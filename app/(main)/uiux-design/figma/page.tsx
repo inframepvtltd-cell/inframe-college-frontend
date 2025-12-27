@@ -1,0 +1,44 @@
+import ComboPack from "../../../../components/courseDetails/ComboPack";
+import CourseHero from "../../../../components/courseDetails/courseDetails";
+import CourseFeatures from "../../../../components/courseDetails/courseFeature";
+import CustomizeCourse from "../../../../components/courseDetails/CustomizePack";
+
+import WhyChooseUs from "../../../../components/courseDetails/WhyChooseUs";
+
+import DreamsSection from "../../../../components/DreamSection";
+import FAQSection from "../../../professional-online-courses/components/faq";
+import FAQComponent from "../../../professional-online-courses/components/FaqComponent";
+
+export const metadata = {
+  title: "Figma Course: Practical UI/UX Skills That Matter",
+  description: "This Figma course cuts the fluff and teaches real UI/UX workflow—wireframes, components, prototypes, and clean layouts you can use in client projects.",
+};
+
+function CourseContent() {
+
+
+  return (
+    <div className="bg-white text-black mt-20">
+      <CourseHero  offerPrice="699"  noOfHours="12.5" noOfLessons="150"   courseMetaContent="The Figma Course introduces learners to collaborative interface design using this cloud-based tool. Students master designing user interfaces, creating interactive prototypes, and working in teams remotely, making it essential for modern UX/UI projects."  courseName="Figma Course"  title="UIUX designing" price="1499" />
+    
+
+      <ComboPack />
+    
+
+      <CustomizeCourse
+        courseTitle="UIUX design"
+      />       
+      <CourseFeatures />
+
+
+      < DreamsSection />
+
+      <WhyChooseUs />
+
+      <div className="my-12 sm:my-1 px-4 sm:px-0 lg:px-60">
+  <FAQComponent courseType="uiux" />      </div>
+    </div>
+  );
+}
+
+export default CourseContent;
