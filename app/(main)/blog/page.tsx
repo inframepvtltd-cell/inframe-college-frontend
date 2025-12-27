@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, Search, Tag,} from "lucide-react"
+import { ChevronRight, Search, Tag, } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Metadata } from "next"
@@ -219,9 +219,9 @@ export default function Home() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <div className="relative flex-grow max-w-lg">
-                      <input 
-                        type="text" 
-                        placeholder="Search articles, topics, keywords..." 
+                      <input
+                        type="text"
+                        placeholder="Search articles, topics, keywords..."
                         className="w-full py-3 px-4 pl-12 rounded-md text-black"
                         aria-label="Search blog posts"
                       />
@@ -280,9 +280,9 @@ export default function Home() {
                 All
               </Button>
               {Object.keys(categoryColors).map((category) => (
-                <Button 
+                <Button
                   key={category}
-                  variant="outline" 
+                  variant="outline"
                   className={`border-2 ${categoryColors[category].replace('bg-', 'border-').replace(' text-white', '')} hover:bg-opacity-10`}
                 >
                   {category}
@@ -291,95 +291,45 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Featured Post - Hero Format
-          <div className="mb-12">
-            <Card className="overflow-hidden border-0 shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative h-64 lg:h-auto">
-                  <Image
-                    src={blogPosts[0].image}
-                    alt={blogPosts[0].title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className={`${categoryColors[blogPosts[0].category]} px-3 py-1 text-xs font-semibold`}>
-                      {blogPosts[0].category}
-                    </Badge>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                    <Calendar size={16} />
-                    <span>{blogPosts[0].date}</span>
-                    <span className="mx-2">•</span>
-                    <Clock size={16} />
-                    <span>{blogPosts[0].readTime}</span>
-                    <span className="mx-2">•</span>
-                  </div>
-                  <Link href={`/blog/${blogPosts[0].id}`}>
-                    <h3 className="text-2xl font-bold mb-4 hover:text-yellow-600 transition-colors">
-                      {blogPosts[0].title}
-                    </h3>
-                  </Link>
-                  <p className="text-gray-600 mb-6">{blogPosts[0].excerpt}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {blogPosts[0].tags.map((tag, index) => (
-                      <Badge key={index} variant="outline" className="text-xs">
-                        #{tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    
-                    <Button className="bg-black text-white hover:bg-yellow-400 hover:text-black transition-colors">
-                      Read Article <ChevronRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div> */}
-
           {/* Blog Cards Grid - Enhanced Design */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <div key={post.id} id={post.id} className="scroll-mt-16">
-              <Link href={`/blog/${post.id}`} className="group">
-                <Card className="overflow-hidden border-2 hover:border-yellow-400 transition-all duration-300 hover:shadow-xl h-full flex flex-col">
-                  <div className="relative h-56 overflow-hidden">
-                    <Image
-                      src={post.image || "/placeholder.svg"}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge className={`${categoryColors[post.category]} px-3 py-1 text-xs font-semibold`}>
-                        {post.category}
-                      </Badge>
+            {blogPosts.map((post) => (
+              <div key={post.id} id={post.id} className="scroll-mt-16">
+                <Link href={`/blog/${post.id}`} className="group">
+                  <Card className="overflow-hidden border-2 hover:border-yellow-400 transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+                    <div className="relative h-56 overflow-hidden">
+                      <Image
+                        src={post.image || "/placeholder.svg"}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge className={`${categoryColors[post.category]} px-3 py-1 text-xs font-semibold`}>
+                          {post.category}
+                        </Badge>
+                      </div>
                     </div>
-                  </div>
-                  <CardContent className="p-6 flex-grow flex flex-col">
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500 mt-auto">
-                      <span>{post.date}</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                    <Button className="mt-4 bg-black text-white hover:bg-yellow-400 hover:text-black transition-colors w-full">
-                      Read More <ChevronRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
-          ))}
-        </div>
+                    <CardContent className="p-6 flex-grow flex flex-col">
+                      <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-600 mb-4 flex-grow">{post.excerpt}</p>
+                      <div className="flex items-center justify-between text-sm text-gray-500 mt-auto">
+                        <span>{post.date}</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <Button className="mt-4 bg-black text-white hover:bg-yellow-400 hover:text-black transition-colors w-full">
+                        Read More <ChevronRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
+            ))}
+          </div>
 
-        
+
         </section>
 
         {/* Enhanced Newsletter Section with SEO */}
@@ -400,7 +350,8 @@ export default function Home() {
           </div>
         </section>
 
-        
 
-          </main>
-          </>)}
+
+      </main>
+    </>)
+}
