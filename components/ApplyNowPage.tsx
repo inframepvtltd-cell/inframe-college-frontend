@@ -48,7 +48,7 @@ import Testimonial from "./Testimonials";
 import { Poppins } from "next/font/google";
 import WhyInframe from "./WhyInframe";
 import CampusLife from "./CampusLife";
-import ApplyNow from "./ApplyNow";
+import ApplyNow from "../app/(main)/news-events/component/ApplyNow";
 import ApplyNowForm from "./ApplyNowForm";
 import Image from "next/image";
 

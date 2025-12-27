@@ -16,218 +16,151 @@ const poppins = Poppins({
 
 // Event & News Types
 interface EventItem {
-  id: number;
+  id: string;
   title: string;
   category: "art" | "design" | "business" | "general";
   description: string;
-  date: string;
-  time: string;
-  location: string;
+  date: string | null;
+  time: string | null;
+  location: string | null;
   image: string;
   featured?: boolean;
 }
 
 interface NewsItem {
-  id: number;
+  id: string;
   title: string;
   category: "art" | "design" | "business" | "general";
   summary: string;
-  date: string;
-  author: string;
+  date: string | null;
+  author: string | null;
   image: string;
   featured?: boolean;
 }
 
 const NewsAndEventsPage = () => {
-  // Sample data - in a real application, this would come from an API
-  const events: EventItem[] = [
-    {
-      id: 1,
-      title: "Annual Design Exhibition 2025",
-      category: "design",
-      description:
-        "Showcasing the innovative works of our final year design students, exploring sustainable solutions for everyday challenges.",
-      date: "May 15, 2025",
-      time: "10:00 AM - 6:00 PM",
-      location: "Campus Gallery Hall",
-      image:
-        "https://images.unsplash.com/photo-1581078426770-6d336e5de7bf?q=80&w=2070&auto=format&fit=crop",
-      featured: true,
-    },
-    {
-      id: 2,
-      title: "Business Innovation Summit",
-      category: "business",
-      description:
-        "Connect with industry leaders and explore emerging trends in entrepreneurship and business development.",
-      date: "June 3, 2025",
-      time: "9:00 AM - 5:00 PM",
-      location: "Conference Center",
-      image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 3,
-      title: "Contemporary Art Workshop Series",
-      category: "art",
-      description:
-        "A hands-on workshop series led by renowned contemporary artists exploring new mediums and techniques.",
-      date: "May 22-24, 2025",
-      time: "1:00 PM - 4:00 PM",
-      location: "Studio B, Art Building",
-      image:
-        "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=2080&auto=format&fit=crop",
-    },
-    {
-      id: 4,
-      title: "UX Research Masterclass",
-      category: "design",
-      description:
-        "Learn advanced user research methodologies from industry experts to enhance your design process.",
-      date: "June 10, 2025",
-      time: "10:00 AM - 3:00 PM",
-      location: "Design Lab",
-      image:
-        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 5,
-      title: "Investment Strategies Seminar",
-      category: "business",
-      description:
-        "Expert financial advisors share insights on investment opportunities in the creative industries.",
-      date: "June 15, 2025",
-      time: "2:00 PM - 5:00 PM",
-      location: "Business School Auditorium",
-      image:
-        "https://images.unsplash.com/photo-1591115765373-5207764f72e7?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 6,
-      title: "Alumni Meet & Greet",
-      category: "general",
-      description:
-        "Connect with successful alumni from various fields and expand your professional network.",
-      date: "July 5, 2025",
-      time: "5:00 PM - 8:00 PM",
-      location: "Campus Central Square",
-      image:
-        "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=2070&auto=format&fit=crop",
-    },
-  ];
-
-  const news: NewsItem[] = [
-    {
-      id: 1,
-      title: "School of Design Wins National Creative Excellence Award",
-      category: "design",
-      summary:
-        "Our design department has been recognized for outstanding contributions to sustainable design practices and innovation in education.",
-      date: "April 20, 2025",
-      author: "Communications Team",
-      image:
-        "https://images.unsplash.com/photo-1561489401-fc2876ced162?q=80&w=2070&auto=format&fit=crop",
-      featured: true,
-    },
-    {
-      id: 2,
-      title: "New Business Analytics Program Launching Fall 2025",
-      category: "business",
-      summary:
-        "Responding to industry demands, our business school introduces a specialized program in creative industry analytics.",
-      date: "April 15, 2025",
-      author: "Academic Affairs",
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 3,
-      title: "Student Art Installation Featured in City Museum",
-      category: "art",
-      summary:
-        "Three senior art students' collaborative work has been selected for permanent display at the National Contemporary Art Museum.",
-      date: "April 12, 2025",
-      author: "Arts Department",
-      image:
-        "https://images.unsplash.com/photo-1594749794743-c23c6dadde5a?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 4,
-      title: "Faculty Research on Sustainable Design Practices Published",
-      category: "design",
-      summary:
-        "Professor Michaels' groundbreaking research on eco-friendly materials has been published in the International Design Journal.",
-      date: "April 8, 2025",
-      author: "Research Office",
-      image:
-        "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 5,
-      title: "Entrepreneurship Fund Grants $1M to Student Startups",
-      category: "business",
-      summary:
-        "Ten innovative student business ventures receive funding to develop their concepts into market-ready products and services.",
-      date: "April 5, 2025",
-      author: "Business Development Center",
-      image:
-        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 6,
-      title: "Campus Expansion Project Breaks Ground",
-      category: "general",
-      summary:
-        "Construction begins on the new Creative Technologies Center that will house state-of-the-art facilities for all departments.",
-      date: "April 1, 2025",
-      author: "Facilities Management",
-      image:
-        "https://images.unsplash.com/photo-1503387837-b154d5074bd2?q=80&w=2071&auto=format&fit=crop",
-    },
-  ];
 
   // State management
-  const [, setActiveTab] = useState(0);
-  const [filteredEvents, setFilteredEvents] = useState(events);
-  const [filteredNews, setFilteredNews] = useState(news);
-  // const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [searchTerm, setSearchTerm] = useState("");
+const [, setActiveTab] = useState(0);
+
+const [allEvents, setAllEvents] = useState<EventItem[]>([]);
+const [allNews, setAllNews] = useState<NewsItem[]>([]);
+
+const [filteredEvents, setFilteredEvents] = useState<EventItem[]>([]);
+const [filteredNews, setFilteredNews] = useState<NewsItem[]>([]);
+
+const [selectedCategory, setSelectedCategory] = useState<string>("all");
+const [searchTerm, setSearchTerm] = useState("");
+
+
+
+  // ================ News & Event Fetch API =====================
+  const normalizeCategory = (
+    category?: string
+  ): "art" | "design" | "business" | "general" => {
+    if (!category) return "general";
+
+    const value = category.toLowerCase();
+    if (
+      value === "art" ||
+      value === "design" ||
+      value === "business" ||
+      value === "general"
+    ) {
+      return value;
+    }
+
+    return "general";
+  };
+
+  const transformNewsEvents = (data: any[]) => {
+    const events: EventItem[] = [];
+    const news: NewsItem[] = [];
+
+    data.forEach((item) => {
+      const formattedDate = item.date
+        ? new Date(item.date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
+        : null;
+
+      if (item.type === "event") {
+        events.push({
+          id: item.id,
+          title: item.title,
+          category: normalizeCategory(item.category),
+          description: item.description ?? "",
+          date: formattedDate,
+          time:
+            item.start_time && item.end_time
+              ? `${item.start_time} - ${item.end_time}`
+              : null,
+          location: item.location ?? null,
+          image: item.image,
+        });
+      }
+
+      if (item.type === "news") {
+        news.push({
+          id: item.id,
+          title: item.title,
+          category: normalizeCategory(item.category),
+          summary: item.description ?? "",
+          date: formattedDate,
+          author: "Admin",
+          image: item.image,
+        });
+      }
+    });
+
+    return { events, news };
+  };
+
+  const base_url = process.env.NEXT
+
+  useEffect(() => {
+    const fetchNewsEvents = async () => {
+      const res = await fetch("/api/news-events");
+      const json = await res.json();
+
+      const { events, news } = transformNewsEvents(json.data);
+
+      setAllEvents(events);
+      setAllNews(news);
+
+      setFilteredEvents(events);
+      setFilteredNews(news);
+    };
+
+    fetchNewsEvents();
+  }, []);
 
   // Categories for filtering
-  // const categories = [
-  //   { id: "all", name: "All" },
-  //   { id: "art", name: "Art" },
-  //   { id: "design", name: "Design" },
-  //   { id: "business", name: "Business" },
-  //   { id: "general", name: "General" }
-  // ];
+  const categories = [
+    { id: "all", name: "All" },
+    { id: "art", name: "Art" },
+    { id: "design", name: "Design" },
+    { id: "business", name: "Business" },
+    { id: "general", name: "General" }
+  ];
 
   // Filter logic
   useEffect(() => {
-    const filterItems = () => {
-      // Filter events
-      const eventResults = events.filter((event) => {
-        // const matchesCategory = selectedCategory === "all" || event.category === selectedCategory;
-        const matchesSearch =
-          event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          event.description.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchesSearch;
-      });
-      setFilteredEvents(eventResults);
+    const eventResults = allEvents.filter((event) =>
+      event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-      // Filter news
-      const newsResults = news.filter((item) => {
-        // const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
-        const matchesSearch =
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.summary.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchesSearch;
-      });
-      setFilteredNews(newsResults);
-    };
+    const newsResults = allNews.filter((item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.summary.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-    filterItems();
-  }, [searchTerm]);
+    setFilteredEvents(eventResults);
+    setFilteredNews(newsResults);
+  }, [searchTerm, allEvents, allNews]);
 
   // Animation variants
   const containerVariants = {
@@ -249,8 +182,10 @@ const NewsAndEventsPage = () => {
     e.preventDefault();
     setIsFormOpen(true);
   };
+
   return (
     <div className={`min-h-screen bg-white ${poppins.className}`}>
+
       {/* Hero Section */}
       <div className="relative py-28 overflow-hidden">
         {/* Background image */}
@@ -269,7 +204,6 @@ const NewsAndEventsPage = () => {
           {/* Accent line */}
           <div className="absolute left-0 top-1/2 h-px w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-20"></div>
         </div>
-
         <div className="relative container mx-auto px-6 z-10">
           <div className="flex flex-col max-w-5xl">
             {/* Section indicator */}
@@ -359,15 +293,15 @@ const NewsAndEventsPage = () => {
         and student showcases.
       </div>
       <div className="relative w-full mt-5 h-[300px] overflow-hidden">
-  <img
-    src="/images/gallery/1721738128651.jpg"
-    alt="Design School Background"
-    className="w-full h-full object-cover"
-  />
-  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-    <h1 className="text-white text-3xl sm:text-4xl font-bold">Explore the Events</h1>
-  </div>
-</div>
+        <img
+          src="/images/gallery/1721738128651.jpg"
+          alt="Design School Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
+          <h1 className="text-white text-3xl sm:text-4xl font-bold">Explore the Events</h1>
+        </div>
+      </div>
 
 
       {/* Tabs Section */}
@@ -376,10 +310,9 @@ const NewsAndEventsPage = () => {
           <Tab.List className="flex space-x-4 border-b border-gray-200 mb-8">
             <Tab
               className={({ selected }) =>
-                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${
-                  selected
-                    ? "text-black border-yellow-400"
-                    : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${selected
+                  ? "text-black border-yellow-400"
+                  : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
                 }`
               }
             >
@@ -387,10 +320,9 @@ const NewsAndEventsPage = () => {
             </Tab>
             <Tab
               className={({ selected }) =>
-                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${
-                  selected
-                    ? "text-black border-yellow-400"
-                    : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${selected
+                  ? "text-black border-yellow-400"
+                  : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
                 }`
               }
             >
@@ -398,10 +330,9 @@ const NewsAndEventsPage = () => {
             </Tab>
             <Tab
               className={({ selected }) =>
-                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${
-                  selected
-                    ? "text-black border-yellow-400"
-                    : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${selected
+                  ? "text-black border-yellow-400"
+                  : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
                 }`
               }
             >
@@ -409,10 +340,9 @@ const NewsAndEventsPage = () => {
             </Tab>
             <Tab
               className={({ selected }) =>
-                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${
-                  selected
-                    ? "text-black border-yellow-400"
-                    : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
+                `px-6 py-3 text-sm font-medium border-b-2 outline-none transition-colors ${selected
+                  ? "text-black border-yellow-400"
+                  : "text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300"
                 }`
               }
             >
@@ -449,31 +379,38 @@ const NewsAndEventsPage = () => {
                         <span className="bg-yellow-400 text-black text-xs font-medium px-2 py-1 rounded">
                           EVENT
                         </span>
-                        <span
-                          className={`text-xs font-medium px-2 py-1 rounded capitalize ${
-                            event.category === "art"
+                        {event.category && (
+                          <span
+                            className={`text-xs font-medium px-2 py-1 rounded capitalize ${event.category === "art"
                               ? "bg-pink-100 text-pink-800"
                               : event.category === "design"
                                 ? "bg-blue-100 text-blue-800"
                                 : event.category === "business"
                                   ? "bg-green-100 text-green-800"
                                   : "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {event.category}
-                        </span>
+                              }`}
+                          >
+                            {event.category}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="p-6">
                       <div className="flex flex-wrap gap-y-1 gap-x-4 text-gray-500 text-sm mb-3">
-                        <div className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          <span>{event.date}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span>{event.time}</span>
-                        </div>
+                        {event.date && (
+                          <div className="flex items-center">
+                            <Calendar className="h-4 w-4 mr-1" />
+                            <span>{event.date}</span>
+                          </div>
+                        )}
+
+                        {event.time && (
+                          <div className="flex items-center">
+                            <Clock className="h-4 w-4 mr-1" />
+                            <span>{event.time}</span>
+                          </div>
+                        )}
+
                       </div>
                       <h3 className="text-lg font-semibold mb-2 line-clamp-2">
                         {event.title}
@@ -482,9 +419,11 @@ const NewsAndEventsPage = () => {
                         {event.description}
                       </p>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">
-                          {event.location}
-                        </span>
+                        {event.location && (
+                          <span className="text-xs text-gray-500">
+                            {event.location}
+                          </span>
+                        )}
                         <Link
                           href={""}
                           className="inline-flex items-center text-sm font-medium text-black bg-transparent hover:bg-yellow-400 border border-yellow-400 py-2 px-4 rounded-md transition-all duration-300 group"
@@ -518,15 +457,14 @@ const NewsAndEventsPage = () => {
                           NEWS
                         </span>
                         <span
-                          className={`text-xs font-medium px-2 py-1 rounded capitalize ${
-                            item.category === "art"
-                              ? "bg-pink-100 text-pink-800"
-                              : item.category === "design"
-                                ? "bg-blue-100 text-blue-800"
-                                : item.category === "business"
-                                  ? "bg-green-100 text-green-800"
-                                  : "bg-gray-100 text-gray-800"
-                          }`}
+                          className={`text-xs font-medium px-2 py-1 rounded capitalize ${item.category === "art"
+                            ? "bg-pink-100 text-pink-800"
+                            : item.category === "design"
+                              ? "bg-blue-100 text-blue-800"
+                              : item.category === "business"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-800"
+                            }`}
                         >
                           {item.category}
                         </span>
@@ -590,15 +528,14 @@ const NewsAndEventsPage = () => {
                             EVENT
                           </span>
                           <span
-                            className={`text-xs font-medium px-2 py-1 rounded capitalize ${
-                              event.category === "art"
-                                ? "bg-pink-100 text-pink-800"
-                                : event.category === "design"
-                                  ? "bg-blue-100 text-blue-800"
-                                  : event.category === "business"
-                                    ? "bg-green-100 text-green-800"
-                                    : "bg-gray-100 text-gray-800"
-                            }`}
+                            className={`text-xs font-medium px-2 py-1 rounded capitalize ${event.category === "art"
+                              ? "bg-pink-100 text-pink-800"
+                              : event.category === "design"
+                                ? "bg-blue-100 text-blue-800"
+                                : event.category === "business"
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-gray-100 text-gray-800"
+                              }`}
                           >
                             {event.category}
                           </span>
@@ -675,15 +612,14 @@ const NewsAndEventsPage = () => {
                             NEWS
                           </span>
                           <span
-                            className={`text-xs font-medium px-2 py-1 rounded capitalize ${
-                              item.category === "art"
-                                ? "bg-pink-100 text-pink-800"
-                                : item.category === "design"
-                                  ? "bg-blue-100 text-blue-800"
-                                  : item.category === "business"
-                                    ? "bg-green-100 text-green-800"
-                                    : "bg-gray-100 text-gray-800"
-                            }`}
+                            className={`text-xs font-medium px-2 py-1 rounded capitalize ${item.category === "art"
+                              ? "bg-pink-100 text-pink-800"
+                              : item.category === "design"
+                                ? "bg-blue-100 text-blue-800"
+                                : item.category === "business"
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-gray-100 text-gray-800"
+                              }`}
                           >
                             {item.category}
                           </span>
@@ -831,7 +767,6 @@ const NewsAndEventsPage = () => {
           </Tab.Panels>
         </Tab.Group>
       </div>
-
       <div className="w-full  bg-opacity-90 py-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto bg-black bg-opacity-90 rounded-2xl shadow-2xl border border-zinc-800 px-6 md:px-12 py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10">

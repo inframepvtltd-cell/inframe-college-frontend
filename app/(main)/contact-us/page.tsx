@@ -1,7 +1,7 @@
 import "../../../components/style.css";
 import { ContactUsForm } from "../../../components/ContactUs";
 import ReelCard from "../../../components/ReelCard";
-import ApplyNow from "../../../components/ApplyNow";
+import ApplyNow from "../news-events/component/ApplyNow";
 import { Metadata } from "next";
 
 

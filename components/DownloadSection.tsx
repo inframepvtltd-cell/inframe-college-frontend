@@ -12,7 +12,7 @@ import {
 
 import { Poppins } from "next/font/google";
 import Image from "next/image";
-import ApplyNow from "./ApplyNow";
+import ApplyNow from "../app/(main)/news-events/component/ApplyNow";
 import DreamsSection from "./DreamSection";
 import FreeResourcesCTABanner from "./FreeResourcesCTABanner";
 import {
