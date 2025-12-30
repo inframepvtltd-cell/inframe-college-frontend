@@ -28,7 +28,13 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@components/*": ["./components/*"],
+      "@lib/*": ["./lib/*"],
+      "@api/*": ["./api/*"],
+      "@utils/*": ["./utils/*"],
+      "@app/*": ["./app/*"],
+      "@components/ui/*":["./components/ui/*"]
     },
     "target": "ES2017"
   },
