@@ -91,11 +91,15 @@ const ApplyNowForm = ({
   });
 
   const allPrograms = Object.keys(programLevels);
+  console.log(programLevels);
 
   const getAvailableProgramsForLevel = (level: string) => {
-    return allPrograms.filter((program) =>
+    let res = allPrograms.filter((program) =>
       Object.keys(programLevels[program]).includes(level)
     );
+    console.log(level);
+
+    return res
   };
 
   // Reset form when sheet closes
@@ -712,14 +716,13 @@ const ApplyNowForm = ({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="max-h-60">
-                            {selectedLevel &&
-                              getAvailableProgramsForLevel(selectedLevel).map(
-                                (prog) => (
-                                  <SelectItem key={prog} value={prog}>
-                                    {prog}
-                                  </SelectItem>
-                                )
-                              )}
+                            {selectedLevel && getAvailableProgramsForLevel(selectedLevel).map(
+                              (prog) => (
+                                <SelectItem key={prog} value={prog}>
+                                  {prog}
+                                </SelectItem>
+                              )
+                            )}
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-xs" />

@@ -1,7 +1,7 @@
 import GraphicDesignComponent from "../../../components/cityComponents/GraphicDesignComponent";
 
 export const metadata = {
-    title: "GGraphic Design Course in Delhi | Inframe School",
+    title: "Graphic Design Course in Delhi | Inframe School",
     description: "Master modern design tools and creative techniques with Inframe School’s Graphic Design Course in Delhi."
 };
 

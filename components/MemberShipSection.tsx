@@ -25,7 +25,7 @@ const MembershipPartnership = () => {
     gap-4 sm:gap-6
     items-center
   "
-        >
+        > 
 
           {[
             { src: "/The_Glocal_University-_Logo.png", alt: "Glocal University Logo" },

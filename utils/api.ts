@@ -1,9 +1,13 @@
 "use client";
-
-// API utility functions for backend communication
 import axios from 'axios';
 import React, { useState, useCallback, useEffect } from 'react';
+const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
 
+export const fetchCourseDetails = async () => {
+  // const res = await fetch("http://localhost:7000/api/v1/courses/course-types");
+    const { data } = await axios.get(`${API_BASE}/courses/course-types`);
+    return data;
+};
 // TypeScript interfaces
 export interface Testimonial {
   _id: string;
@@ -370,7 +374,7 @@ export interface CourseProgram {
   slug?: string;
   parentCourseSlug?: string;
   parentCourseTitle?: string;
-  
+
   // Additional fields from API documentation
   courseOverview?: string;
   admissionSteps?: any[];
@@ -605,7 +609,7 @@ apiClient.interceptors.response.use(
         // window.location.href = '/login';
       }
     }
-    
+
     // Log detailed error information for debugging
     console.error('API Error:', {
       message: error.message,
@@ -615,7 +619,7 @@ apiClient.interceptors.response.use(
       method: error.config?.method,
       data: error.response?.data
     });
-    
+
     return Promise.reject(error);
   }
 );
@@ -736,23 +740,23 @@ export const API_ENDPOINTS = {
   ADD_HERO_IMAGE: '/api/v1/about-us/hero-images/addheroimage',
   UPDATE_HERO_IMAGE: '/api/v1/about-us/hero-images/updateheroimage',
   DELETE_HERO_IMAGE: '/api/v1/about-us/hero-images/deleteheroimage',
-  
+
   // Content Sections
   GET_CONTENT_BY_TYPE: '/api/v1/about-us/content/getcontentbytype',
   ADD_OR_UPDATE_CONTENT: '/api/v1/about-us/content/addorupdatecontent',
-  
+
   // Statistics
   GET_STATISTICS: '/api/v1/about-us/statistics/getstatistics',
   ADD_STATISTIC: '/api/v1/about-us/statistics/addstatistic',
   UPDATE_STATISTIC: '/api/v1/about-us/statistics/updatestatistic',
   DELETE_STATISTIC: '/api/v1/about-us/statistics/deletestatistic',
-  
+
   // Core Values
   GET_CORE_VALUES: '/api/v1/about-us/core-values/getcorevalues',
   ADD_CORE_VALUE: '/api/v1/about-us/core-values/addcorevalue',
   UPDATE_CORE_VALUE: '/api/v1/about-us/core-values/updatecorevalue',
   DELETE_CORE_VALUE: '/api/v1/about-us/core-values/deletecorevalue',
-  
+
   // Campus Images
   GET_CAMPUS_IMAGES: '/api/v1/about-us/campus-images/getcampusimages',
   ADD_CAMPUS_IMAGE: '/api/v1/about-us/campus-images/addcampusimage',
@@ -847,7 +851,7 @@ export const apiHelpers = {
     }
   },
 
-  
+
 
   // Submit application
   submitApplication: async (applicationData: any) => {
@@ -949,10 +953,10 @@ export const apiHelpers = {
       if (!careerid) {
         throw new Error('Career ID is required');
       }
-      
+
       // Log the JSON data for debugging
       console.log('JSON application data:', applicationData);
-      
+
       // Use the correct endpoint with career ID as URL parameter
       // Send JSON data with proper headers
       const response = await apiClient.post(`${API_ENDPOINTS.SUBMIT_JOB_APPLICATION}/${careerid}`, applicationData, {
@@ -1072,10 +1076,10 @@ export const apiHelpers = {
     try {
       console.log(`Fetching course by slug: ${slug}`);
       console.log(`API URL: ${API_ENDPOINTS.GET_COURSE_BY_SLUG}/${slug}`);
-      
+
       const response = await apiClient.get<CourseResponse>(`${API_ENDPOINTS.GET_COURSE_BY_SLUG}/${slug}`);
       console.log('Course API response:', response.data);
-      
+
       if (response.data.success && response.data.data) {
         console.log('Course data found:', response.data.data);
         return response.data.data;
@@ -1226,7 +1230,7 @@ export const apiHelpers = {
   // Get blog by slug (increments views)
   getBlogBySlug: async (slug: string): Promise<BlogPost | null> => {
     try {
-      const response = await apiClient.get<{success: boolean; data: BlogPost}>(`${API_ENDPOINTS.GET_BLOG_BY_SLUG}/${slug}`);
+      const response = await apiClient.get<{ success: boolean; data: BlogPost }>(`${API_ENDPOINTS.GET_BLOG_BY_SLUG}/${slug}`);
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -1274,7 +1278,7 @@ export const apiHelpers = {
   // Get blog by ID
   getBlogById: async (id: string): Promise<BlogPost | null> => {
     try {
-      const response = await apiClient.get<{success: boolean; data: BlogPost}>(`${API_ENDPOINTS.GET_BLOG_BY_ID}/${id}`);
+      const response = await apiClient.get<{ success: boolean; data: BlogPost }>(`${API_ENDPOINTS.GET_BLOG_BY_ID}/${id}`);
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -1325,7 +1329,7 @@ export const apiHelpers = {
       console.log('Making API request to:', API_ENDPOINTS.GET_MEMBERSHIP);
       const response = await apiClient.get<MembershipResponse>(API_ENDPOINTS.GET_MEMBERSHIP);
       console.log('Memberships API response:', response.data);
-      
+
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
         return response.data.data;
       } else {
@@ -1365,7 +1369,7 @@ export const apiHelpers = {
   // Get advisor by ID
   getAdvisorById: async (id: string): Promise<Advisor | null> => {
     try {
-      const response = await apiClient.get<{success: boolean; data: Advisor}>(`${API_ENDPOINTS.GET_ADVISOR_BY_ID}/${id}`);
+      const response = await apiClient.get<{ success: boolean; data: Advisor }>(`${API_ENDPOINTS.GET_ADVISOR_BY_ID}/${id}`);
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -1381,7 +1385,7 @@ export const apiHelpers = {
   // Create new advisor
   createAdvisor: async (advisorData: Omit<Advisor, '_id' | 'createdAt' | 'updatedAt' | '__v'>): Promise<Advisor> => {
     try {
-      const response = await apiClient.post<{success: boolean; data: Advisor}>(API_ENDPOINTS.CREATE_ADVISOR, advisorData);
+      const response = await apiClient.post<{ success: boolean; data: Advisor }>(API_ENDPOINTS.CREATE_ADVISOR, advisorData);
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -1396,7 +1400,7 @@ export const apiHelpers = {
   // Update advisor
   updateAdvisor: async (id: string, advisorData: Partial<Omit<Advisor, '_id' | 'createdAt' | 'updatedAt' | '__v'>>): Promise<Advisor> => {
     try {
-      const response = await apiClient.put<{success: boolean; data: Advisor}>(`${API_ENDPOINTS.UPDATE_ADVISOR}/${id}`, advisorData);
+      const response = await apiClient.put<{ success: boolean; data: Advisor }>(`${API_ENDPOINTS.UPDATE_ADVISOR}/${id}`, advisorData);
       if (response.data && response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -1411,7 +1415,7 @@ export const apiHelpers = {
   // Delete advisor
   deleteAdvisor: async (id: string): Promise<boolean> => {
     try {
-      const response = await apiClient.delete<{success: boolean; message: string}>(`${API_ENDPOINTS.DELETE_ADVISOR}/${id}`);
+      const response = await apiClient.delete<{ success: boolean; message: string }>(`${API_ENDPOINTS.DELETE_ADVISOR}/${id}`);
       if (response.data && response.data.success) {
         return true;
       } else {
@@ -1473,7 +1477,7 @@ export const apiHelpers = {
   // Delete enquiry
   deleteEnquiry: async (id: string): Promise<boolean> => {
     try {
-      const response = await apiClient.delete<{success: boolean}>(`${API_ENDPOINTS.DELETE_ENQUIRY}/${id}`);
+      const response = await apiClient.delete<{ success: boolean }>(`${API_ENDPOINTS.DELETE_ENQUIRY}/${id}`);
       if (response.data && response.data.success) {
         return true;
       } else {
@@ -1622,7 +1626,7 @@ export const apiHelpers = {
       console.log('Making API request to:', API_ENDPOINTS.GET_INDUSTRY_PARTNERS);
       const response = await apiClient.get<IndustryPartnersResponse>(API_ENDPOINTS.GET_INDUSTRY_PARTNERS);
       console.log('Industry partners API response:', response.data);
-      
+
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
         return response.data.data;
       } else {
@@ -1707,7 +1711,7 @@ export const apiHelpers = {
   // Get sports facilities
   getSportsFacilities: async (): Promise<SportsFacility[]> => {
     try {
-      const response = await apiClient.get<{success: boolean; data: SportsFacility[]}>(API_ENDPOINTS.GET_SPORTS_FACILITIES);
+      const response = await apiClient.get<{ success: boolean; data: SportsFacility[] }>(API_ENDPOINTS.GET_SPORTS_FACILITIES);
       if (response.data && response.data.success && Array.isArray(response.data.data)) {
         return response.data.data;
       } else {
@@ -1799,17 +1803,17 @@ export const useAboutUsData = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const result = await Promise.race([
         apiHelpers.getAboutUsData(),
         timeoutPromise
       ]) as any;
-      
+
       setData({
         heroImages: result?.heroImages || [],
         statistics: result?.statistics || [],
@@ -1862,17 +1866,17 @@ export const useIndustryPartners = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       console.log(`Fetching industry partners... (attempt ${retryCount + 1})`);
       const startTime = Date.now();
       const partnersData = await apiHelpers.getIndustryPartners();
       const endTime = Date.now();
       console.log(`Industry partners fetched in ${endTime - startTime}ms:`, partnersData);
-      
+
       setPartners(partnersData || []);
     } catch (err) {
       console.error(`Failed to fetch industry partners (attempt ${retryCount + 1}):`, err);
-      
+
       // Retry up to 2 times with exponential backoff
       if (retryCount < 2) {
         const delay = Math.pow(2, retryCount) * 1000; // 1s, 2s
@@ -1880,7 +1884,7 @@ export const useIndustryPartners = () => {
         setTimeout(() => fetchPartners(retryCount + 1), delay);
         return;
       }
-      
+
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch industry partners';
       setError(errorMessage);
       setPartners([]); // Set empty array on error
@@ -1910,17 +1914,17 @@ export const useAdvisors = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const advisorsData = await Promise.race([
         apiHelpers.getAdvisors(),
         timeoutPromise
       ]) as Advisor[];
-      
+
       setAdvisors(advisorsData || []);
     } catch (err) {
       console.error('Failed to fetch advisors:', err);
@@ -1988,17 +1992,17 @@ export const useEnquiries = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const enquiriesData = await Promise.race([
         apiHelpers.getEnquiries(),
         timeoutPromise
       ]) as Enquiry[];
-      
+
       setEnquiries(enquiriesData || []);
     } catch (err) {
       console.error('Failed to fetch enquiries:', err);
@@ -2065,17 +2069,17 @@ export const useSportsFacilities = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const facilitiesData = await Promise.race([
         apiHelpers.getSportsFacilities(),
         timeoutPromise
       ]) as SportsFacility[];
-      
+
       setFacilities(facilitiesData || []);
     } catch (err) {
       console.error('Failed to fetch sports facilities:', err);
@@ -2107,17 +2111,17 @@ export const useLifeAtInframeGallery = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const galleryData = await Promise.race([
         apiHelpers.getLifeAtInframeGallery(),
         timeoutPromise
       ]) as GalleryImage[];
-      
+
       setGalleryImages(galleryData || []);
     } catch (err) {
       console.error('Failed to fetch gallery images:', err);
@@ -2149,17 +2153,17 @@ export const useLifeAtInframeSections = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const sectionsData = await Promise.race([
         apiHelpers.getLifeAtInframeSections(),
         timeoutPromise
       ]) as LifeAtInframeSection[];
-      
+
       setSections(sectionsData || []);
     } catch (err) {
       console.error('Failed to fetch life at inframe sections:', err);
@@ -2191,17 +2195,17 @@ export const useStudentServices = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Add timeout to prevent infinite loading
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Request timeout')), 10000)
       );
-      
+
       const servicesData = await Promise.race([
         apiHelpers.getStudentServices(),
         timeoutPromise
       ]) as StudentService[];
-      
+
       setServices(servicesData || []);
     } catch (err) {
       console.error('Failed to fetch student services:', err);
@@ -2353,7 +2357,7 @@ export const freeCoursesApiHelpers = {
   getAllFreeCourses: async (): Promise<FreeCourse[]> => {
     try {
       const response = await apiClient.get<FreeCoursesResponse>(API_ENDPOINTS.GET_FREE_COURSES);
-      
+
       if (response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -2369,7 +2373,7 @@ export const freeCoursesApiHelpers = {
   getFreeCourseById: async (id: string): Promise<FreeCourse | null> => {
     try {
       const response = await apiClient.get<FreeCourseResponse>(`${API_ENDPOINTS.GET_FREE_COURSE_BY_ID}/${id}`);
-      
+
       if (response.data.success && response.data.data) {
         return response.data.data;
       } else {
@@ -2398,8 +2402,8 @@ export const freeCoursesApiHelpers = {
     try {
       const allCourses = await freeCoursesApiHelpers.getAllFreeCourses();
       const searchLower = searchTerm.toLowerCase();
-      
-      return allCourses.filter(course => 
+
+      return allCourses.filter(course =>
         course.name.toLowerCase().includes(searchLower) ||
         course.shortDescription.toLowerCase().includes(searchLower) ||
         course.metaKeywords.toLowerCase().includes(searchLower)
@@ -2433,7 +2437,7 @@ export const useFreeCourses = () => {
   const createCourse = async (courseData: FreeCourseData) => {
     try {
       const response = await apiClient.post<FreeCourseResponse>(API_ENDPOINTS.CREATE_FREE_COURSE, courseData);
-      
+
       if (response.data.success && response.data.data) {
         setCourses(prev => [...prev, response.data.data]);
         return response.data.data;
@@ -2449,9 +2453,9 @@ export const useFreeCourses = () => {
   const updateCourse = async (id: string, courseData: FreeCourseData) => {
     try {
       const response = await apiClient.put<FreeCourseResponse>(`${API_ENDPOINTS.UPDATE_FREE_COURSE}/${id}`, courseData);
-      
+
       if (response.data.success && response.data.data) {
-        setCourses(prev => prev.map(course => 
+        setCourses(prev => prev.map(course =>
           course._id === id ? response.data.data : course
         ));
         return response.data.data;
@@ -2477,9 +2481,9 @@ export const useFreeCourses = () => {
   const toggleStatus = async (id: string, isActive: boolean) => {
     try {
       const response = await apiClient.put<FreeCourseResponse>(`${API_ENDPOINTS.TOGGLE_FREE_COURSE_STATUS}/${id}/toggle-status`, { isActive });
-      
+
       if (response.data.success && response.data.data) {
-        setCourses(prev => prev.map(course => 
+        setCourses(prev => prev.map(course =>
           course._id === id ? response.data.data : course
         ));
         return response.data.data;
@@ -2895,7 +2899,7 @@ export const useMentors = () => {
       setLoading(true);
       setError(null);
       const response = await apiClient.get(API_ENDPOINTS.GET_MENTORS);
-      
+
       if (response.data.success) {
         setMentors(response.data.data.mentors || response.data.data);
       } else {
@@ -2972,7 +2976,7 @@ export const useActiveMentors = () => {
       setLoading(true);
       setError(null);
       const response = await apiClient.get(API_ENDPOINTS.GET_MENTORS);
-      
+
       if (response.data.success) {
         // Get all mentors (backend should handle filtering if needed)
         const allMentors = response.data.data.mentors || response.data.data;
@@ -3018,7 +3022,7 @@ export const useNews = () => {
       setLoading(true);
       setError(null);
       const response = await apiClient.get(`${API_ENDPOINTS.GET_NEWS_ALL}?page=${page}&limit=${limit}`);
-      
+
       if (response.data.success) {
         setNews(response.data.data.news || response.data.data);
         setPagination(response.data.data.pagination || {
@@ -3138,7 +3142,7 @@ export const useLatestNews = () => {
       setLoading(true);
       setError(null);
       const response = await apiClient.get(`${API_ENDPOINTS.GET_LATEST_NEWS}?limit=5`);
-      
+
       if (response.data.success) {
         setNews(response.data.data.news || response.data.data);
       } else {
@@ -3174,7 +3178,7 @@ export const useCampusEvents = () => {
       setLoading(true);
       setError(null);
       const response = await apiClient.get(API_ENDPOINTS.GET_CAMPUS_EVENTS);
-      
+
       if (response.data.success) {
         setEvents(response.data.data);
       } else {
@@ -3334,7 +3338,7 @@ export const useSessionLogin = (id: string) => {
 // Utility function to generate consistent slugs
 export const generateConsistentSlug = (title: string): string => {
   if (!title) return '';
-  
+
   let slug = title.toLowerCase()
     // Handle number conversions
     .replace(/three\s+year/g, '3-year')
@@ -3365,7 +3369,7 @@ export const generateConsistentSlug = (title: string): string => {
     .replace(/-+/g, '-')
     // Remove leading/trailing hyphens
     .replace(/^-+|-+$/g, '');
-  
+
   return slug;
 };
 

@@ -10,6 +10,8 @@ export const fetchCourseBySlug = async (slug: string) => {
     try {
         console.log(slug)
         const response = await axios.post(`${API_BASE}/city-page/slug`, { slug });
+        console.log(response.data);
+
         return response.data;
     } catch (error: any) {
         console.error("Error fetching course:", error.response || error.message);

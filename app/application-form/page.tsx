@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import ProgramSelectionForm from "./components/Form/ProgramSelectionForm";
 import TermsAndConditionsForm from "./components/Form/TermsAndCondition";
+import PaymentStep from "./components/Payment.component";
+import { submitApplication } from "./api";
 
 // Define form data types
 interface FormData {
@@ -76,6 +78,13 @@ const steps = [
   {
     id: 4,
     name: "Terms & Conditions",
+    description: "Review and accept admission policies",
+    icon: FileText,
+    color: "bg-purple-500",
+  },
+  {
+    id: 5,
+    name: "Payment",
     description: "Review and accept admission policies",
     icon: FileText,
     color: "bg-purple-500",
@@ -234,7 +243,11 @@ export default function MultiStepFormPage() {
       if (validateCurrentStep()) {
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 2000));
+        const res = await submitApplication(formData);
 
+        if (res.status !== "success") {
+          throw new Error(res.message);
+        }
         console.log("Form submitted:", formData);
 
         // Clear saved data
@@ -467,11 +480,13 @@ export default function MultiStepFormPage() {
                   />
                 )}
 
-                {/* {currentStep === 4 && (
-                  <div className="space-y-6">
-
-                  </div>
-                )} */}
+                {currentStep === 5 && (
+                  <PaymentStep
+                    registrationFee={1800}
+                    processingFee={250}
+                    courseName="Diploma in Interior Design"
+                  />
+                )}
 
                 {/* Navigation Buttons */}
                 <div className="mt-8 pt-6 border-t border-gray-200">
@@ -523,13 +538,6 @@ export default function MultiStepFormPage() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Footer Note */}
-            <div className="mt-6 text-center text-sm text-gray-500">
-              <p>
-                Your progress is automatically saved. You can return anytime to complete your application.
-              </p>
             </div>
           </div>
         </div>

@@ -240,3 +240,112 @@ Animation & VFX Course in Surat
 At Inframe, you can choose from multiple Animation & VFX programs such as B.Des in Animation & VFX, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Animation & VFX Course in Surat, these courses are designed to develop your artistic creativity, technical animation skills, and digital storytelling capability. After completing the course, you will have a professional portfolio and the confidence to create animations, motion graphics, and visual-effects content for diverse media.
 You will learn 2D and 3D animation, VFX basics, storyboarding, character and environment design, motion graphics, compositing, video editing, and visual storytelling. The program also provides training on industry software like Adobe After Effects, Premiere Pro, Autodesk Maya, Blender, and other compositing/animation tools — enabling you to produce professional-level animations and effects. With these skills, you can pursue careers such as Animator, VFX Artist, Motion Graphic Designer, Compositor, or Multimedia Content Creator.
 
+
+
+
+
+==================================================
+
+
+UPDATE courses
+SET
+  overview = CASE course_slug
+
+    WHEN 'jewellery-design-in-pali' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a Jewellery Design Course in Pali, these programs are designed to help you build strong creative, technical, and design skills required for the jewellery and accessory industry. By the end of the course, you will have a professional portfolio and the confidence to design unique and market-ready jewellery pieces.'
+
+    WHEN 'jewellery-design-in-ajmer' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Jewellery Design Course in Ajmer, these courses are structured to build your creativity, technical skill, and design sensibility for jewellery and accessories. By course completion, you will have a polished portfolio and the confidence to design handcrafted and contemporary jewellery pieces.'
+
+    WHEN 'jewellery-design-in-sikar' THEN
+      'At Inframe, you can choose from many Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a Jewellery Design Course in Sikar, these programs help you build strong creative and technical jewellery design skills. By the end of the program, you will have a professional portfolio and the confidence to create unique jewellery collections.'
+
+    WHEN 'jewellery-design-in-bikaner' THEN
+      'At Inframe, you can choose from various Jewellery Design programs including B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are interested in a Jewellery Design Course in Bikaner, these courses aim to develop your creative imagination, technical know-how, and jewellery design sensibility. By course end, you will have a professional portfolio and confidence to design jewellery that balances traditional aesthetics with modern trends.'
+
+    WHEN 'jewellery-design-in-jaisalmer' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you want a Jewellery Design Course in Jaisalmer, these courses provide training in creative jewellery design, technical fabrication, and aesthetic sensibility tailored for accessories and fashion jewellery. By the end of the course, you will have a strong portfolio and the confidence to design beautiful jewellery collections.'
+
+    WHEN 'jewellery-design-in-kota' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a Jewellery Design Course in Kota, these courses are structured to build your design creativity, technical skills, and jewellery craftsmanship. Upon completion, you will have a professional portfolio and the confidence to design fashionable and market-ready jewellery.'
+
+    WHEN 'jewellery-design-in-jaipur' THEN
+      'At Inframe, you can choose from a range of Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are considering a Jewellery Design Course in Jaipur, these programs aim to refine your artistic sensibilities, technical craftsmanship, and jewellery design knowledge. By the end of the course, you will have a strong portfolio and the confidence to design custom jewellery, contemporary accessories, and traditional pieces.'
+
+    WHEN 'jewellery-design-in-udaipur' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs including B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Jewellery Design Course in Udaipur, these programs are designed to build your creativity, technical skill, and design sensibility tailored for jewellery and accessories. By course completion, you will have a professional portfolio and confidence to design unique jewellery pieces — both traditional and modern.'
+
+    WHEN 'jewellery-design-in-bhopal' THEN
+      'At Inframe, you can choose from several Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are interested in a Jewellery Design Course in Bhopal, these courses help you build creative vision, technical skills, and design understanding necessary for jewellery design industry. By the end of the course, you will have a professional portfolio and the confidence to design jewellery pieces suitable for both fashion and traditional wear.'
+
+    WHEN 'jewellery-design-in-indore' THEN
+      'At Inframe, you can choose from various Jewellery Design programs including B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Jewellery Design Course in Indore, these programs offer comprehensive training in both traditional and contemporary jewellery design, combining craftsmanship with creative design thinking. By the end of the course, you will have a professional portfolio and confidence to design bespoke jewellery collections.'
+
+    WHEN 'jewellery-design-in-delhi' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are seeking a Jewellery Design Course in Delhi, these courses are structured to give you in-depth design training, craftsmanship skills, and creative exposure for jewellery design. After completing the course, you will have a strong portfolio and confidence to design both traditional and modern jewellery pieces.'
+
+    WHEN 'jewellery-design-in-agra' THEN
+      'At Inframe, you can choose from various Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Jewellery Design Course in Agra, these courses aim to build your jewellery design skills, combine creativity with technical craftsmanship, and hone your understanding of materials and trends. By the end of the program, you will have a professional portfolio and the confidence to design bespoke jewellery pieces.'
+
+    WHEN 'jewellery-design-in-lucknow' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs including B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you want a Jewellery Design Course in Lucknow, these courses provide comprehensive training in jewellery design — combining traditional craftsmanship, contemporary design thinking, and digital design exposure. By the end of the course, you will have a polished portfolio and the confidence to design unique jewellery pieces.'
+
+    WHEN 'jewellery-design-in-ahmedabad' THEN
+      'At Inframe, you can choose from various Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are looking for a Jewellery Design Course in Ahmedabad, these courses are designed to build your creative, technical, and design skills needed in jewellery and accessory industry. By the end of the course, you will have a professional portfolio and the confidence to design both traditional and modern jewellery pieces.'
+
+    WHEN 'jewellery-design-in-surat' THEN
+      'At Inframe, you can choose from multiple Jewellery Design programs such as B.Des in Jewellery Design, BVOC, B.Sc, One-Year Diploma, and Three-Year Diploma. If you are searching for a Jewellery Design Course in Surat, these courses aim to develop your jewellery design sensibility, technical jewellery-making skills, and creative design thinking. By the end of the program, you will have a strong portfolio and the confidence to design contemporary and traditional jewellery pieces.'
+
+  END,
+
+  course_description = CASE course_slug
+
+    WHEN 'jewellery-design-in-pali' THEN
+      'You will learn jewellery sketching, gemstone selection, metal work, design theory, jewellery fabrication techniques, trend analysis, and accessory styling. The course also includes training on modern digital tools and design software to create digital jewellery designs, mood boards, and 3D mock-ups.'
+
+    WHEN 'jewellery-design-in-ajmer' THEN
+      'You will learn jewellery sketching, material and gemstone study, metalwork basics, design principles, jewellery fabrication, trend research, and accessory styling. The program also includes digital design training to create jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-sikar' THEN
+      'The curriculum covers jewellery sketching, gemstone and material study, metalwork techniques, design fundamentals, jewellery fabrication, and trend research. You will also get training on digital design tools for making jewellery designs, mood boards, and 3D mock-ups.'
+
+    WHEN 'jewellery-design-in-bikaner' THEN
+      'You will learn jewellery sketching, gemstone and metal selection, design fundamentals, metalwork techniques, accessory styling, and jewellery fabrication. The program also integrates digital design training to create jewellery mockups, mood boards, and presentation-ready designs.'
+
+    WHEN 'jewellery-design-in-jaisalmer' THEN
+      'You will study jewellery sketching, gemstone and material selection, metalwork basics, design principles, trend study, and jewellery fabrication. The curriculum also includes digital design aspects to create jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-kota' THEN
+      'You will learn jewellery sketching, gemstone and metalwork study, design fundamentals, jewellery fabrication techniques, accessory styling, and trend analysis. The course also provides digital design training for jewellery mockups, mood boards, and presentations.'
+
+    WHEN 'jewellery-design-in-jaipur' THEN
+      'You will learn jewellery sketching, gemstone and material study, metalwork basics, design theory, jewellery fabrication, and trend study. The course also includes digital design training for creating jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-udaipur' THEN
+      'You will learn jewellery sketching, gemstone and metal selection, material study, jewellery fabrication techniques, design principles, and accessory styling. The program also offers digital design training to create jewellery mockups, mood boards, and presentation-ready designs.'
+
+    WHEN 'jewellery-design-in-bhopal' THEN
+      'You will learn jewellery sketching, gemstone and material study, metalwork basics, design theory, jewellery fabrication, and trend research. The course also includes digital design training for jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-indore' THEN
+      'You will learn jewellery sketching, material and gemstone selection, metalwork techniques, design fundamentals, jewellery fabrication, accessory styling, and trend study. The course also trains you in digital design tools for creating jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-delhi' THEN
+      'You will learn jewellery sketching, gemstone and material study, metalwork basics, design principles, jewellery fabrication, and trend analysis. The curriculum also includes digital design training to create jewellery mockups, mood boards, and presentation-ready designs.'
+
+    WHEN 'jewellery-design-in-agra' THEN
+      'You will study jewellery sketching, gemstone and metal selection, design fundamentals, jewellery fabrication techniques, accessory styling, and trend research. The course also offers digital design training to produce jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-lucknow' THEN
+      'You will learn jewellery sketching, gemstone and material study, metalwork fundamentals, design principles, jewellery fabrication, trend analysis, and accessory styling. The program also includes digital design training for mockups, mood boards, and presentation-ready designs.'
+
+    WHEN 'jewellery-design-in-ahmedabad' THEN
+      'You will study jewellery sketching, gemstone and metal selection, material study, design theory, jewellery fabrication techniques, accessory styling, and trend research. The program also provides digital design training to create jewellery mockups, mood boards, and design presentations.'
+
+    WHEN 'jewellery-design-in-surat' THEN
+      'You will learn jewellery sketching, gemstone and material study, metalwork basics, design fundamentals, jewellery fabrication techniques, accessory styling, and trend research. The curriculum also includes digital design training to create jewellery mockups, mood boards, and presentation-ready designs.'
+
+  END
+WHERE
+  page_type = 'city_page'
+  AND course_slug LIKE 'jewellery-design-in-%';

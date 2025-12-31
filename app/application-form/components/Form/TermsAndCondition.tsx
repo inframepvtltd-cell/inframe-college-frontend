@@ -33,6 +33,7 @@ interface TermsFormProps {
     onChange: (field: any, value: any) => void;
     onBack: () => void;
     onSubmit: () => void;
+    onAccept?: () => void; // Add this line
 }
 
 export default function TermsAndConditionsForm({
@@ -40,13 +41,14 @@ export default function TermsAndConditionsForm({
     onChange,
     onBack,
     onSubmit,
+    onAccept, // Add this line
 }: TermsFormProps) {
     return (
         <div className="flex justify-center">
-            <div className="w-full max-w-5xl bg-white rounded-xl shadow-xl border">
+            <div className="w-full max-w-5xl bg-white rounded-no border">
 
                 {/* Header */}
-                <div className="px-6 py-4 border-b">
+                <div className="px-6 py-4 ">
                     <h3 className="text-lg font-semibold text-gray-900">
                         Terms and Conditions
                     </h3>
@@ -68,34 +70,59 @@ export default function TermsAndConditionsForm({
                         <input
                             type="checkbox"
                             checked={data.termsAccepted}
-                            onChange={(e) => onChange("termsAccepted", e.target.checked)}
-                            className="w-4 h-4"
+                            onChange={(e) => {
+                                onChange("termsAccepted", e.target.checked);
+                                // Auto-proceed if onAccept is provided and terms are accepted
+                                if (onAccept && e.target.checked) {
+                                    setTimeout(() => onAccept(), 100); // Small delay for better UX
+                                }
+                            }}
+                            className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                         />
                         I have read and agree to the Terms & Conditions
                     </label>
 
-                    <div className="flex justify-between">
+                    {/* <div className="flex justify-between items-center">
                         <button
                             type="button"
                             onClick={onBack}
-                            className="px-4 py-2 border rounded-md text-sm hover:bg-gray-100"
+                            className="px-6 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center gap-2"
                         >
                             Previous
                         </button>
 
-                        <button
-                            type="button"
-                            disabled={!data.termsAccepted}
-                            onClick={onSubmit}
-                            className={`px-6 py-2 rounded-md text-sm font-medium text-white
-                ${data.termsAccepted
-                                    ? "bg-black hover:bg-gray-800"
+                        <div className="flex items-center gap-3">
+                            <button
+                                type="button"
+                                onClick={onSubmit}
+                                className={`px-6 py-2 border rounded-lg font-medium transition-all duration-200 ${data.termsAccepted
+                                    ? "border-green-600 text-green-600 hover:bg-green-50"
+                                    : "border-gray-300 text-gray-400 cursor-not-allowed"
+                                    }`}
+                                disabled={!data.termsAccepted}
+                            >
+                                Save & Exit
+                            </button>
+
+                            <button
+                                type="button"
+                                disabled={!data.termsAccepted}
+                                onClick={() => {
+                                    if (onAccept) {
+                                        onAccept();
+                                    } else {
+                                        onSubmit();
+                                    }
+                                }}
+                                className={`px-8 py-2.5 rounded-lg font-medium text-white transition-all duration-200 ${data.termsAccepted
+                                    ? "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md hover:shadow-lg"
                                     : "bg-gray-400 cursor-not-allowed"
-                                }`}
-                        >
-                            Accept Terms
-                        </button>
-                    </div>
+                                    }`}
+                            >
+                                {onAccept ? "Proceed to Payment" : "Accept & Submit"}
+                            </button>
+                        </div>
+                    </div> */}
                 </div>
             </div>
         </div>

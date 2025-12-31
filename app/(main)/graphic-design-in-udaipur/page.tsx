@@ -2,7 +2,7 @@ import GraphicDesignComponent from "../../../components/cityComponents/GraphicDe
 
 export const metadata = {
     title: "Graphic Design Course in Udaipur | Inframe School",
-    description: ": Develop strong creative and software skills with Inframe School’s Graphic Design Course in Udaipur."
+    description: "Develop strong creative and software skills with Inframe School’s Graphic Design Course in Udaipur."
 };
 
 

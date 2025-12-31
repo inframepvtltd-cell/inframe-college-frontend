@@ -1,8 +1,8 @@
 import InteriorDesignComponent from "../../../components/cityComponents/InteriorDesignComponent";
 
 export const metadata = {
-    title: "Interior Design Course in Jaipur | Inframe School",
-    description: "Learn interior design concepts, materials, and software with Inframe School’s Interior Design Course in Jaipur. Start your design career."
+    title: "Interior Design Course in Kota | Inframe School",
+    description: "Learn interior design concepts, materials, and software with Inframe School’s Interior Design Course in kota. Start your design career."
 };
 
 function Page() {
