@@ -4,7 +4,7 @@ import { MapPin, Mail, Phone } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ApplyNow from "../../components/ApplyNow";
+import ApplyNow from "../(main)/news-events/component/ApplyNow";
 import ApplyNowForm from "../../components/ApplyNowForm";
 import CampusLife from "../../components/CampusLife";
 import CourseCatalog from "../../components/CourseCarousel";

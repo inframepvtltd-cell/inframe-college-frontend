@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState } from "react";
 import { Button } from "@components/ui/button";
@@ -11,11 +10,13 @@ const poppins = Poppins({
 });
 
 const ApplyNow = () => {
-      const [isFormOpen, setIsFormOpen] = useState(false);
-        const handleApplyClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-          e.preventDefault();
-          setIsFormOpen(true);
-        };
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  
+  const handleApplyClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    setIsFormOpen(true);
+  };
+
   return (
     <div>
       <div className="bg-black w-full h-52 md:h-36 border-b-yellow-400 border-4">
@@ -27,25 +28,29 @@ const ApplyNow = () => {
           </h1>
 
           <Button 
-                onClick={handleApplyClick}
-                className={`
+            onClick={handleApplyClick}
+            className={`
               text-lg sm:text-xl py-6 sm:py-6 my-5 md:my-0 px-6 sm:px-8 bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 text-black
               font-bold border-4 border-yellow-400 transition-all duration-300 ease-in-out
               hover:bg-gradient-to-l hover:from-yellow-500 hover:via-orange-600 hover:to-yellow-500 
               hover:text-white shadow-lg rounded-lg ${poppins.className}
             `}
-              >
-                Apply Now
-            </Button>
-
-
-              <ApplyNowForm
-                  isFormOpen={isFormOpen}
-                  setIsFormOpen={setIsFormOpen}
-                  isScrolled={false}
-              />
+          >
+            Apply Now
+          </Button>
         </div>
       </div>
+
+      {/* Render ApplyNowForm as a portal/modal separately */}
+      {isFormOpen && (
+        <div className="fixed inset-0 z-50">
+          <ApplyNowForm
+            isFormOpen={isFormOpen}
+            setIsFormOpen={setIsFormOpen}
+            isScrolled={false}
+          />
+        </div>
+      )}
     </div>
   );
 };
