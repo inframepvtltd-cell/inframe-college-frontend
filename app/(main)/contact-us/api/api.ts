@@ -91,7 +91,7 @@ export const getContactValue = (contacts: ContactInfoItem[], title: string): str
 };
 
 // Simple extractor for your specific needs
-export const extractContactInfo = (contacts: ContactInfoItem[]) => {
+    export const extractContactInfo = (contacts: ContactInfoItem[]) => {
   return {
     // Basic Info
     address: getContactValue(contacts, "address"),
