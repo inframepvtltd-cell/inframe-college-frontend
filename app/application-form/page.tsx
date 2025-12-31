@@ -1,678 +1,547 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
-// import Button from '@/components/ui/Button'
-import { AlertCircle, Loader2, CheckCircle, XCircle, Tag, Shield, CreditCard, Smartphone, Ban, Lock } from 'lucide-react'
+import { useState, useEffect } from "react";
+import PersonalDetailsForm from "./components/Form/StudentDetailsForm";
+import EducationDetailsForm from "./components/Form/EducationalForm";
 import {
-  FaExclamationCircle,
-  FaSpinner,
-  FaCheckCircle,
-  FaTimesCircle,
-  FaTag,
-  FaShieldAlt,
-  FaCreditCard,
-  FaMobileAlt,
-  FaUniversity,
-  FaLock
-} from "react-icons/fa";
+  User,
+  GraduationCap,
+  FileText,
+  CheckCircle,
+  Circle,
+  ArrowLeft,
+  ArrowRight,
+  Save
+} from "lucide-react";
+import ProgramSelectionForm from "./components/Form/ProgramSelectionForm";
+import TermsAndConditionsForm from "./components/Form/TermsAndCondition";
+import PaymentStep from "./components/Payment.component";
+import { submitApplication } from "./api";
 
-// Define TypeScript interfaces for better type safety
-interface RazorpayResponse {
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
+// Define form data types
+interface FormData {
+  // Personal Details
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  fatherName: string
+  motherName: string
+  gender: string
+  category: string
+  religion: string
+  profilePhoto: File | null
+  profilePhotoPreview: string
+  aadharNumber: string
+  aadharFile: File | null
+  permanentAddress: string
+  temporaryAddress: string
+  dateOfBirth: string
+
+  // Education Details
+  classLevel: string
+  institutionName: string
+  stream: string
+  yearOfPassing: string
+  grade: string
+  duration: string
+  document: File | null
+
+  // Additional steps
+  additionalInfo: string
+  termsAccepted: boolean
 }
 
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  handler: (response: RazorpayResponse) => void;
-  prefill: {
-    name?: string;
-    email?: string;
-    contact?: string;
-  };
-  notes?: Record<string, string>;
-  theme: {
-    color: string;
-  };
-  modal?: {
-    ondismiss: () => void;
-    escape: boolean;
-    animation: boolean;
-  };
-}
-
-interface RazorpayErrorResponse {
-  error: {
-    code: string;
-    description: string;
-    source: string;
-    step: string;
-    reason: string;
-    metadata: Record<string, unknown>;
-  }
-}
-
-// Static data for demonstration
-const STATIC_APPLICATION_DATA = {
-  personalInfo: {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "+91 9876543210",
-    dateOfBirth: "1995-05-15",
-    gender: "Male",
-    city: "Mumbai",
-    state: "Maharashtra",
-    pincode: "400001",
-    permanentAddress: "123 Main Street, Mumbai",
+// Step configuration
+const steps = [
+  {
+    id: 1,
+    name: "Personal Details",
+    description: "Basic information & documents",
+    icon: User,
+    color: "bg-blue-500",
   },
-  programSelection: {
-    programType: "btech",
-    programName: "Bachelor of Technology",
-    specialization: "Computer Science and Engineering",
-    campus: "mumbai-campus"
-  }
-}
-
-const STATIC_FEE_STRUCTURE = {
-  applicationFee: 1000,
-  totalCourseFee: 50000,
-  couponCodes: [
-    { code: "WELCOME100", discountValue: 100, discountType: "fixed", isActive: true, description: "Get ₹100 off on your first payment" },
-    { code: "EARLYBIRD500", discountValue: 500, discountType: "fixed", isActive: true, description: "Early bird discount ₹500" },
-    { code: "STUDENT10", discountValue: 10, discountType: "percentage", isActive: true, description: "10% off for students" }
-  ]
-}
-
-export default function PaymentForm() {
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [scriptLoaded, setScriptLoaded] = useState(false)
-  const [paymentOption, setPaymentOption] = useState<'application' | 'course' | 'custom'>('application')
-  const [customAmount, setCustomAmount] = useState('')
-  const [customAmountError, setCustomAmountError] = useState('')
-  const [couponCode, setCouponCode] = useState('')
-  const [couponResult, setCouponResult] = useState<{
-    isValid: boolean
-    discountAmount: number
-    finalAmount: number
-    coupon?: any
-    error?: string
-  } | null>(null)
-  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>('card')
-
-  const personalInfo = STATIC_APPLICATION_DATA.personalInfo
-  const programSelection = STATIC_APPLICATION_DATA.programSelection
-  const feeStructure = STATIC_FEE_STRUCTURE
-
-  // Calculate fees based on static data and payment option
-  const getFees = () => {
-    const baseAmount = paymentOption === 'course' ? 
-      feeStructure.totalCourseFee + feeStructure.applicationFee : 
-      paymentOption === 'custom' && customAmount ? 
-        parseFloat(customAmount) : 
-        feeStructure.applicationFee
-
-    const amountAfterCoupon = couponResult?.finalAmount || baseAmount
-
-    return {
-      applicationFee: feeStructure.applicationFee,
-      totalCourseFee: feeStructure.totalCourseFee,
-      totalFee: baseAmount,
-      actualPaymentAmount: baseAmount,
-      remainingAmount: paymentOption === 'custom' && customAmount ? 
-        (feeStructure.totalCourseFee + feeStructure.applicationFee) - parseFloat(customAmount) :
-        paymentOption === 'course' ? 0 : feeStructure.totalCourseFee,
-      courseName: programSelection.programName,
-      courseDuration: "4 Years",
-      paymentOption: paymentOption,
-      discountAmount: couponResult?.discountAmount || 0,
-      finalAmount: amountAfterCoupon
-    }
+  {
+    id: 2,
+    name: "Education Details",
+    description: "Academic background",
+    icon: GraduationCap,
+    color: "bg-green-500",
+  },
+  {
+    id: 3,
+    name: "Program Selection",
+    description: "Choose your course, campus, and study mode",
+    icon: GraduationCap,
+    color: "bg-green-500",
+  },
+  {
+    id: 4,
+    name: "Terms & Conditions",
+    description: "Review and accept admission policies",
+    icon: FileText,
+    color: "bg-purple-500",
+  },
+  {
+    id: 5,
+    name: "Payment",
+    description: "Review and accept admission policies",
+    icon: FileText,
+    color: "bg-purple-500",
   }
 
-  const fees = getFees()
+];
 
+export default function MultiStepFormPage() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [formData, setFormData] = useState<FormData>({
+    // Personal Details
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    fatherName: "",
+    motherName: "",
+    gender: "",
+    category: "",
+    religion: "",
+    profilePhoto: null,
+    profilePhotoPreview: "",
+    aadharNumber: "",
+    aadharFile: null,
+    permanentAddress: "",
+    temporaryAddress: "",
+    dateOfBirth: "",
+
+    // Education Details
+    classLevel: "",
+    institutionName: "",
+    stream: "",
+    yearOfPassing: "",
+    grade: "",
+    duration: "",
+    document: null,
+
+    // Additional
+    additionalInfo: "",
+    termsAccepted: false,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  // Load saved data from localStorage
   useEffect(() => {
-    if (error) setError(null);
-    
-    // Simulate script loading for demo
-    const timer = setTimeout(() => {
-      setScriptLoaded(true)
-    }, 1500)
+    const savedData = localStorage.getItem('multistepFormData');
+    const savedStep = localStorage.getItem('multistepFormStep');
+    const savedCompleted = localStorage.getItem('multistepFormCompleted');
 
-    return () => clearTimeout(timer)
-  }, [error])
-
-  const validateCustomPayment = (): boolean => {
-    if (paymentOption !== 'custom') return true
-
-    setCustomAmountError('')
-
-    if (!customAmount.trim()) {
-      setCustomAmountError('Please enter a payment amount')
-      return false
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      // Convert string dates back to objects
+      const processedData = {
+        ...parsedData,
+        profilePhoto: null,
+        aadharFile: null,
+        document: null
+      };
+      setFormData(prev => ({ ...prev, ...processedData }));
     }
 
-    const amount = parseFloat(customAmount)
-    if (isNaN(amount) || amount <= 0) {
-      setCustomAmountError('Please enter a valid amount')
-      return false
+    if (savedStep) {
+      setCurrentStep(parseInt(savedStep));
     }
 
-    const totalAmount = fees.totalCourseFee + fees.applicationFee
-    if (amount > totalAmount) {
-      setCustomAmountError(`Amount cannot exceed total amount of ₹${totalAmount.toLocaleString('en-IN')}`)
-      return false
+    if (savedCompleted) {
+      setCompletedSteps(JSON.parse(savedCompleted));
     }
+  }, []);
 
-    const minAmount = 100
-    if (amount < minAmount) {
-      setCustomAmountError(`Minimum payment amount is ₹${minAmount.toLocaleString('en-IN')}`)
-      return false
+  // Auto-save to localStorage
+  useEffect(() => {
+    if (currentStep > 1) { // Don't save immediately on step 1
+      setSaveStatus("saving");
+      const saveData = {
+        ...formData,
+        profilePhoto: null,
+        aadharFile: null,
+        document: null
+      };
+
+      localStorage.setItem('multistepFormData', JSON.stringify(saveData));
+      localStorage.setItem('multistepFormStep', currentStep.toString());
+      localStorage.setItem('multistepFormCompleted', JSON.stringify(completedSteps));
+
+      setTimeout(() => {
+        setSaveStatus("saved");
+        setTimeout(() => setSaveStatus("idle"), 2000);
+      }, 500);
     }
+  }, [formData, currentStep, completedSteps]);
 
-    return true
-  }
+  const handleChange = (field: keyof FormData, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
-  const handlePaymentOptionChange = (option: 'application' | 'course' | 'custom') => {
-    setPaymentOption(option)
-    if (option !== 'custom') {
-      setCustomAmount('')
-      setCustomAmountError('')
-    }
-  }
-
-  const handleCouponValidation = async () => {
-    if (!couponCode.trim()) {
-      setCouponResult({
-        isValid: false,
-        discountAmount: 0,
-        finalAmount: fees.actualPaymentAmount,
-        error: 'Please enter a coupon code'
-      })
-      return
-    }
-
-    setIsValidatingCoupon(true)
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      const coupon = feeStructure.couponCodes.find(c => c.code === couponCode.trim().toUpperCase())
-      
-      if (coupon) {
-        const discountAmount = coupon.discountType === 'percentage' 
-          ? (fees.actualPaymentAmount * coupon.discountValue) / 100
-          : coupon.discountValue
-        
-        const finalAmount = Math.max(0, fees.actualPaymentAmount - discountAmount)
-        
-        setCouponResult({
-          isValid: true,
-          discountAmount,
-          finalAmount,
-          coupon
-        })
-      } else {
-        setCouponResult({
-          isValid: false,
-          discountAmount: 0,
-          finalAmount: fees.actualPaymentAmount,
-          error: 'Invalid coupon code'
-        })
+  const handleNext = () => {
+    // Validate current step before proceeding
+    if (validateCurrentStep()) {
+      if (!completedSteps.includes(currentStep)) {
+        setCompletedSteps(prev => [...prev, currentStep]);
       }
-      
-      setIsValidatingCoupon(false)
-    }, 800)
-  }
-
-  const handleRemoveCoupon = () => {
-    setCouponCode('')
-    setCouponResult(null)
-  }
-
-  const handleProceedToPayment = async () => {
-    if (isProcessing) return
-
-    if (!scriptLoaded) {
-      setError("Payment system is still loading. Please try again in a moment.")
-      return
+      setCurrentStep(prev => Math.min(prev + 1, steps.length));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
 
-    if (!validateCustomPayment()) {
-      return
+  const handlePrev = () => {
+    setCurrentStep(prev => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const validateCurrentStep = (): boolean => {
+    switch (currentStep) {
+      case 1: // Personal Details
+        const personalErrors = [];
+        if (!formData.firstName.trim()) personalErrors.push("First name");
+        if (!formData.lastName.trim()) personalErrors.push("Last name");
+        if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) personalErrors.push("Email");
+        if (!formData.phone.trim() || !/^\d{10}$/.test(formData.phone)) personalErrors.push("Phone");
+        if (!formData.gender) personalErrors.push("Gender");
+        if (!formData.dateOfBirth) personalErrors.push("Date of birth");
+        if (!formData.permanentAddress.trim()) personalErrors.push("Permanent address");
+        if (personalErrors.length > 0) {
+          alert(`Please fill in: ${personalErrors.join(", ")}`);
+          return false;
+        }
+        return true;
+
+      case 2: // Education Details
+        const educationErrors = [];
+        if (!formData.classLevel.trim()) educationErrors.push("Class/Level");
+        if (!formData.institutionName.trim()) educationErrors.push("Institution name");
+        if (!formData.stream.trim()) educationErrors.push("Stream");
+        if (!formData.yearOfPassing.trim()) educationErrors.push("Year of passing");
+        if (!formData.grade.trim()) educationErrors.push("Grade");
+        if (!formData.duration.trim()) educationErrors.push("Duration");
+        if (educationErrors.length > 0) {
+          alert(`Please fill in: ${educationErrors.join(", ")}`);
+          return false;
+        }
+        return true;
+
+      default:
+        return true;
     }
+  };
 
-    setIsProcessing(true)
-    setError(null)
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      // Final validation
+      if (validateCurrentStep()) {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        const res = await submitApplication(formData);
 
-    // For demo purposes, simulate payment processing
-    setTimeout(() => {
-      setIsProcessing(false)
-      alert(`Demo Payment: ₹${fees.finalAmount.toLocaleString('en-IN')}\n\nThis is a demo. In a real application, Razorpay payment modal would open here.`)
-    }, 1500)
-  }
+        if (res.status !== "success") {
+          throw new Error(res.message);
+        }
+        console.log("Form submitted:", formData);
 
-  const paymentInstructions = [
-    paymentOption === 'custom'
-      ? "Custom payment: Remaining course fee must be paid before commencement."
-      : paymentOption === 'course'
-        ? "Complete course fee payment including application fee."
-        : "Application fee only. Course fees collected separately.",
-    "All payments are non-refundable after course commencement.",
-    "Ensure details are correct before proceeding.",
-    "Confirmation email will be sent after successful payment.",
-    "Do not refresh or close during payment processing."
-  ]
+        // Clear saved data
+        localStorage.removeItem('multistepFormData');
+        localStorage.removeItem('multistepFormStep');
+        localStorage.removeItem('multistepFormCompleted');
 
-  const paymentMethods = [
-    { id: 'card', name: 'Credit/Debit Card', icon: <CreditCard className="w-4 h-4" /> },
-    { id: 'upi', name: 'UPI', icon: <Smartphone className="w-4 h-4" /> },
-    // { id: 'netbanking', name: 'Net Banking', icon: <Bank className="w-4 h-4" /> },
-    { id: 'wallet', name: 'Wallet', icon: <FaLock className="w-4 h-4" /> }
-  ]
+        // Show success and reset
+        alert("Form submitted successfully!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          fatherName: "",
+          motherName: "",
+          gender: "",
+          category: "",
+          religion: "",
+          profilePhoto: null,
+          profilePhotoPreview: "",
+          aadharNumber: "",
+          aadharFile: null,
+          permanentAddress: "",
+          temporaryAddress: "",
+          dateOfBirth: "",
+          classLevel: "",
+          institutionName: "",
+          stream: "",
+          yearOfPassing: "",
+          grade: "",
+          duration: "",
+          document: null,
+          additionalInfo: "",
+          termsAccepted: false,
+        });
+        setCurrentStep(1);
+        setCompletedSteps([]);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const jumpToStep = (step: number) => {
+    // Only allow jumping to completed steps or next step
+    if (step <= currentStep || completedSteps.includes(step - 1)) {
+      setCurrentStep(step);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const getStepIcon = (stepId: number) => {
+    const StepIcon = steps[stepId - 1]?.icon || Circle;
+    if (completedSteps.includes(stepId)) {
+      return CheckCircle;
+    }
+    if (stepId === currentStep) {
+      return StepIcon;
+    }
+    return StepIcon;
+  };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="mb-8 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl mb-4">
-          <FaLock className="w-8 h-8 text-white" />
-        </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Secure Payment</h1>
-        <p className="text-gray-600 text-lg">Complete your application with secure payment</p>
-        <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mt-4 rounded-full"></div>
-      </div>
-
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-          <div className="flex items-center">
-            <AlertCircle className="h-5 w-5 text-red-500 mr-3" />
-            <p className="text-red-700 font-medium">{error}</p>
-          </div>
-        </div>
-      )}
-
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Left Column - Order Summary */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Application Summary Card */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4 border-b">
-              <h2 className="text-xl font-bold text-gray-900">Application Summary</h2>
-            </div>
-            <div className="p-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Personal Details */}
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Personal Details</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-xs text-gray-500">Full Name</p>
-                      <p className="font-medium text-gray-900">{personalInfo.firstName} {personalInfo.lastName}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Email</p>
-                      <p className="font-medium text-gray-900">{personalInfo.email}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Phone</p>
-                      <p className="font-medium text-gray-900">{personalInfo.phone}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Program Details */}
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Program Details</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-xs text-gray-500">Program</p>
-                      <p className="font-medium text-gray-900">{programSelection.programName}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Specialization</p>
-                      <p className="font-medium text-gray-900">{programSelection.specialization}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Duration</p>
-                      <p className="font-medium text-gray-900">4 Years</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500">Campus</p>
-                      <p className="font-medium text-gray-900">Mumbai Campus</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Payment Options Card */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b">
-              <h2 className="text-xl font-bold text-gray-900">Select Payment Option</h2>
-            </div>
-            <div className="p-6">
-              <div className="grid md:grid-cols-3 gap-4 mb-6">
-                <button
-                  onClick={() => handlePaymentOptionChange('application')}
-                  className={`p-4 rounded-lg border-2 transition-all ${paymentOption === 'application' 
-                    ? 'border-blue-500 bg-blue-50' 
-                    : 'border-gray-200 hover:border-gray-300'}`}
-                >
-                  <div className="text-center">
-                    <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${paymentOption === 'application' ? 'bg-blue-100' : 'bg-gray-100'}`}>
-                      <span className={`text-lg font-bold ${paymentOption === 'application' ? 'text-blue-600' : 'text-gray-500'}`}>₹</span>
-                    </div>
-                    <p className="font-medium text-gray-900 mb-1">Application Fee</p>
-                    <p className="text-sm text-gray-600">₹{feeStructure.applicationFee.toLocaleString('en-IN')}</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => handlePaymentOptionChange('course')}
-                  className={`p-4 rounded-lg border-2 transition-all ${paymentOption === 'course' 
-                    ? 'border-green-500 bg-green-50' 
-                    : 'border-gray-200 hover:border-gray-300'}`}
-                >
-                  <div className="text-center">
-                    <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${paymentOption === 'course' ? 'bg-green-100' : 'bg-gray-100'}`}>
-                      <span className={`text-lg font-bold ${paymentOption === 'course' ? 'text-green-600' : 'text-gray-500'}`}>₹</span>
-                    </div>
-                    <p className="font-medium text-gray-900 mb-1">Full Course</p>
-                    <p className="text-sm text-gray-600">₹{(feeStructure.totalCourseFee + feeStructure.applicationFee).toLocaleString('en-IN')}</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => handlePaymentOptionChange('custom')}
-                  className={`p-4 rounded-lg border-2 transition-all ${paymentOption === 'custom' 
-                    ? 'border-purple-500 bg-purple-50' 
-                    : 'border-gray-200 hover:border-gray-300'}`}
-                >
-                  <div className="text-center">
-                    <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${paymentOption === 'custom' ? 'bg-purple-100' : 'bg-gray-100'}`}>
-                      <span className={`text-lg font-bold ${paymentOption === 'custom' ? 'text-purple-600' : 'text-gray-500'}`}>₹</span>
-                    </div>
-                    <p className="font-medium text-gray-900 mb-1">Custom Amount</p>
-                    <p className="text-sm text-gray-600">Enter any amount</p>
-                  </div>
-                </button>
-              </div>
-
-              {paymentOption === 'custom' && (
-                <div className="mb-6">
-                  <label htmlFor="customAmount" className="block text-sm font-medium text-gray-700 mb-2">
-                    Enter Custom Amount
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg">₹</span>
-                    <input
-                      type="number"
-                      id="customAmount"
-                      value={customAmount}
-                      onChange={(e) => setCustomAmount(e.target.value)}
-                      placeholder="Enter amount between ₹100 and ₹51,000"
-                      min="100"
-                      max={feeStructure.totalCourseFee + feeStructure.applicationFee}
-                      className={`pl-10 pr-4 py-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${customAmountError ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                  </div>
-                  {customAmountError && (
-                    <p className="mt-2 text-sm text-red-600">{customAmountError}</p>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Coupon Section */}
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200 shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-green-200">
-              <div className="flex items-center">
-                <Tag className="w-5 h-5 text-green-600 mr-2" />
-                <h2 className="text-lg font-bold text-gray-900">Apply Coupon Code</h2>
-              </div>
-            </div>
-            <div className="p-6">
-              <div className="flex gap-3 mb-4">
-                <input
-                  type="text"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                  placeholder="Enter coupon code"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                  disabled={isValidatingCoupon}
-                />
-                <button
-                  onClick={handleCouponValidation}
-                  disabled={!couponCode.trim() || isValidatingCoupon}
-                  className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-medium rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isValidatingCoupon ? (
-                    <Loader2 className="w-4 h-4 animate-spin mx-auto" />
-                  ) : (
-                    'Apply'
-                  )}
-                </button>
-              </div>
-
-              {couponResult && (
-                <div className={`p-4 rounded-lg mb-4 ${couponResult.isValid 
-                  ? 'bg-green-100 border border-green-200' 
-                  : 'bg-red-100 border border-red-200'}`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      {couponResult.isValid ? (
-                        <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                      ) : (
-                        <XCircle className="w-5 h-5 text-red-600 mr-2" />
-                      )}
-                      <span className={`font-medium ${couponResult.isValid ? 'text-green-800' : 'text-red-800'}`}>
-                        {couponResult.isValid ? 'Coupon Applied!' : 'Invalid Coupon'}
-                      </span>
-                    </div>
-                    {couponResult.isValid && (
-                      <button
-                        onClick={handleRemoveCoupon}
-                        className="text-sm text-green-600 hover:text-green-800 font-medium"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                  {couponResult.isValid ? (
-                    <div className="mt-2 text-green-700">
-                      <p>Discount: ₹{couponResult.discountAmount.toLocaleString('en-IN')}</p>
-                      <p>Final Amount: ₹{couponResult.finalAmount.toLocaleString('en-IN')}</p>
-                    </div>
-                  ) : (
-                    <p className="mt-2 text-red-700">{couponResult.error}</p>
-                  )}
-                </div>
-              )}
-
-              <div className="grid grid-cols-3 gap-3">
-                {feeStructure.couponCodes.slice(0, 3).map((coupon) => (
-                  <div key={coupon.code} className="bg-white border border-gray-200 rounded-lg p-3">
-                    <div className="text-center">
-                      <p className="font-mono text-sm font-medium text-gray-900 mb-1">{coupon.code}</p>
-                      <p className="text-xs text-gray-600">
-                        {coupon.discountType === 'percentage' 
-                          ? `${coupon.discountValue}% OFF` 
-                          : `₹${coupon.discountValue} OFF`}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Student Application Form
+          </h1>
+          <p className="text-gray-600">
+            Complete all steps to submit your application
+          </p>
         </div>
 
-        {/* Right Column - Payment Summary */}
-        <div className="lg:col-span-1 space-y-6">
-          {/* Payment Summary Card */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden sticky top-6">
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
-              <h2 className="text-xl font-bold text-white">Payment Summary</h2>
-            </div>
-            <div className="p-6">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar - Steps */}
+          <div className="lg:w-1/4">
+            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+              <div className="mb-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                  Application Progress
+                </h2>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-600">
+                    Step {currentStep} of {steps.length}
+                  </div>
+                  {saveStatus === "saving" && (
+                    <div className="flex items-center gap-1 text-sm text-blue-600">
+                      <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      Saving...
+                    </div>
+                  )}
+                  {saveStatus === "saved" && (
+                    <div className="flex items-center gap-1 text-sm text-green-600">
+                      <CheckCircle className="w-4 h-4" />
+                      Saved
+                    </div>
+                  )}
+                </div>
+                <div className="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+                    style={{ width: `${((completedSteps.length + (currentStep > completedSteps.length ? 0.5 : 0)) / steps.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Steps List */}
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Application Fee</span>
-                  <span className="font-medium text-gray-900">₹{feeStructure.applicationFee.toLocaleString('en-IN')}</span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Course Fee</span>
-                  <span className="font-medium text-gray-900">₹{feeStructure.totalCourseFee.toLocaleString('en-IN')}</span>
-                </div>
+                {steps.map((step, index) => {
+                  const Icon = getStepIcon(step.id);
+                  const isCompleted = completedSteps.includes(step.id);
+                  const isCurrent = currentStep === step.id;
+                  const isAccessible = step.id <= currentStep || completedSteps.includes(step.id - 1);
 
-                {couponResult?.isValid && (
-                  <div className="flex justify-between items-center text-green-600">
-                    <span>Coupon Discount</span>
-                    <span className="font-medium">-₹{couponResult.discountAmount.toLocaleString('en-IN')}</span>
-                  </div>
-                )}
-
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold text-gray-900">Total Amount</span>
-                    <span className="text-2xl font-bold text-gray-900">₹{fees.finalAmount.toLocaleString('en-IN')}</span>
-                  </div>
-                </div>
-
-                {paymentOption === 'application' && (
-                  <div className="bg-blue-50 rounded-lg p-3 mt-4">
-                    <p className="text-sm text-blue-700 text-center">
-                      Course fee of ₹{feeStructure.totalCourseFee.toLocaleString('en-IN')} payable later
-                    </p>
-                  </div>
-                )}
-
-                {paymentOption === 'custom' && customAmount && (
-                  <div className="bg-purple-50 rounded-lg p-3 mt-4">
-                    <p className="text-sm text-purple-700 text-center">
-                      Remaining balance: ₹{fees.remainingAmount.toLocaleString('en-IN')}
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Payment Method Selection */}
-              <div className="mt-6">
-                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Payment Method</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {paymentMethods.map((method) => (
+                  return (
                     <button
-                      key={method.id}
-                      onClick={() => setSelectedPaymentMethod(method.id)}
-                      className={`p-3 rounded-lg border flex items-center justify-center gap-2 transition-all ${selectedPaymentMethod === method.id 
-                        ? 'border-blue-500 bg-blue-50' 
-                        : 'border-gray-200 hover:border-gray-300'}`}
+                      key={step.id}
+                      onClick={() => isAccessible && jumpToStep(step.id)}
+                      disabled={!isAccessible}
+                      className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-200 ${isCurrent
+                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 shadow-sm'
+                        : isCompleted
+                          ? 'bg-green-50 border border-green-100'
+                          : 'bg-gray-50 hover:bg-gray-100'
+                        } ${!isAccessible ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                     >
-                      {method.icon}
-                      <span className="text-sm font-medium">{method.name}</span>
+                      <div className={`p-3 rounded-lg ${isCurrent
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                        : isCompleted
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 text-gray-600'
+                        }`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-medium ${isCurrent
+                            ? 'text-gray-900'
+                            : isCompleted
+                              ? 'text-gray-900'
+                              : 'text-gray-700'
+                            }`}>
+                            Step {step.id}: {step.name}
+                          </h3>
+                          {isCompleted && (
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          )}
+                        </div>
+                        <p className={`text-sm ${isCurrent
+                          ? 'text-blue-600'
+                          : isCompleted
+                            ? 'text-green-600'
+                            : 'text-gray-500'
+                          }`}>
+                          {step.description}
+                        </p>
+                      </div>
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
 
-              {/* Proceed Button */}
-              <button
-                onClick={handleProceedToPayment}
-                disabled={isProcessing || !scriptLoaded}
-                className="w-full mt-6 py-3 px-4 bg-gradient-to-r from-gray-900 to-black text-white font-semibold rounded-lg hover:from-gray-800 hover:to-gray-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isProcessing ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Processing Payment...
-                  </div>
-                ) : !scriptLoaded ? (
-                  'Loading Payment Gateway...'
-                ) : (
-                  `Pay ₹${fees.finalAmount.toLocaleString('en-IN')}`
-                )}
-              </button>
 
-              {/* Security Badge */}
-              <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
-                <Shield className="w-4 h-4" />
-                <span>256-bit SSL Secure Payment</span>
-              </div>
             </div>
           </div>
 
-          {/* Instructions Card */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200 p-5">
-            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-blue-600" />
-              Important Instructions
-            </h3>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {paymentInstructions.map((instruction, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">•</span>
-                  <span>{instruction}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Main Form Area */}
+          <div className="lg:w-3/4">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              {/* Form Header */}
+              <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900">
+                      {steps[currentStep - 1]?.name}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      {steps[currentStep - 1]?.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <span className="hidden sm:inline">Auto-save:</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${saveStatus === "saved" ? "bg-green-100 text-green-800" :
+                      saveStatus === "saving" ? "bg-blue-100 text-blue-800" :
+                        "bg-gray-100 text-gray-800"
+                      }`}>
+                      {saveStatus === "saved" ? "Saved" :
+                        saveStatus === "saving" ? "Saving..." :
+                          "Ready"}
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-          {/* Security Info */}
-          <div className="bg-gray-50 rounded-xl p-5">
-            <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
-              <FaLock className="w-4 h-4" />
-              Secure Payment Info
-            </h4>
-            <div className="grid grid-cols-2 gap-4 text-xs text-gray-600">
-              <div>
-                <p className="font-medium mb-1">Payment Gateway</p>
-                <p>Razorpay - Trusted by Millions</p>
-              </div>
-              <div>
-                <p className="font-medium mb-1">Security</p>
-                <p>256-bit SSL Encryption</p>
-              </div>
-              <div>
-                <p className="font-medium mb-1">Accepted Methods</p>
-                <p>Cards, UPI, Net Banking</p>
-              </div>
-              <div>
-                <p className="font-medium mb-1">Support</p>
-                <p>24/7 Payment Support</p>
+              {/* Form Content */}
+              <div className="p-2 md:p-2">
+                {currentStep === 1 && (
+                  <PersonalDetailsForm
+                    data={formData}
+                    onChange={handleChange}
+                  />
+                )}
+
+                {currentStep === 2 && (
+                  <EducationDetailsForm
+                    data={formData}
+                    onChange={handleChange}
+                  />
+                )}
+
+                {currentStep === 3 && (
+                  <ProgramSelectionForm
+                    data={formData}
+                    onChange={handleChange}
+                  />
+                )}
+
+                {currentStep === 4 && (
+                  <TermsAndConditionsForm
+                    data={formData}
+                    onChange={handleChange}
+                    onBack={handlePrev}
+                    onSubmit={handleSubmit}
+                  />
+                )}
+
+                {currentStep === 5 && (
+                  <PaymentStep
+                    registrationFee={1800}
+                    processingFee={250}
+                    courseName="Diploma in Interior Design"
+                  />
+                )}
+
+                {/* Navigation Buttons */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      {currentStep > 1 && (
+                        <button
+                          type="button"
+                          onClick={handlePrev}
+                          className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 flex items-center gap-2"
+                        >
+                          <ArrowLeft className="w-4 h-4" />
+                          Previous Step
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      {currentStep < steps.length ? (
+                        <button
+                          type="button"
+                          onClick={handleNext}
+                          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
+                        >
+                          Next Step
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting}
+                          className="px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              <Save className="w-5 h-5" />
+                              Submit Application
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Loading Overlay */}
-      {!scriptLoaded && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-8 text-center max-w-sm mx-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mb-4 flex items-center justify-center">
-              <FaLock className="w-8 h-8 text-white animate-pulse" />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading Secure Payment Gateway</h3>
-            <p className="text-gray-600 mb-4">Initializing secure connection with Razorpay...</p>
-            <div className="w-full bg-gray-200 rounded-full h-1">
-              <div className="bg-blue-600 h-1 rounded-full animate-pulse"></div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-  )
+  );
 }

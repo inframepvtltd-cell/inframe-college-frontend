@@ -1,8 +1,16 @@
 "use client";
 
+import { GraduationCap, MapPin, Laptop, IndianRupee } from "lucide-react";
+
+const COURSE_FEES: Record<string, number> = {
+  design: 1000,
+  development: 1500,
+  marketing: 800,
+};
+
 interface ProgramSelectionFormProps {
   data: any;
-  onChange: (field: any, value: any) => void;
+  onChange: (field: string, value: any) => void;
   onNext?: () => void;
   onBack?: () => void;
 }
@@ -10,66 +18,95 @@ interface ProgramSelectionFormProps {
 export default function ProgramSelectionForm({
   data,
   onChange,
-  onNext,
-  onBack,
 }: ProgramSelectionFormProps) {
+  const fee = COURSE_FEES[data.courseType] || 0;
+
   const isValid =
     data.courseType &&
     data.campus &&
-    data.programType;
+    data.programType &&
+    data.studyMode;
 
   return (
-    <div className="space-y-6">
-      {/* Title */}
+    <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
+      {/* Header */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900">
+        <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <GraduationCap className="w-5 h-5" />
           Program Selection
         </h3>
         <p className="text-sm text-gray-500">
-          Select your course and campus preferences
+          Choose your preferred course, mode, and campus
         </p>
       </div>
 
       {/* Course Type */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Select Course Type *
+        <label className="block text-sm font-medium mb-1">
+          Course Type *
         </label>
         <select
-          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+          className="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-black"
           value={data.courseType || ""}
           onChange={(e) => onChange("courseType", e.target.value)}
         >
-          <option value="">Select</option>
-          <option value="design">Design Course (₹1000)</option>
-          <option value="development">Development Course</option>
-          <option value="marketing">Marketing Course</option>
+          <option value="">Select Course</option>
+          <option value="design">Design</option>
+          <option value="development">Development</option>
+          <option value="marketing">Marketing</option>
         </select>
+      </div>
+
+      {/* Study Mode */}
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          Study Mode *
+        </label>
+        <div className="grid grid-cols-3 gap-3">
+          {["online", "offline", "hybrid"].map((mode) => (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => onChange("studyMode", mode)}
+              className={`border rounded-lg py-2 text-sm capitalize flex items-center justify-center gap-2
+                ${
+                  data.studyMode === mode
+                    ? "bg-black text-white"
+                    : "hover:bg-gray-50"
+                }`}
+            >
+              <Laptop className="w-4 h-4" />
+              {mode}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Campus */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Study Campus *
-        </label>
-        <select
-          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
-          value={data.campus || ""}
-          onChange={(e) => onChange("campus", e.target.value)}
-        >
-          <option value="">Select</option>
-          <option value="main">Main Campus</option>
-          <option value="city">City Campus</option>
-        </select>
-      </div>
+      {data.studyMode !== "online" && (
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Campus *
+          </label>
+          <select
+            className="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-black"
+            value={data.campus || ""}
+            onChange={(e) => onChange("campus", e.target.value)}
+          >
+            <option value="">Select Campus</option>
+            <option value="main">Main Campus</option>
+            <option value="city">City Campus</option>
+          </select>
+        </div>
+      )}
 
       {/* Program Type */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium mb-1">
           Program Type *
         </label>
         <select
-          className="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none"
+          className="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-black"
           value={data.programType || ""}
           onChange={(e) => onChange("programType", e.target.value)}
         >
@@ -79,29 +116,23 @@ export default function ProgramSelectionForm({
         </select>
       </div>
 
-      {/* Footer Buttons (like screenshot) */}
-      <div className="flex items-center justify-between pt-6 border-t">
-        <button
-          type="button"
-          onClick={onBack}
-          className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100"
-        >
-          Previous
-        </button>
+      {/* Fee Display */}
+      {fee > 0 && (
+        <div className="flex items-center justify-between bg-gray-50 border rounded-lg p-4">
+          <div className="flex items-center gap-2 text-gray-700">
+            <IndianRupee className="w-4 h-4" />
+            <span className="font-medium">Application Fee</span>
+          </div>
+          <span className="text-lg font-semibold">₹{fee}</span>
+        </div>
+      )}
 
-        <button
-          type="button"
-          onClick={onNext}
-          disabled={!isValid}
-          className={`px-6 py-2 text-sm rounded-md font-medium text-white
-            ${isValid
-              ? "bg-black hover:bg-gray-800"
-              : "bg-gray-400 cursor-not-allowed"
-            }`}
-        >
-          Next
-        </button>
-      </div>
+      {/* Validation Hint */}
+      {!isValid && (
+        <p className="text-xs text-red-500">
+          Please complete all required fields to continue
+        </p>
+      )}
     </div>
   );
 }

@@ -193,53 +193,8 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-// Helper function to format course titles for URLs based on your working examples
-// const formatCourseSlug = (title: string): string => {
-//   const slugMap: { [key: string]: string } = {
-//     "Interior Design": "interior-design",
-//     "Fashion Design": "fashion-design", 
-//     "Graphic Design": "graphic-design",
-//     "UIUX-Design": "uiux-design",
-//     "Animation-VFX": "animation-vfx",
-//     "Jewellery Design": "jewellery-design",
-//     "Fine Arts": "fine-arts",
-//     "Digital Marketing": "digital-marketing",
-//     "Entrepreneurship Skill": "entrepreneurship-skill",
-//     "Media-Entertainment": "media-entertainment"
-//   };
-
-//   return slugMap[title] || title.replace(/\s+/g, "-").toLowerCase();
-// };
-
-// // Fixed getDegreeType function that matches your working URLs
-// const getDegreeType = (programText: string, courseTitle: string): string => {
-//   const courseSlug = formatCourseSlug(courseTitle);
-
-//   // Extract the degree type from program text
-//   if (programText.includes("B. Des")) {
-//     return `bdes-in-${courseSlug}`;
-//   } else if (programText.includes("B.VOC")) {
-//     return `bvoc-in-${courseSlug}`;
-//   } else if (programText.includes("B.SC")) {
-//     return `bsc-in-${courseSlug}`;
-//   } else if (programText.includes("1 Year Diploma")) {
-//     return `one-year-diploma-in-${courseSlug}`;
-//   } else if (programText.includes("2 Year Diploma")) {
-//     return `two-year-diploma-in-${courseSlug}`;
-//   } else if (programText.includes("3 Year Diploma")) {
-//     return `three-year-diploma-in-${courseSlug}`;
-//   } else if (programText.includes("6 Month Certificate")) {
-//     return `six-month-certificate-course-in-${courseSlug}`;
-//   }
-
-//   // Fallback
-//   return `program-in-${courseSlug}`;
-// };
 
 const formatCourseSlug = (title: string): string => {
-  // console.log(title);
-  // console.log("==============");
-
   const slugMap: { [key: string]: string } = {
     "Interior Design": "interior-design",
     "Fashion Design": "fashion-design",
@@ -296,8 +251,6 @@ const getDegreeType = (programText: string, courseTitle: string): string => {
 
     return programText.replace(/\s+/g, "-").toLowerCase();
   }
-
-  // return `program-in-${programCourseSlug}`;
 };
 
 

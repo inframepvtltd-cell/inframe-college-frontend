@@ -134,11 +134,12 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
     }))
     // Immediately notify parent of change
     onChange(field, value)
-    setErrors(prev => ({ ...prev, [field]: undefined }))
+    // setErrors(prev => ({ ...prev, [field]: undefined }))
     setTouched(prev => new Set(prev.add(field)))
   }, [onChange])
 
   const handleFileChange = useCallback((field: "profilePhoto" | "aadharFile", file: File | null) => {
+    
     if (field === "profilePhoto" && file) {
       const previewUrl = URL.createObjectURL(file)
       setFormData(prev => ({
@@ -152,7 +153,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
       setFormData(prev => ({ ...prev, [field]: file }))
       onChange(field, file)
     }
-    setErrors(prev => ({ ...prev, [field]: undefined }))
+    // setErrors(prev => ({ ...prev, [field]: undefined }))
   }, [onChange])
 
   const validateField = (field: keyof FormData, value: any): string => {

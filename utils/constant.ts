@@ -1374,7 +1374,7 @@ export const programLevels: ProgramLevels = {
   "Jewellery Design": {
     "B.Voc": "B.Voc in Jewellery Design",
     "1 Year Diploma": "1 Year Diploma in Jewellery Design",
-    "6 Month Certificate": "6 Month Certificate course in Jewellery Design",
+    // "6 Month Certificate": "6 Month Certificate course in Jewellery Design",
   },
   "Fine Arts": {
     BFA: [
@@ -1390,7 +1390,13 @@ export const programLevels: ProgramLevels = {
   "Digital Marketing": {
     "B.Voc": "B.Voc in Digital Marketing",
     "1 Year Diploma": "1 Year Diploma in Digital Marketing",
-    "6 Month Certificate": "6 Month Certificate course in Digital Marketing",
+    // "6 Month Certificate": "6 Month Certificate course in Digital Marketing",
+    // "6 Month Certificate": [
+    //   "6 Month Certificate course in Digital Marketing",
+    //   "6 Month Certificate in SEO",
+    //   "6 Month Certificate in Social Media Marketing",
+    //   "6 Month Certificate in Performance Marketing",
+    // ],
   },
   "Entrepreneurship Skill": {
     "B.Voc": "B.Voc in Entrepreneurship Skill",
@@ -1403,6 +1409,26 @@ export const programLevels: ProgramLevels = {
   "Advertising and Marketing": {
     BBA: "BBA in Advertising and Marketing",
   },
+  // 6 months courses
+  "6 Month Certificate course in Digital Marketing": {
+    "B.Voc": "B.Voc in Digital Marketing",
+    "1 Year Diploma": "1 Year Diploma in Digital Marketing",
+    // "6 Month Certificate": "6 Month Certificate course in Digital Marketing",
+    "6 Month Certificate": [
+      "6 Month Certificate course in Digital Marketing",
+    ],
+  },
+  "6 Month Certificate course in Jewellery Design": {
+    "B.Voc": "B.Voc in Jewellery Design",
+    "1 Year Diploma": "1 Year Diploma in Jewellery Design",
+    "6 Month Certificate": "6 Month Certificate course in Jewellery Design",
+  },
+  "Six Month Certificate Course in CAD Jewellery": {
+    "B.Voc": "B.Voc in Jewellery Design",
+    "1 Year Diploma": "1 Year Diploma in Jewellery Design",
+    "6 Month Certificate": "6 Month Certificate course in Jewellery Design",
+  },
+
 };
 
 export const BFAPrograms = [
@@ -1750,7 +1776,6 @@ export const courses = [
     ],
   },
 ];
-
 
 export const blogPostsData = {
   "top-5-reasons-to-choose-inframe-school": {

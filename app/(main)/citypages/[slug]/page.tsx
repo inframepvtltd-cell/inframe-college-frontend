@@ -27,14 +27,16 @@ const getCourse = cache(async (slug: string) => {
 // extract category keyword from slug
 const getCategoryFromSlug = (slug: string) => {
     if (!slug) return "";
-    const parts = slug.split("-course-"); // e.g., "digital-marketing-course-in-ajmer" -> "digital-marketing"
-    return parts[0].split("-")[0]; // take first part as main category, e.g., "digital"
-};
+    const parts = slug.split("-course-");
+    return parts[0].split("-")[0];
+}
 
 // SEO (SERVER ONLY)
 export async function generateMetadata({ params }: any) {
     const { slug } = await params;
+    console.log(slug);
     const course = await getCourse(slug);
+    console.log(course);
 
     return {
         title: course?.data.meta_title || "Inframe School",
@@ -65,7 +67,7 @@ export default async function Page({ params }: any) {
                 duration="4 Years Full-Time"
                 content1={course.data.overview}
                 content2={course.data.course_description}
-                description={course.data.meta_description}
+                description={course.data.meta_keywords}
                 index={0}
                 category={category}
                 software={course.data.software || ["Photoshop", "Illustrator"]}
