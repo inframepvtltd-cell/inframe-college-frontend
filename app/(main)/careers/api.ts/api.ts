@@ -4,19 +4,19 @@ import axios from "axios";
 // const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
 export interface Career {
-  id: string;
-  title: string;
-  place: string;
-  description: string;
-  requirements: string[];
-  part_time: boolean;
-  is_active: boolean;
+    id: string;
+    title: string;
+    place: string;
+    description: string;
+    requirements: string[];
+    part_time: boolean;
+    is_active: boolean;
 }
 
 // GET: fetch all careers
 export const getAllCareers = async () => {
-  const res = await axios.get(`${API_BASE}/career/all`);
-  return res.data;
+    const res = await axios.get(`${API_BASE}/career/all`);
+    return res.data;
 };
 
 // POST: apply for career
