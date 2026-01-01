@@ -85,10 +85,10 @@ export const LifeAtCampus = () => {
     <div>
       <div className={`min-h-screen ${poppins.className}`}>
         {/* Background Pattern */}
-        <div
+        {/* <div
           className="fixed inset-0 h-full w-full opacity-10 bg-white bg-[linear-gradient(to_right,#000000_1px,transparent_1px),linear-gradient(to_bottom,#000000_1px,transparent_1px)] bg-[size:150px_150px] z-0"
           aria-hidden="true"
-        />
+        /> */}
 
         {/* Hero Section */}
         <div className="relative z-10">
@@ -234,6 +234,7 @@ export const LifeAtCampus = () => {
             </div>
           </div>
         </section>
+        
         <div className="bg bg1  "></div>
 
         {/* Lazy Loaded Components */}
