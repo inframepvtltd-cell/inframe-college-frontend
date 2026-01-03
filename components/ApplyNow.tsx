@@ -1,7 +1,7 @@
 
 "use client"
 import React, { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@components/ui/button";
 import { Poppins } from "next/font/google";
 import ApplyNowForm from "./ApplyNowForm";
 
