@@ -494,7 +494,7 @@ const AboutPage = () => {
       {/* Campus Life Grid */}
       <CampusLife experienceCamputLife={experienceCamputLife} />
 
-      {/* Core Values Section */}
+      {/* FOUNDAIONAL BELIEFS Section */}
       <section className="bg-white text-black py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-32 items-center">
@@ -520,7 +520,7 @@ const AboutPage = () => {
             {/* Right side: Text */}
             <div data-aos="fade-left" className="text-center md:text-left">
               <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${poppins.className}`}>
-                CORE VALUES
+                FOUNDAIONAL BELIEFS
               </h2>
               <p className="text-base sm:text-lg font-sans leading-relaxed text-justify">
                 Inframe school of art, design and business inculcates design thinking
