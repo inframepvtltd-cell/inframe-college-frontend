@@ -1,5 +1,3 @@
-// import { API_BASE_URL } from './api';
-// src/utils/courseTypes.ts
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
 
 export type CourseCategory = {
@@ -42,10 +40,9 @@ export type CourseType = {
   curriculum?: CurriculumType;
   software: SoftwareType[];
   whatYouWillLearn: WhatLearn[];
-  videos: VideosType[]; // Now software is an array of objects
+  videos: VideosType[]; 
 };
 
-// const res = await fetch("http://localhost:7000/api/v1/courses/course-types");
 const res = await fetch(`${API_BASE}/courses/course-types`);
 export const courseTypes = await res.json();
 

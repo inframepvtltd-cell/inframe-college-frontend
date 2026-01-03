@@ -248,8 +248,6 @@ export default function MultiStepFormPage() {
         if (res.status !== "success") {
           throw new Error(res.message);
         }
-        console.log("Form submitted:", formData);
-
         // Clear saved data
         localStorage.removeItem('multistepFormData');
         localStorage.removeItem('multistepFormStep');

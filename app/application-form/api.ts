@@ -42,7 +42,7 @@ interface SubmitApplicationData {
 
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
 
-export const submitApplication = async (data: SubmitApplicationData) => {
+export const submitApplication = async (data: any) => {
     const formData = new FormData();
     console.log(`${API_BASE}/student/add`);
 
@@ -117,3 +117,23 @@ export const createPaymentOrder = async (amount: number) => {
 
     return await response.json();
 };
+
+export const fetchAllPaidCourse = async () => {
+  try {
+    const res = await axios.get(`${API_BASE}/courses/fetchAllPaidCourse`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch course types", error);
+    throw error;
+  }
+};
+
+// export const courseTypes = async () => {
+//   try {
+//     const res = await axios.get(`${API_BASE}/courses/course-types`);
+//     return res.data;
+//   } catch (error) {
+//     console.error("Failed to fetch course types", error);
+//     throw error;
+//   }
+// };

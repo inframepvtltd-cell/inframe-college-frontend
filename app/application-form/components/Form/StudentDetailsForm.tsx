@@ -94,9 +94,8 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
   const [errors, setErrors] = useState<FormErrors>({})
   const [touched, setTouched] = useState<Set<string>>(new Set())
 
-  // Update local formData when parent data changes (only when data actually changes)
+
   useEffect(() => {
-    // Create a clean copy of the data without functions
     const cleanData = {
       firstName: data.firstName || "",
       lastName: data.lastName || "",
@@ -137,24 +136,50 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
     // setErrors(prev => ({ ...prev, [field]: undefined }))
     setTouched(prev => new Set(prev.add(field)))
   }, [onChange])
+  const handleFileChange = useCallback(
+    (field: "profilePhoto" | "aadharFile", file: File | null) => {
 
-  const handleFileChange = useCallback((field: "profilePhoto" | "aadharFile", file: File | null) => {
-    
-    if (field === "profilePhoto" && file) {
-      const previewUrl = URL.createObjectURL(file)
-      setFormData(prev => ({
-        ...prev,
-        [field]: file,
-        profilePhotoPreview: previewUrl
-      }))
-      onChange(field, file)
-      onChange("profilePhotoPreview", previewUrl)
-    } else {
+      if (field === "profilePhoto" && file === null) {
+        setFormData(prev => {
+          // revoke old object URL (memory cleanup)
+          if (prev.profilePhotoPreview) {
+            URL.revokeObjectURL(prev.profilePhotoPreview)
+          }
+
+          return {
+            ...prev,
+            profilePhoto: null,
+            profilePhotoPreview: null
+          }
+        })
+
+        onChange("profilePhoto", null)
+        onChange("profilePhotoPreview", null)
+        return
+      }
+
+      // 📸 ADD / CHANGE PHOTO
+      if (field === "profilePhoto" && file) {
+        const previewUrl = URL.createObjectURL(file)
+
+        setFormData(prev => ({
+          ...prev,
+          profilePhoto: file,
+          profilePhotoPreview: previewUrl
+        }))
+
+        onChange("profilePhoto", file)
+        onChange("profilePhotoPreview", previewUrl)
+        return
+      }
+
+      // 📄 OTHER FILES (like aadhar)
       setFormData(prev => ({ ...prev, [field]: file }))
       onChange(field, file)
-    }
-    // setErrors(prev => ({ ...prev, [field]: undefined }))
-  }, [onChange])
+    },
+    [onChange]
+  )
+
 
   const validateField = (field: keyof FormData, value: any): string => {
     switch (field) {
@@ -559,6 +584,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                     >
                       Remove Photo
                     </button>
+
                   </div>
                 ) : (
                   <div className="space-y-3">

@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { FAQ_DATA, themeClasses } from './constant';
 
 // Define TypeScript types
-type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+type CourseType = "Interior Design" | 'UIUX Design' | 'Motion Design' | 'Digital Marketing' | 'Fashion Design' | 'Animation VFX' | 'Jewellery Design' | 'Fine Arts' | 'Graphic Design';
 
 interface FAQItem {
     question: string;
@@ -111,12 +111,11 @@ const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
 
             {/* FAQ List */}
             <div className="space-y-3">
-                {currentFAQs.map((faq, index) => (
+                {currentFAQs.map((faq: any, index: any) => (
                     <FAQItemComponent key={index} faq={faq} index={index} />
                 ))}
             </div>
 
-            {/* Contact CTA */}
 
         </div>
     );
