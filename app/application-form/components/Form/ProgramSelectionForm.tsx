@@ -1,31 +1,60 @@
 "use client";
 
-import { GraduationCap, MapPin, Laptop, IndianRupee } from "lucide-react";
+import { useEffect, useState } from "react";
+import { GraduationCap, Laptop, IndianRupee } from "lucide-react";
+import { fetchAllPaidCourse } from "../../api";
+// import { fetchAllPaidCourse } from "@/api/courses"; // adjust path
 
-const COURSE_FEES: Record<string, number> = {
-  design: 1000,
-  development: 1500,
-  marketing: 800,
-};
+interface Course {
+  id: number;
+  course_name: string;
+  course_slug: string;
+  price: number;
+}
 
 interface ProgramSelectionFormProps {
   data: any;
   onChange: (field: string, value: any) => void;
-  onNext?: () => void;
-  onBack?: () => void;
 }
 
 export default function ProgramSelectionForm({
   data,
   onChange,
 }: ProgramSelectionFormProps) {
-  const fee = COURSE_FEES[data.courseType] || 0;
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  /** Fetch paid courses */
+  useEffect(() => {
+    const loadCourses = async () => {
+      try {
+        setLoading(true);
+        const res = await fetchAllPaidCourse();
+        console.log(res);
+        
+        setCourses(res); // assuming API returns array
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCourses();
+  }, []);
+
+  /** Find selected course */
+  const selectedCourse = courses.find(
+    (c) => c.course_slug === data.courseType
+  );
+
+  const fee = selectedCourse?.price || 0;
 
   const isValid =
     data.courseType &&
-    data.campus &&
+    data.studyMode &&
     data.programType &&
-    data.studyMode;
+    (data.studyMode === "online" || data.campus);
 
   return (
     <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
@@ -49,11 +78,17 @@ export default function ProgramSelectionForm({
           className="w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-black"
           value={data.courseType || ""}
           onChange={(e) => onChange("courseType", e.target.value)}
+          disabled={loading}
         >
-          <option value="">Select Course</option>
-          <option value="design">Design</option>
-          <option value="development">Development</option>
-          <option value="marketing">Marketing</option>
+          <option value="">
+            {loading ? "Loading courses..." : "Select Course"}
+          </option>
+
+          {courses.map((course) => (
+            <option key={course.id} value={course.course_slug}>
+              {course.course_name}
+            </option>
+          ))}
         </select>
       </div>
 

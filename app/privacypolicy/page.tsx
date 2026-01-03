@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, CardContent } from "../components/ui/card";
+// import { Card, CardContent } from "../components/ui/card";
 import { Poppins } from "next/font/google";
+import { Card, CardContent } from "@/components/ui/card";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -10,9 +11,9 @@ const poppins = Poppins({
 const PrivacyPolicy = () => {
   return (
     <div
-      className={`min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ${poppins.className} my-20`}
+      className={`min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ${poppins.className} my-0`}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl text-justify mx-auto">
         <Card className="bg-white shadow">
           <CardContent className="p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">

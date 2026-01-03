@@ -10,7 +10,7 @@ const WereSkillFooter = () => {
                 <p className="font-bold">
                     © 2025 wereskill is a Unit of Inframe Educational Society Registered under the Rajasthan Society Act. All rights reserved
                     Privacy Policy ·<br />
-                    <Link href={"/privacy-policy"} className="hover:underline">
+                    <Link href={"/privacypolicy"} className="hover:underline">
                         Privacy Policy
                     </Link>{" "}
                     ·{" "}

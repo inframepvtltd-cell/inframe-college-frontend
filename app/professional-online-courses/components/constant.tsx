@@ -1,6 +1,6 @@
 // FAQ data organized by course type
 // const faqData: any = {
-type CourseType = 'civil' | 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+type CourseType = 'civil' | "Interior Design" | 'UIUX Design' | 'Motion Design' | 'Digital Marketing' | 'Fashion Design' | 'Animation VFX' | 'Jewellery Design' | 'Fine Arts' | 'Graphic Design';
 
 interface FAQItem {
     question: string;
@@ -19,7 +19,7 @@ interface CourseMeta {
 }
 
 export const themeClasses: Record<CourseType, CourseMeta> = {
-    interior: {
+    "Interior Design": {
         title: "Interior Design Course",
         text: "text-yellow-500",
         fontColour: 'black',
@@ -29,7 +29,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-yellow-500",
         gradient: "from-yellow-400 to-yellow-600",
     },
-    uiux: {
+    "UIUX Design": {
         title: "UI/UX Design Course",
         text: "text-blue-500",
         bg: "bg-blue-500",
@@ -38,7 +38,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-blue-500",
         gradient: "from-blue-500 to-cyan-500",
     },
-    motion: {
+    "Motion Design": {
         title: "Motion Graphic Design Course",
         text: "text-orange-500",
         bg: "bg-orange-500",
@@ -46,7 +46,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-orange-500",
         gradient: "from-orange-500 to-red-500",
     },
-    digital: {
+    "Digital Marketing": {
         title: "Digital Marketing Course",
         text: "text-green-500",
         bg: "bg-green-500",
@@ -54,7 +54,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-green-500",
         gradient: "from-green-500 to-emerald-500",
     },
-    fashion: {
+    "Fashion Design": {
         title: "Fashion Design Course",
         text: "text-fuchsia-500",
         bg: "bg-fuchsia-500",
@@ -62,7 +62,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-fuchsia-500",
         gradient: "from-fuchsia-500 to-purple-500",
     },
-    animation: {
+    "Animation VFX": {
         title: "Animation & VFX Course",
         text: "text-red-500",
         bg: "bg-red-500",
@@ -70,7 +70,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-red-500",
         gradient: "from-red-500 to-orange-500",
     },
-    jewellery: {
+    "Jewellery Design": {
         title: "Jewellery Design Course",
         text: "text-yellow-500",
         bg: "bg-yellow-500",
@@ -78,7 +78,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-yellow-500",
         gradient: "from-yellow-500 to-amber-500",
     },
-    finearts: {
+    "Fine Arts": {
         title: "Fine Arts Course",
         text: "text-indigo-500",
         bg: "bg-indigo-500",
@@ -86,7 +86,7 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
         hoverBorder: "hover:border-indigo-500",
         gradient: "from-indigo-500 to-violet-500",
     },
-    graphic: {
+    "Graphic Design": {
         title: "Graphic Design Course",
         text: "text-[#731e88]",
         bg: "bg-[#731e88]",
@@ -104,8 +104,9 @@ export const themeClasses: Record<CourseType, CourseMeta> = {
     },
 };
 
-export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
-    interior: [
+export const FAQ_DATA: any = {
+    // export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
+    "Interior Design": [
         {
             question: "How do I enroll in the interior design course?",
             answer:
@@ -227,7 +228,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. You receive a confirmed internship, and we continuously provide placement opportunities until you secure a job in an interior design firm or studio."
         }
     ],
-    uiux: [
+    "UIUX Design": [
         {
             question: "What software will I actually learn in this bundle?",
             answer:
@@ -333,9 +334,8 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
             answer:
                 "Yes. You receive a guaranteed internship, 99% placement assistance, portfolio support, interview preparation, and continuous job referrals until you’re placed."
         }
-    ]
-    ,
-    motion: [
+    ],
+    "Motion Design": [
         {
             question: "What software/tools will I learn?",
             answer: "You'll learn Adobe Illustrator, Adobe InDesign, CorelDRAW, Adobe Photoshop, Adobe Premiere Pro, Adobe After Effects, Maya, and Blender."
@@ -361,7 +361,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
             answer: "You'll learn practical design, editing, animation, and project-building skills that match real industry requirements."
         }
     ],
-    digital: [
+    "Digital Marketing": [
         {
             question: "What platforms will I learn in this bundle?",
             answer:
@@ -468,7 +468,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. After completing the modules, you receive a real internship, and we keep arranging company interviews until you’re placed."
         }
     ],
-    fashion: [
+    "Fashion Design": [
         {
             question: "What software will I learn?",
             answer:
@@ -575,7 +575,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. You receive an industry internship, and we continue providing placement opportunities with boutiques and fashion brands until you secure a job."
         }
     ],
-    animation: [
+    "Animation VFX": [
         {
             question: "What software will I learn?",
             answer:
@@ -682,7 +682,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. You receive a production-studio internship, and we continuously push your profile to animation and VFX companies until you’re hired."
         }
     ],
-    jewellery: [
+    "Jewellery Design": [
         {
             question: "What software will I learn in this Jewellery Design Bundle?",
             answer:
@@ -769,7 +769,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. Once your jewellery design portfolio is complete, you receive an internship, and we continuously arrange interviews with jewellery studios and manufacturers until you’re placed."
         }
     ],
-    finearts: [
+    "Fine Arts": [
         {
             question: "Who is this course suitable for?",
             answer:
@@ -876,7 +876,7 @@ export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
                 "Yes. You receive an internship along with continuous placement support until you secure a job in a studio, gallery, or creative company."
         }
     ],
-    graphic: [
+    "Graphic Design": [
         {
             question: "Do I need any design background before joining this course?",
             answer:

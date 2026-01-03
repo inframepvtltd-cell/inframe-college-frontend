@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { AboutTheCourse } from './AboutTheCourse';
 const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, noOfHours, noOfLessons }: { noOfHours: string, noOfLessons: string, courseMetaContent: string, courseName: string, title: string, price: string, offerPrice: string }) => {
     const router = useRouter();
-    console.log(title);
+    console.log(offerPrice + "00");
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -18,7 +18,7 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, n
     const handleBuyNow = async () => {
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Razorpay test key
-            amount: 2 + "00",//149900,
+            amount: offerPrice + "00",//149900,
             currency: "INR",
             name: "Inframe College",
             description: "Interior Design Course Enrollment",
@@ -40,7 +40,7 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, n
                 contact: "",
             },
             notes: {
-                course: "Interior Design",
+                course: title,
             },
             theme: {
                 color: "#FACC15", // yellow theme

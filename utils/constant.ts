@@ -397,9 +397,6 @@ export const categories = [
           { text: "Adobe XD", href: "#" },
           { text: "Figma", href: "#" },
           { text: "Sketch", href: "#" },
-
-
-
         ],
         category: "Design",
         image:
