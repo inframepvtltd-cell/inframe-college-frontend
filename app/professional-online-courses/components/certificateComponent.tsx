@@ -9,7 +9,8 @@ interface CertificateCardProps {
     themeColor?: string; // Optional theme color prop
     courseType: CourseType;
 }
-type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+// type CourseType = 'Interior ' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic';
+type CourseType = "Interior Design" | 'UIUX Design' | 'Motion Design' | 'Digital Marketing' | 'Fashion Design' | 'Animation VFX' | 'Jewellery Design' | 'Fine Arts' | 'Graphic Design';
 
 
 export default function CertificateCard({

@@ -330,7 +330,7 @@ function InteriorDesign() {
                             </section>
 
                             <CertificateCard
-                                courseType='interior'
+                                courseType='Interior Design'
                                 title="Become A Certified Interior Design Expert"
                                 subtitle="Upon Successful Completion of the Course, You Will Receive Certification From Inframe a Renowned Institution That Adds Substantial Credibility to Your Certificate and Strengthens Your Resume"
                                 imageUrl="/Certificate/inframe_certificate.png"
@@ -540,7 +540,7 @@ function InteriorDesign() {
                             <div className="w-full flex justify-center">
                                 <div className="w-full max-w-4xl animate-slide-up-smooth">
                                     {/* <FAQSection /> */}
-                                    <FAQComponent courseType="interior" />
+                                    <FAQComponent courseType="Interior Design" />
                                 </div>
                             </div>
                         </div>
@@ -548,7 +548,7 @@ function InteriorDesign() {
                 </div>
 
                 {/* Footer */}
-                <div className="animate-fade-in-up">
+                <div className="animate-fade-in-up pb-20">
                     <Footer />
                 </div>
             </div>
