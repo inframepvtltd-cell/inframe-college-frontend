@@ -1,7 +1,15 @@
 import { Facebook, Youtube, Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
+import { getFreeCourses } from "../app/(main)/free-course/api/api";
+type FreeCourse = {
+  id: number;
+  name: string;
+  slug: string;
+};
 
-const Footer = () => {
+const Footer = async () => {
+  const freeCourses = await getFreeCourses();
+
   return (
     <footer className="bg-gradient-to-b from-black to-gray-900 text-white font-sans py-16">
       <div className="container mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -29,7 +37,7 @@ const Footer = () => {
             <li>
               <a
                 href="https://admission.inframeschool.com/"
-                  // href="https://admission-portal-one.vercel.app/"
+                // href="https://admission-portal-one.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-500 transition duration-300"
@@ -144,7 +152,7 @@ const Footer = () => {
                 >
                   3-Year Diploma in Interior Design
                 </Link></li>
-           
+
             </ul>
             <ul className="space-y-3">
               <li className="font-bold">Fashion Design</li>
@@ -315,18 +323,12 @@ const Footer = () => {
             >
               <Linkedin size={30} />
             </Link>
-            {/* <Link
-              href="#"
-              className="text-sky-500 hover:text-sky-600 transition duration-300"
-            >
-              <Twitter size={30} />
-            </Link> */}
           </div>
         </div>
       </div>
 
       {/* Free Courses Section */}
-      <div className="mt-16 border-t border-gray-700 pt-8">
+      {/* <div className="mt-16 border-t border-gray-700 pt-8">
         <div className="container mx-auto px-6 lg:px-16 text-center text-sm">
           <p>
             <span className="font-semibold">Free Courses:</span> Copywriting ·
@@ -340,7 +342,27 @@ const Footer = () => {
             Marketing
           </p>
         </div>
+      </div> */}
+
+      <div className="mt-16 border-t border-gray-700 pt-8">
+        <div className="container mx-auto px-6 lg:px-16 text-center text-sm">
+          <p>
+            <span className="font-semibold">Free Courses:</span>{" "}
+            {freeCourses.map((course: any, index: any) => (
+              <span key={course.id}>
+                <Link
+                  href={`/free-course/${course.course_slug}`}
+                  className="hover:text-blue-400 hover:underline transition"
+                >
+                  {course.course_name}
+                </Link>
+                {index !== freeCourses.length - 1 && " · "}
+              </span>
+            ))}
+          </p>
+        </div>
       </div>
+
 
       {/* Copyright Section */}
       <div className="mt-8 border-t-2 border-gray-800 pt-6">

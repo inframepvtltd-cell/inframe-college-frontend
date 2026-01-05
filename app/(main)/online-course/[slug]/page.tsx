@@ -57,7 +57,7 @@ export default async function CourseContent({ params }: any) {
     }
 
     const category = getCategoryFromSlug(course.data.course_slug);
-
+    
     return (
         <div className="bg-white text-black mt-20">
             <CourseHero noOfHours="12.5" noOfLessons="21" courseMetaContent={course.data.overview}

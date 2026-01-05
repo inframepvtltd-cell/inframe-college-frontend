@@ -115,7 +115,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
         if (!validateForm()) return;
 
-        // Show order confirmation page instead of immediately proceeding
         setShowForm(false);
         setShowOrderConfirmation(true);
     };
@@ -187,9 +186,9 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
             if ((window as any).fbq) {
                 (window as any).fbq("track", "InitiateCheckout", {
-                  currency: "INR",
-                  value: Number(price),
-                  content_name: courseName,
+                    currency: "INR",
+                    value: Number(price),
+                    content_name: courseName,
                 });
             }
             rzp.open();

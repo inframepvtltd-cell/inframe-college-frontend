@@ -513,7 +513,7 @@ export default function LandingPage() {
                             <FeaturesSection courseType='graphic' />
 
                             <div className="w-full flex justify-center  bg-gradient-to-b from-purple-100 to-white-100">
-                                <FAQComponent courseType="graphic" />
+                                <FAQComponent courseType="Graphic Design" />
                             </div>
                         </div>
                     </div>
