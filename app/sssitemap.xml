@@ -1,0 +1,52 @@
+<!-- <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://inframeschool.com</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://inframeschool.com/about</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inframeschool.com/blog</loc>
+    <lastmod>2023-04-06T15:02:24.021Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset> -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- MAIN PAGES -->
+  <url><loc>https://www.inframeschool.com/</loc></url>
+  <url><loc>https://www.inframeschool.com/about-us</loc></url>
+  <url><loc>https://www.inframeschool.com/lifeatinframe</loc></url>
+  <url><loc>https://www.inframeschool.com/blog</loc></url>
+  <url><loc>https://www.inframeschool.com/advisors</loc></url>
+  <url><loc>https://www.inframeschool.com/news-events</loc></url>
+  <url><loc>https://www.inframeschool.com/mentors</loc></url>
+  <url><loc>https://www.inframeschool.com/careers</loc></url>
+  <url><loc>https://www.inframeschool.com/download</loc></url>
+  <url><loc>https://www.inframeschool.com/quick-payment</loc></url>
+
+  <!-- CATEGORY PAGE -->
+  <url><loc>https://www.inframeschool.com/digital-marketing</loc></url>
+
+  <!-- DEGREE COURSES -->
+  <url><loc>https://www.inframeschool.com/interior-design/bdes-in-interior-design</loc></url>
+  <url><loc>https://www.inframeschool.com/fashion-design/bdes-in-fashion-design</loc></url>
+  <url><loc>https://www.inframeschool.com/graphic-design/bdes-in-graphic-design</loc></url>
+  <url><loc>https://www.inframeschool.com/uiux-design/bdes-in-ui-ux-design</loc></url>
+
+  <!-- LEGAL -->
+  <url><loc>https://www.inframeschool.com/privacy-policy</loc></url>
+  <url><loc>https://www.inframeschool.com/cancellation-and-refund</loc></url>
+  <url><loc>https://www.inframeschool.com/terms-and-conditions</loc></url>
+  <url><loc>https://www.inframeschool.com/shipping-policy</loc></url>
+
+</urlset>

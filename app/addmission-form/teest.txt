@@ -1,0 +1,4435 @@
+I have form process.... Have multiple problems like 
+jab koi user form fill karta hai aur next step par aaa hai wapas side tab par jakar wo entry hata deta hai jo ki mendatory hai fir wapas next table par click karta hai to click ho jata hai 
+Next tab bhi dhang se work nahi kar raha hai (mendatory fields ko jab blank chor det hai ye next tab par chala jata hai) erms and condition me bhi agree checked na hone par next tab par chala jata hai
+to Side tabs and Next Tabs ko secure banana hai ki current tabs ke mendatory field ko bhare fir wo dusre fields bhar sakta hai
+mujhe document me 2 doccument default me chahiye and wo row delete nahi kar sake user jese 'signature' and 'aadhar_card' aur chahe to add more kar sakega add more wale document row ko dlete kar sakega lekin jo default hai wo use bharne hi padenge.
+mujhe education me bhi 3 row default chahiye jo delete nahi hogi and add more kar sakega taki delete na ho jisme '10th', '12th' and graduation hai (yaha 10th, 12th mendatory hai and graduation optional hai lekin delete nahi hogi row ok jab bhi open kare then yee teen row to chahiye bhale wo add more kare baad me)
+terms ad condition me bina agree kiyee aagee baadh next tab clicck ho raha hai
+side tabs par bhi hona chahiye jab tak ccurrent form ke mendatory fields na bhare tab tak clicck na ho
+and form me round off total backend me bhi jaye.
+baki profile students me ja rahi hai 
+education document, sudent_educations me ja rahi hai
+2 mendatory document lene hai signature and aadhar_card student_document ke liye
+
+ye hai meri tables
+
+CREATE TABLE IF NOT EXISTS public.students
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    first_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(100) COLLATE pg_catalog."default",
+    email character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    father_name character varying(100) COLLATE pg_catalog."default",
+    mother_name character varying(100) COLLATE pg_catalog."default",
+    gender character varying(20) COLLATE pg_catalog."default",
+    category character varying(50) COLLATE pg_catalog."default",
+    religion character varying(50) COLLATE pg_catalog."default",
+    date_of_birth date,
+    permanent_address text COLLATE pg_catalog."default",
+    temporary_address text COLLATE pg_catalog."default",
+    course_type character varying(50) COLLATE pg_catalog."default",
+    program_type character varying(50) COLLATE pg_catalog."default",
+    campus character varying(100) COLLATE pg_catalog."default",
+    razorpay_order_id character varying(100) COLLATE pg_catalog."default",
+    razorpay_payment_id character varying(100) COLLATE pg_catalog."default",
+    razorpay_signature character varying(255) COLLATE pg_catalog."default",
+    payment_amount numeric(10,2),
+    payment_status boolean DEFAULT false,
+    payment_date timestamp without time zone,
+    created_at timestamp without time zone DEFAULT now(),
+    is_active boolean DEFAULT true,
+    profile_photo_url text COLLATE pg_catalog."default",
+    aadhar_number character varying(12) COLLATE pg_catalog."default",
+    CONSTRAINT students_pkey PRIMARY KEY (id),
+    CONSTRAINT students_email_key UNIQUE (email)
+)
+
+CREATE TABLE IF NOT EXISTS public.student_educations
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    student_id uuid NOT NULL,
+    class_level character varying(50) COLLATE pg_catalog."default",
+    institution_name character varying(150) COLLATE pg_catalog."default",
+    stream character varying(100) COLLATE pg_catalog."default",
+    year_of_passing character varying(10) COLLATE pg_catalog."default",
+    grade character varying(20) COLLATE pg_catalog."default",
+    duration character varying(20) COLLATE pg_catalog."default",
+    document text COLLATE pg_catalog."default",
+    created_at timestamp without time zone DEFAULT now(),
+    CONSTRAINT educations_pkey PRIMARY KEY (id),
+    CONSTRAINT educations_student_id_fkey FOREIGN KEY (student_id)
+        REFERENCES public.students (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
+CREATE TABLE IF NOT EXISTS public.student_documents
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    student_id uuid NOT NULL,
+    file_type character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    file text COLLATE pg_catalog."default" NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    CONSTRAINT student_documents_pkey PRIMARY KEY (id),
+    CONSTRAINT student_documents_student_id_fkey FOREIGN KEY (student_id)
+        REFERENCES public.students (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
+and frontend
+
+/addmission-form
+=> /components
+
+// components/Sidebar.tsx
+import Link from "next/link";
+
+const steps = [
+  { label: "Student Details", path: "/application/student" },
+  { label: "Education Details", path: "/application/education" },
+  { label: "Program Details", path: "/application/program" },
+  { label: "Payment", path: "/application/payment" },
+];
+
+const Sidebar = () => (
+  <div className="w-60 p-4 border-r">
+    <ul>
+      {steps.map((step, i) => (
+        <li key={i} className="my-2">
+          <Link href={step.path}>
+            <a className="text-blue-600 hover:underline">{step.label}</a>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+export default Sidebar;
+
+
+"use client";
+
+import { PartyPopper, CheckCircle, Download, Mail, Phone } from "lucide-react";
+
+interface ThankYouStepProps {
+  studentName: string;
+  email: string;
+  applicationId: string;
+}
+
+export default function ThankYouStep({
+  studentName,
+  email,
+  applicationId,
+}: ThankYouStepProps) {
+  const handleDownloadReceipt = () => {
+    // Implement receipt download logic
+    alert("Receipt download will be implemented!");
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto p-6">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-8 text-white text-center">
+          <div className="flex justify-center mb-4">
+            <div className="bg-white/20 p-4 rounded-full">
+              <PartyPopper className="w-12 h-12" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold mb-2">Application Submitted Successfully!</h1>
+          <p className="text-green-100">Thank you for choosing our institution</p>
+        </div>
+
+        {/* Content */}
+        <div className="p-8">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <CheckCircle className="w-6 h-6 text-green-500" />
+            <span className="text-lg font-semibold text-gray-900">
+              Your application is now complete
+            </span>
+          </div>
+
+          {/* Summary Card */}
+          <div className="bg-gray-50 rounded-xl p-6 mb-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-medium text-gray-700 mb-2">Application Details</h3>
+                <div className="space-y-2">
+                  <p className="text-sm">
+                    <span className="font-medium">Application ID:</span>{" "}
+                    <span className="font-mono text-gray-900">{applicationId}</span>
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-medium">Student Name:</span>{" "}
+                    <span className="text-gray-900">{studentName}</span>
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-medium">Email:</span>{" "}
+                    <span className="text-gray-900">{email}</span>
+                  </p>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="font-medium text-gray-700 mb-2">Next Steps</h3>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    You will receive a confirmation email within 24 hours
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    Document verification process will begin shortly
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    Admission letter will be sent within 3-5 working days
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={handleDownloadReceipt}
+              className="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              Download Receipt
+            </button>
+            
+            <button
+              onClick={() => window.print()}
+              className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition-all duration-200"
+            >
+              Print Confirmation
+            </button>
+          </div>
+
+          {/* Contact Information */}
+          <div className="mt-10 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+              Need Assistance?
+            </h3>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2 text-gray-600">
+                <Mail className="w-4 h-4" />
+                <span>admissions@yourcollege.edu</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <Phone className="w-4 h-4" />
+                <span>+91 98765 43210</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/components/form
+=>
+
+"use client"
+
+import { useState, useEffect } from "react"
+import { X, AlertCircle, FileText, Upload, Plus, Trash2, Shield, FileCheck, FileType, Signature } from "lucide-react"
+
+interface DocumentData {
+  fileType: string
+  file: File | null
+  fileName?: string
+  fileSize?: number
+}
+
+interface DocumentErrors {
+  [key: string]: string
+}
+
+interface StudentDocumentsFormProps {
+  data: DocumentData[];
+  onChange: (data: DocumentData[]) => void;
+}
+
+// Updated document types with mandatory Aadhar and Signature
+const DOCUMENT_TYPES = [
+  { value: 'aadhar', label: 'Aadhar Card', required: true, mandatory: true },
+  { value: 'signature', label: 'Signature', required: true, mandatory: true },
+  { value: 'pan', label: 'PAN Card', required: false, mandatory: false },
+  { value: 'passport', label: 'Passport', required: false, mandatory: false },
+  { value: 'voter_id', label: 'Voter ID', required: false, mandatory: false },
+  { value: 'driving_license', label: 'Driving License', required: false, mandatory: false },
+  { value: 'marksheet_10th', label: '10th Marksheet', required: false, mandatory: false },
+  { value: 'marksheet_12th', label: '12th Marksheet', required: false, mandatory: false },
+  { value: 'graduation_marksheet', label: 'Graduation Marksheet', required: false, mandatory: false },
+  { value: 'transfer_certificate', label: 'Transfer Certificate', required: false, mandatory: false },
+  { value: 'migration_certificate', label: 'Migration Certificate', required: false, mandatory: false },
+  { value: 'character_certificate', label: 'Character Certificate', required: false, mandatory: false },
+  { value: 'caste_certificate', label: 'Caste Certificate', required: false, mandatory: false },
+  { value: 'income_certificate', label: 'Income Certificate', required: false, mandatory: false },
+  { value: 'medical_certificate', label: 'Medical Certificate', required: false, mandatory: false },
+  { value: 'passport_photo', label: 'Passport Photo', required: false, mandatory: false },
+  { value: 'other', label: 'Other Document', required: false, mandatory: false }
+]
+
+export default function StudentDocumentsForm({ data, onChange }: StudentDocumentsFormProps) {
+  const [documents, setDocuments] = useState<DocumentData[]>(data)
+  const [errorsArray, setErrorsArray] = useState<DocumentErrors[]>([])
+  const [touchedArray, setTouchedArray] = useState<Set<string>[]>([])
+  const [showErrorsArray, setShowErrorsArray] = useState<Set<string>[]>([])
+
+  // Initialize with mandatory documents if no data provided
+  useEffect(() => {
+    if (data.length === 0) {
+      const defaultData: DocumentData[] = [
+        {
+          fileType: 'aadhar',
+          file: null
+        },
+        {
+          fileType: 'signature',
+          file: null
+        }
+      ]
+      setDocuments(defaultData)
+      onChange(defaultData)
+      // Initialize arrays
+      setErrorsArray([{}, {}])
+      setTouchedArray([new Set<string>(), new Set<string>()])
+      setShowErrorsArray([new Set<string>(), new Set<string>()])
+    } else {
+      setDocuments(data)
+      // Initialize arrays with existing data
+      const initialErrors = Array(data.length).fill({})
+      const initialTouched = Array(data.length).fill(new Set<string>())
+      const initialShowErrors = Array(data.length).fill(new Set<string>())
+      
+      setErrorsArray(initialErrors)
+      setTouchedArray(initialTouched)
+      setShowErrorsArray(initialShowErrors)
+    }
+  }, [data, onChange])
+
+  const validateDocument = (index: number, field: keyof DocumentData, value: any): string => {
+    switch (field) {
+      case 'fileType':
+        if (!value?.trim()) return 'Document type is required'
+        return ''
+
+      case 'file':
+        if (!value) return 'File upload is required'
+        if (value && !(value instanceof File)) return 'Please upload a valid file'
+        
+        // Get file type restrictions based on document type
+        const docType = documents[index]?.fileType
+        const file = value as File
+        
+        // File size validation (5MB max)
+        if (file.size > 5 * 1024 * 1024) return 'File must be less than 5MB'
+        
+        // File type validation based on document type
+        const allowedTypes: Record<string, string[]> = {
+          'passport_photo': ['image/jpeg', 'image/png', 'image/jpg'],
+          'signature': ['image/jpeg', 'image/png', 'image/jpg'],
+          'aadhar': ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'],
+          'pan': ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'],
+          'passport': ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'],
+          'default': ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf']
+        }
+        
+        const validTypes = allowedTypes[docType] || allowedTypes.default
+        if (!validTypes.includes(file.type)) {
+          return 'File must be PDF, JPG, or PNG'
+        }
+
+        // Special validation for signature
+        if (docType === 'signature') {
+          // Signature should be small (max 1MB)
+          if (file.size > 1 * 1024 * 1024) return 'Signature file must be less than 1MB'
+          // Signature should be image only
+          if (!file.type.startsWith('image/')) return 'Signature must be an image file'
+        }
+        
+        return ''
+
+      default:
+        return ''
+    }
+  }
+
+  const handleFileTypeChange = (index: number, value: string) => {
+    // Don't allow changing mandatory document types
+    const currentDocType = documents[index].fileType
+    const currentDocInfo = DOCUMENT_TYPES.find(d => d.value === currentDocType)
+    const newDocInfo = DOCUMENT_TYPES.find(d => d.value === value)
+    
+    if (currentDocInfo?.mandatory) {
+      const error = 'This is a mandatory document and cannot be changed'
+      const newErrors = [...errorsArray]
+      newErrors[index] = { ...newErrors[index], fileType: error }
+      setErrorsArray(newErrors)
+      
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add('fileType')
+      setShowErrorsArray(newShowErrors)
+      return
+    }
+
+    const updatedDocuments = [...documents]
+    updatedDocuments[index] = { 
+      ...updatedDocuments[index], 
+      fileType: value,
+      file: null, // Clear file when type changes
+      fileName: '',
+      fileSize: 0
+    }
+    setDocuments(updatedDocuments)
+    onChange(updatedDocuments)
+    
+    // Update touched
+    const newTouched = [...touchedArray]
+    newTouched[index] = new Set(newTouched[index]).add('fileType')
+    setTouchedArray(newTouched)
+    
+    // Validate
+    const error = validateDocument(index, 'fileType', value)
+    const newErrors = [...errorsArray]
+    
+    if (error) {
+      newErrors[index] = { ...newErrors[index], fileType: error }
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add('fileType')
+      setShowErrorsArray(newShowErrors)
+    } else {
+      const { fileType: removed, ...rest } = newErrors[index]
+      newErrors[index] = rest
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== 'fileType'))
+      setShowErrorsArray(newShowErrors)
+    }
+    
+    setErrorsArray(newErrors)
+  }
+
+  const handleFileChange = (index: number, file: File | null) => {
+    const updatedDocuments = [...documents]
+    updatedDocuments[index] = { 
+      ...updatedDocuments[index], 
+      file,
+      fileName: file?.name,
+      fileSize: file?.size
+    }
+    setDocuments(updatedDocuments)
+    onChange(updatedDocuments)
+    
+    // Update touched
+    const newTouched = [...touchedArray]
+    newTouched[index] = new Set(newTouched[index]).add('file')
+    setTouchedArray(newTouched)
+    
+    // Validate
+    const error = validateDocument(index, 'file', file)
+    const newErrors = [...errorsArray]
+    
+    if (error) {
+      newErrors[index] = { ...newErrors[index], file: error }
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add('file')
+      setShowErrorsArray(newShowErrors)
+    } else {
+      const { file: removed, ...rest } = newErrors[index]
+      newErrors[index] = rest
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== 'file'))
+      setShowErrorsArray(newShowErrors)
+    }
+    
+    setErrorsArray(newErrors)
+  }
+
+  const addDocument = () => {
+    const newDocument: DocumentData = {
+      fileType: '',
+      file: null
+    }
+    
+    const updatedDocuments = [...documents, newDocument]
+    setDocuments(updatedDocuments)
+    onChange(updatedDocuments)
+    
+    // Initialize arrays for new document
+    setErrorsArray([...errorsArray, {}])
+    setTouchedArray([...touchedArray, new Set<string>()])
+    setShowErrorsArray([...showErrorsArray, new Set<string>()])
+  }
+
+  const removeDocument = (index: number) => {
+    // Don't remove if it's a mandatory document
+    const docType = documents[index].fileType
+    const docInfo = DOCUMENT_TYPES.find(d => d.value === docType)
+    
+    if (docInfo?.mandatory) {
+      // Show error that mandatory documents cannot be removed
+      const newErrors = [...errorsArray]
+      newErrors[index] = { ...newErrors[index], fileType: `${docInfo.label} is mandatory and cannot be removed` }
+      setErrorsArray(newErrors)
+      
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add('fileType')
+      setShowErrorsArray(newShowErrors)
+      return
+    }
+    
+    const updatedDocuments = documents.filter((_, i) => i !== index)
+    setDocuments(updatedDocuments)
+    onChange(updatedDocuments)
+    
+    // Remove corresponding error/touched data
+    setErrorsArray(errorsArray.filter((_, i) => i !== index))
+    setTouchedArray(touchedArray.filter((_, i) => i !== index))
+    setShowErrorsArray(showErrorsArray.filter((_, i) => i !== index))
+  }
+
+  const closeError = (index: number, field: string) => {
+    const newShowErrors = [...showErrorsArray]
+    newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== field))
+    setShowErrorsArray(newShowErrors)
+  }
+
+  const getDocumentIcon = (fileType: string) => {
+    switch (fileType) {
+      case 'aadhar':
+        return <Shield className="w-5 h-5 text-blue-600" />
+      case 'signature':
+        return <Signature className="w-5 h-5 text-red-600" />
+      case 'pan':
+        return <FileText className="w-5 h-5 text-purple-600" />
+      case 'passport':
+        return <FileCheck className="w-5 h-5 text-green-600" />
+      default:
+        return <FileType className="w-5 h-5 text-gray-600" />
+    }
+  }
+
+  const getSelectClass = (index: number, field: string) => {
+    const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none"
+    const errorClass = errorsArray[index]?.[field] ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-gray-400"
+    const successClass = touchedArray[index]?.has(field) && !errorsArray[index]?.[field] && documents[index][field as keyof DocumentData] ? "border-green-300" : ""
+    const disabledClass = documents[index].fileType && DOCUMENT_TYPES.find(d => d.value === documents[index].fileType)?.mandatory ? "bg-gray-50 cursor-not-allowed" : ""
+    return `${baseClass} ${errorClass} ${successClass} ${disabledClass}`
+  }
+
+  const getFileUploadClass = (index: number) => {
+    const baseClass = "border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200 cursor-pointer"
+    return errorsArray[index]?.file ? `${baseClass} border-red-300 bg-red-50` : `${baseClass} border-gray-300 hover:border-blue-400`
+  }
+
+  const ErrorMessage = ({ index, field }: { index: number, field: string }) => {
+    const error = errorsArray[index]?.[field]
+    if (!showErrorsArray[index]?.has(field) || !error) return null
+
+    return (
+      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2 animate-in slide-in-from-top-1 duration-200">
+        <AlertCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-sm text-red-600">{error}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => closeError(index, field)}
+          className="p-1 hover:bg-red-100 rounded transition-colors flex-shrink-0"
+        >
+          <X className="w-3 h-3 text-red-600" />
+        </button>
+      </div>
+    )
+  }
+
+  const getFileNamePreview = (document: DocumentData) => {
+    if (document.fileName) {
+      const sizeInKB = (document.fileSize || 0) / 1024
+      return (
+        <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-800 truncate">
+                {document.fileName}
+              </span>
+            </div>
+            <span className="text-xs text-green-600">
+              {sizeInKB.toFixed(2)} KB
+            </span>
+          </div>
+        </div>
+      )
+    }
+    return null
+  }
+
+  const getRemainingTypes = () => {
+    const selectedTypes = documents.map(doc => doc.fileType)
+    return DOCUMENT_TYPES.filter(type => 
+      !selectedTypes.includes(type.value)
+    )
+  }
+
+  // Check mandatory documents status
+  const checkMandatoryDocuments = () => {
+    const mandatoryDocs = DOCUMENT_TYPES.filter(d => d.mandatory)
+    const status = mandatoryDocs.map(doc => {
+      const hasDoc = documents.some(d => d.fileType === doc.value && d.file)
+      return {
+        ...doc,
+        uploaded: hasDoc
+      }
+    })
+    return status
+  }
+
+  const mandatoryDocsStatus = checkMandatoryDocuments()
+  const allMandatoryUploaded = mandatoryDocsStatus.every(doc => doc.uploaded)
+
+  return (
+    <div className="py-8">
+      <div className="space-y-8">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <FileText className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900">Student Documents</h2>
+              <p className="text-sm text-gray-500">
+                Upload required documents. Aadhar Card and Signature are mandatory.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={addDocument}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled={getRemainingTypes().length === 0}
+            title={getRemainingTypes().length === 0 ? "All document types added" : ""}
+          >
+            <Plus className="w-4 h-4" />
+            Add Document
+          </button>
+        </div>
+
+        {/* Mandatory Documents Alert */}
+        {!allMandatoryUploaded && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div className="flex items-center gap-3">
+              <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0" />
+              <div>
+                <h4 className="text-sm font-medium text-yellow-800">Mandatory Documents Required</h4>
+                <p className="text-sm text-yellow-700 mt-1">
+                  Please upload all mandatory documents to proceed
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Documents List */}
+        {documents.map((doc, index) => {
+          const docInfo = DOCUMENT_TYPES.find(d => d.value === doc.fileType)
+          const isMandatory = docInfo?.mandatory || false
+          
+          return (
+            <div key={index} className="bg-white border rounded-xl p-6 space-y-6 relative">
+              {/* Remove Button - Hidden for mandatory documents */}
+              {!isMandatory && (
+                <button
+                  type="button"
+                  onClick={() => removeDocument(index)}
+                  className="absolute top-4 right-4 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                  title="Remove document"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              )}
+
+              {/* Document Number */}
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                  isMandatory ? 'bg-red-100' : 'bg-blue-100'
+                }`}>
+                  {getDocumentIcon(doc.fileType)}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {docInfo?.label || 'Document'} {index + 1}
+                    {isMandatory && (
+                      <span className="ml-2 px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">
+                        Mandatory
+                      </span>
+                    )}
+                  </h3>
+                  {doc.file && (
+                    <p className="text-sm text-green-600 mt-1 flex items-center gap-1">
+                      <FileCheck className="w-4 h-4" />
+                      Uploaded
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Document Type */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Document Type <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={doc.fileType}
+                    onChange={(e) => handleFileTypeChange(index, e.target.value)}
+                    onBlur={() => {
+                      const newShowErrors = [...showErrorsArray]
+                      newShowErrors[index] = new Set(newShowErrors[index]).add('fileType')
+                      setShowErrorsArray(newShowErrors)
+                    }}
+                    className={getSelectClass(index, 'fileType')}
+                    disabled={isMandatory}
+                  >
+                    <option value="">Select Document Type</option>
+                    {getRemainingTypes().map((type) => (
+                      <option key={type.value} value={type.value}>
+                        {type.label} {type.mandatory ? '(Mandatory)' : type.required ? '(Required)' : ''}
+                      </option>
+                    ))}
+                    {/* Always show current selected type */}
+                    {doc.fileType && (
+                      <option value={doc.fileType}>
+                        {docInfo?.label || doc.fileType} {isMandatory ? '(Mandatory)' : ''}
+                      </option>
+                    )}
+                  </select>
+                  <ErrorMessage index={index} field="fileType" />
+                  {isMandatory && (
+                    <p className="text-xs text-red-600 mt-1">
+                      This is a mandatory document and cannot be changed
+                    </p>
+                  )}
+                </div>
+
+                {/* File Upload */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Upload File <span className="text-red-500">*</span>
+                  </label>
+                  <div className={getFileUploadClass(index)}>
+                    <label className="cursor-pointer block">
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept={doc.fileType === 'signature' ? ".jpg,.jpeg,.png" : ".pdf,.jpg,.jpeg,.png"}
+                        onChange={(e) => handleFileChange(index, e.target.files?.[0] || null)}
+                      />
+                      <div className="space-y-3">
+                        <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                          <Upload className="w-8 h-8 text-gray-400" />
+                        </div>
+                        <div>
+                          <p className="text-blue-600 font-medium">Click to upload</p>
+                          <p className="text-gray-600 text-sm">or drag and drop</p>
+                        </div>
+                        <p className="text-xs text-gray-500">
+                          {doc.fileType === 'signature' 
+                            ? 'JPG, PNG up to 1MB' 
+                            : 'PDF, PNG, JPG up to 5MB'}
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                  <ErrorMessage index={index} field="file" />
+                  {getFileNamePreview(doc)}
+                </div>
+              </div>
+
+              {/* Document Requirements */}
+              {doc.fileType && (
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <h4 className="text-sm font-medium text-blue-800 mb-1">Requirements:</h4>
+                  <ul className="text-xs text-blue-700 space-y-1">
+                    {doc.fileType === 'aadhar' && (
+                      <>
+                        <li>• Front and back side of Aadhar Card</li>
+                        <li>• PDF or clear scanned image</li>
+                        <li>• Name, photo, and Aadhar number should be clearly visible</li>
+                        <li>• File must be less than 5MB</li>
+                      </>
+                    )}
+                    {doc.fileType === 'signature' && (
+                      <>
+                        <li>• Clear image of your signature on white background</li>
+                        <li>• Signature should be in blue or black ink</li>
+                        <li>• No background marks or stamps</li>
+                        <li>• File must be less than 1MB</li>
+                        <li>• Image format only (JPG, PNG)</li>
+                      </>
+                    )}
+                    {doc.fileType === 'pan' && (
+                      <>
+                        <li>• Clear image of PAN Card</li>
+                        <li>• All details should be readable</li>
+                      </>
+                    )}
+                    {doc.fileType === 'passport' && (
+                      <>
+                        <li>• First and last page of passport</li>
+                        <li>• Visa pages if applicable</li>
+                      </>
+                    )}
+                    {doc.fileType.includes('marksheet') && (
+                      <>
+                        <li>• Clear scanned copy of marksheet</li>
+                        <li>• All pages should be included</li>
+                        <li>• University seal should be visible</li>
+                      </>
+                    )}
+                    {!['aadhar', 'signature', 'pan', 'passport'].some(t => doc.fileType.includes(t)) && (
+                      <>
+                        <li>• Clear scanned copy</li>
+                        <li>• All details should be readable</li>
+                        <li>• Government seal/stamp should be visible</li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )
+        })}
+
+        {/* Add More Button at Bottom */}
+        {getRemainingTypes().length > 0 && (
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={addDocument}
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+              Add Another Document
+            </button>
+          </div>
+        )}
+
+        {/* Summary */}
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6">
+          <h4 className="text-lg font-semibold text-gray-900 mb-4">Document Checklist</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-3">Mandatory Documents:</p>
+              <ul className="space-y-2">
+                {mandatoryDocsStatus.map((doc, index) => (
+                  <li key={index} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {doc.uploaded ? (
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                          <FileCheck className="w-3 h-3 text-green-600" />
+                        </div>
+                      ) : (
+                        <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center">
+                          <AlertCircle className="w-3 h-3 text-red-600" />
+                        </div>
+                      )}
+                      <span className={`text-sm ${doc.uploaded ? 'text-green-700' : 'text-red-700'}`}>
+                        {doc.label}
+                      </span>
+                    </div>
+                    <span className={`text-xs px-2 py-1 rounded-full ${doc.uploaded 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-red-100 text-red-800'}`}>
+                      {doc.uploaded ? 'Uploaded' : 'Pending'}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-3">Upload Progress:</p>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>Total Uploaded</span>
+                    <span>{documents.filter(d => d.file).length} of {documents.length}</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${(documents.filter(d => d.file).length / documents.length) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>Mandatory Documents</span>
+                    <span>{mandatoryDocsStatus.filter(d => d.uploaded).length} of {mandatoryDocsStatus.length}</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        allMandatoryUploaded ? 'bg-green-600' : 'bg-yellow-500'
+                      }`}
+                      style={{ width: `${(mandatoryDocsStatus.filter(d => d.uploaded).length / mandatoryDocsStatus.length) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+                {!allMandatoryUploaded && (
+                  <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-sm text-yellow-700">
+                      <span className="font-medium">Note:</span> All mandatory documents must be uploaded to proceed to the next step.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+"use client"
+
+import { useState, useEffect } from "react"
+import { X, AlertCircle, GraduationCap, School, BookOpen, Calendar, Award, Clock, FileText, Plus, Trash2 } from "lucide-react"
+
+interface EducationFormData {
+  classLevel: string
+  institutionName: string
+  stream: string
+  yearOfPassing: string
+  grade: string
+  duration: string
+  document: File | null
+}
+
+interface EducationFormErrors {
+  [key: string]: string
+}
+
+interface EducationDetailsFormProps {
+  data: EducationFormData[] | EducationFormData;
+  onChange: (data: EducationFormData[]) => void;
+}
+
+// Define important education levels
+const IMPORTANT_EDUCATION_LEVELS = ["10", "10th", "12", "12th", "tenth", "twelfth"];
+const GRADUATION_LEVELS = ["bachelor", "bachelors", "btech", "be", "bsc", "ba", "bcom", "graduation", "degree"];
+
+export default function EducationDetailsForm({ data, onChange }: EducationDetailsFormProps) {
+  const initialData = Array.isArray(data) ? data : [data]
+
+  const [formDataArray, setFormDataArray] = useState<EducationFormData[]>(initialData)
+  const [errorsArray, setErrorsArray] = useState<Record<string, string>[]>([])
+  const [touchedArray, setTouchedArray] = useState<Set<string>[]>([])
+  const [showErrorsArray, setShowErrorsArray] = useState<Set<string>[]>([])
+
+  useEffect(() => {
+    const newData = Array.isArray(data) ? data : [data]
+    setFormDataArray(newData)
+
+    const initialErrors = Array(newData.length).fill({})
+    const initialTouched = Array(newData.length).fill(new Set<string>())
+    const initialShowErrors = Array(newData.length).fill(new Set<string>())
+
+    setErrorsArray(initialErrors)
+    setTouchedArray(initialTouched)
+    setShowErrorsArray(initialShowErrors)
+  }, [data])
+
+  // Check if education level is important (10th/12th)
+  const isImportantEducation = (classLevel: string): boolean => {
+    return IMPORTANT_EDUCATION_LEVELS.includes(classLevel.toLowerCase().trim());
+  }
+
+  // Check if education level is graduation
+  const isGraduationEducation = (classLevel: string): boolean => {
+    return GRADUATION_LEVELS.some(level => classLevel.toLowerCase().includes(level));
+  }
+
+  const validateField = (index: number, field: keyof EducationFormData, value: any): string => {
+    const classLevel = formDataArray[index]?.classLevel?.toLowerCase().trim();
+    const isImportant = isImportantEducation(formDataArray[index]?.classLevel || '');
+    const isGraduation = isGraduationEducation(formDataArray[index]?.classLevel || '');
+
+    // For graduation fields, make them optional
+    if (isGraduation) {
+      if (!value?.toString().trim()) {
+        return ''; // No error if empty for graduation
+      }
+    }
+
+    switch (field) {
+      case 'classLevel':
+        if (!value?.trim()) return 'Class / Level is required'
+        if (value.length < 2) return 'Class / Level must be at least 2 characters'
+        return ''
+
+      case 'institutionName':
+        if (!value?.trim()) {
+          // For important education (10th/12th), institution is required
+          if (isImportant) return 'Institution name is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Institution name is required'
+        }
+        if (value.length < 3) return 'Institution name must be at least 3 characters'
+        return ''
+
+      case 'stream':
+        if (!value?.trim()) {
+          // For important education (10th/12th), stream is required
+          if (isImportant) return 'Stream / Subject is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Stream / Subject is required'
+        }
+        if (value.length < 2) return 'Stream / Subject must be at least 2 characters'
+        return ''
+
+      case 'yearOfPassing':
+        if (!value?.trim()) {
+          // For important education (10th/12th), year is required
+          if (isImportant) return 'Year of passing is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Year of passing is required'
+        }
+        if (!/^\d{4}$/.test(value)) return 'Year must be 4 digits'
+
+        const currentYear = new Date().getFullYear()
+        const year = parseInt(value)
+        if (year < 1900) return 'Year must be after 1900'
+        if (year > currentYear + 5) return 'Year cannot be more than 5 years in the future'
+        return ''
+
+      case 'grade':
+        if (!value?.trim()) {
+          // For important education (10th/12th), grade is required
+          if (isImportant) return 'Grade / CGPA is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Grade / CGPA is required'
+        }
+        if (!/^[0-9]+(\.[0-9]+)?(\s*[\/-]\s*[0-9]+(\.[0-9]+)?)?$/.test(value.trim()))
+          return 'Enter valid grade (e.g., 8.5, 85%, 3.5/4.0)'
+        return ''
+
+      case 'duration':
+        if (!value?.trim()) {
+          // For important education (10th/12th), duration is required
+          if (isImportant) return 'Duration is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Duration is required'
+        }
+        const num = parseInt(value.trim())
+        if (isNaN(num) || num <= 0) return 'Enter a valid number greater than 0'
+        return ''
+
+      case 'document':
+        if (!value) {
+          // For important education (10th/12th), document is required
+          if (isImportant) return 'Document upload is required'
+          // For graduation, it's optional
+          if (isGraduation) return ''
+          // For others, it's required
+          return 'Document upload is required'
+        }
+        if (value && !(value instanceof File)) return 'Please upload a valid file'
+        if (value && value.size > 5 * 1024 * 1024) return 'File must be less than 5MB'
+        return ''
+
+      default:
+        return ''
+    }
+  }
+
+  const handleFieldChange = (index: number, field: keyof EducationFormData, value: string | File | null) => {
+    const updatedArray = [...formDataArray]
+
+    // Format specific fields
+    if (field === 'yearOfPassing' && typeof value === 'string') {
+      value = value.replace(/\D/g, '').slice(0, 4)
+    }
+
+    if (field === 'grade' && typeof value === 'string') {
+      value = value.replace(/[^0-9./%\s–-]/g, '')
+    }
+
+    updatedArray[index] = { ...updatedArray[index], [field]: value }
+    setFormDataArray(updatedArray)
+    onChange(updatedArray)
+
+    // Update touched
+    const newTouched = [...touchedArray]
+    newTouched[index] = new Set(newTouched[index]).add(field)
+    setTouchedArray(newTouched)
+
+    // Validate and set error
+    const error = validateField(index, field, value)
+    const newErrors = [...errorsArray]
+
+    if (error) {
+      newErrors[index] = { ...newErrors[index], [field]: error }
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add(field)
+      setShowErrorsArray(newShowErrors)
+    } else {
+      const { [field]: removed, ...rest } = newErrors[index]
+      newErrors[index] = rest
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== field))
+      setShowErrorsArray(newShowErrors)
+    }
+
+    setErrorsArray(newErrors)
+  }
+
+  const handleFileChange = (index: number, file: File | null) => {
+    const updatedArray = [...formDataArray]
+    updatedArray[index] = { ...updatedArray[index], document: file }
+    setFormDataArray(updatedArray)
+    onChange(updatedArray)
+
+    // Validate file
+    const error = validateField(index, 'document', file)
+    const newErrors = [...errorsArray]
+
+    if (error) {
+      newErrors[index] = { ...newErrors[index], document: error }
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set(newShowErrors[index]).add('document')
+      setShowErrorsArray(newShowErrors)
+    } else {
+      const { document: removed, ...rest } = newErrors[index]
+      newErrors[index] = rest
+      const newShowErrors = [...showErrorsArray]
+      newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== 'document'))
+      setShowErrorsArray(newShowErrors)
+    }
+
+    setErrorsArray(newErrors)
+  }
+
+  const addEducation = () => {
+    const newEntry: EducationFormData = {
+      classLevel: '',
+      institutionName: '',
+      stream: '',
+      yearOfPassing: '',
+      grade: '',
+      duration: '',
+      document: null
+    }
+
+    const updatedArray = [...formDataArray, newEntry]
+    setFormDataArray(updatedArray)
+    onChange(updatedArray)
+
+    // Initialize arrays for new entry
+    setErrorsArray([...errorsArray, {}])
+    setTouchedArray([...touchedArray, new Set<string>()])
+    setShowErrorsArray([...showErrorsArray, new Set<string>()])
+  }
+
+  const removeEducation = (index: number) => {
+    if (formDataArray.length <= 1) return
+
+    const updatedArray = formDataArray.filter((_, i) => i !== index)
+    setFormDataArray(updatedArray)
+    onChange(updatedArray)
+
+    // Remove corresponding error/touched data
+    setErrorsArray(errorsArray.filter((_, i) => i !== index))
+    setTouchedArray(touchedArray.filter((_, i) => i !== index))
+    setShowErrorsArray(showErrorsArray.filter((_, i) => i !== index))
+  }
+
+  const closeError = (index: number, field: string) => {
+    const newShowErrors = [...showErrorsArray]
+    newShowErrors[index] = new Set([...newShowErrors[index]].filter(f => f !== field))
+    setShowErrorsArray(newShowErrors)
+  }
+
+  const getInputClass = (index: number, field: string) => {
+    const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+    const errorClass = errorsArray[index]?.[field] ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-gray-400"
+    const successClass = touchedArray[index]?.has(field) && !errorsArray[index]?.[field] && formDataArray[index][field as keyof EducationFormData] ? "border-green-300" : ""
+    
+    // Add special styling for important fields (10th/12th)
+    const isImportant = isImportantEducation(formDataArray[index]?.classLevel || '');
+    const importantClass = isImportant ? "border-blue-100 bg-blue-50" : "";
+    
+    return `${baseClass} ${errorClass} ${successClass} ${importantClass}`
+  }
+
+  const getFileUploadClass = (index: number) => {
+    const baseClass = "border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200"
+    const errorClass = errorsArray[index]?.document ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-blue-400"
+    
+    // Add special styling for important education
+    const isImportant = isImportantEducation(formDataArray[index]?.classLevel || '');
+    const importantClass = isImportant ? "bg-blue-50 border-blue-200" : ""
+    
+    return `${baseClass} ${errorClass} ${importantClass}`
+  }
+
+  const ErrorMessage = ({ index, field }: { index: number, field: string }) => {
+    const error = errorsArray[index]?.[field]
+    if (!showErrorsArray[index]?.has(field) || !error) return null
+
+    return (
+      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2 animate-in slide-in-from-top-1 duration-200">
+        <AlertCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-sm text-red-600">{error}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => closeError(index, field)}
+          className="p-1 hover:bg-red-100 rounded transition-colors flex-shrink-0"
+        >
+          <X className="w-3 h-3 text-red-600" />
+        </button>
+      </div>
+    )
+  }
+
+  // Check if current education is important (10th/12th)
+  const isCurrentEducationImportant = (index: number): boolean => {
+    return isImportantEducation(formDataArray[index]?.classLevel || '');
+  }
+
+  // Check if current education is graduation
+  const isCurrentEducationGraduation = (index: number): boolean => {
+    return isGraduationEducation(formDataArray[index]?.classLevel || '');
+  }
+
+  return (
+    <div className="py-8">
+      <div className="space-y-8">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <GraduationCap className="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900">Educational Details</h2>
+              <p className="text-sm text-gray-600 mt-1">
+                10th & 12th are required • Graduation fields are optional
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={addEducation}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Add More
+          </button>
+        </div>
+
+        {/* Important Notice */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm text-blue-800">
+                <span className="font-semibold">Important:</span> 10th and 12th standard details are mandatory. 
+                Graduation and other education details are optional. You can add multiple education entries.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Education Forms */}
+        {formDataArray.map((edu, index) => {
+          const isImportant = isCurrentEducationImportant(index);
+          const isGraduation = isCurrentEducationGraduation(index);
+          
+          return (
+            <div key={index} className="bg-white border rounded-xl p-6 space-y-6 relative">
+              {/* Remove Button */}
+              {formDataArray.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeEducation(index)}
+                  className="absolute top-4 right-4 p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              )}
+
+              {/* Education Header with Indicator */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 h-8 ${isImportant ? 'bg-blue-100' : isGraduation ? 'bg-green-100' : 'bg-gray-100'} rounded-lg flex items-center justify-center`}>
+                    <span className={`font-semibold ${isImportant ? 'text-blue-600' : isGraduation ? 'text-green-600' : 'text-gray-600'}`}>
+                      {index + 1}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      Education {index + 1}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      {isImportant && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                          <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                          Required (10th/12th)
+                        </span>
+                      )}
+                      {isGraduation && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                          <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+                          Optional (Graduation)
+                        </span>
+                      )}
+                      {!isImportant && !isGraduation && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
+                          <span className="w-1.5 h-1.5 bg-gray-600 rounded-full"></span>
+                          Other Education
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Class / Level */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Class / Level <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <School className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.classLevel}
+                      onChange={e => handleFieldChange(index, 'classLevel', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('classLevel')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'classLevel')}
+                      placeholder="e.g., 10th, 12th, B.Tech, MCA"
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="classLevel" />
+                  {isGraduation && (
+                    <p className="mt-1 text-xs text-green-600">
+                      Graduation level detected - following fields are optional
+                    </p>
+                  )}
+                </div>
+
+                {/* Institution Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Institution Name {!isGraduation && <span className="text-red-500">*</span>}
+                    {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                  </label>
+                  <div className="relative">
+                    <School className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.institutionName}
+                      onChange={e => handleFieldChange(index, 'institutionName', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('institutionName')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'institutionName')}
+                      placeholder="Name of school/college/university"
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="institutionName" />
+                </div>
+
+                {/* Stream / Subject */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Stream / Subject {!isGraduation && <span className="text-red-500">*</span>}
+                    {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                  </label>
+                  <div className="relative">
+                    <BookOpen className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.stream}
+                      onChange={e => handleFieldChange(index, 'stream', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('stream')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'stream')}
+                      placeholder="e.g., Science, Computer Science, Commerce"
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="stream" />
+                </div>
+
+                {/* Year of Passing */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Year of Passing {!isGraduation && <span className="text-red-500">*</span>}
+                    {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                  </label>
+                  <div className="relative">
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.yearOfPassing}
+                      onChange={e => handleFieldChange(index, 'yearOfPassing', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('yearOfPassing')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'yearOfPassing')}
+                      placeholder="e.g., 2025"
+                      maxLength={4}
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="yearOfPassing" />
+                </div>
+
+                {/* Grade / CGPA */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Grade / CGPA {!isGraduation && <span className="text-red-500">*</span>}
+                    {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                  </label>
+                  <div className="relative">
+                    <Award className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.grade}
+                      onChange={e => handleFieldChange(index, 'grade', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('grade')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'grade')}
+                      placeholder="e.g., 8.5, 85%, 3.5/4.0"
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="grade" />
+                </div>
+
+                {/* Duration */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Duration (Years) {!isGraduation && <span className="text-red-500">*</span>}
+                    {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                  </label>
+                  <div className="relative">
+                    <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={edu.duration}
+                      onChange={e => handleFieldChange(index, 'duration', e.target.value)}
+                      onBlur={() => {
+                        const newShowErrors = [...showErrorsArray]
+                        newShowErrors[index] = new Set(newShowErrors[index]).add('duration')
+                        setShowErrorsArray(newShowErrors)
+                      }}
+                      className={getInputClass(index, 'duration')}
+                      placeholder="e.g., 4"
+                      style={{ paddingLeft: '2.75rem' }}
+                    />
+                  </div>
+                  <ErrorMessage index={index} field="duration" />
+                </div>
+              </div>
+
+              {/* Document Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload Document (Marksheet/Transcript) {!isGraduation && <span className="text-red-500">*</span>}
+                  {isGraduation && <span className="text-green-600 text-xs ml-1">(Optional)</span>}
+                </label>
+                <div className={getFileUploadClass(index)}>
+                  <div className="space-y-3">
+                    <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                      <FileText className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div>
+                      <label className="cursor-pointer">
+                        <span className="text-blue-600 font-medium">Click to upload</span>
+                        <span className="text-gray-600"> or drag and drop</span>
+                        <input
+                          type="file"
+                          className="hidden"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={e => handleFileChange(index, e.target.files?.[0] || null)}
+                        />
+                      </label>
+                      <p className="text-xs text-gray-500 mt-2">PDF, PNG, JPG up to 5MB</p>
+                    </div>
+                  </div>
+                </div>
+                <ErrorMessage index={index} field="document" />
+                {edu.document && (
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-sm text-green-700">
+                      ✓ File uploaded: <span className="font-medium">{edu.document.name}</span> ({(edu.document.size / 1024).toFixed(2)} KB)
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        })}
+
+        {/* Add More Button at Bottom */}
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={addEducation}
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-5 h-5" />
+            Add Another Education
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+"use client";
+
+import { useEffect, useState } from "react";
+import { GraduationCap, IndianRupee, Calendar, BookOpen, Clock } from "lucide-react";
+import { createPaymentOrder, fetchAllPaidCourse } from "../../api";
+
+interface Course {
+  id: number;
+  course_name: string;
+  course_slug: string;
+  price: number;
+  duration?: string;
+  mode?: string;
+}
+
+
+interface ProgramSelectionFormProps {
+  data: any;
+  onChange: (field: string, value: any) => void;
+  onPaymentSuccess: () => void;
+
+}
+
+export default function ProgramAndPaymentForm({
+  data,
+  onChange,
+  onPaymentSuccess,
+}: ProgramSelectionFormProps) {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+  /** Fetch paid courses */
+  useEffect(() => {
+    const loadCourses = async () => {
+      try {
+        setLoading(true);
+        const res = await fetchAllPaidCourse();
+        console.log(res);
+        setCourses(res);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadCourses();
+  }, []);
+
+  /** Find selected course */
+  const selectedCourse = courses.find(
+    (c) => c.course_slug === data.courseType
+  );
+
+  const registrationFee = selectedCourse?.price || 0;
+  const totalAmount = registrationFee;
+  const roundoff = Math.round(totalAmount);
+  const isValid = data.courseType;
+
+  // Load Razorpay script
+  const loadRazorpay = () => {
+    return new Promise<boolean>((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayment = async () => {
+    if (!selectedCourse) {
+      alert("Please select a course first");
+      return;
+    }
+
+    setPaymentLoading(true);
+    try {
+      // Load Razorpay
+      const razorpayLoaded = await loadRazorpay();
+      if (!razorpayLoaded) {
+        throw new Error("Razorpay SDK failed to load");
+      }
+
+      // Create order using API utility
+      const order = await createPaymentOrder(totalAmount * 100);
+
+      // Configure Razorpay options
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: "INR",
+        name: "Inframe College",
+        description: `Payment for ${selectedCourse.course_name}`,
+        order_id: order.id,
+        handler: function (response: any) {
+          console.log("Payment successful:", response);
+          verifyPayment(response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
+          setPaymentCompleted(true);
+          onPaymentSuccess();
+        },
+        prefill: {
+          email: "", // You can prefill with user email
+          contact: "", // You can prefill with user phone
+        },
+        theme: { color: "#111827" },
+        modal: {
+          ondismiss: function () {
+            setPaymentLoading(false);
+          }
+        }
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+
+    } catch (error: any) {
+      console.error("Payment error:", error);
+      alert(`Payment failed: ${error.message || "Please try again."}`);
+      setPaymentLoading(false);
+    }
+  };
+
+  const verifyPayment = async (paymentId: string, orderId: string, signature: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          razorpay_payment_id: paymentId,
+          razorpay_order_id: orderId,
+          razorpay_signature: signature
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Payment verification failed');
+      }
+      console.log('Payment verified successfully');
+    } catch (error) {
+      console.error('Payment verification error:', error);
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Program Selection Section */}
+      <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
+        {/* Header */}
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <GraduationCap className="w-5 h-5" />
+            Select Your Course
+          </h3>
+          <p className="text-sm text-gray-500">
+            Choose your preferred course
+          </p>
+        </div>
+
+        {/* Course Type */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Course Type <span className="text-red-500">*</span>
+          </label>
+          <select
+            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+            value={data.courseType || ""}
+            onChange={(e) => onChange("courseType", e.target.value)}
+            disabled={loading}
+          >
+            <option value="">
+              {loading ? "Loading courses..." : "Select Course"}
+            </option>
+            {courses.map((course) => (
+              <option key={course.id} value={course.course_slug}>
+                {course.course_name}
+              </option>
+            ))}
+          </select>
+
+          {!isValid && (
+            <p className="mt-2 text-sm text-red-500 flex items-center gap-1">
+              Please select a course to continue
+            </p>
+          )}
+        </div>
+
+        {/* Course Details Card - Shows when course is selected */}
+        {selectedCourse && (
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 space-y-4">
+            <h4 className="font-semibold text-lg text-gray-900 flex items-center gap-2">
+              <BookOpen className="w-5 h-5" />
+              Course Details
+            </h4>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Calendar className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Course Duration</p>
+                    <p className="font-medium">{selectedCourse.duration || "6 Months"}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Mode</p>
+                    <p className="font-medium capitalize">{selectedCourse.mode || "Online + Offline"}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <IndianRupee className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Course Fee</p>
+                    <p className="text-lg font-bold">₹{selectedCourse.price}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Payment Section - Only shows when course is selected */}
+      {selectedCourse && (
+        <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
+          {/* Header */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <IndianRupee className="w-5 h-5" />
+              Payment Details
+            </h3>
+            <p className="text-sm text-gray-500">
+              Complete your application by making the payment
+            </p>
+          </div>
+
+          {/* Fee Summary */}
+          <div className="bg-gray-50 rounded-xl p-5 space-y-4">
+            <h4 className="font-semibold text-lg text-gray-800 mb-2">Fee Summary</h4>
+
+            <div className="space-y-3">
+              <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                <div>
+                  <p className="font-medium text-gray-700">Registration Fee</p>
+                  <p className="text-sm text-gray-500">For {selectedCourse.course_name}</p>
+                </div>
+                <span className="font-semibold">₹{registrationFee}</span>
+              </div>
+
+              <div className="pt-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-bold text-gray-900">Total Amount</span>
+                  <span className="text-2xl font-bold text-gray-900">₹{totalAmount}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Payment Instructions */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <h4 className="font-medium text-blue-800 mb-2">Important Notes:</h4>
+            <ul className="text-sm text-blue-700 space-y-1">
+              <li>• You will be redirected to Razorpay's secure payment gateway</li>
+              <li>• Payment confirmation may take a few moments</li>
+              <li>• Please don't close the window during payment processing</li>
+              <li>• Save your payment receipt for future reference</li>
+            </ul>
+          </div>
+
+          {/* Payment Status */}
+          {paymentCompleted && (
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 text-green-800">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span className="font-medium">Payment Successful!</span>
+              </div>
+              <p className="text-green-700 text-sm mt-1">
+                Your payment has been processed successfully. You will be redirected to the confirmation page shortly.
+              </p>
+            </div>
+          )}
+
+          {/* Payment Button */}
+          <div className="pt-4">
+            <button
+              onClick={handlePayment}
+              disabled={paymentLoading || paymentCompleted}
+              className={`w-full px-6 py-3 font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${paymentCompleted
+                  ? "bg-green-600 text-white cursor-not-allowed"
+                  : paymentLoading
+                    ? "bg-gray-600 text-white cursor-wait"
+                    : "bg-black text-white hover:bg-gray-800"
+                }`}
+            >
+              {paymentLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Processing...
+                </>
+              ) : paymentCompleted ? (
+                "Payment Completed ✓"
+              ) : (
+                `Pay ₹${roundoff} Now`
+              )}
+            </button>
+          </div>
+
+          <p className="text-xs text-center text-gray-500 mt-4">
+            Secure payment powered by Razorpay
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+"use client"
+
+import { useState, useEffect, useCallback } from "react"
+import {
+  User,
+  Phone,
+  Mail,
+  Calendar,
+  MapPin,
+  Shield,
+  Users,
+  Camera,
+  X,
+  AlertCircle,
+  CheckCircle,
+  Loader2,
+  ChevronRight
+} from "lucide-react"
+
+const genderOptions = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "other", label: "Other" }
+]
+
+const categoryOptions = [
+  { value: "general", label: "General" },
+  { value: "obc", label: "OBC" },
+  { value: "sc", label: "SC" },
+  { value: "st", label: "ST" },
+  { value: "other", label: "Other" }
+]
+
+const religionOptions = [
+  { value: "hinduism", label: "Hinduism" },
+  { value: "islam", label: "Islam" },
+  { value: "christianity", label: "Christianity" },
+  { value: "sikhism", label: "Sikhism" },
+  { value: "buddhism", label: "Buddhism" },
+  { value: "jainism", label: "Jainism" },
+  { value: "judaism", label: "Judaism" },
+  { value: "other", label: "Other" }
+]
+
+interface FormData {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  fatherName: string
+  motherName: string
+  gender: string
+  category: string
+  religion: string
+  profilePhoto: File | null
+  profilePhotoPreview: string | null  
+  aadharNumber: string
+  permanentAddress: string
+  temporaryAddress: string
+  dateOfBirth: string
+}
+
+interface FormErrors {
+  [key: string]: string
+}
+
+interface PersonalDetailsFormProps {
+  data: Partial<FormData>;
+  onChange: (field: any, value: any) => void;
+}
+
+export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsFormProps) {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: data.firstName || "",
+    lastName: data.lastName || "",
+    email: data.email || "",
+    phone: data.phone || "",
+    fatherName: data.fatherName || "",
+    motherName: data.motherName || "",
+    gender: data.gender || "",
+    category: data.category || "",
+    religion: data.religion || "",
+    profilePhoto: data.profilePhoto || null,
+    profilePhotoPreview: data.profilePhotoPreview || "",
+    aadharNumber: data.aadharNumber || "",
+    permanentAddress: data.permanentAddress || "",
+    temporaryAddress: data.temporaryAddress || "",
+    dateOfBirth: data.dateOfBirth || ""
+  })
+
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [touched, setTouched] = useState<Set<string>>(new Set())
+  const [showErrors, setShowErrors] = useState<Set<string>>(new Set())
+
+  // Sync with parent data
+  useEffect(() => {
+    const cleanData = {
+      firstName: data.firstName || "",
+      lastName: data.lastName || "",
+      email: data.email || "",
+      phone: data.phone || "",
+      fatherName: data.fatherName || "",
+      motherName: data.motherName || "",
+      gender: data.gender || "",
+      category: data.category || "",
+      religion: data.religion || "",
+      profilePhoto: data.profilePhoto || null,
+      profilePhotoPreview: data.profilePhotoPreview || "",
+      aadharNumber: data.aadharNumber || "",
+      permanentAddress: data.permanentAddress || "",
+      temporaryAddress: data.temporaryAddress || "",
+      dateOfBirth: data.dateOfBirth || ""
+    }
+
+    const hasChanges = Object.keys(cleanData).some(key => {
+      const cleanKey = key as keyof FormData
+      return cleanData[cleanKey] !== formData[cleanKey]
+    })
+
+    if (hasChanges) {
+      setFormData(cleanData)
+    }
+  }, [data])
+
+  // Validate field on change
+  const validateField = useCallback((field: keyof FormData, value: any): string => {
+    switch (field) {
+      case 'firstName':
+      case 'lastName':
+      case 'fatherName':
+      case 'motherName':
+        if (!value?.trim()) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`
+        if (value.length < 2) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} must be at least 2 characters`
+        if (!/^[a-zA-Z\s]+$/.test(value)) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} can only contain letters and spaces`
+        return ''
+
+      case 'email':
+        if (!value?.trim()) return 'Email is required'
+        if (!/\S+@\S+\.\S+/.test(value)) return 'Please enter a valid email address'
+        if (value.length > 150) return 'Email must be less than 150 characters'
+        return ''
+
+      case 'phone':
+        if (!value?.trim()) return 'Phone number is required'
+        const phoneDigits = value.replace(/\D/g, '')
+        if (!/^\d{10}$/.test(phoneDigits)) return 'Phone number must be exactly 10 digits'
+        if (!/^[6-9]\d{9}$/.test(phoneDigits)) return 'Phone number must start with 6,7,8, or 9'
+        return ''
+
+      case 'aadharNumber':
+        if (!value?.trim()) return 'Aadhar number is required'
+        if (!/^\d{12}$/.test(value)) return 'Aadhar number must be exactly 12 digits'
+        if (!/^[2-9]\d{11}$/.test(value)) return 'Aadhar number must be valid (starting with 2-9)'
+        return ''
+
+      case 'permanentAddress':
+        if (!value?.trim()) return 'Permanent address is required'
+        if (value.length < 10) return 'Address must be at least 10 characters'
+        return ''
+
+      case 'dateOfBirth':
+        if (!value) return 'Date of birth is required'
+        const dob = new Date(value)
+        const today = new Date()
+        const minAge = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate())
+        const maxAge = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate())
+        
+        if (dob < minAge) return 'Age must be less than 100 years'
+        if (dob > maxAge) return 'You must be at least 16 years old'
+        return ''
+
+      case 'gender':
+      case 'category':
+      case 'religion':
+        return !value ? `${field.charAt(0).toUpperCase() + field.slice(1)} is required` : ''
+
+      case 'profilePhoto':
+        if (!value) return 'Profile photo is required'
+        return ''
+
+      default:
+        return ''
+    }
+  }, [])
+
+  // Handle field change with validation
+  const handleChange = useCallback((field: keyof FormData, value: string) => {
+    // For phone field, allow only numbers and format
+    if (field === 'phone') {
+      value = value.replace(/\D/g, '').slice(0, 10)
+    }
+    
+    // For aadhar number, allow only numbers
+    if (field === 'aadharNumber') {
+      value = value.replace(/\D/g, '').slice(0, 12)
+    }
+    
+    // For name fields, allow only letters and spaces
+    if (['firstName', 'lastName', 'fatherName', 'motherName'].includes(field)) {
+      value = value.replace(/[^a-zA-Z\s]/g, '')
+    }
+    
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }))
+    
+    onChange(field, value)
+    setTouched(prev => new Set(prev.add(field)))
+    
+    // Validate and set error
+    const error = validateField(field, value)
+    if (error) {
+      setErrors(prev => ({ ...prev, [field]: error }))
+      setShowErrors(prev => new Set(prev.add(field)))
+    } else {
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[field]
+        return newErrors
+      })
+      setShowErrors(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(field)
+        return newSet
+      })
+    }
+  }, [onChange, validateField])
+
+  const handleFileChange = useCallback(
+    (field: "profilePhoto", file: File | null) => {
+      if (field === "profilePhoto" && file === null) {
+        setFormData(prev => {
+          if (prev.profilePhotoPreview) {
+            URL.revokeObjectURL(prev.profilePhotoPreview)
+          }
+          return {
+            ...prev,
+            profilePhoto: null,
+            profilePhotoPreview: null
+          }
+        })
+
+        onChange("profilePhoto", null)
+        onChange("profilePhotoPreview", null)
+        
+        // Validate profile photo removal
+        const error = validateField("profilePhoto", null)
+        if (error) {
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+        }
+        return
+      }
+
+      if (field === "profilePhoto" && file) {
+        // Validate file type and size
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg']
+        const maxSize = 2 * 1024 * 1024 // 2MB
+        
+        if (!validTypes.includes(file.type)) {
+          const error = 'Profile photo must be JPG or PNG format'
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+          return
+        }
+        
+        if (file.size > maxSize) {
+          const error = 'Profile photo must be less than 2MB'
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+          return
+        }
+
+        const previewUrl = URL.createObjectURL(file)
+        setFormData(prev => ({
+          ...prev,
+          profilePhoto: file,
+          profilePhotoPreview: previewUrl
+        }))
+
+        onChange("profilePhoto", file)
+        onChange("profilePhotoPreview", previewUrl)
+        
+        // Clear error if validation passes
+        setErrors(prev => {
+          const newErrors = { ...prev }
+          delete newErrors["profilePhoto"]
+          return newErrors
+        })
+        setShowErrors(prev => {
+          const newSet = new Set(prev)
+          newSet.delete("profilePhoto")
+          return newSet
+        })
+      }
+    },
+    [onChange, validateField]
+  )
+
+  // Close error message
+  const closeError = (field: string) => {
+    setShowErrors(prev => {
+      const newSet = new Set(prev)
+      newSet.delete(field)
+      return newSet
+    })
+  }
+
+  // Helper functions for styling
+  const getInputClass = (field: string) => {
+    const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
+    const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
+    return `${baseClass} ${errorClass} ${successClass}`
+  }
+
+  const getSelectClass = (field: string) => {
+    const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
+    const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
+    return `${baseClass} ${errorClass} ${successClass}`
+  }
+
+  const getTextareaClass = (field: string) => {
+    const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
+    const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
+    return `${baseClass} ${errorClass} ${successClass}`
+  }
+
+  // Error display component
+  const ErrorMessage = ({ field }: { field: string }) => {
+    if (!showErrors.has(field) || !errors[field]) return null
+    
+    return (
+      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2 animate-in slide-in-from-top-1 duration-200">
+        <AlertCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-sm text-red-600">{errors[field]}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => closeError(field)}
+          className="p-1 hover:bg-red-100 rounded transition-colors flex-shrink-0"
+        >
+          <X className="w-3 h-3 text-red-600" />
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="py-8">
+      <div className="space-y-8">
+        {/* Personal Information Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <User className="w-5 h-5 text-blue-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                First Name <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={formData.firstName}
+                  onChange={e => handleChange("firstName", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("firstName")))}
+                  className={getInputClass("firstName")}
+                  placeholder="Enter your first name"
+                  style={{ paddingLeft: '2.75rem' }}
+                />
+              </div>
+              <ErrorMessage field="firstName" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Last Name <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={e => handleChange("lastName", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("lastName")))}
+                  className={getInputClass("lastName")}
+                  placeholder="Enter your last name"
+                  style={{ paddingLeft: '2.75rem' }}
+                />
+              </div>
+              <ErrorMessage field="lastName" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={e => handleChange("email", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("email")))}
+                  className={getInputClass("email")}
+                  placeholder="student@example.com"
+                  style={{ paddingLeft: '2.75rem' }}
+                />
+              </div>
+              <ErrorMessage field="email" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={e => handleChange("phone", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("phone")))}
+                  className={getInputClass("phone")}
+                  placeholder="10-digit mobile number"
+                  maxLength={10}
+                  style={{ paddingLeft: '2.75rem' }}
+                />
+              </div>
+              <ErrorMessage field="phone" />
+            </div>
+          </div>
+        </div>
+
+        {/* Family Information Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-green-100 rounded-lg">
+              <Users className="w-5 h-5 text-green-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900">Family Information</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Father's Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.fatherName}
+                onChange={e => handleChange("fatherName", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("fatherName")))}
+                className={getInputClass("fatherName")}
+                placeholder="Enter father's full name"
+              />
+              <ErrorMessage field="fatherName" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Mother's Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.motherName}
+                onChange={e => handleChange("motherName", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("motherName")))}
+                className={getInputClass("motherName")}
+                placeholder="Enter mother's full name"
+              />
+              <ErrorMessage field="motherName" />
+            </div>
+          </div>
+        </div>
+
+        {/* Demographic Information Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <Calendar className="w-5 h-5 text-purple-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900">Demographic Information</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date of Birth <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={e => handleChange("dateOfBirth", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("dateOfBirth")))}
+                  className={getInputClass("dateOfBirth")}
+                  style={{ paddingLeft: '2.75rem' }}
+                  max={new Date().toISOString().split('T')[0]}
+                />
+              </div>
+              <ErrorMessage field="dateOfBirth" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Gender <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={formData.gender}
+                onChange={e => handleChange("gender", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("gender")))}
+                className={getSelectClass("gender")}
+              >
+                <option value="">Select Gender</option>
+                {genderOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage field="gender" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Category <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={formData.category}
+                onChange={e => handleChange("category", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("category")))}
+                className={getSelectClass("category")}
+              >
+                <option value="">Select Category</option>
+                {categoryOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage field="category" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Religion <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={formData.religion}
+                onChange={e => handleChange("religion", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("religion")))}
+                className={getSelectClass("religion")}
+              >
+                <option value="">Select Religion</option>
+                {religionOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ErrorMessage field="religion" />
+            </div>
+          </div>
+        </div>
+
+        {/* Address Information Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <MapPin className="w-5 h-5 text-orange-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900">Address Information</h2>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Permanent Address <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                value={formData.permanentAddress}
+                onChange={e => handleChange("permanentAddress", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("permanentAddress")))}
+                className={getTextareaClass("permanentAddress")}
+                placeholder="House number, Street, Area, City, State, Pincode"
+                rows={3}
+              />
+              <ErrorMessage field="permanentAddress" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Temporary Address
+              </label>
+              <textarea
+                value={formData.temporaryAddress}
+                onChange={e => handleChange("temporaryAddress", e.target.value)}
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none hover:border-gray-400"
+                placeholder="If different from permanent address"
+                rows={2}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Document Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-red-100 rounded-lg">
+              <Shield className="w-5 h-5 text-red-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-900">Identification</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Profile Photo <span className="text-red-500">*</span>
+              </label>
+              <div className={`border-2 ${errors.profilePhoto ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-blue-400'} rounded-xl p-6 text-center transition-all duration-200`}>
+                {formData.profilePhotoPreview ? (
+                  <div className="space-y-4">
+                    <div className="relative w-32 h-32 mx-auto">
+                      <img
+                        src={formData.profilePhotoPreview}
+                        alt="Profile preview"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleFileChange("profilePhoto", null)}
+                      className="text-sm text-red-600 hover:text-red-800"
+                    >
+                      Remove Photo
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                      <Camera className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <div>
+                      <label className="cursor-pointer">
+                        <span className="text-blue-600 font-medium">Click to upload</span>
+                        <span className="text-gray-600"> or drag and drop</span>
+                        <input
+                          type="file"
+                          className="hidden"
+                          accept="image/*"
+                          onChange={e => handleFileChange("profilePhoto", e.target.files?.[0] || null)}
+                        />
+                      </label>
+                      <p className="text-xs text-gray-500 mt-2">PNG, JPG up to 2MB</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <ErrorMessage field="profilePhoto" />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Aadhar Number <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={formData.aadharNumber}
+                  onChange={e => handleChange("aadharNumber", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("aadharNumber")))}
+                  className={getInputClass("aadharNumber")}
+                  placeholder="12-digit Aadhar number"
+                  maxLength={12}
+                  style={{ paddingLeft: '2.75rem' }}
+                />
+              </div>
+              <ErrorMessage field="aadharNumber" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+"use client";
+
+import { useState, useEffect } from "react";
+import { AlertCircle, CheckCircle, ArrowLeft, ArrowRight } from "lucide-react";
+
+const termsAndConditions = [
+    "The applicant must fulfill the eligibility criteria as specified in the admission guidelines for the program.",
+    "Admission is subject to verification of all original documents during the admission process.",
+    "If 12th results awaited and student doesn't qualified that school will not be liable for it.",
+    "The applicant must provide accurate, current, and complete information in the admission form.",
+    "Any misinformation or false documents will result in immediate disqualification and cancellation of admission.",
+    "The submission of the admission form does not guarantee admission.",
+    "Failure to provide the required documents within the stipulated time frame may result in rejection of the application.",
+    "Admission is confirmed only after the payment of the full admission fee, as mentioned in the fee structure.",
+    "The fee is non-refundable in any circumstances.",
+    "Failure to make timely payments may result in suspension or termination of enrollment. ₹50 per day penalty would be taken for late fees payment.",
+    "The admission will be confirmed after verification of all documents and payment of fees.",
+    "The institution reserves the right to revoke admission at any stage if any discrepancies are found.",
+    "Upon admission, the student agrees to abide by the rules and regulations of the institution.",
+    "Any violation of the code of conduct or disciplinary guidelines may lead to expulsion.",
+    "The information provided in the admission form will be used solely for the admission process and will remain confidential.",
+    "The institution may use the data for internal purposes like communication, announcements, or records maintenance.",
+    "The institution reserves the right to deny admission to any applicant without providing specific reasons.",
+    "The institution reserves the right to modify the terms and conditions of admission at any time without prior notice.",
+    "Regular attendance and participation are mandatory for successful course completion.",
+    "Course is non transferable and fees is not refundable in any case.",
+    "Students wishing to withdraw from the course must notify the institution in writing.",
+    "Exams would be held in different centre if approved by University & main centre.",
+    "School reserves the right to change or cancel any test center/city at its discretion, if required."
+];
+
+interface TermsFormProps {
+    data: {
+        termsAccepted: boolean;
+    };
+    onChange: (field: any, value: any) => void;
+    onBack: () => void;
+    onSubmit: () => void;
+    onAccept?: () => void;
+}
+
+export default function TermsAndConditionsForm({
+    data,
+    onChange,
+    onBack,
+    onSubmit,
+    onAccept,
+}: TermsFormProps) {
+    const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
+    const [isScrollable, setIsScrollable] = useState(false);
+    const [attemptedToCheckWithoutScrolling, setAttemptedToCheckWithoutScrolling] = useState(false);
+
+    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+        const element = e.currentTarget;
+        const isAtBottom = Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 10;
+        
+        if (isAtBottom) {
+            setHasScrolledToBottom(true);
+            setAttemptedToCheckWithoutScrolling(false);
+        }
+    };
+
+    // Check if content is scrollable
+    useEffect(() => {
+        const termsContainer = document.getElementById('terms-container');
+        if (termsContainer) {
+            const isContentScrollable = termsContainer.scrollHeight > termsContainer.clientHeight;
+            setIsScrollable(isContentScrollable);
+            
+            // If content is not scrollable (all visible), automatically set hasScrolledToBottom
+            if (!isContentScrollable) {
+                setHasScrolledToBottom(true);
+            }
+        }
+    }, []);
+
+    const canProceed = data.termsAccepted && (!isScrollable || hasScrolledToBottom);
+
+    const handleCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!hasScrolledToBottom && isScrollable) {
+            e.preventDefault();
+            setAttemptedToCheckWithoutScrolling(true);
+            return;
+        }
+        onChange("termsAccepted", e.target.checked);
+    };
+
+    const handleSubmit = () => {
+        if (!canProceed) {
+            if (!hasScrolledToBottom && isScrollable) {
+                setAttemptedToCheckWithoutScrolling(true);
+            }
+            return;
+        }
+        onSubmit();
+    };
+
+    return (
+        <div className="py-8">
+            <div className="max-w-4xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-8">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="p-2 bg-yellow-100 rounded-lg">
+                            <CheckCircle className="w-6 h-6 text-yellow-600" />
+                        </div>
+                        <h1 className="text-2xl font-bold text-gray-900">
+                            Terms & Conditions
+                        </h1>
+                    </div>
+                    <p className="text-gray-600">
+                        Please read and accept the following terms and conditions to proceed
+                    </p>
+                </div>
+
+                {/* Terms Container */}
+                <div className="bg-white rounded-xl shadow-lg border overflow-hidden">
+                    {/* Terms Header */}
+                    <div className="bg-gray-50 border-b px-6 py-4">
+                        <h3 className="text-lg font-semibold text-gray-900">
+                            Inframe College Admission Terms
+                        </h3>
+                        <p className="text-sm text-gray-600 mt-1">
+                            Last updated: {new Date().toLocaleDateString('en-IN')}
+                        </p>
+                    </div>
+
+                    {/* Scrollable Terms with Indicator */}
+                    <div className="relative">
+                        <div
+                            id="terms-container"
+                            className="px-6 py-4 h-96 overflow-y-auto text-gray-700 space-y-4"
+                            onScroll={handleScroll}
+                        >
+                            <div className="space-y-4">
+                                {termsAndConditions.map((term, index) => (
+                                    <div key={index} className="flex gap-3">
+                                        <div className="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span className="text-sm font-medium text-blue-600">
+                                                {index + 1}
+                                            </span>
+                                        </div>
+                                        <p className="text-sm leading-relaxed">
+                                            {term}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* End of terms marker */}
+                            <div className="text-center py-4 border-t mt-4">
+                                <div className="flex items-center justify-center gap-2 text-green-600">
+                                    <CheckCircle className="w-5 h-5" />
+                                    <span className="font-medium">End of Terms & Conditions</span>
+                                </div>
+                                <p className="text-sm text-gray-500 mt-2">
+                                    You have reached the end of the terms
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Acceptance Section */}
+                    <div className="border-t bg-gray-50 px-6 py-6">
+                        <div className="space-y-4">
+                            {/* Warning message when trying to check without scrolling */}
+                            {attemptedToCheckWithoutScrolling && !hasScrolledToBottom && (
+                                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                                    <div className="flex items-center gap-2 text-red-700">
+                                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                        <p className="text-sm font-medium">
+                                            Please scroll through all terms before accepting
+                                        </p>
+                                    </div>
+                                    <p className="text-sm text-red-600 mt-1 ml-6">
+                                        You must read all terms by scrolling to the bottom first
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Scroll Requirement */}
+                            {isScrollable && !hasScrolledToBottom && !attemptedToCheckWithoutScrolling && (
+                                <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                    <div className="flex items-center gap-2 text-blue-700">
+                                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                        <p className="text-sm">
+                                            Please scroll through all the terms before accepting
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Checkbox */}
+                            <label className={`flex items-start gap-3 p-4 rounded-lg border transition-all duration-200 ${canProceed
+                                    ? 'bg-green-50 border-green-200'
+                                    : 'bg-white border-gray-300'
+                                }`}>
+                                <input
+                                    type="checkbox"
+                                    checked={data.termsAccepted}
+                                    onChange={handleCheckboxClick}
+                                    className={`w-5 h-5 mt-0.5 rounded focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${canProceed
+                                        ? 'text-green-600 border-green-300'
+                                        : 'text-gray-400 border-gray-300'
+                                        }`}
+                                />
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-2">
+                                        <span className={`font-medium ${canProceed ? 'text-green-800' : 'text-gray-700'}`}>
+                                            I accept all Terms & Conditions
+                                        </span>
+                                        {canProceed && (
+                                            <CheckCircle className="w-4 h-4 text-green-600" />
+                                        )}
+                                    </div>
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        By checking this box, you acknowledge that you have read,
+                                        understood, and agree to be bound by all the terms and conditions
+                                        listed above.
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Navigation Buttons */}
+                <div className="flex justify-between items-center mt-8">
+                    <button
+                        type="button"
+                        onClick={onBack}
+                        className="flex items-center gap-2 px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={!canProceed}
+                        className={`flex items-center gap-2 px-8 py-3 rounded-lg transition-all ${canProceed
+                                ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                            }`}
+                    >
+                        Submit Application
+                        <ArrowRight className="w-4 h-4" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/context
+
+import { createContext, useState, ReactNode, useContext } from "react";
+
+interface FormData {
+  student: any;
+  education: any;
+  program: any;
+  payment: any;
+}
+
+interface FormContextType {
+  data: FormData;
+  setFormValues: (step: keyof FormData, values: any) => void;
+}
+
+const FormContext = createContext<FormContextType | undefined>(undefined);
+
+export const FormProvider = ({ children }: { children: ReactNode }) => {
+  const [data, setData] = useState<FormData>({
+    student: {},
+    education: {},
+    program: {},
+    payment: {},
+  });
+
+  const setFormValues = (step: keyof FormData, values: any) => {
+    setData(prev => ({ ...prev, [step]: values }));
+  };
+
+  return (
+    <FormContext.Provider value={{ data, setFormValues }}>
+      {children}
+    </FormContext.Provider>
+  );
+};
+
+export const useFormContext = () => {
+  const context = useContext(FormContext);
+  if (!context) throw new Error("useFormContext must be used inside FormProvider");
+  return context;
+};
+
+
+api.ts
+
+import axios from "axios";
+const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export const submitApplication = async (data: any) => {
+  const formData = new FormData();
+  
+  // Personal details
+  formData.append("first_name", data.firstName);
+  formData.append("last_name", data.lastName);
+  formData.append("email", data.email);
+  formData.append("phone", data.phone);
+  formData.append("father_name", data.fatherName);
+  formData.append("mother_name", data.motherName);
+  formData.append("gender", data.gender);
+  formData.append("category", data.category);
+  formData.append("religion", data.religion);
+  formData.append("date_of_birth", data.dateOfBirth);
+  formData.append("permanent_address", data.permanentAddress);
+  formData.append("temporary_address", data.temporaryAddress || "");
+  formData.append("aadhar_number", data.aadharNumber || "");
+  
+  // Program details
+  formData.append("course_type", data.courseType);
+  formData.append("program_type", data.programType || "");
+  formData.append("campus", data.campus || "");
+  
+  // Terms
+  formData.append("termsAccepted", String(data.termsAccepted));
+  
+  // Convert education array to match backend format
+  if (data.educationDetails && Array.isArray(data.educationDetails)) {
+    const educationArray = data.educationDetails.map((edu: any) => ({
+      class_level: edu.classLevel,
+      institution_name: edu.institutionName,
+      stream: edu.stream,
+      year_of_passing: edu.yearOfPassing,
+      grade: edu.grade,
+      duration: edu.duration
+    }));
+    formData.append("education", JSON.stringify(educationArray));
+  }
+  
+  // Files
+  
+  // 1. Profile Photo (single file)
+  if (data.profilePhoto) {
+    formData.append("profilePhoto", data.profilePhoto);
+  }
+  
+  // 2. Education Documents (one per education record)
+  if (data.educationDetails && Array.isArray(data.educationDetails)) {
+    data.educationDetails.forEach((edu: any) => {
+      if (edu.document) {
+        formData.append("educationDocuments", edu.document);
+      }
+    });
+  }
+  
+  // 3. Other Documents (Aadhar, PAN, etc.)
+  if (data.documents && Array.isArray(data.documents)) {
+    data.documents.forEach((doc: any) => {
+      if (doc.file) {
+        const blob = new Blob([doc.file], { type: doc.file.type });
+        const renamedFile = new File([blob], `${doc.fileType}_${doc.file.name}`, { type: doc.file.type });
+        formData.append("otherDocuments", renamedFile);
+      }
+    });
+  }
+  
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/student/add`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error: any) {
+    const message =
+      error?.response?.data?.message ||
+      error.message ||
+      "Failed to submit application";
+
+    throw new Error(message);
+  }
+};
+
+export const submitPayment = async (studentId: string, paymentData: any) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/student/${studentId}/payment`,
+      paymentData
+    );
+    return response.data;
+  } catch (error: any) {
+    const message =
+      error?.response?.data?.message ||
+      error.message ||
+      "Failed to submit payment";
+    throw new Error(message);
+  }
+};
+
+export const createPaymentOrder = async (amount: number) => {
+  const response = await fetch(`${API_BASE_URL}/payment/create-order`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ amount: amount * 100 }), // Convert to paise
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to create payment order');
+  }
+
+  return await response.json();
+};
+
+export const fetchAllPaidCourse = async () => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/courses/fetchAllPaidCourse`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch course types", error);
+    throw error;
+  }
+};
+
+page.tsx
+
+"use client";
+
+import { useState, useEffect } from "react";
+import PersonalDetailsForm from "./components/Form/StudentDetailsForm";
+import EducationDetailsForm from "./components/Form/EducationalForm";
+import {
+  User,
+  GraduationCap,
+  FileText,
+  CheckCircle,
+  Circle,
+  ArrowLeft,
+  ArrowRight,
+  Save
+} from "lucide-react";
+import ProgramSelectionForm from "./components/Form/ProgramSelectionForm";
+import TermsAndConditionsForm from "./components/Form/TermsAndCondition";
+import { submitApplication } from "./api";
+import StudentDocumentsForm from "./components/Form/DocumentForm";
+
+interface FormData {
+  // Personal Details
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  fatherName: string
+  motherName: string
+  gender: string
+  category: string
+  religion: string
+  profilePhoto: File | null
+  profilePhotoPreview: string
+  aadharNumber: string
+  permanentAddress: string
+  temporaryAddress: string
+  dateOfBirth: string
+
+  // Education Details (array)
+  educationDetails: EducationFormData[]
+
+  // Documents (array)
+  documents: DocumentData[]
+
+  // Program Selection
+  courseType: string
+  studyMode: string
+  campus: string
+  programType: string
+
+  // Terms
+  termsAccepted: boolean
+}
+
+interface EducationFormData {
+  classLevel: string
+  institutionName: string
+  stream: string
+  yearOfPassing: string
+  grade: string
+  duration: string
+  document: File | null
+}
+
+interface DocumentData {
+  fileType: string
+  file: File | null
+  fileName?: string
+  fileSize?: number
+}
+
+// Step configuration
+const steps = [
+  {
+    id: 1,
+    name: "Personal Details",
+    description: "Basic information & documents",
+    icon: User,
+    color: "bg-blue-500",
+  },
+  {
+    id: 2,
+    name: "Education Details",
+    description: "Academic background",
+    icon: GraduationCap,
+    color: "bg-green-500",
+  },
+  {
+    id: 3,
+    name: "Documents",
+    description: "Upload required documents",
+    icon: FileText,
+    color: "bg-purple-500",
+  },
+  {
+    id: 4,
+    name: "Terms & Conditions",
+    description: "Review and accept policies",
+    icon: CheckCircle,
+    color: "bg-yellow-500",
+  },
+  {
+    id: 5,
+    name: "Course & Payment",
+    description: "Select course and complete payment",
+    icon: GraduationCap,
+    color: "bg-green-500",
+  },
+];
+
+export default function MultiStepFormPage() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [formData, setFormData] = useState<FormData>({
+    // Personal Details
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    fatherName: "",
+    motherName: "",
+    gender: "",
+    category: "",
+    religion: "",
+    profilePhoto: null,
+    profilePhotoPreview: "",
+    aadharNumber: "",
+    permanentAddress: "",
+    temporaryAddress: "",
+    dateOfBirth: "",
+
+    // Education Details (array with one empty entry)
+    educationDetails: [{
+      classLevel: "",
+      institutionName: "",
+      stream: "",
+      yearOfPassing: "",
+      grade: "",
+      duration: "",
+      document: null
+    }],
+
+    // Documents (array with default Aadhar)
+    documents: [{
+      fileType: 'aadhar',
+      file: null
+    }],
+
+    // Program Selection
+    courseType: "",
+    studyMode: "",
+    campus: "",
+    programType: "",
+
+    // Terms
+    termsAccepted: false,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  // Load saved data from localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem('multistepFormData');
+    const savedStep = localStorage.getItem('multistepFormStep');
+    const savedCompleted = localStorage.getItem('multistepFormCompleted');
+
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      // Convert string dates back to objects
+      const processedData = {
+        ...parsedData,
+        profilePhoto: null,
+        aadharFile: null,
+        document: null
+      };
+      setFormData(prev => ({ ...prev, ...processedData }));
+    }
+
+    if (savedStep) {
+      setCurrentStep(parseInt(savedStep));
+    }
+
+    if (savedCompleted) {
+      setCompletedSteps(JSON.parse(savedCompleted));
+    }
+  }, []);
+
+  // Auto-save to localStorage
+  useEffect(() => {
+    if (currentStep > 1) { // Don't save immediately on step 1
+      setSaveStatus("saving");
+      const saveData = {
+        ...formData,
+        profilePhoto: null,
+        aadharFile: null,
+        document: null
+      };
+
+      localStorage.setItem('multistepFormData', JSON.stringify(saveData));
+      localStorage.setItem('multistepFormStep', currentStep.toString());
+      localStorage.setItem('multistepFormCompleted', JSON.stringify(completedSteps));
+
+      setTimeout(() => {
+        setSaveStatus("saved");
+        setTimeout(() => setSaveStatus("idle"), 2000);
+      }, 500);
+    }
+  }, [formData, currentStep, completedSteps]);
+
+  const handleChange = (field: keyof FormData, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleNext = () => {
+    // Validate current step before proceeding
+    if (validateCurrentStep()) {
+      if (!completedSteps.includes(currentStep)) {
+        setCompletedSteps(prev => [...prev, currentStep]);
+      }
+      setCurrentStep(prev => Math.min(prev + 1, steps.length));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrev = () => {
+    setCurrentStep(prev => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const validateCurrentStep = (): boolean => {
+    switch (currentStep) {
+      case 1: // Personal Details
+        const personalErrors: string[] = [];
+        if (!formData.firstName.trim()) personalErrors.push("First name");
+        if (!formData.lastName.trim()) personalErrors.push("Last name");
+        if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) personalErrors.push("Email");
+        if (!formData.phone.trim() || !/^\d{10}$/.test(formData.phone)) personalErrors.push("Phone");
+        if (!formData.gender) personalErrors.push("Gender");
+        if (!formData.dateOfBirth) personalErrors.push("Date of birth");
+        if (!formData.permanentAddress.trim()) personalErrors.push("Permanent address");
+        if (personalErrors.length > 0) {
+          alert(`Please fill in: ${personalErrors.join(", ")}`);
+          return false;
+        }
+        return true;
+
+      case 2: // Education Details
+        if (!formData.educationDetails || formData.educationDetails.length === 0) {
+          alert("Please add at least one education detail");
+          return false;
+        }
+
+        const educationErrors: string[] = [];
+        formData.educationDetails.forEach((edu, index) => {
+          if (!edu.classLevel?.trim()) educationErrors.push(`Education ${index + 1}: Class/Level`);
+          if (!edu.institutionName?.trim()) educationErrors.push(`Education ${index + 1}: Institution name`);
+          if (!edu.stream?.trim()) educationErrors.push(`Education ${index + 1}: Stream`);
+          if (!edu.yearOfPassing?.trim()) educationErrors.push(`Education ${index + 1}: Year of passing`);
+          if (!edu.grade?.trim()) educationErrors.push(`Education ${index + 1}: Grade`);
+          if (!edu.duration?.trim()) educationErrors.push(`Education ${index + 1}: Duration`);
+        });
+
+        if (educationErrors.length > 0) {
+          alert(`Please fill in:\n${educationErrors.join("\n")}`);
+          return false;
+        }
+        return true;
+
+      case 3: // Documents
+        if (!formData.documents || formData.documents.length === 0) {
+          alert("Please add at least one document");
+          return false;
+        }
+
+        const hasAadhar = formData.documents.some(doc => doc.fileType === 'aadhar' && doc.file);
+        if (!hasAadhar) {
+          alert("Aadhar Card is required. Please upload at least one Aadhar document.");
+          return false;
+        }
+
+        const documentErrors: string[] = [];
+        formData.documents.forEach((doc, index) => {
+          if (!doc.file) {
+            documentErrors.push(`Document ${index + 1}: ${doc.fileType || 'Document'} file is required`);
+          }
+        });
+
+        if (documentErrors.length > 0) {
+          alert(`Please complete:\n${documentErrors.join("\n")}`);
+          return false;
+        }
+        return true;
+
+      case 4: // Program Selection
+        if (!formData.courseType) {
+          alert("Please select a course");
+          return false;
+        }
+        return true;
+
+      case 5: // Payment
+        if (!formData.termsAccepted) {
+          alert("Please accept terms and conditions");
+          return false;
+        }
+        return true;
+
+      default:
+        return true;
+    }
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      // Final validation
+      if (validateCurrentStep()) {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        const res = await submitApplication(formData);
+
+        if (res.status !== "success") {
+          throw new Error(res.message);
+        }
+        // Clear saved data
+        localStorage.removeItem('multistepFormData');
+        localStorage.removeItem('multistepFormStep');
+        localStorage.removeItem('multistepFormCompleted');
+
+        // Show success and reset
+        alert("Form submitted successfully!");
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          fatherName: "",
+          motherName: "",
+          gender: "",
+          category: "",
+          religion: "",
+          profilePhoto: null,
+          profilePhotoPreview: "",
+          aadharNumber: "",
+          permanentAddress: "",
+          temporaryAddress: "",
+          dateOfBirth: "",
+
+          educationDetails: [{
+            classLevel: "",
+            institutionName: "",
+            stream: "",
+            yearOfPassing: "",
+            grade: "",
+            duration: "",
+            document: null
+          }],
+
+          documents: [{
+            fileType: 'aadhar',
+            file: null
+          }],
+
+          courseType: "",
+          studyMode: "",
+          campus: "",
+          programType: "",
+
+          termsAccepted: false,
+        });
+        setCurrentStep(1);
+        setCompletedSteps([]);
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const jumpToStep = (step: number) => {
+    // Only allow jumping to completed steps or next step
+    if (step <= currentStep || completedSteps.includes(step - 1)) {
+      setCurrentStep(step);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const getStepIcon = (stepId: number) => {
+    const StepIcon = steps[stepId - 1]?.icon || Circle;
+    if (completedSteps.includes(stepId)) {
+      return CheckCircle;
+    }
+    if (stepId === currentStep) {
+      return StepIcon;
+    }
+    return StepIcon;
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Student Application Form
+          </h1>
+          <p className="text-gray-600">
+            Complete all steps to submit your application
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar - Steps */}
+          <div className="lg:w-1/4">
+            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+              <div className="mb-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                  Application Progress
+                </h2>
+                <div className="flex items-center justify-between">
+                  <div className="text-sm text-gray-600">
+                    Step {currentStep} of {steps.length}
+                  </div>
+                  {saveStatus === "saving" && (
+                    <div className="flex items-center gap-1 text-sm text-blue-600">
+                      <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      Saving...
+                    </div>
+                  )}
+                  {saveStatus === "saved" && (
+                    <div className="flex items-center gap-1 text-sm text-green-600">
+                      <CheckCircle className="w-4 h-4" />
+                      Saved
+                    </div>
+                  )}
+                </div>
+                <div className="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+                    style={{ width: `${((completedSteps.length + (currentStep > completedSteps.length ? 0.5 : 0)) / steps.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Steps List */}
+              <div className="space-y-4">
+                {steps.map((step, index) => {
+                  const Icon = getStepIcon(step.id);
+                  const isCompleted = completedSteps.includes(step.id);
+                  const isCurrent = currentStep === step.id;
+                  const isAccessible = step.id <= currentStep || completedSteps.includes(step.id - 1);
+
+                  return (
+                    <button
+                      key={step.id}
+                      onClick={() => isAccessible && jumpToStep(step.id)}
+                      disabled={!isAccessible}
+                      className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-200 ${isCurrent
+                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 shadow-sm'
+                        : isCompleted
+                          ? 'bg-green-50 border border-green-100'
+                          : 'bg-gray-50 hover:bg-gray-100'
+                        } ${!isAccessible ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    >
+                      <div className={`p-3 rounded-lg ${isCurrent
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                        : isCompleted
+                          ? 'bg-green-500 text-white'
+                          : 'bg-gray-200 text-gray-600'
+                        }`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-medium ${isCurrent
+                            ? 'text-gray-900'
+                            : isCompleted
+                              ? 'text-gray-900'
+                              : 'text-gray-700'
+                            }`}>
+                            Step {step.id}: {step.name}
+                          </h3>
+                          {isCompleted && (
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          )}
+                        </div>
+                        <p className={`text-sm ${isCurrent
+                          ? 'text-blue-600'
+                          : isCompleted
+                            ? 'text-green-600'
+                            : 'text-gray-500'
+                          }`}>
+                          {step.description}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+
+            </div>
+          </div>
+
+          {/* Main Form Area */}
+          <div className="lg:w-3/4">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              {/* Form Header */}
+              <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900">
+                      {steps[currentStep - 1]?.name}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      {steps[currentStep - 1]?.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <span className="hidden sm:inline">Auto-save:</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${saveStatus === "saved" ? "bg-green-100 text-green-800" :
+                      saveStatus === "saving" ? "bg-blue-100 text-blue-800" :
+                        "bg-gray-100 text-gray-800"
+                      }`}>
+                      {saveStatus === "saved" ? "Saved" :
+                        saveStatus === "saving" ? "Saving..." :
+                          "Ready"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Form Content */}
+              <div className="p-2 md:p-2">
+                {currentStep === 1 && (
+                  <PersonalDetailsForm
+                    data={formData}
+                    onChange={handleChange}
+                  />
+                )}
+
+                {currentStep === 2 && (
+                  <EducationDetailsForm
+                    data={formData.educationDetails}
+                    onChange={(data: EducationFormData[]) => handleChange("educationDetails", data)}
+                  />
+                )}
+
+                {currentStep === 3 && (
+                  <StudentDocumentsForm
+                    data={formData.documents}
+                    onChange={(data: DocumentData[]) => handleChange("documents", data)}
+                  />
+                )}
+
+                {currentStep === 4 && (
+                  <TermsAndConditionsForm
+                    data={formData}
+                    onChange={(field: string, value: any) => handleChange(field as keyof FormData, value)}
+                    onBack={handlePrev}
+                    onSubmit={handleSubmit}
+                  />
+                )}
+
+                {currentStep === 5 && (
+                  <ProgramSelectionForm
+                    data={formData}
+                    onChange={(field: string, value: any) => handleChange(field as keyof FormData, value)}
+                    onPaymentSuccess={() => {
+                      // Payment successful
+                      handleSubmit();
+                    }}
+                  />
+                )}
+
+                {/* Navigation Buttons */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      {currentStep > 1 && (
+                        <button
+                          type="button"
+                          onClick={handlePrev}
+                          className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 flex items-center gap-2"
+                        >
+                          <ArrowLeft className="w-4 h-4" />
+                          Previous Step
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      {currentStep < steps.length ? (
+                        <button
+                          type="button"
+                          onClick={handleNext}
+                          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
+                        >
+                          Next Step
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting}
+                          className="px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-2"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              <Save className="w-5 h-5" />
+                              Submit Application
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ek aur baat mene payment wala selection program me hi daal diya hai to wo hi last tab hai
+jo total round off value hai wo students table me payment_amount me jaygi baki abhi razor pay ka kaam nahi karna hai 
+and selection program jo last tab hai usme ek note line dalni hai ki agar aap offline par karna chahte hai to sidha form submit kar dijiye
+jab bhi form submit karega to entry ho jaygi to Thank you wale pagee par redirct karna hai and wapas jab bhi login karke aaye to bhi db me to email ke through check karna hai agar entry hai to use Thank you wale page par redirect karna hai
+
+ye lo backend bhi agar koi ned hai ya route bana hai to controller and service bhej raha hours
+
+route
+
+import { Router } from "express";
+import { upload } from "#config/multer.js";
+import {
+  submitStudent,
+  getStudents,
+  getStudentDetails,
+  updateStudentStatus,
+  deleteStudent
+} from "#modules/student/student.controller.js";
+
+const router = Router();
+
+router.post(
+  "/add",
+  upload.fields([
+    { name: "profilePhoto", maxCount: 1 },
+    { name: "educationDocuments", maxCount: 10 },
+    { name: "otherDocuments", maxCount: 10 }
+  ]),
+  submitStudent
+);
+
+// Get students with pagination 
+router.post("/list", getStudents);
+
+// Get full student details
+router.post("/info", getStudentDetails);
+
+// Approve / Reject student
+router.patch("/status", updateStudentStatus);
+
+//Delete soft
+router.patch("/delete", deleteStudent);
+
+// Separate payment API
+router.post("/:id/payment", async (req, res) => {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    const { id } = req.params;
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      payment_amount,
+      payment_status
+    } = req.body;
+
+    await client.query(
+      `UPDATE students SET 
+        razorpay_order_id = $1,
+        razorpay_payment_id = $2,
+        razorpay_signature = $3,
+        payment_amount = $4,
+        payment_status = $5,
+        payment_date = NOW()
+       WHERE id = $6`,
+      [
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        payment_amount,
+        payment_status === 'true',
+        id
+      ]
+    );
+
+    await client.query("COMMIT");
+    res.status(200).json({ success: true, message: "Payment recorded successfully" });
+  } catch (err) {
+    await client.query("ROLLBACK");
+    res.status(500).json({ success: false, message: err.message });
+  } finally {
+    client.release();
+  }
+});
+export default router;
+
+
+import * as studentService from "./student.service.js";
+
+// Submit new student
+export const submitStudent = async (req, res) => {
+  try {
+    const data = await studentService.createStudent(req);
+    res.status(201).json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get students with pagination + filters
+export const getStudents = async (req, res) => {
+  try {
+    const result = await studentService.getStudents(req.body);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get full info (student + education + documents) by id
+export const getStudentDetails = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const data = await studentService.getStudentById(id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Approve / Reject single endpoint
+export const updateStudentStatus = async (req, res) => {
+  try {
+    const { id, action } = req.body;
+    if (!["approve", "reject"].includes(action)) {
+      return res.status(400).json({ success: false, message: "Invalid action" });
+    }
+
+    await studentService.updateStudentStatus(id, action);
+    res.json({ success: true, message: `Student ${action}d successfully` });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const deleteStudent = async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.status(400).json({ success: false, message: "Student id is required" });
+    }
+
+    await studentService.deleteStudentService(id);
+
+    res.json({ success: true, message: "Student deleted successfully (soft delete)" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+import pool from "#config/pg_db.js";
+import { uploadToCloudinary } from "#utils/uploadToCloudinary.js";
+
+
+// Create new student
+export const createStudent = async (req) => {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    // Parse the JSON education array
+    const education = req.body.education ? JSON.parse(req.body.education) : [];
+
+    // Insert student
+    const studentRes = await client.query(
+      `INSERT INTO students (
+        first_name, last_name, email, phone,
+        father_name, mother_name, gender,
+        category, religion, date_of_birth,
+        permanent_address, temporary_address,
+        course_type, program_type, campus,
+        aadhar_number, profile_photo_url
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
+      RETURNING id`,
+      [
+        req.body.first_name,
+        req.body.last_name,
+        req.body.email,
+        req.body.phone,
+        req.body.father_name,
+        req.body.mother_name,
+        req.body.gender,
+        req.body.category,
+        req.body.religion,
+        req.body.date_of_birth,
+        req.body.permanent_address,
+        req.body.temporary_address || null,
+        req.body.course_type,
+        req.body.program_type || null,
+        req.body.campus || null,
+        req.body.aadhar_number || null,
+        null // profile_photo_url will be updated after upload
+      ]
+    );
+
+    const studentId = studentRes.rows[0].id;
+
+    // 1. Upload Profile Photo
+    let profilePhotoUrl = null;
+    if (req.files?.profilePhoto?.[0]) {
+      const profilePhotoFile = req.files.profilePhoto[0];
+      profilePhotoUrl = await uploadToCloudinary(profilePhotoFile.path, profilePhotoFile.mimetype, { types: ["image"] });
+      
+      // Update student with profile photo URL
+      await client.query(
+        `UPDATE students SET profile_photo_url = $1 WHERE id = $2`,
+        [profilePhotoUrl, studentId]
+      );
+    }
+
+    // 2. Education Records with Documents
+    if (education && education.length) {
+      for (let i = 0; i < education.length; i++) {
+        const edu = education[i];
+        let educationDocumentUrl = null;
+        
+        // Upload education document if exists
+        if (req.files?.educationDocuments && req.files.educationDocuments[i]) {
+          const eduDocFile = req.files.educationDocuments[i];
+          educationDocumentUrl = await uploadToCloudinary(eduDocFile.path, eduDocFile.mimetype, { types: ["pdf", "image"] });
+        }
+        
+        await client.query(
+          `INSERT INTO student_educations
+           (student_id, class_level, institution_name, stream, year_of_passing, grade, duration, document)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+          [
+            studentId,
+            edu.class_level,
+            edu.institution_name,
+            edu.stream,
+            edu.year_of_passing,
+            edu.grade,
+            edu.duration,
+            educationDocumentUrl
+          ]
+        );
+      }
+    }
+
+    // 3. Other Documents (Aadhar, PAN, etc.)
+    if (req.files?.otherDocuments?.length) {
+      for (const file of req.files.otherDocuments) {
+        const url = await uploadToCloudinary(file.path, file.mimetype, { types: ["pdf", "image"] });
+        await client.query(
+          `INSERT INTO student_documents (student_id, file_type, file)
+           VALUES ($1,$2,$3)`,
+          [studentId, file.mimetype, url]
+        );
+      }
+    }
+
+    await client.query("COMMIT");
+    return { studentId, profilePhotoUrl };
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
+// Helper function to detect document type
+function detectDocumentType(filename) {
+  const lowerFilename = filename.toLowerCase();
+  if (lowerFilename.includes('aadhar') || lowerFilename.includes('uidai')) return 'aadhar_card';
+  if (lowerFilename.includes('pan')) return 'pan_card';
+  if (lowerFilename.includes('passport')) return 'passport';
+  if (lowerFilename.includes('marksheet')) return 'marksheet';
+  if (lowerFilename.includes('certificate')) return 'certificate';
+  return 'other_document';
+}
+
+// Get students with pagination + filters
+export const getStudents = async ({
+  page = 1,
+  limit = 10,
+  first_name,
+  last_name,
+  course_type,
+  program_type,
+  campus,
+  payment_status,
+  is_active
+}) => {
+  const offset = (page - 1) * limit;
+  const filters = [];
+  const values = [];
+
+  // Dynamic filters
+  if (first_name) { values.push(`%${first_name}%`); filters.push(`first_name ILIKE $${values.length}`); }
+  if (last_name) { values.push(`%${last_name}%`); filters.push(`last_name ILIKE $${values.length}`); }
+  if (course_type) { values.push(course_type); filters.push(`course_type = $${values.length}`); }
+  if (program_type) { values.push(program_type); filters.push(`program_type = $${values.length}`); }
+  if (campus) { values.push(campus); filters.push(`campus = $${values.length}`); }
+  if (payment_status !== undefined) { values.push(payment_status); filters.push(`payment_status = $${values.length}`); }
+  if (is_active !== undefined) { values.push(is_active); filters.push(`is_active = $${values.length}`); }
+
+  const where = filters.length ? `WHERE ${filters.join(" AND ")}` : "";
+
+  const dataQuery = `SELECT * FROM students ${where} ORDER BY created_at DESC LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
+  values.push(limit, offset);
+
+  const countQuery = `SELECT COUNT(*) FROM students ${where}`;
+
+  const [dataRes, countRes] = await Promise.all([
+    pool.query(dataQuery, values),
+    pool.query(countQuery, values.slice(0, values.length - 2))
+  ]);
+
+  return {
+    data: dataRes.rows,
+    page: Number(page),
+    total: Number(countRes.rows[0].count)
+  };
+};
+
+// Get student full info
+export const getStudentById = async (id) => {
+  const studentRes = await pool.query(`SELECT * FROM students WHERE id = $1`, [id]);
+  if (!studentRes.rows.length) return null;
+
+  const [educationRes, documentsRes] = await Promise.all([
+    pool.query(`SELECT * FROM student_educations WHERE student_id = $1`, [id]),
+    pool.query(`SELECT * FROM student_documents WHERE student_id = $1`, [id])
+  ]);
+
+  return {
+    student: studentRes.rows[0],
+    education: educationRes.rows,
+    documents: documentsRes.rows
+  };
+};
+
+// Approve / Reject
+export const updateStudentStatus = async (id, action) => {
+  if (action === "approve") {
+    await pool.query(`UPDATE students SET payment_status = true WHERE id = $1`, [id]);
+  } else {
+    await pool.query(`UPDATE students SET is_active = false WHERE id = $1`, [id]);
+  }
+};
+
+export const deleteStudentService = async (id) => {
+  await pool.query(
+    `UPDATE students
+     SET is_active = false
+     WHERE id = $1`,
+    [id]
+  );
+};
+
+
+import studentRouter from "./routes/student.routes.js";
+import { Router } from "express";
+const studentModule = Router();
+studentModule.use('/student', studentRouter);
+export default studentModule;
+
+===================================================================================================
+
+mujhe dashboard ready karna hai responsive with functionality jisme lis hogi students ki jisme basix details ke kuch column jese name, father name, enrolled course and payment status and 3 dot honge action me jisme wo fill kiya hua form download kar sakega as pdf click karne par student ki id se sab details de denge and profile pic (sudents table) and student signature (student_documents table) wo bhi show karna hai to aapko format banana padega 
+and 3 dot me ek hoga view jis par click karne par specific student ki details show ho jaygi tabs me jese basic, education, document and wo us page se bhi download kar sakta hai application 
+3dot me ek aur option hoga delete us par click karne par delete wali api call ho jaygi
+jab tabular view me show karwayenge agar db me payment_status true hai to waha show karwayenge Payment Done other wise ek button hoga make payment jis par click karne par popup aayega confirmation then yes par click karte hi api hit hogi and payment_status true ho jayga
+
+to tumhe banana hai page.tsx, /components, /api/api.ts
+
+ye hai meri tables
+
+CREATE TABLE IF NOT EXISTS public.students
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    first_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(100) COLLATE pg_catalog."default",
+    email character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    father_name character varying(100) COLLATE pg_catalog."default",
+    mother_name character varying(100) COLLATE pg_catalog."default",
+    gender character varying(20) COLLATE pg_catalog."default",
+    category character varying(50) COLLATE pg_catalog."default",
+    religion character varying(50) COLLATE pg_catalog."default",
+    date_of_birth date,
+    permanent_address text COLLATE pg_catalog."default",
+    temporary_address text COLLATE pg_catalog."default",
+    course_type character varying(50) COLLATE pg_catalog."default",
+    program_type character varying(50) COLLATE pg_catalog."default",
+    campus character varying(100) COLLATE pg_catalog."default",
+    razorpay_order_id character varying(100) COLLATE pg_catalog."default",
+    razorpay_payment_id character varying(100) COLLATE pg_catalog."default",
+    razorpay_signature character varying(255) COLLATE pg_catalog."default",
+    payment_amount numeric(10,2),
+    payment_status boolean DEFAULT false,
+    payment_date timestamp without time zone,
+    created_at timestamp without time zone DEFAULT now(),
+    is_active boolean DEFAULT true,
+    profile_photo_url text COLLATE pg_catalog."default",
+    aadhar_number character varying(12) COLLATE pg_catalog."default",
+    CONSTRAINT students_pkey PRIMARY KEY (id),
+    CONSTRAINT students_email_key UNIQUE (email)
+)
+
+CREATE TABLE IF NOT EXISTS public.student_educations
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    student_id uuid NOT NULL,
+    class_level character varying(50) COLLATE pg_catalog."default",
+    institution_name character varying(150) COLLATE pg_catalog."default",
+    stream character varying(100) COLLATE pg_catalog."default",
+    year_of_passing character varying(10) COLLATE pg_catalog."default",
+    grade character varying(20) COLLATE pg_catalog."default",
+    duration character varying(20) COLLATE pg_catalog."default",
+    document text COLLATE pg_catalog."default",
+    created_at timestamp without time zone DEFAULT now(),
+    CONSTRAINT educations_pkey PRIMARY KEY (id),
+    CONSTRAINT educations_student_id_fkey FOREIGN KEY (student_id)
+        REFERENCES public.students (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
+CREATE TABLE IF NOT EXISTS public.student_documents
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    student_id uuid NOT NULL,
+    file_type character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    file text COLLATE pg_catalog."default" NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    CONSTRAINT student_documents_pkey PRIMARY KEY (id),
+    CONSTRAINT student_documents_student_id_fkey FOREIGN KEY (student_id)
+        REFERENCES public.students (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
+and ye hai backend
+
+route
+
+import { Router } from "express";
+import { upload } from "#config/multer.js";
+import {
+  submitStudent,
+  getStudents,
+  getStudentDetails,
+  updateStudentStatus,
+  deleteStudent
+} from "#modules/student/student.controller.js";
+
+const router = Router();
+
+router.post(
+  "/add",
+  upload.fields([
+    { name: "profilePhoto", maxCount: 1 },
+    { name: "educationDocuments", maxCount: 10 },
+    { name: "otherDocuments", maxCount: 10 }
+  ]),
+  submitStudent
+);
+
+// Get students with pagination 
+router.post("/list", getStudents);
+
+// Get full student details
+router.post("/info", getStudentDetails);
+
+// Approve / Reject student
+router.patch("/status", updateStudentStatus);
+
+//Delete soft
+router.patch("/delete", deleteStudent);
+
+// Separate payment API
+router.post("/:id/payment", async (req, res) => {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    const { id } = req.params;
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      payment_amount,
+      payment_status
+    } = req.body;
+
+    await client.query(
+      `UPDATE students SET 
+        razorpay_order_id = $1,
+        razorpay_payment_id = $2,
+        razorpay_signature = $3,
+        payment_amount = $4,
+        payment_status = $5,
+        payment_date = NOW()
+       WHERE id = $6`,
+      [
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        payment_amount,
+        payment_status === 'true',
+        id
+      ]
+    );
+
+    await client.query("COMMIT");
+    res.status(200).json({ success: true, message: "Payment recorded successfully" });
+  } catch (err) {
+    await client.query("ROLLBACK");
+    res.status(500).json({ success: false, message: err.message });
+  } finally {
+    client.release();
+  }
+});
+export default router;
+
+
+import * as studentService from "./student.service.js";
+
+// Submit new student
+export const submitStudent = async (req, res) => {
+  try {
+    const data = await studentService.createStudent(req);
+    res.status(201).json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get students with pagination + filters
+export const getStudents = async (req, res) => {
+  try {
+    const result = await studentService.getStudents(req.body);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Get full info (student + education + documents) by id
+export const getStudentDetails = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const data = await studentService.getStudentById(id);
+    if (!data) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+    res.json({ success: true, data });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Approve / Reject single endpoint
+export const updateStudentStatus = async (req, res) => {
+  try {
+    const { id, action } = req.body;
+    if (!["approve", "reject"].includes(action)) {
+      return res.status(400).json({ success: false, message: "Invalid action" });
+    }
+
+    await studentService.updateStudentStatus(id, action);
+    res.json({ success: true, message: `Student ${action}d successfully` });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const deleteStudent = async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.status(400).json({ success: false, message: "Student id is required" });
+    }
+
+    await studentService.deleteStudentService(id);
+
+    res.json({ success: true, message: "Student deleted successfully (soft delete)" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+import pool from "#config/pg_db.js";
+import { uploadToCloudinary } from "#utils/uploadToCloudinary.js";
+
+
+// Create new student
+export const createStudent = async (req) => {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+
+    // Parse the JSON education array
+    const education = req.body.education ? JSON.parse(req.body.education) : [];
+
+    // Insert student
+    const studentRes = await client.query(
+      `INSERT INTO students (
+        first_name, last_name, email, phone,
+        father_name, mother_name, gender,
+        category, religion, date_of_birth,
+        permanent_address, temporary_address,
+        course_type, program_type, campus,
+        aadhar_number, profile_photo_url
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
+      RETURNING id`,
+      [
+        req.body.first_name,
+        req.body.last_name,
+        req.body.email,
+        req.body.phone,
+        req.body.father_name,
+        req.body.mother_name,
+        req.body.gender,
+        req.body.category,
+        req.body.religion,
+        req.body.date_of_birth,
+        req.body.permanent_address,
+        req.body.temporary_address || null,
+        req.body.course_type,
+        req.body.program_type || null,
+        req.body.campus || null,
+        req.body.aadhar_number || null,
+        null // profile_photo_url will be updated after upload
+      ]
+    );
+
+    const studentId = studentRes.rows[0].id;
+
+    // 1. Upload Profile Photo
+    let profilePhotoUrl = null;
+    if (req.files?.profilePhoto?.[0]) {
+      const profilePhotoFile = req.files.profilePhoto[0];
+      profilePhotoUrl = await uploadToCloudinary(profilePhotoFile.path, profilePhotoFile.mimetype, { types: ["image"] });
+      
+      // Update student with profile photo URL
+      await client.query(
+        `UPDATE students SET profile_photo_url = $1 WHERE id = $2`,
+        [profilePhotoUrl, studentId]
+      );
+    }
+
+    // 2. Education Records with Documents
+    if (education && education.length) {
+      for (let i = 0; i < education.length; i++) {
+        const edu = education[i];
+        let educationDocumentUrl = null;
+        
+        // Upload education document if exists
+        if (req.files?.educationDocuments && req.files.educationDocuments[i]) {
+          const eduDocFile = req.files.educationDocuments[i];
+          educationDocumentUrl = await uploadToCloudinary(eduDocFile.path, eduDocFile.mimetype, { types: ["pdf", "image"] });
+        }
+        
+        await client.query(
+          `INSERT INTO student_educations
+           (student_id, class_level, institution_name, stream, year_of_passing, grade, duration, document)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+          [
+            studentId,
+            edu.class_level,
+            edu.institution_name,
+            edu.stream,
+            edu.year_of_passing,
+            edu.grade,
+            edu.duration,
+            educationDocumentUrl
+          ]
+        );
+      }
+    }
+
+    // 3. Other Documents (Aadhar, PAN, etc.)
+    if (req.files?.otherDocuments?.length) {
+      for (const file of req.files.otherDocuments) {
+        const url = await uploadToCloudinary(file.path, file.mimetype, { types: ["pdf", "image"] });
+        await client.query(
+          `INSERT INTO student_documents (student_id, file_type, file)
+           VALUES ($1,$2,$3)`,
+          [studentId, file.mimetype, url]
+        );
+      }
+    }
+
+    await client.query("COMMIT");
+    return { studentId, profilePhotoUrl };
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
+// Helper function to detect document type
+function detectDocumentType(filename) {
+  const lowerFilename = filename.toLowerCase();
+  if (lowerFilename.includes('aadhar') || lowerFilename.includes('uidai')) return 'aadhar_card';
+  if (lowerFilename.includes('pan')) return 'pan_card';
+  if (lowerFilename.includes('passport')) return 'passport';
+  if (lowerFilename.includes('marksheet')) return 'marksheet';
+  if (lowerFilename.includes('certificate')) return 'certificate';
+  return 'other_document';
+}
+
+// Get students with pagination + filters
+export const getStudents = async ({
+  page = 1,
+  limit = 10,
+  first_name,
+  last_name,
+  course_type,
+  program_type,
+  campus,
+  payment_status,
+  is_active
+}) => {
+  const offset = (page - 1) * limit;
+  const filters = [];
+  const values = [];
+
+  // Dynamic filters
+  if (first_name) { values.push(`%${first_name}%`); filters.push(`first_name ILIKE $${values.length}`); }
+  if (last_name) { values.push(`%${last_name}%`); filters.push(`last_name ILIKE $${values.length}`); }
+  if (course_type) { values.push(course_type); filters.push(`course_type = $${values.length}`); }
+  if (program_type) { values.push(program_type); filters.push(`program_type = $${values.length}`); }
+  if (campus) { values.push(campus); filters.push(`campus = $${values.length}`); }
+  if (payment_status !== undefined) { values.push(payment_status); filters.push(`payment_status = $${values.length}`); }
+  if (is_active !== undefined) { values.push(is_active); filters.push(`is_active = $${values.length}`); }
+
+  const where = filters.length ? `WHERE ${filters.join(" AND ")}` : "";
+
+  const dataQuery = `SELECT * FROM students ${where} ORDER BY created_at DESC LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
+  values.push(limit, offset);
+
+  const countQuery = `SELECT COUNT(*) FROM students ${where}`;
+
+  const [dataRes, countRes] = await Promise.all([
+    pool.query(dataQuery, values),
+    pool.query(countQuery, values.slice(0, values.length - 2))
+  ]);
+
+  return {
+    data: dataRes.rows,
+    page: Number(page),
+    total: Number(countRes.rows[0].count)
+  };
+};
+
+// Get student full info
+export const getStudentById = async (id) => {
+  const studentRes = await pool.query(`SELECT * FROM students WHERE id = $1`, [id]);
+  if (!studentRes.rows.length) return null;
+
+  const [educationRes, documentsRes] = await Promise.all([
+    pool.query(`SELECT * FROM student_educations WHERE student_id = $1`, [id]),
+    pool.query(`SELECT * FROM student_documents WHERE student_id = $1`, [id])
+  ]);
+
+  return {
+    student: studentRes.rows[0],
+    education: educationRes.rows,
+    documents: documentsRes.rows
+  };
+};
+
+// Approve / Reject
+export const updateStudentStatus = async (id, action) => {
+  if (action === "approve") {
+    await pool.query(`UPDATE students SET payment_status = true WHERE id = $1`, [id]);
+  } else {
+    await pool.query(`UPDATE students SET is_active = false WHERE id = $1`, [id]);
+  }
+};
+
+export const deleteStudentService = async (id) => {
+  await pool.query(
+    `UPDATE students
+     SET is_active = false
+     WHERE id = $1`,
+    [id]
+  );
+};
+
+index.js
+
+import studentRouter from "./routes/student.routes.js";
+import { Router } from "express";
+const studentModule = Router();
+studentModule.use('/student', studentRouter);
+export default studentModule;
