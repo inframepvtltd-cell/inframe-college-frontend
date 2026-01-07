@@ -247,7 +247,7 @@ const getDegreeType = (programText: string, courseTitle: string): string => {
     return `six-month-certificate-course-in-${programCourseSlug}`;
   }
   else {
-    console.log(programText.replace(/\s+/g, "-").toLowerCase());
+    // console.log(programText.replace(/\s+/g, "-").toLowerCase());
 
     return programText.replace(/\s+/g, "-").toLowerCase();
   }

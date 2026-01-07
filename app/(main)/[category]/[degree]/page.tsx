@@ -8,7 +8,7 @@ type ParamsType = {
 };
 
 export default async function DegreePage({ params }: { params: Promise<ParamsType> }) {
-  const { category, degree } = await params; // Corrected: params is directly an object, not a Promise.
+  const { category, degree } = await params;
   const categoryLower = category.toLowerCase();
 
   if (!courseTypes[categoryLower]) {
@@ -16,7 +16,7 @@ export default async function DegreePage({ params }: { params: Promise<ParamsTyp
   }
 
   const categoryCourses = courseTypes[categoryLower];
-  const selectedCourseIndex = categoryCourses.findIndex((course) => course.value === degree);
+  const selectedCourseIndex = categoryCourses.findIndex((course: any) => course.value === degree);
 
   if (selectedCourseIndex === -1) {
     return notFound();
@@ -30,11 +30,20 @@ export default async function DegreePage({ params }: { params: Promise<ParamsTyp
 export async function generateStaticParams(): Promise<ParamsType[]> {
   const paths: ParamsType[] = [];
 
-  Object.entries(courseTypes).forEach(([category, courses]) => {
-    courses.forEach((course) => {
-      paths.push({ category, degree: course.value });
-    });
-  });
+  // Object.entries(courseTypes).forEach(([category, courses]) => {
+  //   courses.forEach((course: any) => {
+  //     paths.push({ category, degree: course.value });
+  //   });
+  // });
+
+  Object.entries(courseTypes as Record<string, any[]>).forEach(
+    ([category, courses]) => {
+      courses.forEach((course) => {
+        paths.push({ category, degree: course.value });
+      });
+    }
+  );
+
 
   return paths;
 }

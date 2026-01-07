@@ -13,7 +13,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function Page({ params }: { params: { slug: string } }) {
    const { slug } = await params;
    
-    // const course = await getCourse(slug);
   const course = await getFreeCourseBySlug(slug);
 
   if (!course) {

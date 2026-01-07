@@ -26,12 +26,7 @@ interface FAQComponentProps {
 }
 
 const FAQComponent: React.FC<FAQComponentProps> = ({ courseType }) => {
-
-
-
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-    // Memoized values for performance
     const currentFAQs = useMemo(() => FAQ_DATA[courseType], [courseType]);
     const meta = useMemo(() => themeClasses[courseType], [courseType]);
 

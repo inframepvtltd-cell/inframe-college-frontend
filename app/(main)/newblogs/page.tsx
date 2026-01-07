@@ -4,7 +4,6 @@ import { getAllBlogs } from "./api";
 import BlogCard from "./components/blogCard";
 import { Search } from "lucide-react";
 import Image from "next/image"
-import { Head } from "next/document";
 
 export default async function BlogsPage() {
   const blogs = await getAllBlogs();

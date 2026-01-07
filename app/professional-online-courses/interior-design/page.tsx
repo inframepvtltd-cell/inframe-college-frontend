@@ -9,7 +9,7 @@ import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
 import StudentsWork from '../components/studentsWork';
 import FeaturesSection from '../components/featureSection';
-import TestimonialCarousel from '../../../components/TestimonialSection ';
+import TestimonialCarousel from '../../../components/TestimonialSection';
 import FAQComponent from '../components/FaqComponent';
 import CertificateCard from '../components/certificateComponent';
 function InteriorDesign() {
@@ -548,9 +548,10 @@ function InteriorDesign() {
                 </div>
 
                 {/* Footer */}
-                <div className="animate-fade-in-up pb-20">
+                <div className="animate-fade-in-up">
                     <Footer />
                 </div>
+
             </div>
 
 

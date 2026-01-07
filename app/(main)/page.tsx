@@ -7,7 +7,7 @@ import CounselingForm from "../../components/CounselingForm";
 import LifeAtInframe from "../../components/LifeAtInframe";
 import CTABanner from "../../components/CTABanner";
 import FeaturesSection from "../../components/WhyInframe";
-import TestimonialCarousel from "../../components/TestimonialSection ";
+import TestimonialCarousel from "../../components/TestimonialSection";
 import MembershipPartnership from "../../components/MemberShipSection";
 import CourseCatalog from "../../components/CourseCarousel";
 import { Metadata } from "next";

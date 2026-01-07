@@ -109,14 +109,37 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         return true;
     };
 
+    const saveLeadDataSilently = async () => {
+        try {
+            await Promise.all([
+                sendLeadEmail(),
+                fetch("/api/add-to-sheet", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                        contact: user.contact,
+                        courseName,
+                        price,
+                    }),
+                }),
+            ]);
+        } catch (err) {
+            console.error("Lead save failed", err);
+        }
+    };
+
     // Handle form submission to show order confirmation
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!validateForm()) return;
 
+        // ✅ SAVE DATA IMMEDIATELY
         setShowForm(false);
         setShowOrderConfirmation(true);
+        await saveLeadDataSilently(); 
     };
 
     // Proceed to payment after order confirmation
@@ -155,12 +178,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 description: `Course Payment: ${courseName}`,
                 image: "/pixelcut-export4.png",
 
-                // handler: function () {
-                //     setPaymentSuccess(true);
-                //     setShowOrderConfirmation(true);
-                //     toast.success("Payment successful");
-                //     router.push("/order-confirmation");
-                // },
+
                 handler: function () {
                     sessionStorage.setItem("purchase_amount", String(price));
                     sessionStorage.setItem("purchase_event_id", crypto.randomUUID());
@@ -175,6 +193,18 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 },
 
                 theme: { color: "#FACC15" },
+
+                modal: {
+                    ondismiss: () => {
+                        // ✅ USER CANCELLED PAYMENT
+                        setLoading(false);
+
+                        toast.dismiss(); // close processing toast
+                        toast.info("Payment cancelled", {
+                            position: "top-center",
+                        });
+                    },
+                },
             };
 
             const rzp = new (window as any).Razorpay(options);
@@ -198,7 +228,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             setLoading(false);
         }
     };
-
 
     // Submit data to backend APIs
     const submitUserData = async () => {
@@ -232,20 +261,20 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         );
 
         try {
-            await Promise.all([
-                sendLeadEmail(),
-                fetch("/api/add-to-sheet", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        name: user.name,
-                        email: user.email,
-                        contact: user.contact,
-                        courseName,
-                        price,
-                    }),
-                }),
-            ]);
+            // await Promise.all([
+            //     sendLeadEmail(),
+            //     fetch("/api/add-to-sheet", {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({
+            //             name: user.name,
+            //             email: user.email,
+            //             contact: user.contact,
+            //             courseName,
+            //             price,
+            //         }),
+            //     }),
+            // ]);
 
             // ✅ Success toast
             toast.success(

@@ -8,7 +8,7 @@ import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
 import FAQSection from '../components/faq';
 import StudentsWork from '../components/studentsWork';
-import TestimonialCarousel from '../../../components/TestimonialSection ';
+import TestimonialCarousel from '../../../components/TestimonialSection';
 import FeaturesSection from '../components/featureSection';
 
 function CivilArch() {

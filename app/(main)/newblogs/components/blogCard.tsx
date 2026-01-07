@@ -15,7 +15,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
       {/* Image */}
       <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
         <Image
-          src={blog.heroImage || "/images/gallery/DSC04232.JPG"}
+          src={blog.heroImage}
           alt={blog.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"

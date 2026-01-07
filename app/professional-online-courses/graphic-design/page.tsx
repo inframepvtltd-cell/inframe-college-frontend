@@ -8,7 +8,7 @@ import QuickPayment from '../components/quickPayment';
 import Carrousal from '../components/carrousal';
 import CourseInfo from '../components/courseDetails';
 import StudentsWork from '../components/studentsWork';
-import TestimonialCarousel from '../../../components/TestimonialSection ';
+import TestimonialCarousel from '../../../components/TestimonialSection';
 import FeaturesSection from '../components/featureSection';
 import { useRef } from "react";
 import FAQComponent from '../components/FaqComponent';
@@ -314,7 +314,7 @@ export default function LandingPage() {
                             </section>
 
                             <CertificateCard
-                                courseType='graphic'
+                                courseType='Graphic Design'
                                 title="Become A Certified Digital Marketing Expert"
                                 subtitle="Upon Successful Completion of the Course, You Will Receive Certification From Inframe a Renowned Institution That Adds Substantial Credibility to Your Certificate and Strengthens Your Resume"
                                 imageUrl="/Certificate/inframe_certificate.png"
