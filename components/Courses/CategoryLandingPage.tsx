@@ -140,7 +140,7 @@ const CategoryLandingPage: React.FC<CategoryLandingPageProps> = ({
       : getCategoryInfo(category)
 
   const categoryCourses = courseTypes[category] || [];
-  const fallbackVideos = categoryCourses.find(course => course.videos)?.videos || [];
+  const fallbackVideos = categoryCourses.find((course: { videos: any }) => course.videos)?.videos || [];
 
   const finalVideos = videos.length > 0 ? videos : fallbackVideos;
 
