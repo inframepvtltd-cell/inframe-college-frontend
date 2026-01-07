@@ -91,13 +91,13 @@ const ApplyNowForm = ({
   });
 
   const allPrograms = Object.keys(programLevels);
-  console.log(programLevels);
+  // console.log(programLevels);
 
   const getAvailableProgramsForLevel = (level: string) => {
     let res = allPrograms.filter((program) =>
       Object.keys(programLevels[program]).includes(level)
     );
-    console.log(level);
+    // console.log(level);
 
     return res
   };

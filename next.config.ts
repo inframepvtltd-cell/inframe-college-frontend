@@ -8,6 +8,10 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"], // Optimized for modern browsers
     remotePatterns: [
       {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
+      {
         protocol: "https",
         hostname: "edwardgeorgelondon.com",
         pathname: "/wp-content/uploads/**",

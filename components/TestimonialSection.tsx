@@ -5,8 +5,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "../components/ui/carousel";
-import { Card } from "../components/ui/card";
+} from "./ui/carousel";
+import { Card } from "./ui/card";
 import Image from "next/image";
 import { testimonials } from "../utils/constant";
 import { Poppins } from "next/font/google";
