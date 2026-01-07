@@ -6,9 +6,9 @@ import Autoplay from "embla-carousel-autoplay";
 // import Autoplay from "embla-carousel-autoplay/react";
 
 import { Star } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem } from "../../../components/ui/carousel";
-import { testimonials } from "../../../utils/constant";
-import { Card } from "../../../components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@components/ui/carousel";
+import { Card } from "@components/ui/card";
+import { testimonials } from "@utils/constant";
 
 const poppins = Poppins({
   subsets: ["latin"],
