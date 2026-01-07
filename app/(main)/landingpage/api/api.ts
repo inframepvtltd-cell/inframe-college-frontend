@@ -27,3 +27,5 @@ export const fetchAllCourses = async () => {
         return [];
     }
 };
+
+
