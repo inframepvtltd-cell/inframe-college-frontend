@@ -10,7 +10,7 @@ import {
   Shield,
   Users,
   Camera,
-  FileText,
+  X,
   AlertCircle,
   CheckCircle,
   Loader2,
@@ -53,9 +53,8 @@ interface FormData {
   category: string
   religion: string
   profilePhoto: File | null
-  profilePhotoPreview: string
+  profilePhotoPreview: string | null  
   aadharNumber: string
-  aadharFile: File | null
   permanentAddress: string
   temporaryAddress: string
   dateOfBirth: string
@@ -71,7 +70,6 @@ interface PersonalDetailsFormProps {
 }
 
 export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsFormProps) {
-  // Initialize formData with data from props
   const [formData, setFormData] = useState<FormData>({
     firstName: data.firstName || "",
     lastName: data.lastName || "",
@@ -85,7 +83,6 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
     profilePhoto: data.profilePhoto || null,
     profilePhotoPreview: data.profilePhotoPreview || "",
     aadharNumber: data.aadharNumber || "",
-    aadharFile: data.aadharFile || null,
     permanentAddress: data.permanentAddress || "",
     temporaryAddress: data.temporaryAddress || "",
     dateOfBirth: data.dateOfBirth || ""
@@ -93,8 +90,9 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
 
   const [errors, setErrors] = useState<FormErrors>({})
   const [touched, setTouched] = useState<Set<string>>(new Set())
+  const [showErrors, setShowErrors] = useState<Set<string>>(new Set())
 
-
+  // Sync with parent data
   useEffect(() => {
     const cleanData = {
       firstName: data.firstName || "",
@@ -109,13 +107,11 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
       profilePhoto: data.profilePhoto || null,
       profilePhotoPreview: data.profilePhotoPreview || "",
       aadharNumber: data.aadharNumber || "",
-      aadharFile: data.aadharFile || null,
       permanentAddress: data.permanentAddress || "",
       temporaryAddress: data.temporaryAddress || "",
       dateOfBirth: data.dateOfBirth || ""
     }
 
-    // Only update if there are actual differences
     const hasChanges = Object.keys(cleanData).some(key => {
       const cleanKey = key as keyof FormData
       return cleanData[cleanKey] !== formData[cleanKey]
@@ -124,28 +120,120 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
     if (hasChanges) {
       setFormData(cleanData)
     }
-  }, [data]) // Only run when data prop changes
+  }, [data])
 
+  // Validate field on change
+  const validateField = useCallback((field: keyof FormData, value: any): string => {
+    switch (field) {
+      case 'firstName':
+      case 'lastName':
+      case 'fatherName':
+      case 'motherName':
+        if (!value?.trim()) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required`
+        if (value.length < 2) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} must be at least 2 characters`
+        if (!/^[a-zA-Z\s]+$/.test(value)) return `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} can only contain letters and spaces`
+        return ''
+
+      case 'email':
+        if (!value?.trim()) return 'Email is required'
+        if (!/\S+@\S+\.\S+/.test(value)) return 'Please enter a valid email address'
+        if (value.length > 150) return 'Email must be less than 150 characters'
+        return ''
+
+      case 'phone':
+        if (!value?.trim()) return 'Phone number is required'
+        const phoneDigits = value.replace(/\D/g, '')
+        if (!/^\d{10}$/.test(phoneDigits)) return 'Phone number must be exactly 10 digits'
+        if (!/^[6-9]\d{9}$/.test(phoneDigits)) return 'Phone number must start with 6,7,8, or 9'
+        return ''
+
+      case 'aadharNumber':
+        if (!value?.trim()) return 'Aadhar number is required'
+        if (!/^\d{12}$/.test(value)) return 'Aadhar number must be exactly 12 digits'
+        if (!/^[2-9]\d{11}$/.test(value)) return 'Aadhar number must be valid (starting with 2-9)'
+        return ''
+
+      case 'permanentAddress':
+        if (!value?.trim()) return 'Permanent address is required'
+        if (value.length < 10) return 'Address must be at least 10 characters'
+        return ''
+
+      case 'dateOfBirth':
+        if (!value) return 'Date of birth is required'
+        const dob = new Date(value)
+        const today = new Date()
+        const minAge = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate())
+        const maxAge = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate())
+        
+        if (dob < minAge) return 'Age must be less than 100 years'
+        if (dob > maxAge) return 'You must be at least 16 years old'
+        return ''
+
+      case 'gender':
+      case 'category':
+      case 'religion':
+        return !value ? `${field.charAt(0).toUpperCase() + field.slice(1)} is required` : ''
+
+      case 'profilePhoto':
+        if (!value) return 'Profile photo is required'
+        return ''
+
+      default:
+        return ''
+    }
+  }, [])
+
+  // Handle field change with validation
   const handleChange = useCallback((field: keyof FormData, value: string) => {
+    // For phone field, allow only numbers and format
+    if (field === 'phone') {
+      value = value.replace(/\D/g, '').slice(0, 10)
+    }
+    
+    // For aadhar number, allow only numbers
+    if (field === 'aadharNumber') {
+      value = value.replace(/\D/g, '').slice(0, 12)
+    }
+    
+    // For name fields, allow only letters and spaces
+    if (['firstName', 'lastName', 'fatherName', 'motherName'].includes(field)) {
+      value = value.replace(/[^a-zA-Z\s]/g, '')
+    }
+    
     setFormData(prev => ({
       ...prev,
       [field]: value
     }))
-    // Immediately notify parent of change
+    
     onChange(field, value)
-    // setErrors(prev => ({ ...prev, [field]: undefined }))
     setTouched(prev => new Set(prev.add(field)))
-  }, [onChange])
-  const handleFileChange = useCallback(
-    (field: "profilePhoto" | "aadharFile", file: File | null) => {
+    
+    // Validate and set error
+    const error = validateField(field, value)
+    if (error) {
+      setErrors(prev => ({ ...prev, [field]: error }))
+      setShowErrors(prev => new Set(prev.add(field)))
+    } else {
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[field]
+        return newErrors
+      })
+      setShowErrors(prev => {
+        const newSet = new Set(prev)
+        newSet.delete(field)
+        return newSet
+      })
+    }
+  }, [onChange, validateField])
 
+  const handleFileChange = useCallback(
+    (field: "profilePhoto", file: File | null) => {
       if (field === "profilePhoto" && file === null) {
         setFormData(prev => {
-          // revoke old object URL (memory cleanup)
           if (prev.profilePhotoPreview) {
             URL.revokeObjectURL(prev.profilePhotoPreview)
           }
-
           return {
             ...prev,
             profilePhoto: null,
@@ -155,13 +243,36 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
 
         onChange("profilePhoto", null)
         onChange("profilePhotoPreview", null)
+        
+        // Validate profile photo removal
+        const error = validateField("profilePhoto", null)
+        if (error) {
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+        }
         return
       }
 
-      // 📸 ADD / CHANGE PHOTO
       if (field === "profilePhoto" && file) {
-        const previewUrl = URL.createObjectURL(file)
+        // Validate file type and size
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg']
+        const maxSize = 2 * 1024 * 1024 // 2MB
+        
+        if (!validTypes.includes(file.type)) {
+          const error = 'Profile photo must be JPG or PNG format'
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+          return
+        }
+        
+        if (file.size > maxSize) {
+          const error = 'Profile photo must be less than 2MB'
+          setErrors(prev => ({ ...prev, ["profilePhoto"]: error }))
+          setShowErrors(prev => new Set(prev.add("profilePhoto")))
+          return
+        }
 
+        const previewUrl = URL.createObjectURL(file)
         setFormData(prev => ({
           ...prev,
           profilePhoto: file,
@@ -170,78 +281,73 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
 
         onChange("profilePhoto", file)
         onChange("profilePhotoPreview", previewUrl)
-        return
+        
+        // Clear error if validation passes
+        setErrors(prev => {
+          const newErrors = { ...prev }
+          delete newErrors["profilePhoto"]
+          return newErrors
+        })
+        setShowErrors(prev => {
+          const newSet = new Set(prev)
+          newSet.delete("profilePhoto")
+          return newSet
+        })
       }
-
-      // 📄 OTHER FILES (like aadhar)
-      setFormData(prev => ({ ...prev, [field]: file }))
-      onChange(field, file)
     },
-    [onChange]
+    [onChange, validateField]
   )
 
-
-  const validateField = (field: keyof FormData, value: any): string => {
-    switch (field) {
-      case 'firstName':
-      case 'lastName':
-      case 'fatherName':
-      case 'motherName':
-        return !value?.trim() ? `${field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} is required` : ''
-
-      case 'email':
-        if (!value?.trim()) return 'Email is required'
-        if (!/\S+@\S+\.\S+/.test(value)) return 'Please enter a valid email address'
-        return ''
-
-      case 'phone':
-        if (!value?.trim()) return 'Phone number is required'
-        if (!/^\d{10}$/.test(value.replace(/\D/g, ''))) return 'Phone number must be 10 digits'
-        return ''
-
-      case 'aadharNumber':
-        if (!value?.trim()) return 'Aadhar number is required'
-        if (!/^\d{12}$/.test(value)) return 'Aadhar number must be 12 digits'
-        return ''
-
-      case 'permanentAddress':
-        return !value?.trim() ? 'Permanent address is required' : ''
-
-      case 'dateOfBirth':
-        return !value ? 'Date of birth is required' : ''
-
-      case 'gender':
-      case 'category':
-      case 'religion':
-        return !value ? `${field.charAt(0).toUpperCase() + field.slice(1)} is required` : ''
-
-      case 'profilePhoto':
-        return !value ? 'Profile photo is required' : ''
-
-      default:
-        return ''
-    }
+  // Close error message
+  const closeError = (field: string) => {
+    setShowErrors(prev => {
+      const newSet = new Set(prev)
+      newSet.delete(field)
+      return newSet
+    })
   }
 
+  // Helper functions for styling
   const getInputClass = (field: string) => {
     const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-    const errorClass = errors[field] ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-gray-400"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
     const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
     return `${baseClass} ${errorClass} ${successClass}`
   }
 
   const getSelectClass = (field: string) => {
     const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none"
-    const errorClass = errors[field] ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-gray-400"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
     const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
     return `${baseClass} ${errorClass} ${successClass}`
   }
 
   const getTextareaClass = (field: string) => {
     const baseClass = "w-full px-4 py-3 bg-white border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-    const errorClass = errors[field] ? "border-red-300 bg-red-50" : "border-gray-300 hover:border-gray-400"
+    const errorClass = errors[field] ? "border-red-300 bg-red-50 focus:ring-red-500" : "border-gray-300 hover:border-gray-400"
     const successClass = touched.has(field) && !errors[field] && formData[field as keyof FormData] ? "border-green-300" : ""
     return `${baseClass} ${errorClass} ${successClass}`
+  }
+
+  // Error display component
+  const ErrorMessage = ({ field }: { field: string }) => {
+    if (!showErrors.has(field) || !errors[field]) return null
+    
+    return (
+      <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2 animate-in slide-in-from-top-1 duration-200">
+        <AlertCircle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+        <div className="flex-1">
+          <p className="text-sm text-red-600">{errors[field]}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => closeError(field)}
+          className="p-1 hover:bg-red-100 rounded transition-colors flex-shrink-0"
+        >
+          <X className="w-3 h-3 text-red-600" />
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -267,17 +373,13 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="text"
                   value={formData.firstName}
                   onChange={e => handleChange("firstName", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("firstName")))}
                   className={getInputClass("firstName")}
                   placeholder="Enter your first name"
                   style={{ paddingLeft: '2.75rem' }}
                 />
               </div>
-              {errors.firstName && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.firstName}
-                </p>
-              )}
+              <ErrorMessage field="firstName" />
             </div>
 
             <div>
@@ -290,17 +392,13 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="text"
                   value={formData.lastName}
                   onChange={e => handleChange("lastName", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("lastName")))}
                   className={getInputClass("lastName")}
                   placeholder="Enter your last name"
                   style={{ paddingLeft: '2.75rem' }}
                 />
               </div>
-              {errors.lastName && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.lastName}
-                </p>
-              )}
+              <ErrorMessage field="lastName" />
             </div>
 
             <div>
@@ -313,17 +411,13 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="email"
                   value={formData.email}
                   onChange={e => handleChange("email", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("email")))}
                   className={getInputClass("email")}
                   placeholder="student@example.com"
                   style={{ paddingLeft: '2.75rem' }}
                 />
               </div>
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.email}
-                </p>
-              )}
+              <ErrorMessage field="email" />
             </div>
 
             <div>
@@ -336,18 +430,14 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="tel"
                   value={formData.phone}
                   onChange={e => handleChange("phone", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("phone")))}
                   className={getInputClass("phone")}
                   placeholder="10-digit mobile number"
                   maxLength={10}
                   style={{ paddingLeft: '2.75rem' }}
                 />
               </div>
-              {errors.phone && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.phone}
-                </p>
-              )}
+              <ErrorMessage field="phone" />
             </div>
           </div>
         </div>
@@ -370,15 +460,11 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                 type="text"
                 value={formData.fatherName}
                 onChange={e => handleChange("fatherName", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("fatherName")))}
                 className={getInputClass("fatherName")}
                 placeholder="Enter father's full name"
               />
-              {errors.fatherName && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.fatherName}
-                </p>
-              )}
+              <ErrorMessage field="fatherName" />
             </div>
 
             <div>
@@ -389,15 +475,11 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                 type="text"
                 value={formData.motherName}
                 onChange={e => handleChange("motherName", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("motherName")))}
                 className={getInputClass("motherName")}
                 placeholder="Enter mother's full name"
               />
-              {errors.motherName && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.motherName}
-                </p>
-              )}
+              <ErrorMessage field="motherName" />
             </div>
           </div>
         </div>
@@ -422,16 +504,13 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="date"
                   value={formData.dateOfBirth}
                   onChange={e => handleChange("dateOfBirth", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("dateOfBirth")))}
                   className={getInputClass("dateOfBirth")}
                   style={{ paddingLeft: '2.75rem' }}
+                  max={new Date().toISOString().split('T')[0]}
                 />
               </div>
-              {errors.dateOfBirth && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.dateOfBirth}
-                </p>
-              )}
+              <ErrorMessage field="dateOfBirth" />
             </div>
 
             <div>
@@ -441,6 +520,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
               <select
                 value={formData.gender}
                 onChange={e => handleChange("gender", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("gender")))}
                 className={getSelectClass("gender")}
               >
                 <option value="">Select Gender</option>
@@ -450,12 +530,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   </option>
                 ))}
               </select>
-              {errors.gender && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.gender}
-                </p>
-              )}
+              <ErrorMessage field="gender" />
             </div>
 
             <div>
@@ -465,6 +540,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
               <select
                 value={formData.category}
                 onChange={e => handleChange("category", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("category")))}
                 className={getSelectClass("category")}
               >
                 <option value="">Select Category</option>
@@ -474,12 +550,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   </option>
                 ))}
               </select>
-              {errors.category && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.category}
-                </p>
-              )}
+              <ErrorMessage field="category" />
             </div>
 
             <div>
@@ -489,6 +560,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
               <select
                 value={formData.religion}
                 onChange={e => handleChange("religion", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("religion")))}
                 className={getSelectClass("religion")}
               >
                 <option value="">Select Religion</option>
@@ -498,12 +570,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   </option>
                 ))}
               </select>
-              {errors.religion && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.religion}
-                </p>
-              )}
+              <ErrorMessage field="religion" />
             </div>
           </div>
         </div>
@@ -525,16 +592,12 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
               <textarea
                 value={formData.permanentAddress}
                 onChange={e => handleChange("permanentAddress", e.target.value)}
+                onBlur={() => setShowErrors(prev => new Set(prev.add("permanentAddress")))}
                 className={getTextareaClass("permanentAddress")}
                 placeholder="House number, Street, Area, City, State, Pincode"
                 rows={3}
               />
-              {errors.permanentAddress && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.permanentAddress}
-                </p>
-              )}
+              <ErrorMessage field="permanentAddress" />
             </div>
 
             <div>
@@ -552,13 +615,13 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
           </div>
         </div>
 
-        {/* Document Upload Section */}
+        {/* Document Section */}
         <div className="space-y-6">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-red-100 rounded-lg">
-              <FileText className="w-5 h-5 text-red-600" />
+              <Shield className="w-5 h-5 text-red-600" />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900">Document Upload</h2>
+            <h2 className="text-xl font-semibold text-gray-900">Identification</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -566,8 +629,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Profile Photo <span className="text-red-500">*</span>
               </label>
-              <div className={`border-2 border-dashed rounded-xl p-6 text-center transition-all duration-200 ${errors.profilePhoto ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-blue-400'
-                }`}>
+              <div className={`border-2 ${errors.profilePhoto ? 'border-red-300 bg-red-50' : 'border-gray-300 hover:border-blue-400'} rounded-xl p-6 text-center transition-all duration-200`}>
                 {formData.profilePhotoPreview ? (
                   <div className="space-y-4">
                     <div className="relative w-32 h-32 mx-auto">
@@ -584,7 +646,6 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                     >
                       Remove Photo
                     </button>
-
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -607,12 +668,7 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   </div>
                 )}
               </div>
-              {errors.profilePhoto && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.profilePhoto}
-                </p>
-              )}
+              <ErrorMessage field="profilePhoto" />
             </div>
 
             <div>
@@ -625,36 +681,14 @@ export default function PersonalDetailsForm({ data, onChange }: PersonalDetailsF
                   type="text"
                   value={formData.aadharNumber}
                   onChange={e => handleChange("aadharNumber", e.target.value)}
+                  onBlur={() => setShowErrors(prev => new Set(prev.add("aadharNumber")))}
                   className={getInputClass("aadharNumber")}
                   placeholder="12-digit Aadhar number"
                   maxLength={12}
                   style={{ paddingLeft: '2.75rem' }}
                 />
               </div>
-              {errors.aadharNumber && (
-                <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.aadharNumber}
-                </p>
-              )}
-
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Aadhar Card Upload
-                </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:border-blue-400 transition-colors">
-                  <label className="cursor-pointer">
-                    <input
-                      type="file"
-                      className="hidden"
-                      accept=".jpg,.jpeg,.png,.pdf"
-                      onChange={e => handleFileChange("aadharFile", e.target.files?.[0] || null)}
-                    />
-                    <span className="text-blue-600 font-medium">Upload Aadhar Card</span>
-                    <p className="text-xs text-gray-500 mt-1">JPG, PNG or PDF up to 5MB</p>
-                  </label>
-                </div>
-              </div>
+              <ErrorMessage field="aadharNumber" />
             </div>
           </div>
         </div>
