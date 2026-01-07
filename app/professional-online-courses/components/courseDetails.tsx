@@ -27,7 +27,7 @@ const themes: any = {
 
 type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic' | 'civil';
 function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
-    const meta = useMemo(() => themeClasses[courseType], [courseType]);
+    // const meta = useMemo(() => themeClasses[courseType], [courseType]);
 
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
