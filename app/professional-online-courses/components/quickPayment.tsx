@@ -95,6 +95,60 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         }
     };
 
+        const sendToPrivyr = async () => {
+        const PRIVYR_URL =
+            "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/iQR8c5Xr#generic-webhook";
+
+        try {
+            // 🔹 Raw enroll data
+            const leadData = {
+                name: user.name,
+                email: user.email,
+                phone_number: user.contact,
+                course_name: courseName,
+                price,
+                currency: "INR",
+                source: "Enroll Now Page",
+                device: navigator.userAgent,
+            };
+
+            // Final payload
+            const payload = {
+                // REQUIRED
+                name: user.name,
+                display_name: user.name,
+
+                // CONTACT
+                phone: user.contact,
+                mobile_number: user.contact,
+                whatsapp_number: user.contact,
+                email_address: user.email,
+
+                // BUSINESS FIELDS
+                lead_stage: "New Enrollment",
+                price: price,
+                course_name: courseName,
+
+                webhook_source: "Website Frontend - Professional Course",
+            };
+
+            const res = await fetch(PRIVYR_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+            } else {
+                const successText = await res.text();
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const sendToPrivyr = async () => {
         const PRIVYR_URL =
             "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/iQR8c5Xr#generic-webhook";
@@ -178,6 +232,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         price,
                     }),
                 }),
+                sendToPrivyr(),
                 sendToPrivyr(),
             ]);
         } catch (err) {
