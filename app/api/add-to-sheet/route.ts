@@ -31,6 +31,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: true, data: text });
     } catch (err) {
         console.error("Add-to-sheet failed:", err);
-        return NextResponse.json({ success: false, error: err.message });
+        return NextResponse.json({ success: false, error: err });
     }
 }
