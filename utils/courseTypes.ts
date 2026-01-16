@@ -40,11 +40,38 @@ export type CourseType = {
   curriculum?: CurriculumType;
   software: SoftwareType[];
   whatYouWillLearn: WhatLearn[];
-  videos: VideosType[]; 
+  videos: VideosType[];
+};
+
+const deepTrim = (value: any): any => {
+  if (typeof value === 'string') {
+    return value.trim();
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(deepTrim);
+  }
+
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, val]) => [key, deepTrim(val)])
+    );
+  }
+
+  return value;
 };
 
 const res = await fetch(`${API_BASE}/courses/course-types`);
-export const courseTypes = await res.json();
+const data = await res.json();
+
+const trimmedCourseTypes = deepTrim(data);
+
+export const courseTypes = trimmedCourseTypes;
+
+// const res = await fetch(`${API_BASE}/courses/course-types`);
+// console.clear();
+// console.log(await res.json());
+// export const courseTypes = await res.json();
 
 // export const courseTypes: CourseCategory = {
 //   "interior-design": [

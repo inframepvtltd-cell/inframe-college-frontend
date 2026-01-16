@@ -1,4 +1,3 @@
-// app/(main)/lifeatinframe/components/LifeAtInframePage.tsx
 "use client";
 
 import { Suspense, lazy, useState } from 'react';
@@ -6,10 +5,11 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, ArrowRight } from 'lucide-react';
-import { Poppins } from 'next/font/google';
+import { Poppins } from "next/font/google";
+import "@components/style.css";
 import { LifeSection, LifeSectionItem } from '../api/api';
-import ApplyNowForm from './ApplyNowForm';
 import LoadingSpinner from './LoadingSpinner';
+import ApplyNowForm from '@components/ApplyNowForm';
 
 // Lazy load heavy components
 const CampusLife = lazy(() => import('./CampusLife'));
@@ -17,6 +17,7 @@ const CampusGallery = lazy(() => import('./CampusGallery'));
 const SportsArena = lazy(() => import('./SportsArena'));
 const StudentClubs = lazy(() => import('./StudentClubs'));
 const CampusTour = lazy(() => import('./CampusTour'));
+
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -104,7 +105,7 @@ const LifeAtInframePage: React.FC<LifeAtInframePageProps> = ({ sectionsWithItems
   const welcomeSection = getSectionByType('life_welcome');
   const servicesSection = getSectionByType('life_student_services');
   const campusLifeSection = getSectionByType('life_campus_life');
-  const studentClubsSection = getSectionByType('student_clubs');
+  const studentClubsSection = getSectionByType('life_student_clubs');
   const sportsArenaSection = getSectionByType('life_sports_arena');
   const campusTourSection = getSectionByType('life_campus_tour');
   const eventsSection = getSectionByType('life_events_activities');
@@ -163,7 +164,7 @@ const LifeAtInframePage: React.FC<LifeAtInframePageProps> = ({ sectionsWithItems
             <div>
               {/* SECTION TITLE HIDDEN - Only show item title if exists */}
               {welcomeSection?.items[0]?.title ? (
-                <h2 className="text-4xl font-bold mb-6 text-black">
+                <h2 className="text-4xl font-bold mb-6 text-black shad">
                   {welcomeSection.items[0].title}
                 </h2>
               ) : (
@@ -174,14 +175,14 @@ const LifeAtInframePage: React.FC<LifeAtInframePageProps> = ({ sectionsWithItems
 
               {/* Content with new line formatting */}
               {welcomeSection?.items[0]?.content && (
-                <div className="mb-6">
+                <div className="mb-6 text-black">
                   {formatTextWithNewLines(welcomeSection.items[0].content)}
                 </div>
               )}
 
               {/* Extra text if exists */}
               {welcomeSection?.items[0]?.extra_text && (
-                <div className="mb-6">
+                <div className="mb-6 text-black">
                   {formatTextWithNewLines(welcomeSection.items[0].extra_text)}
                 </div>
               )}
@@ -376,23 +377,10 @@ const LifeAtInframePage: React.FC<LifeAtInframePageProps> = ({ sectionsWithItems
       )}
 
       {/* Events & Activities Section */}
-      <section className="w-full py-10">
+      <section className="w-full pb-10">
         <div className="max-w-7xl mx-auto px-4">
           {/* SECTION TITLE HIDDEN - Only show if items have content */}
-          {eventsSection?.items[0]?.title || eventsSection?.section.description ? (
-            <div className="text-center mb-16">
-              {eventsSection?.items[0]?.title && (
-                <h2 className="text-4xl font-bold mb-6 text-black">
-                  {eventsSection.items[0].title}
-                </h2>
-              )}
-              {eventsSection?.section.description && (
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  {eventsSection.section.description}
-                </p>
-              )}
-            </div>
-          ) : (
+         
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-6 text-black">
                 Campus Events & Activities
@@ -401,7 +389,6 @@ const LifeAtInframePage: React.FC<LifeAtInframePageProps> = ({ sectionsWithItems
                 Immerse yourself in a diverse range of events and activities that make campus life exciting and memorable.
               </p>
             </div>
-          )}
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* If database has events, use them */}

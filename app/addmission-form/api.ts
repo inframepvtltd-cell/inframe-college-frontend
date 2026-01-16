@@ -119,17 +119,24 @@ export const submitPayment = async (studentId: string, paymentData: any) => {
   }
 };
 
-export const createPaymentOrder = async (amount: number) => {
-  const response = await fetch(`${API_BASE_URL}/payment/create-order`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ amount: amount * 100 }), // Convert to paise
-  });
+export const createPaymentOrder = async ({
+  courseId,
+}: {
+  courseId: string;
+}) => {
+  const response = await fetch(
+    `${API_BASE_URL}/payment/create-order`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ courseId }),
+    }
+  );
 
   if (!response.ok) {
-    throw new Error('Failed to create payment order');
+    throw new Error("Failed to create payment order");
   }
 
   return await response.json();

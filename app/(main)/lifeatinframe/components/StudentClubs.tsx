@@ -50,27 +50,14 @@ const StudentClubs: React.FC<StudentClubsProps> = ({ section, items }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* SECTION TITLE - Use item title if exists */}
-          {displayItems[0]?.title ? (
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              {displayItems[0].title}
-            </h2>
-          ) : (
+          
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Student Clubs & Societies
             </h2>
-          )}
-          
-          {/* Description */}
-          {displayItems[0]?.content ? (
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {displayItems[0].content}
-            </p>
-          ) : (
+        
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Discover your passion and connect with like-minded individuals through our diverse range of student clubs. Each club offers unique opportunities for personal growth, leadership development, and unforgettable experiences.
             </p>
-          )}
         </motion.div>
 
         {/* Clubs List */}

@@ -62,6 +62,11 @@ export default function ProgramAndPaymentForm({
   // Load Razorpay script
   const loadRazorpay = () => {
     return new Promise<boolean>((resolve) => {
+      if ((window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => resolve(true);
@@ -85,7 +90,9 @@ export default function ProgramAndPaymentForm({
       }
 
       // Create order using API utility
-      const order = await createPaymentOrder(totalAmount * 100);
+      const order = await createPaymentOrder({
+        courseId: data.courseId!,
+      });
 
       // Configure Razorpay options
       const options = {
@@ -95,11 +102,13 @@ export default function ProgramAndPaymentForm({
         name: "Inframe College",
         description: `Payment for ${selectedCourse.course_name}`,
         order_id: order.id,
-        handler: function (response: any) {
+        handler: async (response: any) => {
           console.log("Payment successful:", response);
-          verifyPayment(response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
-          setPaymentCompleted(true);
-          
+          const verified = await verifyPayment(response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
+          if (verified) {
+            setPaymentCompleted(true);
+          }
+
           // Pass payment data to parent
           if (onPaymentComplete) {
             onPaymentComplete({
@@ -148,11 +157,17 @@ export default function ProgramAndPaymentForm({
       });
 
       if (!response.ok) {
-        throw new Error('Payment verification failed');
+        return false;
       }
+
       console.log('Payment verified successfully');
+
+      const data = await response.json();
+      return data.success === true;
+
     } catch (error) {
       console.error('Payment verification error:', error);
+      return false;
     }
   };
 
@@ -282,13 +297,12 @@ export default function ProgramAndPaymentForm({
                 <button
                   onClick={handlePayment}
                   disabled={paymentLoading || paymentCompleted}
-                  className={`w-full px-6 py-3 font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${
-                    paymentCompleted
-                      ? "bg-green-600 text-white cursor-not-allowed"
-                      : paymentLoading
+                  className={`w-full px-6 py-3 font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 ${paymentCompleted
+                    ? "bg-green-600 text-white cursor-not-allowed"
+                    : paymentLoading
                       ? "bg-gray-600 text-white cursor-wait"
                       : "bg-black text-white hover:bg-gray-800"
-                  }`}
+                    }`}
                 >
                   {paymentLoading ? (
                     <>
@@ -310,8 +324,8 @@ export default function ProgramAndPaymentForm({
                   <div>
                     <h4 className="font-medium text-yellow-800 mb-1">Payment Information</h4>
                     <p className="text-sm text-yellow-700">
-                      • Payment is optional. You can submit the application now and pay later at campus.<br/>
-                      • If you pay now, your application will be processed faster.<br/>
+                      • Payment is optional. You can submit the application now and pay later at campus.<br />
+                      • If you pay now, your application will be processed faster.<br />
                       • Course fee: <span className="font-bold">₹{totalAmount}</span>
                     </p>
                   </div>
