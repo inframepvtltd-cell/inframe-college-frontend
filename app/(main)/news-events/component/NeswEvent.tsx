@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { Tab } from "@headlessui/react";
 import { motion } from "framer-motion";
-import ApplyNowForm from "./ApplyNowForm";
+import ApplyNowForm from "@components/ApplyNowForm";
 import HeroSection from "./HeroSection";
 import SearchFilter from "./SearchFilter";
 import EventCard from "./EventCard";

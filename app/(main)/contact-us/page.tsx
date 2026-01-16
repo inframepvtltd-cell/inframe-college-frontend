@@ -2,7 +2,7 @@
 import "@components/style.css";
 import { ContactUsForm } from "./components/ContactUsForm";
 import ReelCard from "./components/ReelCard";
-import ApplyNow from "./components/ApplyNow";
+import ApplyNow from "@components/ApplyNow";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

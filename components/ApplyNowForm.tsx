@@ -9,7 +9,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "../components/ui/sheet";
@@ -21,13 +20,6 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { Input } from "../components/ui/input";
-import {
-  states,
-  cities as citiesData,
-  programLevels,
-  allLevels,
-  BFAPrograms,
-} from "../utils/constant";
 import { Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -40,14 +32,12 @@ import {
 } from "@/components/ui/form";
 import { CheckCircle, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
-// import { cn } from "@/lib/utils";
+import { getStates, getCities, getLevels, getPrograms, submitApplication } from "@app/api/apply-now/route";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
-
-const cities: { [key: string]: string[] } = citiesData;
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -77,6 +67,16 @@ const ApplyNowForm = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
+  // New API states
+  const [states, setStates] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+  const [levels, setLevels] = useState<string[]>([]);
+  const [programs, setPrograms] = useState<string[]>([]);
+  const [loadingStates, setLoadingStates] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
+  const [loadingLevels, setLoadingLevels] = useState(false);
+  const [loadingPrograms, setLoadingPrograms] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -90,18 +90,6 @@ const ApplyNowForm = ({
     },
   });
 
-  const allPrograms = Object.keys(programLevels);
-  // console.log(programLevels);
-
-  const getAvailableProgramsForLevel = (level: string) => {
-    let res = allPrograms.filter((program) =>
-      Object.keys(programLevels[program]).includes(level)
-    );
-    // console.log(level);
-
-    return res
-  };
-
   // Reset form when sheet closes
   useEffect(() => {
     if (!isFormOpen) {
@@ -110,9 +98,79 @@ const ApplyNowForm = ({
         setSelectedState("");
         setSelectedLevel("");
         setSubmissionStatus("idle");
+        setCities([]);
+        setPrograms([]);
       }, 300);
     }
   }, [isFormOpen, form]);
+
+  // Fetch initial states and levels when form opens
+  useEffect(() => {
+    if (isFormOpen) {
+      fetchInitialData();
+    }
+  }, [isFormOpen]);
+
+  const fetchInitialData = async () => {
+    try {
+      setLoadingStates(true);
+      setLoadingLevels(true);
+
+      // Fetch states and levels in parallel
+      const [statesData, levelsData] = await Promise.all([
+        getStates(),
+        getLevels()
+      ]);
+
+      setStates(statesData);
+      setLevels(levelsData);
+    } catch (error) {
+      console.error("Error fetching initial data:", error);
+    } finally {
+      setLoadingStates(false);
+      setLoadingLevels(false);
+    }
+  };
+
+  // Handle state selection - fetch cities for selected state
+  const handleStateChange = async (value: string) => {
+    setSelectedState(value);
+    form.setValue("state", value);
+    form.setValue("city", "");
+    setCities([]);
+
+    if (value) {
+      setLoadingCities(true);
+      try {
+        const citiesData = await getCities(value);
+        setCities(citiesData);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      } finally {
+        setLoadingCities(false);
+      }
+    }
+  };
+
+  // Handle level selection - fetch programs for selected level
+  const handleLevelChange = async (value: string) => {
+    setSelectedLevel(value);
+    form.setValue("level", value);
+    form.setValue("program", "");
+    setPrograms([]);
+
+    if (value) {
+      setLoadingPrograms(true);
+      try {
+        const programsData = await getPrograms(value);
+        setPrograms(programsData);
+      } catch (error) {
+        console.error("Error fetching programs:", error);
+      } finally {
+        setLoadingPrograms(false);
+      }
+    }
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (isSubmitting) return;
@@ -121,16 +179,18 @@ const ApplyNowForm = ({
     setSubmissionStatus("idle");
 
     try {
-      const response = await fetch("https://formspree.io/f/myzrbywp", {
-        // const response = await fetch("https://formspree.io/f/mvgzrnyl", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+      // Use your API submission
+      const response = await submitApplication({
+        name: values.name,
+        email: values.email,
+        phoneNumber: values.phoneNumber,
+        state: values.state,
+        city: values.city,
+        level: values.level,
+        program: values.program,
       });
 
-      if (response.ok) {
+      if (response) {
         setSubmissionStatus("success");
 
         // Show success message for 2 seconds then redirect
@@ -155,263 +215,6 @@ const ApplyNowForm = ({
       setIsSubmitting(false);
     }
   };
-
-  const renderFormFields = () => (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    placeholder="Full Name"
-                    className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="Email Address"
-                    className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="tel"
-                    placeholder="Phone Number (10 digits)"
-                    className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-1">
-            <FormField
-              control={form.control}
-              name="state"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                      setSelectedState(value);
-                      form.setValue("city", "");
-                    }}
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                        <SelectValue placeholder="State" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {states.map((state) => (
-                        <SelectItem key={state} value={state}>
-                          {state}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-xs" />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <div className="space-y-1">
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    disabled={!selectedState}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                        <SelectValue placeholder="City" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {selectedState &&
-                        cities[selectedState]?.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-xs" />
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          <FormField
-            control={form.control}
-            name="level"
-            render={({ field }) => (
-              <FormItem>
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    setSelectedLevel(value);
-                    form.setValue("program", "");
-                  }}
-                  value={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                      <SelectValue placeholder="Education Level" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {allLevels.map((level) => (
-                      <SelectItem key={level} value={level}>
-                        {level}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {selectedLevel === "BFA" ? (
-          <div className="space-y-1">
-            <FormField
-              control={form.control}
-              name="program"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                    }}
-                    value={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                        <SelectValue placeholder="BFA Program" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {BFAPrograms.map((program) => (
-                        <SelectItem key={program} value={program}>
-                          {program}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-xs" />
-                </FormItem>
-              )}
-            />
-          </div>
-        ) : (
-          <div className="space-y-1">
-            <FormField
-              control={form.control}
-              name="program"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                    }}
-                    value={field.value}
-                    disabled={!selectedLevel}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                        <SelectValue placeholder="Select Program" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {selectedLevel &&
-                        getAvailableProgramsForLevel(selectedLevel).map(
-                          (prog) => (
-                            <SelectItem key={prog} value={prog}>
-                              {prog}
-                            </SelectItem>
-                          )
-                        )}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage className="text-xs" />
-                </FormItem>
-              )}
-            />
-          </div>
-        )}
-
-        <Button
-          type="submit"
-          disabled={isSubmitting || isRedirecting}
-          className={cn(
-            "w-full h-12 mt-2 bg-gradient-to-r from-yellow-400 to-yellow-500",
-            "hover:from-yellow-500 hover:to-yellow-600",
-            "text-black font-semibold text-lg",
-            "shadow-lg hover:shadow-xl",
-            "transition-all duration-300",
-            "flex items-center justify-center gap-2"
-          )}
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="h-5 w-5 animate-spin" />
-              Submitting...
-            </>
-          ) : (
-            <>
-              Apply Now
-              <ArrowRight className="h-5 w-5" />
-            </>
-          )}
-        </Button>
-      </form>
-    </Form>
-  );
 
   return (
     <Sheet open={isFormOpen} onOpenChange={setIsFormOpen}>
@@ -453,11 +256,13 @@ const ApplyNowForm = ({
         <div className="sticky top-0 z-20 bg-white border-b border-gray-200 p-6 pb-4">
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <h2 className={`text-2xl font-bold ${poppins.className} mb-2`}>
-                <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                  Start Your Journey
-                </span>
-              </h2>
+              <SheetTitle asChild>
+                <h2 className={`text-2xl font-bold ${poppins.className} mb-2`}>
+                  <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                    Start Your Journey
+                  </span>
+                </h2>
+              </SheetTitle>
               <p className="text-sm text-gray-600">
                 Fill out the form below and our team will get in touch with you
               </p>
@@ -521,7 +326,7 @@ const ApplyNowForm = ({
                 className="space-y-5"
                 id="apply-form"
               >
-                {/* Form Fields - All visible without scrolling within form */}
+                {/* Name Field */}
                 <FormField
                   control={form.control}
                   name="name"
@@ -539,6 +344,7 @@ const ApplyNowForm = ({
                   )}
                 />
 
+                {/* Email Field */}
                 <FormField
                   control={form.control}
                   name="email"
@@ -557,6 +363,7 @@ const ApplyNowForm = ({
                   )}
                 />
 
+                {/* Phone Field */}
                 <FormField
                   control={form.control}
                   name="phoneNumber"
@@ -575,6 +382,7 @@ const ApplyNowForm = ({
                   )}
                 />
 
+                {/* State and City Fields */}
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -582,21 +390,20 @@ const ApplyNowForm = ({
                     render={({ field }) => (
                       <FormItem>
                         <Select
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                            setSelectedState(value);
-                            form.setValue("city", "");
-                          }}
+                          onValueChange={handleStateChange}
                           value={field.value}
+                          disabled={loadingStates}
                         >
                           <FormControl>
                             <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                              <SelectValue placeholder="State" />
+                              <SelectValue
+                                placeholder={loadingStates ? "Loading states..." : "State"}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="max-h-60">
-                            {states.map((state) => (
-                              <SelectItem key={state} value={state}>
+                            {states.map((state, index) => (
+                              <SelectItem key={`state-${index}-${state}`} value={state}>
                                 {state}
                               </SelectItem>
                             ))}
@@ -615,20 +422,27 @@ const ApplyNowForm = ({
                         <Select
                           onValueChange={field.onChange}
                           value={field.value}
-                          disabled={!selectedState}
+                          disabled={!selectedState || loadingCities}
                         >
                           <FormControl>
                             <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                              <SelectValue placeholder="City" />
+                              <SelectValue
+                                placeholder={
+                                  loadingCities
+                                    ? "Loading cities..."
+                                    : !selectedState
+                                      ? "Select state first"
+                                      : "City"
+                                }
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="max-h-60">
-                            {selectedState &&
-                              cities[selectedState]?.map((city) => (
-                                <SelectItem key={city} value={city}>
-                                  {city}
-                                </SelectItem>
-                              ))}
+                            {cities.map((city, index) => (
+                              <SelectItem key={`city-${index}-${city}`} value={city}>
+                                {city}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-xs" />
@@ -637,27 +451,27 @@ const ApplyNowForm = ({
                   />
                 </div>
 
+                {/* Level Field */}
                 <FormField
                   control={form.control}
                   name="level"
                   render={({ field }) => (
                     <FormItem>
                       <Select
-                        onValueChange={(value) => {
-                          field.onChange(value);
-                          setSelectedLevel(value);
-                          form.setValue("program", "");
-                        }}
+                        onValueChange={handleLevelChange}
                         value={field.value}
+                        disabled={loadingLevels}
                       >
                         <FormControl>
                           <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                            <SelectValue placeholder="Education Level" />
+                            <SelectValue
+                              placeholder={loadingLevels ? "Loading levels..." : "Education Level"}
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-60">
-                          {allLevels.map((level) => (
-                            <SelectItem key={level} value={level}>
+                          {levels.map((level, index) => (
+                            <SelectItem key={`level-${index}-${level}`} value={level}>
                               {level}
                             </SelectItem>
                           ))}
@@ -668,70 +482,45 @@ const ApplyNowForm = ({
                   )}
                 />
 
-                {selectedLevel === "BFA" ? (
-                  <FormField
-                    control={form.control}
-                    name="program"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Select
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                          }}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                              <SelectValue placeholder="BFA Program" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="max-h-60">
-                            {BFAPrograms.map((program) => (
-                              <SelectItem key={program} value={program}>
-                                {program}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )}
-                  />
-                ) : (
-                  <FormField
-                    control={form.control}
-                    name="program"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Select
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                          }}
-                          value={field.value}
-                          disabled={!selectedLevel}
-                        >
-                          <FormControl>
-                            <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
-                              <SelectValue placeholder="Select Program" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="max-h-60">
-                            {selectedLevel && getAvailableProgramsForLevel(selectedLevel).map(
-                              (prog) => (
-                                <SelectItem key={prog} value={prog}>
-                                  {prog}
-                                </SelectItem>
-                              )
-                            )}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage className="text-xs" />
-                      </FormItem>
-                    )}
-                  />
-                )}
-
-                {/* Submit Button - Sticky at bottom */}
+                {/* Program Field */}
+                <FormField
+                  control={form.control}
+                  name="program"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        disabled={!selectedLevel || loadingPrograms}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400">
+                            <SelectValue
+                              placeholder={
+                                loadingPrograms
+                                  ? "Loading programs..."
+                                  : !selectedLevel
+                                    ? "Select level first"
+                                    : "Select Program"
+                              }
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="max-h-60">
+                          {programs.map((program, index) => (
+                            <SelectItem
+                              key={`program-${index}`}  // Use index since we don't have ID
+                              value={program}           // program is a string
+                            >
+                              {program}                 {/* Display the string */}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage className="text-xs" />
+                    </FormItem>
+                  )}
+                />
               </form>
             </Form>
           )}
@@ -778,69 +567,3 @@ const ApplyNowForm = ({
 };
 
 export default ApplyNowForm;
-
-
-
-
-// ==============================
-
-
-// const onSubmit = async (values: z.infer<typeof formSchema>) => {
-//   if (isSubmitting) return;
-
-//   setIsSubmitting(true);
-//   setSubmissionMessage(null);
-
-//   try {
-//     console.log("Form values:", values);
-
-//     // Transform form data to match enquiry API structure
-//     const enquiryData = {
-//       name: values.name,
-//       phoneNumber: values.phoneNumber,
-//       email: values.email,
-//       city: values.city,
-//       course: values.program, // Use program as course
-//       source: 'apply-now-form',
-//       message: `State: ${values.state}, Level: ${values.level}`, // Include additional info in message
-//     };
-
-//     console.log("Enquiry data to submit:", enquiryData);
-
-//     // Submit to backend API
-//     const response = await apiHelpers.submitEnquiry(enquiryData);
-
-//     console.log("API response:", response);
-
-//     if (response && response.success) {
-//       setSubmissionMessage("Thank you! Your application has been submitted successfully.");
-//       setTimeout(() => {
-//         router.push("/thank-you");
-//       }, 2000);
-//     } else {
-//       setSubmissionMessage(
-//         "Failed to submit the form. Please try again later."
-//       );
-//     }
-//   } catch (error: unknown) {
-//     console.error("Error submitting the form:", error);
-
-//     // Provide more specific error messages
-//     if (error && typeof error === 'object' && 'response' in error) {
-//       const apiError = error as { response?: { status?: number } };
-//       if (apiError.response?.status === 400) {
-//         setSubmissionMessage("Please check your form data and try again.");
-//       } else if (apiError.response?.status === 404) {
-//         setSubmissionMessage("Service temporarily unavailable. Please try again later.");
-//       } else if (apiError.response?.status && apiError.response.status >= 500) {
-//         setSubmissionMessage("Server error. Please try again later.");
-//       } else {
-//         setSubmissionMessage("An error occurred. Please try again later.");
-//       }
-//     } else {
-//       setSubmissionMessage("An error occurred. Please try again later.");
-//     }
-//   } finally {
-//     setIsSubmitting(false);
-//   }
-// };

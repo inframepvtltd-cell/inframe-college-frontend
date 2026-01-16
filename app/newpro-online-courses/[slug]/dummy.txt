@@ -1,0 +1,135 @@
+{
+  id: 'faaead1a-438e-43fd-bf65-aa8d7bf23b0a',
+  hero_image_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768301423/inframe_college/y76ivhbrbyhpkkco5haa.png',
+  course_type: 'Interior Design Course',
+  course_slug: 'interior-design',
+  course_title: 'Interior Design Course Title',
+  duration: '6 weeks',
+  original_price: '2499.00',
+  offer_price: '1499.00',
+  theme_color: 'purple',
+  pricing_banner_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768301425/inframe_college/dw1aabpr6vzhyoaxjhtv.png',
+  gallery_description: '',
+  software_tools: [
+    {
+      id: '70baa6cc-2cd4-4344-bf26-9d84519d89e3',
+      name: 'google ads',
+      icon_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768041056/inframe_college/me3eryk3iexowwiyw8y6.png'
+    },
+    {
+      id: '2c47b5ba-2e5b-4a1b-882b-83238f47dcfe',
+      name: 'Youtube',
+      icon_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768042627/inframe_college/ydpo1kdwmt1sor2cfd9g.png'
+    },
+    {
+      id: '42bba705-e92c-42ac-a884-fb5fad7540bd',
+      name: 'rhino',
+      icon_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768042628/inframe_college/nricbfp8qpfzcpbsa88b.png'
+    },
+    {
+      id: '1f68f005-bedf-4170-ba87-ebd6b3e55697',
+      name: 'meta',
+      icon_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768042629/inframe_college/ofnuzooveidi2qqtu3cz.png'
+    }
+  ],
+  gallery_images: [
+    {
+      id: '0b09b58d-4950-4d8c-bb9e-fac8c77e6e8e',
+      image_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768301428/inframe_college/r5swueeqwsnslusmgkql.png'
+    },
+    {
+      id: '463c2d37-c28f-40f1-8e9e-6a628f7c78ca',
+      image_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768301426/inframe_college/ylcujfldkfmjzx9l6e47.png'
+    },
+    {
+      id: '7021d0a4-0130-46df-ae6d-6fde6ee63eab',
+      image_url: 'https://res.cloudinary.com/denc4i3lt/image/upload/v1768301427/inframe_college/eobb4zlcnjevuim0hrgm.png'
+    }
+  ]
+}
+===================================================================================
+{
+  "heroInfo": {
+    "title": "Designed for Class 10+ Students & Career Beginners",
+    "highlight": "100% Online Course",
+    "description": "This comprehensive program combines structured pre-recorded video lessons with interactive live sessions for optimal learning outcomes."
+  },
+
+  "delivery": {
+    "recorded": {
+      "title": "Pre-Recorded Video Lessons",
+      "icon": "Play",
+      "points": [
+        "Learn at your own pace and schedule",
+        "Access course materials 24/7"
+      ]
+    },
+    "live": {
+      "title": "Live Interactive Sessions",
+      "icon": "Users",
+      "points": [
+        "Real-time Q&A and discussions",
+        "Peer collaboration opportunities"
+      ]
+    }
+  },
+
+  "additionalSupport": [
+    "Assignments with Feedback",
+    "Progress Tracking",
+    "Mentor Support",
+    "Certificate of Completion"
+  ],
+
+  "targetAudience": [
+    "Class 10+ Students",
+    "College Students",
+    "Career Beginners"
+  ],
+
+  "offerSection": {
+    "badge": "LIMITED TIME OFFER",
+    "title": "New Year Enrollment Special",
+    "benefits": [
+      {
+        "title": "Portfolio Development",
+        "description": "Professional portfolio consultation and optimization"
+      },
+      {
+        "title": "Career Guidance",
+        "description": "Personalized 1-on-1 mentorship sessions"
+      },
+      {
+        "title": "Certifications",
+        "description": "Industry-recognized certification upon completion"
+      },
+      {
+        "title": "Lifetime Access",
+        "description": "Course material and future updates included"
+      }
+    ]
+  },
+
+  "keyFeatures": [
+    {
+      "icon": "Users",
+      "title": "Live Sessions by Industry Professionals",
+      "description": "Gain insights from professionals working at top companies."
+    },
+    {
+      "icon": "Brain",
+      "title": "AI-Powered Marketing Training",
+      "description": "Learn to automate, analyze, and optimize using AI tools."
+    },
+    {
+      "icon": "Briefcase",
+      "title": "Hands-On Projects and Case Studies",
+      "description": "Apply your knowledge to real-world scenarios."
+    },
+    {
+      "icon": "Target",
+      "title": "Placement Assistance",
+      "description": "Interview prep, resume help, and job support."
+    }
+  ]
+}

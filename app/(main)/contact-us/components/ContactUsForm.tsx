@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchContactInfo, submitContactForm, extractContactInfo, getContactValue } from "../api/api";
-import ApplyNowForm from "./ApplyNowForm";
+import ApplyNowForm from "@components/ApplyNowForm";
 
 // Using the Poppins font
 const poppins = Poppins({
@@ -316,7 +316,7 @@ export function ContactUsForm({
                   Important Links
                 </h2>
 
-      
+
                 <div className="space-y-4">
                   {/* Career Link */}
                   <Link href="/career" className="block">

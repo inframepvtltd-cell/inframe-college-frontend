@@ -7,7 +7,7 @@ const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}/blog`
 export const getAllBlogs = async () => {
     const res = await axios.get(`${API_BASE}/allblogs `);
     console.log(res.data.data);
-    
+
     return res.data.data; // assuming { success, data }
 };
 

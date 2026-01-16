@@ -56,11 +56,11 @@ const CampusGallery: React.FC<CampusGalleryProps> = ({ section, items }) => {
       </h1>
       
       {/* Section description if exists */}
-      {section.description && (
+      {/* {section.description && (
         <p className="text-lg text-gray-600 mb-8 max-w-3xl">
           {section.description}
         </p>
-      )}
+      )} */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
         {displayImages.slice(0, 7).map((image, index) => (

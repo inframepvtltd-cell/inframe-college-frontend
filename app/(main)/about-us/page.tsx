@@ -1,3 +1,4 @@
+// app/(main)/aboutus/page.tsx
 import { Metadata } from 'next';
 import { fetchAllAboutSectionsWithItems } from './api/api';
 import AboutPage from './components/AboutPage';

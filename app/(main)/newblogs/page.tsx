@@ -10,7 +10,7 @@ export default async function BlogsPage() {
 
   return (
     <>
-   
+
       <main className="min-h-screen bg-white">
         <div className="relative z-10">
           <div className="relative h-[80vh]">
@@ -85,9 +85,9 @@ export default async function BlogsPage() {
 
 
 
-  {/* <Head> */}
-        {/* Schema.org JSON-LD structured data for better SEO */}
-        {/* <script
+{/* <Head> */ }
+{/* Schema.org JSON-LD structured data for better SEO */ }
+{/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -115,4 +115,4 @@ export default async function BlogsPage() {
             })
           }}
         /> */}
-      {/* </Head> */}
+{/* </Head> */ }

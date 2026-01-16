@@ -164,6 +164,7 @@ export default function MultiStepFormPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [stepErrors, setStepErrors] = useState<{ [key: number]: string[] }>({});
+  
   const [formData, setFormData] = useState<FormData>({
     // Personal Details
     firstName: "",
@@ -188,9 +189,7 @@ export default function MultiStepFormPage() {
     // Documents with DEFAULT rows
     documents: [...DEFAULT_DOCUMENT_ROWS],
 
-    courseId: "", // CHANGED: UUID string
-
-    // REMOVED: studyMode, campus, programType
+    courseId: "",
 
     // Terms
     termsAccepted: false,
