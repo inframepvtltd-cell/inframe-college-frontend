@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/form";
 import { CheckCircle, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
-import { getStates, getCities, getLevels, getPrograms, submitApplication } from "@app/api/apply-now/route";
+import { getStates, getCities, getLevels, getPrograms, submitApplication } from "@app/api/apply-now/route.ts";
 
 const poppins = Poppins({
   subsets: ["latin"],

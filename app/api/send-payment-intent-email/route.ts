@@ -1,122 +1,457 @@
 import nodemailer from "nodemailer";
+import type { Transporter } from "nodemailer";
+import type { SendMailOptions } from "nodemailer";
 
 export async function POST(req: Request) {
-  try {
-    const { name, email, contact, price, courseName } = await req.json();
+  let transporter: Transporter | null = null;
 
-    if (!name || !email || !contact || !courseName) {
-      return Response.json({ message: "Missing fields" }, { status: 400 });
+  try {
+    // Parse request body
+    const {
+      name,
+      email: userEmail,
+      contact,
+      price,
+      courseName,
+    } = await req.json();
+
+    // Validate required fields
+    if (!name || !userEmail || !contact || !courseName) {
+      return Response.json(
+        { success: false, message: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
-    // Transporter
+    if (!process.env.NO_REPLY_MAIL || !process.env.NO_REPLY_PASS) {
+      return Response.json(
+        { success: false, message: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
+      host: process.env.MAIL_HOST,
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        user: process.env.NO_REPLY_MAIL,
+        pass: process.env.NO_REPLY_PASS,
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
+      pool: true,
+      maxConnections: 3,
+      maxMessages: 10,
+      connectionTimeout: 30000,
+      greetingTimeout: 30000,
+      socketTimeout: 60000,
     });
 
-    const html = `
- <div style="
-    width: 100%;
-    padding: 0px;
-    background: #F4F4F7;
-    font-family: Arial, sans-serif;
-  ">
-    <div style="
-      max-width: 600px;
-      margin: auto;
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 30px;
-      border: 1px solid #e6e6e6;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
-    ">
-      
-      <div style="text-align:center; margin-bottom: 25px;">
-        <img src="https://inframeschool.com/pixelcut-export4.png" width="120" style="margin-bottom:10px;" />
-        
-        <h2 style="
-          color: #222;
-          margin-bottom: 10px;
-          font-size: 26px;
-        ">
-          🎉 New Student Enrollment Lead
-        </h2>
-        
-        <p style="color:#666; font-size:14px; margin:0;">
-          A student has shown interest in purchasing a course.
-        </p>
-      </div>
+    // Verify connection ONCE (not for every email)
+    try {
+      await transporter.verify();
+    } catch (error) {
+      return Response.json(
+        { success: false, message: "Email service connection failed" },
+        { status: 500 }
+      );
+    }
 
-      <div style="
-        background: #fafafa;
-        padding: 18px 20px;
-        border-radius: 10px;
-        border: 1px solid #eee;
-        margin-bottom: 20px;
-      ">
-        <p style="font-size:16px; color:#333; margin:8px 0;">
-          <strong>Name:</strong> ${name}
-        </p>
-        <p style="font-size:16px; color:#333; margin:8px 0;">
-          <strong>Email:</strong> ${email}
-        </p>
-        <p style="font-size:16px; color:#333; margin:8px 0;">
-          <strong>Phone:</strong> ${contact}
-        </p>
-        <p style="font-size:16px; color:#333; margin:8px 0;">
-          <strong>Course Name:</strong> ${courseName}
-        </p>
-        <p style="font-size:16px; color:#333; margin:3px 0;">
-          <strong>Price:</strong>
-          <span style="color:#0A8A0A; font-weight:700;">₹${price}</span>
-        </p>
+    // Email templates (use your existing templates)
+    const adminHtml = `
+    <div style="width: 100%; padding: 0px; background: #F4F4F7; font-family: Arial, sans-serif;">
+      <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 14px; padding: 30px; border: 1px solid #e6e6e6; box-shadow: 0 6px 25px rgba(0,0,0,0.08);">
+        <div style="text-align:center; margin-bottom: 25px;">
+          <img src="https://inframeschool.com/pixelcut-export4.png" width="120" style="margin-bottom:10px;" />
+          <h2 style="color: #222; margin-bottom: 10px; font-size: 26px;">🎉 New Student Enrollment Lead</h2>
+          <p style="color:#666; font-size:14px; margin:0;">A student has shown interest in purchasing a course.</p>
+        </div>
+        <div style="background: #fafafa; padding: 18px 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px;">
+          <p style="font-size:16px; color:#333; margin:8px 0;"><strong>Name:</strong> ${name}</p>
+          <p style="font-size:16px; color:#333; margin:8px 0;"><strong>Email:</strong> ${userEmail}</p>
+          <p style="font-size:16px; color:#333; margin:8px 0;"><strong>Phone:</strong> ${contact}</p>
+          <p style="font-size:16px; color:#333; margin:8px 0;"><strong>Course Name:</strong> ${courseName}</p>
+          <p style="font-size:16px; color:#333; margin:3px 0;"><strong>Price:</strong> <span style="color:#0A8A0A; font-weight:700;">₹${price}</span></p>
+        </div>
+        <div style="text-align:center; margin: 30px 0;">
+          <a href="tel:+919971126661" style="background: linear-gradient(90deg, #FACC15, #EAB308); padding: 14px 28px; color: #000; font-size: 18px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 3px 12px rgba(250, 204, 21, 0.4);">📞 Call Student Now</a>
+          <p style="color:#777; font-size:13px; margin-top:10px;">Contact the student to assist with the enrollment.</p>
+        </div>
+        <hr style="border:none; border-top:1px solid #eee; margin:25px 0;">
+        <p style="text-align:center; font-size:13px; color:#777;">This lead alert was generated by <strong>Inframe College</strong>.</p>
       </div>
+    </div>`;
 
-      <div style="text-align:center; margin: 30px 0;">
-        <a href="tel:+919971126661"
-          style="
-            background: linear-gradient(90deg, #FACC15, #EAB308);
-            padding: 14px 28px;
-            color: #000;
-            font-size: 18px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            box-shadow: 0 3px 12px rgba(250, 204, 21, 0.4);
-          "
-        >
-          📞 Call Student Now
+    // Create dynamic course URL
+    const courseSlug = courseName.toLowerCase().replace(/\s+/g, "-");
+    const courseUrl = `https://inframeschool.com/professional-online-courses/${courseSlug}`;
+
+    const userHtml = `
+<div style="font-family: Arial, sans-serif; background:#f4f4f7; padding:20px;">
+  <div style="max-width:600px; margin:auto; background:#fff; border-radius:12px; padding:30px;">
+    <div style="text-align:center;">
+      <img src="https://inframeschool.com/pixelcut-export4.png" width="120" />
+      <h2 style="margin-top:20px;">Complete Your Enrollment 🚀</h2>
+    </div>
+    
+    <p style="font-size:15px; color:#333;">Hi <strong>${name}</strong>,</p>
+    
+    <p style="font-size:15px; color:#333;">
+      You recently showed interest in our <strong>${courseName}</strong>.
+    </p>
+    
+    <div style="background:#fafafa; padding:15px; border-radius:8px; margin:15px 0;">
+      <p><strong>Course:</strong> ${courseName}</p>
+      <p><strong>Amount:</strong> ₹${price}</p>
+    </div>
+    
+    <h3 style="color:#222; margin-top:25px;">Still thinking about joining Inframe School of Design for ${courseName}?</h3>
+    <p style="font-size:15px; color:#333;">
+      You're not alone 🙂
+    </p>
+    
+    <p style="font-size:15px; color:#333;">
+      We noticed you showed interest in our Professional ${courseName} Program, but didn't complete the enrollment. 
+      That's totally okay — sometimes life gets busy. We're here to help you continue right from where you left off.
+    </p>
+    
+    <p style="font-size:15px; color:#333;">
+      No pressure. No rush. Just the right guidance.
+    </p>
+    
+    <h3 style="color:#222; margin-top:25px;">✨ Why wait to build your ${courseName} career?</h3>
+    <p style="font-size:15px; color:#333;">
+      At Inframe School of Design, our ${courseName} courses are crafted to be practical, flexible, and industry-focused — so you don't just learn, you build real skills.
+    </p>
+    
+    <ul style="font-size:15px; color:#333; padding-left:20px;">
+      <li>✔ Live & recorded ${courseName} classes by experienced industry mentors</li>
+      <li>✔ Practical assignments based on real projects</li>
+      <li>✔ Learn anytime, anywhere through our official learning app</li>
+      <li>✔ Dedicated onboarding, mentorship & student support</li>
+      <li>✔ Career-oriented ${courseName} programs for freelancers & professionals</li>
+    </ul>
+    
+    <div style="background:#fff8e1; padding:20px; border-radius:10px; border-left:4px solid #facc15; margin:20px 0;">
+      <h3 style="color:#222; margin-top:0;">📱 Not sure yet? Explore our demo ${courseName} content!</h3>
+      <p style="font-size:15px; color:#333; margin-bottom:15px;">
+        Get a sneak peek into our teaching style, class structure, and learning platform before enrolling. 
+        Simply download our official app and explore demo lessons.
+      </p>
+    </div>
+    
+    <div style="background:#f0f9ff; padding:20px; border-radius:10px; margin:20px 0;">
+      <h3 style="color:#222; margin-top:0;">📲 Learn ${courseName} Anytime with the Inframe Learning App</h3>
+      <p style="font-size:15px; color:#333;">
+        Access live classes, recorded sessions, study materials, assignments, project guidance, and important updates — all in one place.
+      </p>
+      <p style="font-size:15px; margin-top:15px;">
+        <strong>👉 Download the App Now:</strong><br>
+        <a href="https://play.google.com/store/apps/details?id=com.wereskill.app&pcampaignid=web_share" 
+           style="color:#0066cc; text-decoration:none;">
+          https://play.google.com/store/apps/details?id=com.wereskill.app
         </a>
-        <p style="color:#777; font-size:13px; margin-top:10px;">
-          Contact the student to assist with the enrollment.
-        </p>
-      </div>
-
-      <hr style="border:none; border-top:1px solid #eee; margin:25px 0;">
-
-      <p style="text-align:center; font-size:13px; color:#777;">
-        This lead alert was generated by <strong>Inframe College</strong>.
+      </p>
+    </div>
+    
+    <div style="background:#f7f7f7; padding:20px; border-radius:10px; margin:20px 0;">
+      <h3 style="color:#222; margin-top:0;">🤔 Have doubts? Facing payment issues? Need career guidance?</h3>
+      <p style="font-size:15px; color:#333;">
+        Our support team is always ready to help you choose the right ${courseName} course and get started smoothly.
+      </p>
+      <p style="font-size:15px; margin-top:15px;">
+        <strong>📞 Support:</strong> 9649964865<br>
+        <strong>🌐 Website:</strong> 
+        <a href="https://www.inframeschool.com" style="color:#0066cc; text-decoration:none;">
+          www.inframeschool.com
+        </a>
+      </p>
+    </div>
+    
+    <div style="text-align:center; margin:25px 0; padding:20px; background:#facc15; border-radius:10px;">
+      <h2 style="color:#000; margin-top:0;">🚀 Why wait? Start learning ${courseName} today.</h2>
+      <p style="font-size:16px; color:#000; margin-bottom:20px;">
+        Start building your future now. We'd love to welcome you to Inframe School of Design 
+        and be part of your success story.
+      </p>
+      <a href="${courseUrl}" 
+         style="background:#000; color:#fff; padding:14px 26px; border-radius:30px; 
+                text-decoration:none; font-weight:bold; display:inline-block;">
+        Complete Enrollment Now
+      </a>
+    </div>
+    
+    <div style="text-align:center; margin-top:30px; padding-top:20px; border-top:1px solid #eee;">
+      <p style="font-size:13px; color:#777;">
+        <strong>Warm regards,</strong><br>
+        Team Inframe School of Design
       </p>
     </div>
   </div>
-`;
+</div>`;
 
-    await transporter.sendMail({
-      from: `"Inframe College" <${process.env.MAIL_USER}>`,
-      to: process.env.MAIL_ADMIN,
-      subject: "New Payment Intent Started",
-      html,
+    // Helper function to send email with retry
+    // Add type for sendEmailWithRetry function
+    const sendEmailWithRetry = async (
+      mailOptions: SendMailOptions,
+      maxRetries: number = 3
+    ) => {
+      if (!transporter) {
+        return {
+          success: false,
+          error: new Error("Transporter not initialized"),
+        };
+      }
+
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          const info = await transporter.sendMail(mailOptions);
+          return { success: true, info };
+        } catch (error: any) {
+          if (attempt === maxRetries) {
+            return { success: false, error };
+          }
+
+          // Wait before retrying (exponential backoff)
+          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 10000);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+      }
+      return { success: false, error: new Error("Max retries exceeded") };
+    };
+
+    // Send emails with a delay between them
+    let adminSent = false;
+    let userSent = false;
+    let adminError = null;
+    let userError = null;
+
+    // Send admin email first
+    if (process.env.MAIL_ADMIN) {
+      const adminResult = await sendEmailWithRetry({
+        from: `"Inframe College" <${process.env.NO_REPLY_MAIL}>`,
+        to: process.env.MAIL_ADMIN,
+        subject: `"New Student Enrollment Started: ${courseName}"`,
+        html: adminHtml,
+        replyTo: `${process.env.NO_REPLY_MAIL}`,
+      });
+
+      adminSent = adminResult.success;
+      if (!adminSent) {
+        adminError = adminResult.error?.message || "Unknown error";
+      }
+    }
+
+    // Wait 1 second before sending user email
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const userResult = await sendEmailWithRetry({
+      from: `"Inframe School of Design" <${process.env.NO_REPLY_MAIL}>`,
+      to: userEmail,
+      subject: `Course Enrollment: ${courseName}`,
+      html: userHtml,
+      replyTo: `${process.env.NO_REPLY_MAIL}`,
     });
 
-    return Response.json({ success: true, message: "Email sent!" });
-  } catch (error) {
-    console.error("Email error:", error);
-    return Response.json({ success: false, message: "Email failed" }, { status: 500 });
+    userSent = userResult.success;
+    if (!userSent) {
+      userError = userResult.error?.message || "Unknown error";
+    }
+
+    // IMPORTANT: Don't fail the whole API if email fails
+    // Return success even if emails partially fail
+    if (adminSent || userSent) {
+      return Response.json({
+        success: true,
+        message: "Process completed",
+        details: {
+          adminEmailSent: adminSent,
+          userEmailSent: userSent,
+          userEmail: userEmail,
+          note: userSent
+            ? "User notified"
+            : "User email failed, admin notified",
+        },
+      });
+    } else {
+      // Both failed
+      return Response.json(
+        {
+          success: false,
+          message: "Failed to send emails",
+          details: {
+            adminEmailSent: false,
+            userEmailSent: false,
+            errors: { adminError, userError },
+          },
+        },
+        { status: 500 }
+      );
+    }
+  } catch (error: any) {
+    return Response.json(
+      {
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export async function POST(req: Request) {
+//   try {
+//     const { name, email, contact, price, courseName } = await req.json();
+
+//     if (!name || !email || !contact || !courseName) {
+//       return Response.json({ message: "Missing fields" }, { status: 400 });
+//     }
+
+//     // Transporter
+//     const transporter = nodemailer.createTransport({
+//       host: "smtp.gmail.com",
+//       port: 587,
+//       secure: false,
+//       auth: {
+//         user: process.env.MAIL_USER,
+//         pass: process.env.MAIL_PASS,
+//       },
+//     });
+
+//     const html = `
+//  <div style="
+//     width: 100%;
+//     padding: 0px;
+//     background: #F4F4F7;
+//     font-family: Arial, sans-serif;
+//   ">
+//     <div style="
+//       max-width: 600px;
+//       margin: auto;
+//       background: #ffffff;
+//       border-radius: 14px;
+//       padding: 30px;
+//       border: 1px solid #e6e6e6;
+//       box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+//     ">
+
+//       <div style="text-align:center; margin-bottom: 25px;">
+//         <img src="https://inframeschool.com/pixelcut-export4.png" width="120" style="margin-bottom:10px;" />
+
+//         <h2 style="
+//           color: #222;
+//           margin-bottom: 10px;
+//           font-size: 26px;
+//         ">
+//           🎉 New Student Enrollment Lead
+//         </h2>
+
+//         <p style="color:#666; font-size:14px; margin:0;">
+//           A student has shown interest in purchasing a course.
+//         </p>
+//       </div>
+
+//       <div style="
+//         background: #fafafa;
+//         padding: 18px 20px;
+//         border-radius: 10px;
+//         border: 1px solid #eee;
+//         margin-bottom: 20px;
+//       ">
+//         <p style="font-size:16px; color:#333; margin:8px 0;">
+//           <strong>Name:</strong> ${name}
+//         </p>
+//         <p style="font-size:16px; color:#333; margin:8px 0;">
+//           <strong>Email:</strong> ${email}
+//         </p>
+//         <p style="font-size:16px; color:#333; margin:8px 0;">
+//           <strong>Phone:</strong> ${contact}
+//         </p>
+//         <p style="font-size:16px; color:#333; margin:8px 0;">
+//           <strong>Course Name:</strong> ${courseName}
+//         </p>
+//         <p style="font-size:16px; color:#333; margin:3px 0;">
+//           <strong>Price:</strong>
+//           <span style="color:#0A8A0A; font-weight:700;">₹${price}</span>
+//         </p>
+//       </div>
+
+//       <div style="text-align:center; margin: 30px 0;">
+//         <a href="tel:+919971126661"
+//           style="
+//             background: linear-gradient(90deg, #FACC15, #EAB308);
+//             padding: 14px 28px;
+//             color: #000;
+//             font-size: 18px;
+//             border-radius: 30px;
+//             text-decoration: none;
+//             font-weight: bold;
+//             display: inline-block;
+//             box-shadow: 0 3px 12px rgba(250, 204, 21, 0.4);
+//           "
+//         >
+//           📞 Call Student Now
+//         </a>
+//         <p style="color:#777; font-size:13px; margin-top:10px;">
+//           Contact the student to assist with the enrollment.
+//         </p>
+//       </div>
+
+//       <hr style="border:none; border-top:1px solid #eee; margin:25px 0;">
+
+//       <p style="text-align:center; font-size:13px; color:#777;">
+//         This lead alert was generated by <strong>Inframe College</strong>.
+//       </p>
+//     </div>
+//   </div>
+// `;
+
+//     await transporter.sendMail({
+//       from: `"Inframe College" <${process.env.MAIL_USER}>`,
+//       to: process.env.MAIL_ADMIN,
+//       subject: "New Payment Intent Started",
+//       html,
+//     });
+
+//     return Response.json({ success: true, message: "Email sent!" });
+//   } catch (error) {
+//     console.error("Email error:", error);
+//     return Response.json({ success: false, message: "Email failed" }, { status: 500 });
+//   }
+// }
