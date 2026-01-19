@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import OrderConfirmationModal from "./orderConfirmation";
-import { usePathname } from 'next/navigation';
-import { validateUtmFromUrl } from "../../../utils/validateUTMFromUrl";
-
+import { validateUtmFromUrl } from "../../../components/util";
 declare global {
     interface Window {
         Razorpay: any;
@@ -17,184 +16,184 @@ interface QuickPaymentProps {
     className?: string;
 }
 
-const STATE_CITY_MAP: Record<string, string[]> = {
-    "Andhra Pradesh": [
-        "Visakhapatnam", "Vijayawada", "Guntur", "Nellore",
-        "Kurnool", "Rajahmundry", "Tirupati", "Kadapa"
-    ],
-
-    "Arunachal Pradesh": [
-        "Itanagar", "Naharlagun", "Pasighat", "Tawang"
-    ],
-
-    "Assam": [
-        "Guwahati", "Dibrugarh", "Silchar", "Jorhat",
-        "Tezpur", "Nagaon"
-    ],
-
-    "Bihar": [
-        "Patna", "Gaya", "Bhagalpur", "Muzaffarpur",
-        "Darbhanga", "Purnia"
-    ],
-
-    "Chhattisgarh": [
-        "Raipur", "Bhilai", "Durg", "Bilaspur",
-        "Korba", "Raigarh"
-    ],
-
-    "Goa": [
-        "Panaji", "Margao", "Vasco da Gama", "Mapusa"
-    ],
-
-    "Gujarat": [
-        "Ahmedabad", "Surat", "Vadodara", "Rajkot",
-        "Bhavnagar", "Jamnagar"
-    ],
-
-    "Haryana": [
-        "Gurgaon", "Faridabad", "Panipat", "Ambala",
-        "Hisar", "Karnal"
-    ],
-
-    "Himachal Pradesh": [
-        "Shimla", "Solan", "Dharamshala", "Mandi",
-        "Kullu", "Una"
-    ],
-
-    "Jharkhand": [
-        "Ranchi", "Jamshedpur", "Dhanbad", "Bokaro",
-        "Hazaribagh"
-    ],
-
-    "Karnataka": [
-        "Bengaluru", "Mysuru", "Mangaluru", "Hubballi",
-        "Belagavi", "Shivamogga", "Davangere"
-    ],
-
-    "Kerala": [
-        "Thiruvananthapuram", "Kochi", "Kozhikode",
-        "Thrissur", "Kannur", "Alappuzha"
-    ],
-
-    "Madhya Pradesh": [
-        "Bhopal", "Indore", "Jabalpur", "Gwalior",
-        "Ujjain", "Sagar"
-    ],
-
-    "Maharashtra": [
-        "Mumbai", "Pune", "Nagpur", "Nashik",
-        "Thane", "Aurangabad", "Kolhapur", "Solapur"
-    ],
-
-    "Manipur": [
-        "Imphal", "Thoubal", "Churachandpur"
-    ],
-
-    "Meghalaya": [
-        "Shillong", "Tura", "Jowai"
-    ],
-
-    "Mizoram": [
-        "Aizawl", "Lunglei", "Champhai"
-    ],
-
-    "Nagaland": [
-        "Kohima", "Dimapur", "Mokokchung"
-    ],
-
-    "Odisha": [
-        "Bhubaneswar", "Cuttack", "Rourkela",
-        "Sambalpur", "Balasore"
-    ],
-
-    "Punjab": [
-        "Chandigarh", "Ludhiana", "Amritsar",
-        "Jalandhar", "Patiala", "Bathinda"
-    ],
-
-    "Rajasthan": [
-        "Jaipur", "Jodhpur", "Udaipur", "Ajmer",
-        "Bikaner", "Kota", "Alwar"
-    ],
-
-    "Sikkim": [
-        "Gangtok", "Namchi", "Gyalshing"
-    ],
-
-    "Tamil Nadu": [
-        "Chennai", "Coimbatore", "Madurai",
-        "Tiruchirappalli", "Salem", "Erode",
-        "Tirunelveli"
-    ],
-
-    "Telangana": [
-        "Hyderabad", "Warangal", "Karimnagar",
-        "Nizamabad", "Khammam", "Mahbubnagar"
-    ],
-
-    "Tripura": [
-        "Agartala", "Udaipur", "Dharmanagar"
-    ],
-
-    "Uttar Pradesh": [
-        "Lucknow", "Kanpur", "Noida", "Ghaziabad",
-        "Agra", "Meerut", "Varanasi", "Prayagraj",
-        "Bareilly", "Aligarh"
-    ],
-
-    "Uttarakhand": [
-        "Dehradun", "Haridwar", "Roorkee",
-        "Haldwani", "Rudrapur"
-    ],
-
-    "West Bengal": [
-        "Kolkata", "Howrah", "Durgapur",
-        "Asansol", "Siliguri", "Malda"
-    ],
-
-    /* ----------- UNION TERRITORIES ----------- */
-
-    "Andaman and Nicobar Islands": [
-        "Port Blair"
-    ],
-
-    "Chandigarh": [
-        "Chandigarh"
-    ],
-
-    "Dadra and Nagar Haveli and Daman and Diu": [
-        "Daman", "Silvassa"
-    ],
-
-    "Delhi": [
-        "New Delhi", "Delhi", "Dwarka", "Rohini",
-        "Saket", "Karol Bagh"
-    ],
-
-    "Jammu and Kashmir": [
-        "Srinagar", "Jammu", "Anantnag", "Baramulla"
-    ],
-
-    "Ladakh": [
-        "Leh", "Kargil"
-    ],
-
-    "Lakshadweep": [
-        "Kavaratti"
-    ],
-
-    "Puducherry": [
-        "Puducherry", "Karaikal", "Mahe", "Yanam"
-    ]
-};
-
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
-    const pathname = usePathname();
+    const STATE_CITY_MAP: Record<string, string[]> = {
+        "Andhra Pradesh": [
+            "Visakhapatnam", "Vijayawada", "Guntur", "Nellore",
+            "Kurnool", "Rajahmundry", "Tirupati", "Kadapa"
+        ],
 
+        "Arunachal Pradesh": [
+            "Itanagar", "Naharlagun", "Pasighat", "Tawang"
+        ],
+
+        "Assam": [
+            "Guwahati", "Dibrugarh", "Silchar", "Jorhat",
+            "Tezpur", "Nagaon"
+        ],
+
+        "Bihar": [
+            "Patna", "Gaya", "Bhagalpur", "Muzaffarpur",
+            "Darbhanga", "Purnia"
+        ],
+
+        "Chhattisgarh": [
+            "Raipur", "Bhilai", "Durg", "Bilaspur",
+            "Korba", "Raigarh"
+        ],
+
+        "Goa": [
+            "Panaji", "Margao", "Vasco da Gama", "Mapusa"
+        ],
+
+        "Gujarat": [
+            "Ahmedabad", "Surat", "Vadodara", "Rajkot",
+            "Bhavnagar", "Jamnagar"
+        ],
+
+        "Haryana": [
+            "Gurgaon", "Faridabad", "Panipat", "Ambala",
+            "Hisar", "Karnal"
+        ],
+
+        "Himachal Pradesh": [
+            "Shimla", "Solan", "Dharamshala", "Mandi",
+            "Kullu", "Una"
+        ],
+
+        "Jharkhand": [
+            "Ranchi", "Jamshedpur", "Dhanbad", "Bokaro",
+            "Hazaribagh"
+        ],
+
+        "Karnataka": [
+            "Bengaluru", "Mysuru", "Mangaluru", "Hubballi",
+            "Belagavi", "Shivamogga", "Davangere"
+        ],
+
+        "Kerala": [
+            "Thiruvananthapuram", "Kochi", "Kozhikode",
+            "Thrissur", "Kannur", "Alappuzha"
+        ],
+
+        "Madhya Pradesh": [
+            "Bhopal", "Indore", "Jabalpur", "Gwalior",
+            "Ujjain", "Sagar"
+        ],
+
+        "Maharashtra": [
+            "Mumbai", "Pune", "Nagpur", "Nashik",
+            "Thane", "Aurangabad", "Kolhapur", "Solapur"
+        ],
+
+        "Manipur": [
+            "Imphal", "Thoubal", "Churachandpur"
+        ],
+
+        "Meghalaya": [
+            "Shillong", "Tura", "Jowai"
+        ],
+
+        "Mizoram": [
+            "Aizawl", "Lunglei", "Champhai"
+        ],
+
+        "Nagaland": [
+            "Kohima", "Dimapur", "Mokokchung"
+        ],
+
+        "Odisha": [
+            "Bhubaneswar", "Cuttack", "Rourkela",
+            "Sambalpur", "Balasore"
+        ],
+
+        "Punjab": [
+            "Chandigarh", "Ludhiana", "Amritsar",
+            "Jalandhar", "Patiala", "Bathinda"
+        ],
+
+        "Rajasthan": [
+            "Jaipur", "Jodhpur", "Udaipur", "Ajmer",
+            "Bikaner", "Kota", "Alwar"
+        ],
+
+        "Sikkim": [
+            "Gangtok", "Namchi", "Gyalshing"
+        ],
+
+        "Tamil Nadu": [
+            "Chennai", "Coimbatore", "Madurai",
+            "Tiruchirappalli", "Salem", "Erode",
+            "Tirunelveli"
+        ],
+
+        "Telangana": [
+            "Hyderabad", "Warangal", "Karimnagar",
+            "Nizamabad", "Khammam", "Mahbubnagar"
+        ],
+
+        "Tripura": [
+            "Agartala", "Udaipur", "Dharmanagar"
+        ],
+
+        "Uttar Pradesh": [
+            "Lucknow", "Kanpur", "Noida", "Ghaziabad",
+            "Agra", "Meerut", "Varanasi", "Prayagraj",
+            "Bareilly", "Aligarh"
+        ],
+
+        "Uttarakhand": [
+            "Dehradun", "Haridwar", "Roorkee",
+            "Haldwani", "Rudrapur"
+        ],
+
+        "West Bengal": [
+            "Kolkata", "Howrah", "Durgapur",
+            "Asansol", "Siliguri", "Malda"
+        ],
+
+        /* ----------- UNION TERRITORIES ----------- */
+
+        "Andaman and Nicobar Islands": [
+            "Port Blair"
+        ],
+
+        "Chandigarh": [
+            "Chandigarh"
+        ],
+
+        "Dadra and Nagar Haveli and Daman and Diu": [
+            "Daman", "Silvassa"
+        ],
+
+        "Delhi": [
+            "New Delhi", "Delhi", "Dwarka", "Rohini",
+            "Saket", "Karol Bagh"
+        ],
+
+        "Jammu and Kashmir": [
+            "Srinagar", "Jammu", "Anantnag", "Baramulla"
+        ],
+
+        "Ladakh": [
+            "Leh", "Kargil"
+        ],
+
+        "Lakshadweep": [
+            "Kavaratti"
+        ],
+
+        "Puducherry": [
+            "Puducherry", "Karaikal", "Mahe", "Yanam"
+        ]
+    };
+
+    const pathname = usePathname();
     const router = useRouter();
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
     const [showForm, setShowForm] = useState(false);
+
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -202,6 +201,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         state: "",
         city: ""
     });
+
     const [loading, setLoading] = useState(false);
     const [razorpayLoaded, setRazorpayLoaded] = useState(false);
     const [orderDetails, setOrderDetails] = useState({
@@ -209,6 +209,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         tax: "0",
         total: "0"
     });
+
+    // Calculate order details
     useEffect(() => {
         const amount = parseFloat(price);
 
@@ -238,9 +240,11 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         document.body.appendChild(script);
     }, []);
 
-    // email API call
+
     const sendLeadEmail = async () => {
         try {
+
+            const startTime = Date.now();
             const res = await fetch("/api/send-payment-intent-email", {
                 method: "POST",
                 headers: {
@@ -252,13 +256,30 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                     contact: user.contact,
                     price,
                     courseName,
+                    state: user.state,
+                    city: user.city,
                 }),
             });
 
+            const responseTime = Date.now() - startTime;
+
+            if (!res.ok) {
+                let errorData;
+                try {
+                    errorData = await res.json();
+                } catch {
+                    errorData = { message: await res.text() };
+                }
+
+                throw new Error(`Email failed: ${res.status} ${JSON.stringify(errorData)}`);
+            }
+
             const data = await res.json();
-            console.log("Email Status:", data);
+            console.log("Email API response:", data);
+            return data;
         } catch (err) {
-            console.log("Email Error", err);
+            console.error("Email sending error:", err);
+            return { success: false, error: err };
         }
     };
 
@@ -303,7 +324,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 source: "Enroll Now Page",
                 device: navigator.userAgent,
                 city: user.city,
-                state: user.state,
+        state: user.state,
             };
 
             // Final payload
@@ -322,8 +343,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 lead_stage: "New Enrollment",
                 price: price,
                 course_name: courseName,
-                city: user.city,
-                state: user.state,
+city: user.city,
+        state: user.state,
                 webhook_source: "Website Frontend - Professional Course",
             };
 
@@ -343,6 +364,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             console.error(err);
         }
     };
+
     // VALIDATION
     const validateForm = () => {
         if (!user.name.trim()) return alert("Enter your name"), false;
@@ -375,15 +397,17 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         city,
                     }),
                 }),
-
                 sendToPrivyr(),
                 sendWhatsApp(user.contact, user.name, price, courseName),
+
             ]);
+
+            console.log("Lead data saved silently");
         } catch (err) {
             console.error("Lead save failed", err);
+            // ❌ DO NOT block user
         }
     };
-
     // Handle form submission to show order confirmation
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -420,7 +444,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                order_id: orderId,
+                order_id: orderId, // 🔥 THIS STOPS REFUND
                 amount: amountInPaisa,
                 currency: "INR",
                 name: "Inframe College",
@@ -442,12 +466,11 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 },
 
                 theme: { color: "#FACC15" },
-
                 modal: {
                     ondismiss: () => {
                         setLoading(false);
 
-                        toast.dismiss();
+                        toast.dismiss(); // close processing toast
                         toast.info("Payment cancelled", {
                             position: "top-center",
                         });
@@ -476,6 +499,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                     content_name: courseName,
                 });
             }
+
             rzp.open();
         } catch (err) {
             console.error(err);
@@ -483,6 +507,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             setLoading(false);
         }
     };
+
 
     // Submit data to backend APIs
     const submitUserData = async () => {
@@ -516,9 +541,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         );
 
         try {
-
-
-            // ✅ Success toast
+            //  Success toast
             toast.success(
                 <div className="text-center space-y-1">
                     <p className="font-bold text-lg text-green-800">
@@ -582,7 +605,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             {/* Buy Now Button */}
             <div className="text-center">
                 <button
-                    // onClick={() => setShowForm(true)}
                     onClick={() => {
                         if ((window as any).fbq && validateUtmFromUrl(pathname)) {
                             (window as any).fbq('track', 'AddToCart', {
@@ -594,6 +616,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
                         setShowForm(true);
                     }}
+
                     disabled={loading}
                     className="relative overflow-hidden bg-gradient-to-r 
                             from-black via-gray-900 to-black text-white
