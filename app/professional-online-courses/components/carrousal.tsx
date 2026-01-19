@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import HeroSection from '../components/heroSection';
-import AdditionalInfo from '../components/additionalInfo';
-import Footer from '../components/footer';
-import QuickPayment from '../components/quickPayment';
-import RelevantToolsAndFeatures from '../components/relevantToolsAndFeatures';
-import Testimonials from '../components/testimonials';
+import HeroSection from './heroSection';
+import AdditionalInfo from './additionalInfo';
+import Footer from './footer';
+import QuickPayment from './quickPayment';
+import RelevantToolsAndFeatures from './relevantToolsAndFeatures';
+import Testimonials from './testimonials';
 import { Poppins } from "next/font/google";
 export const poppins = Poppins({
     subsets: ["latin"],

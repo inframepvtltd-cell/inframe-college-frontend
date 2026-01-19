@@ -1,375 +1,298 @@
-import React from "react";
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from "../components/ui/tabs";
-import { Card, CardContent } from "../components/ui/card";
-import { Poppins } from "next/font/google";
-import { Button } from "@/components/ui/button";
-import { FaArrowRight } from "react-icons/fa";
-import Link from "next/link";
-import Image from "next/image";
+"use client"
 
-const category = {
+import { JSX, useEffect, useMemo, useState } from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { FaArrowRight, FaPalette, FaPencilRuler, FaChartLine, FaPaintBrush, FaStar, FaChevronRight } from "react-icons/fa"
+import { MdDesignServices, MdBusinessCenter } from "react-icons/md"
+import { GiJewelCrown } from "react-icons/gi"
+import { RiMovie2Line } from "react-icons/ri"
+import Link from "next/link"
+import { Poppins } from "next/font/google"
+import { courseTypes } from "@utils/courseTypes"
+import { transformApiCoursesToCategories } from "@utils/transFormCourse"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs"
+
+export const COURSE_GROUP_MAP: Record<string, string[]> = {
   design: [
-    {
-      title: "Interior Design",
-      programs: [
-        "B. Des In Interior Design",
-        "B.VOC in Interior Design",
-        "B.SC in Interior Design",
-        "1 Year Diploma in Interior Design",
-        "3 Year Diploma in Interior Design",
-        "Interior Design Bundle Course",
-        "AutoCad 2D And 3D",
-        "Sketchup",
-        "3D Max And Vray",
-        "Lumion",
-        "Revit",
-        "D5",
-        "Photoshop",
-      ],
-      image:
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Fashion Design",
-      programs: [
-        "B. Des In Fashion Design",
-        "B.VOC in Fashion Design",
-        "B.SC in Fashion Design",
-        "1 Year Diploma in Fashion Design",
-        "3 Year Diploma in Fashion Design",
-        "Fashion Design Bundle Course",
-        "Adobe Illustrator",
-        "Corel",
-        "Photoshop",
-      ],
-      image: "/fashion-1.JPG",
-    },
-    {
-      title: "Graphic Design",
-      programs: [
-        "B. Des In Graphic Design",
-        "B.VOC in Graphic Design",
-        "B.SC in Graphic Design",
-        "1 Year Diploma in Graphic Design",
-        "3 Year Diploma in Graphic Design",
-
-        "Graphic design Bundle course",
-        "Motion Design Bundle course",
-        "Adobe Illustrator",
-        "Adobe Indesign",
-        "Corel Draw",
-        "Adobe Photoshop",
-        "Adobe Preimere Pro",
-        "Adobe aftereffect",
-        "Maya",
-        "Blender",
-      ],
-      image:
-        "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "UIUX-Design",
-      programs: [
-        "B. Des In UI & UX Design",
-        "1 Year Diploma in UI & UX Design",
-
-        "uiux design bundle course",
-        "Adobe illustrator",
-        "Photoshop",
-        "Adobe indesign",
-        "Adobe XD",
-        "Figma",
-        "Sketch",
-      ],
-      image:
-        "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Animation-VFX",
-      programs: [
-        "B. Des in Animation and VFX",
-        "B.VOC in Animation and VFX",
-        "B.SC in Animation and VFX",
-        "1 Year Diploma in Animation and VFX",
-        "2 Year Diploma in Animation and VFX",
-        "3 Year Diploma in Animation and VFX",
-
-        "Animation and vfx Bundle course",
-        "Maya",
-        "Blender",
-        "Adobe animate",
-        "Adobe preimere Pro",
-        "Adobe aftereffect",
-
-      ],
-      image:
-        "https://images.unsplash.com/photo-1628494391268-c9935bc384d5?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Jewellery Design",
-      programs: [
-        "B.VOC in Jewellery Design",
-        "1 Year Diploma in Jewellery Design",
-        "1 Year Diploma in CAD Jewellery",
-        "6 Month Certificate Course in Jewellery Design",
-        "6 Month Certificate Course in CAD Jewellery",
-
-        "Jewellery design Bundle course",
-        "Corel",
-        "Adobe illustrator",
-        "Photoshop",
-        "Rhino",
-      ],
-      image:
-        "https://images.unsplash.com/photo-1606293926249-ed22e446d476?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
+    "Interior Design",
+    "Fashion Design",
+    "Graphic Design",
+    "UIUX-Design",
+    "Animation-VFX",
+    "Jewellery Design",
   ],
-  art: [
-    {
-      title: "Fine Arts",
-      programs: [
-        "B.VOC in Fine Arts",
-        "1 Year Diploma in Painting",
-        "3 Year Diploma in Fine Arts",
-
-
-        "Fine Arts Bundle course",
-        "Pro create",
-        "Adobe illustrator",
-        "Corel Draw",
-        "sketch",
-
-      ],
-      image:
-        "https://plus.unsplash.com/premium_photo-1673514503009-912ffc6ff956?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  ],
+  art: ["Fine Arts"],
   business: [
-    {
-      title: "Digital Marketing",
-      programs: [
-        "B.VOC in Digital Marketing",
-        "1 Year Diploma in Digital Marketing",
-        "6 Month Certificate Course in Digital Marketing",
-
-        "Google Ads",
-        "Meta Ads",
-        "Linkdin Marketing",
-        "YouTube Ads And Marketing",
-        "Whatsapp SMS Email Marketing With Designing",
-        "Affiliate Marketing",
-
-      ],
-      image: "/fetchpik.com-HAfwcPu9n1.jpg",
-    },
-    {
-      title: "Entrepreneurship Skill",
-      programs: [
-        "B.VOC in Entrepreneurship Skill",
-        "1 Year Diploma in Entrepreneurship Skill",
-      ],
-      image:
-        "https://plus.unsplash.com/premium_photo-1726704124426-c220031548b2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Media-Entertainment",
-      programs: [
-        "B.VOC in Media and Entertainment",
-        "1 Year Diploma in Media and Entertainment",
-      ],
-      image:
-        "https://plus.unsplash.com/premium_photo-1710961232986-36cead00da3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG1lZGlhJTIwYW5kJTIwZW50ZXJ0YWlubWVudHxlbnwwfHwwfHx8MA%3D%3D",
-    },
+    "Digital Marketing",
+    "Entrepreneurship Skill",
+    "Media-Entertainment",
   ],
-};
+}
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-});
+})
 
-
-const formatCourseSlug = (title: string): string => {
-  const slugMap: { [key: string]: string } = {
-    "Interior Design": "interior-design",
-    "Fashion Design": "fashion-design",
-    "Graphic Design": "graphic-design",
-    "UIUX-Design": "uiux-design",
-    "Animation-VFX": "animation-vfx",
-    "Jewellery Design": "jewellery-design",
-    "Fine Arts": "fine-arts",
-    "Digital Marketing": "digital-marketing",
-    "Entrepreneurship Skill": "entrepreneurship-skill",
-    "Media-Entertainment": "media-entertainment",
-
-    // Bundle slugs (fixed)
-    "Interior Design Bundle Course": "interior-design-bundle-course",
-    "Graphic Design Bundle Course": "graphic-design-bundle-course",
-    "Fine Arts Bundle Course": "fine-arts-bundle-course",
-    "Fashion Design Bundle Course": "fashion-design-bundle-course",
-    "Jewellery design Bundle course": "jewellery-design-bundle-course",
-    "Animation and vfx Bundle course": "animation-and-vfx-bundle-course",
-    "Uiux design bundle course": "uiux-design-bundle-course",
-    "Motion Design Bundle course": "motion-design-bundle-course",
-  };
-
-  return slugMap[title] || title.replace(/\s+/g, "-").toLowerCase();
-};
-
-const getDegreeType = (programText: string, courseTitle: string): string => {
-
-  let programCourseSlug =
-    courseTitle === "Animation-VFX"
-      ? "animation-and-vfx"
-      : courseTitle === "UIUX-Design" ? "ui-ux-design"
-        : courseTitle === 'Media-Entertainment' ? 'media-and-entertainment'
-          : formatCourseSlug(courseTitle)
-
-
-  if (programText.includes("B. Des")) {
-    return `bdes-in-${programCourseSlug}`;
-  } else if (programText.includes("B.VOC")) {
-    return `bvoc-in-${programCourseSlug}`;
-  } else if (programText.includes("B.SC")) {
-    return `bsc-in-${programCourseSlug}`;
-  } else if (programText.includes("1 Year Diploma")) {
-    return `one-year-diploma-in-${programCourseSlug}`;
-  } else if (programText.includes("2 Year Diploma")) {
-    return `two-year-diploma-in-${programCourseSlug}`;
-  } else if (programText.includes("3 Year Diploma")) {
-    return `three-year-diploma-in-${programCourseSlug}`;
-  } else if (programText.includes("6 Month Certificate")) {
-    return `six-month-certificate-course-in-${programCourseSlug}`;
-  }
-  else {
-    // console.log(programText.replace(/\s+/g, "-").toLowerCase());
-
-    return programText.replace(/\s+/g, "-").toLowerCase();
-  }
-};
-
-
-interface Course {
-  title: string;
-  programs: string[];
-  image: string;
+/* ----------------------------------
+   Icons Mapping
+---------------------------------- */
+const COURSE_ICONS: Record<string, JSX.Element> = {
+  "Interior Design": <MdDesignServices className="text-2xl" />,
+  "Fashion Design": <FaPencilRuler className="text-2xl" />,
+  "Graphic Design": <FaPalette className="text-2xl" />,
+  "UIUX-Design": <MdDesignServices className="text-2xl" />,
+  "Animation-VFX": <RiMovie2Line className="text-2xl" />,
+  "Jewellery Design": <GiJewelCrown className="text-2xl" />,
+  "Fine Arts": <FaPaintBrush className="text-2xl" />,
+  "Digital Marketing": <FaChartLine className="text-2xl" />,
+  "Entrepreneurship Skill": <MdBusinessCenter className="text-2xl" />,
+  "Media-Entertainment": <RiMovie2Line className="text-2xl" />,
 }
 
-interface CourseSectionProps {
-  courses: Course[];
+const TAB_ICONS: Record<string, JSX.Element> = {
+  all: <FaStar className="mr-2" />,
+  design: <MdDesignServices className="mr-2" />,
+  art: <FaPaintBrush className="mr-2" />,
+  business: <MdBusinessCenter className="mr-2" />,
 }
 
-const CourseSection: React.FC<CourseSectionProps> = ({ courses }) => (
-  <div
-    className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 ${poppins.className}`}
-  >
-    {courses.map((course, idx) => (
-      <Card
-        key={idx}
-        className="overflow-hidden group hover:shadow-2xl transition-all duration-300 border-yellow-100 hover:border-yellow-300"
-      >
-        <div className="relative">
-          <Image
-            src={course.image}
-            alt={course.title}
-            width={600}
-            height={300}
-            className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-yellow-400/20 to-transparent" />
-        </div>
-        <CardContent className="p-6 bg-white">
-          <h3 className="text-xl font-bold mb-4 text-gray-800 group-hover:text-yellow-600 transition-colors">
+/* ----------------------------------
+   Types
+---------------------------------- */
+interface ProgramLink {
+  text: string
+  href: string
+}
+
+interface CourseItem {
+  title: string
+  links: ProgramLink[]
+}
+
+interface Category {
+  title: string
+  items: CourseItem[]
+}
+
+/* ----------------------------------
+   Animated Background Elements
+---------------------------------- */
+const AnimatedBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute -top-40 -right-40 w-80 h-80 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-amber-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+    <div className="absolute top-1/2 left-1/4 w-80 h-80 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+  </div>
+)
+
+/* ----------------------------------
+   Card Component
+---------------------------------- */
+const CourseCard = ({ course }: { course: CourseItem }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <Card
+      className="relative overflow-hidden group hover:shadow-2xl transition-all duration-500 border border-yellow-100 hover:border-yellow-300 bg-gradient-to-br from-white to-yellow-50 min-h-[320px] flex flex-col"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated border effect */}
+      <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-yellow-100 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ${isHovered ? 'opacity-30' : 'opacity-0'}`}></div>
+      
+      {/* Decorative corner accents */}
+      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-yellow-400 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+      <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-amber-400 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+
+      <CardContent className="p-6 flex-1 flex flex-col relative z-10">
+        {/* Icon and Title Section */}
+        <div className="mb-6">
+          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+            {COURSE_ICONS[course.title] || <FaStar className="text-2xl text-white" />}
+          </div>
+          
+          <h3 className="text-2xl font-bold mb-3 text-gray-800 group-hover:text-amber-700 transition-colors duration-300 leading-tight">
             {course.title}
           </h3>
-          <ul className="space-y-2">
-            {course.programs.map((program, idx) => (
-              <li
-                key={idx}
-                className="text-sm text-gray-600 hover:text-yellow-600 transition-colors flex items-start"
-              >
+          
+          {/* Decorative underline */}
+          <div className="w-12 h-1 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full transform origin-left group-hover:scale-x-150 transition-transform duration-300"></div>
+        </div>
+
+        {/* Programs List */}
+        <div className="mb-6 flex-1">
+          <p className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wider">Programs Offered</p>
+          <ul className="space-y-3">
+            {course.links.map((program, idx) => (
+              <li key={idx} className="group/item">
                 <Link
-                  className="hover:text-blue-500 hover:underline"
-                  href={`/${formatCourseSlug(course.title)}/${getDegreeType(program, course.title)}`}
+                  href={program.href}
+                  className="flex items-center text-gray-700 hover:text-amber-600 transition-colors duration-200"
                 >
-                  <span className="text-yellow-400 mr-2 text-lg leading-none">
-                    •
-                  </span>
-                  {program}
+                  <div className="w-2 h-2 rounded-full bg-amber-400 mr-3 group-hover/item:scale-150 transition-transform duration-200"></div>
+                  <span className="text-sm font-medium flex-1">{program.text}</span>
+                  <FaChevronRight className="text-xs opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all duration-200" />
                 </Link>
               </li>
             ))}
+            
           </ul>
+        </div>
 
-          <Link
-            href={`/${formatCourseSlug(course.title)}`}
-            className="block mt-6"
-            scroll={false}
-          >
-            <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black flex items-center justify-center space-x-2 px-5 py-3 rounded-md">
-              <span>Explore Now</span>
-              <FaArrowRight className="text-black" />
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
+        {/* CTA Button */}
+        <Link
+          href={`/${course.title.replace(/\s+/g, "-").toLowerCase()}`}
+          className="block mt-auto"
+        >
+          <Button className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95">
+            <span className="relative z-10 flex items-center justify-center gap-3">
+              Explore Now
+              <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform duration-200" />
+            </span>
+            {/* Button shine effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+          </Button>
+        </Link>
+      </CardContent>
+    </Card>
+  )
+}
+
+/* ----------------------------------
+   Card Section
+---------------------------------- */
+const CourseSection = ({ courses }: { courses: CourseItem[] }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+    {courses.map((course) => (
+      <CourseCard key={course.title} course={course} />
     ))}
   </div>
-);
+)
 
+/* ----------------------------------
+   Main Catalog Component
+---------------------------------- */
 const CourseCatalog = () => {
-  const allCourses = [
-    ...category.design,
-    ...category.art,
-    ...category.business,
-  ];
+  const [categories, setCategories] = useState<Category[]>([])
+  const [activeTab, setActiveTab] = useState("all")
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await courseTypes
+      const transformed = transformApiCoursesToCategories(data)
+      setCategories(transformed)
+    }
+    load()
+  }, [])
+
+  /* Group courses by tab */
+  const groupedCourses = useMemo(() => {
+    const allItems = categories.flatMap(cat => cat.items)
+
+    const result: Record<string, CourseItem[]> = {
+      all: allItems,
+    }
+
+    Object.entries(COURSE_GROUP_MAP).forEach(([group, titles]) => {
+      result[group] = allItems.filter(item =>
+        titles.includes(item.title)
+      )
+    })
+
+    return result
+  }, [categories])
 
   return (
-    <div
-      className={`min-h-screen bg-gradient-to-b from-yellow-50 to-white ${poppins.className}`}
-    >
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-left mb-12">
-          <h1 className="text-4xl md:text-5xl my-10 font-bold mb-4 text-gray-800">
-            Our Industry-Centered Programs
-          </h1>
-          <div className="w-24 h-1 bg-yellow-400 rounded-full" />
-        </div>
-        <Tabs defaultValue="all" className="w-full">
-          <div className="p-2 mb-12">
-            <TabsList className="flex flex-wrap justify-center sm:justify-start my-3 rounded-lg gap-2 font-bold text-black font-sans">
-              {["all", "art", "business", "design"].map((tab) => (
-                <TabsTrigger
-                  key={tab}
-                  value={tab}
-                  className="px-8 py-3 data-[state=active]:bg-yellow-400 border border-black font-sans font-bold data-[state=active]:text-black transition-all duration-300"
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+    <div className={`min-h-screen relative overflow-hidden ${poppins.className}`}>
+      <AnimatedBackground />
+      
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <div className="inline-block px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full mb-6">
+            <span className="text-amber-700 font-bold text-sm uppercase tracking-wider">Industry-Focused Education</span>
           </div>
-          <TabsContent value="all">
-            <CourseSection courses={allCourses} />
-          </TabsContent>
-          <TabsContent value="art">
-            <CourseSection courses={category.art} />
-          </TabsContent>
-          <TabsContent value="business">
-            <CourseSection courses={category.business} />
-          </TabsContent>
-          <TabsContent value="design">
-            <CourseSection courses={category.design} />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
-  );
-};
+          
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-800 to-gray-900 bg-clip-text text-transparent">
+            Transform Your Career
+          </h1>
+          
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Discover our cutting-edge programs designed in collaboration with industry leaders to give you the skills that employers actually need.
+          </p>
+        </div>
 
-export default CourseCatalog;
+        {/* Tab Navigation */}
+        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="mb-12">
+          <TabsList className="flex flex-wrap gap-2 mb-10 justify-center bg-gradient-to-r from-amber-50 to-yellow-50 p-2 rounded-2xl shadow-inner">
+            {["all", "design", "art", "business"].map(tab => (
+              <TabsTrigger
+                key={tab}
+                value={tab}
+                className="px-8 py-4 font-bold text-lg rounded-xl transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-500 data-[state=active]:to-yellow-500 data-[state=active]:text-white data-[state=active]:shadow-lg hover:scale-105 active:scale-95 flex items-center"
+              >
+                {TAB_ICONS[tab]}
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                <span className="ml-2 px-2 py-1 bg-white/20 rounded-lg text-sm">
+                  {groupedCourses[tab]?.length || 0}
+                </span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {/* Tab Content */}
+          {Object.entries(groupedCourses).map(([key, courses]) => (
+            <TabsContent key={key} value={key} className="animate-in fade-in duration-500">
+              {courses.length > 0 ? (
+                <>
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-3xl font-bold text-gray-800">
+                      {key === "all" ? "All Programs" : `${key.charAt(0).toUpperCase() + key.slice(1)} Programs`}
+                    </h2>
+                    <span className="px-4 py-2 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-full font-semibold text-amber-800">
+                      {courses.length} {courses.length === 1 ? 'Program' : 'Programs'}
+                    </span>
+                  </div>
+                  <CourseSection courses={courses} />
+                </>
+              ) : (
+                <div className="text-center py-16">
+                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-r from-amber-100 to-yellow-100 flex items-center justify-center">
+                    <MdDesignServices className="text-3xl text-amber-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-700 mb-3">No programs available</h3>
+                  <p className="text-gray-500">Check back soon for new program offerings!</p>
+                </div>
+              )}
+            </TabsContent>
+          ))}
+        </Tabs>
+
+  
+      </div>
+
+      {/* Custom CSS for animations */}
+      <style jsx global>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
+    </div>
+  )
+}
+
+export default CourseCatalog

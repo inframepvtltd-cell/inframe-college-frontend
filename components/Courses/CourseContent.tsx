@@ -23,13 +23,6 @@ import { Button } from "../ui/button";
 import ApplyNowForm from "../ApplyNowForm";
 import { useState } from "react";
 
-
-import CourseHero from "../courseDetails/courseDetails";
-import ComboPack from "../courseDetails/ComboPack";
-import CourseFeatures from "../courseDetails/courseFeature";
-import Customizecourse from "../courseDetails/CustomizePack";
-import WhyChooseUs from "../courseDetails/WhyChooseUs";
-
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],

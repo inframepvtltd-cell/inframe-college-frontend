@@ -1,13 +1,11 @@
 import axios from "axios";
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-// const API_BASE = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const upsertLandingPage = (data: FormData) =>
   axios.post(`${API_BASE}/landingpage/upsert`, data);
 
 
 export async function getLandingPageBySlug(slug: string) {
-
   try {
     const res = await axios.post(
       `${API_BASE}/landingpage/by-slug`,
@@ -16,13 +14,22 @@ export async function getLandingPageBySlug(slug: string) {
         headers: { "Content-Type": "application/json" },
       }
     );
-
     return res.data; // success
   } catch (error: any) {
     if (error?.response?.status === 404) {
-      return null; // ✅ important
+      return null; 
     }
-
-    throw error; // real server error
+    throw error;
   }
 }
+
+export async function getFAQsByCourse(courseName: string) {
+  const response = await axios.post(
+    `${API_BASE}/faqs/by-course`,
+    {
+      courseName,
+    }
+  );
+
+  return response.data;
+};

@@ -7,16 +7,6 @@ export default function ThankYouPage() {
         "https://play.google.com/store/apps/details?id=com.wereskill.app";
     const [secondsLeft, setSecondsLeft] = useState(10);
 
-    // ✅ PURCHASE EVENT — FIRES ONLY ON SUCCESS PAGE
-    // useEffect(() => {
-    //     if (typeof window !== "undefined" && (window as any).fbq) {
-    //         (window as any).fbq("track", "Purchase", {
-    //             value: 1499, // 🔴 replace with actual course price
-    //             currency: "INR",
-    //         });
-    //     }
-    // }, []);
-
     useEffect(() => {
         if (typeof window === "undefined" || !(window as any).fbq) return;
 

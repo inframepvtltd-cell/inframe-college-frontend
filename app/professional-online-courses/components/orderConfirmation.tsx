@@ -1,5 +1,7 @@
 "use client";
 
+import { validateUtmFromUrl } from "@utils/validateUTMFromUrl";
+import { usePathname } from "next/navigation";
 import { memo, useEffect, useRef } from "react";
 
 interface OrderDetails {
@@ -39,56 +41,31 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
 }: OrderConfirmationModalProps) {
 
   const hasTrackedPurchase = useRef(false);
+  const pathname = usePathname();
 
-  // useEffect(() => {
-  //   if (
-  //     open &&
-  //     paymentSuccess &&
-  //     !hasTrackedPurchase.current &&
-  //     typeof window !== "undefined" &&
-  //     (window as any).fbq
-  //   ) {
-  //     (window as any).fbq("track", "Purchase", {
-  //       value: Number(price),
-  //       currency: "INR",
-  //       content_name: courseName,
-  //     });
-
-  //     hasTrackedPurchase.current = true;
-  //   }
-  // }, [open, paymentSuccess]);
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined" && (window as any).fbq) {
-  //     (window as any).fbq("track", "Purchase", {
-  //       value: price, // exact paid amount (number)
-  //       currency: "INR",
-  //     });
-  //   }
-  // }, []);
-
-  // const hasTrackedPurchase = useRef(false);
-  // alert("Rendering OrderConfirmationModal");
   useEffect(() => {
     if (
-      open &&
-      paymentSuccess &&
-      Number(price) > 0 &&
-      !hasTrackedPurchase.current &&
-      typeof window !== "undefined" &&
-      (window as any).fbq
+      !open ||
+      !paymentSuccess ||
+      Number(price) <= 0 ||
+      hasTrackedPurchase.current ||
+      typeof window === "undefined" ||
+      !(window as any).fbq ||
+      !validateUtmFromUrl(pathname)
     ) {
-      (window as any).fbq("track", "Purchase", {
-        value: Number(price),
-        currency: "INR",
-        content_name: courseName,
-      });
-
-      console.log("🔥 Meta Purchase fired:", price);
-
-      hasTrackedPurchase.current = true;
+      return;
     }
-  }, [open, paymentSuccess, price, courseName]);
+
+    (window as any).fbq("track", "Purchase", {
+      value: Number(price),
+      currency: "INR",
+      content_name: courseName,
+    });
+
+    console.log("🔥 Meta Purchase fired:", price);
+
+    hasTrackedPurchase.current = true;
+  }, [open, paymentSuccess, price, courseName, pathname]);
 
   if (!open) return null;
 

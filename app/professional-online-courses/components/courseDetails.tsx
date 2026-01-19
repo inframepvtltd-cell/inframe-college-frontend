@@ -2,31 +2,25 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useMemo, useState } from 'react'
 import { toast } from "sonner";
 import QuickPayment from './quickPayment';
-import { themeClasses } from './constant';
+
 declare global {
     interface Window {
         Razorpay: any;
     }
 }
-
-interface QuickPaymentProps {
-    price: string;
-    courseName: string;
-}
-
 interface UserDetails {
     name: string;
     email: string;
     contact: string;
 }
-
 const themes: any = {
     interior: 'yellow-400',
     graphic: '[#731e88]'
 }
 
 type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic' | 'civil';
-function CourseInfo({ courseType, percentageOff, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType, percentageOff: string, projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType,  projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
     const [user, setUser] = useState<UserDetails>({
@@ -49,6 +43,19 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
         "Access to Downloadable Study Material",
         "Lifetime Access to Recorded Sessions"
     ];
+    function calculateDiscountPercentage(
+        originalPrice: number,
+        priceWithDiscount: number
+    ): number {
+        if (originalPrice <= 0 || priceWithDiscount >= originalPrice) return 0;
+
+        const discount =
+            ((originalPrice - priceWithDiscount) / originalPrice) * 100;
+
+        return Math.round(discount); // rounded percentage
+    }
+
+    const percentageOff = calculateDiscountPercentage(Number(originalPrice), Number(priceWithDiscount));
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Razorpay) {
@@ -67,7 +74,6 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
         document.body.appendChild(script);
     }, []);
 
-    // ✅ FIXED — Correct email API call
     const sendLeadEmail = async () => {
         try {
             const res = await fetch("/api/send-payment-intent-email", {
@@ -226,7 +232,6 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                 }),
             ]);
 
-            // ✅ Success toast
             toast.success(
                 <div className="text-center space-y-1">
                     <p className="font-bold text-lg text-green-800">
@@ -340,7 +345,7 @@ function CourseInfo({ courseType, percentageOff, projects, title, priceWithDisco
                                 <div className="text-right text-green-600 font-bold">
                                     <div className="text-xs md:text-sm opacity-90">YOU SAVE</div>
                                     <div className="text-lg md:text-2xl lg:text-3xl font-bold text-white-100">
-                                        {percentageOff}
+                                        {percentageOff} %
                                     </div>
                                 </div>
 

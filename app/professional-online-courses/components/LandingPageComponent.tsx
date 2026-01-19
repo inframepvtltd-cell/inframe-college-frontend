@@ -2,23 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import HeroSection from '../components/heroSection';
-import Footer from '../components/footer';
-import QuickPayment from '../components/quickPayment';
-import Carrousal from '../components/carrousal';
-import CourseInfo from '../components/courseDetails';
-import StudentsWork from '../components/studentsWork';
-import FeaturesSection from '../components/featureSection';
+import HeroSection from './heroSection';
+import Footer from './footer';
+import QuickPayment from './quickPayment';
+import Carrousal from './carrousal';
+import CourseInfo from './courseDetails';
+import StudentsWork from './studentsWork';
+import FeaturesSection from './featureSection';
 import TestimonialCarousel from '../../../components/TestimonialSection';
-import FAQComponent from '../components/FaqComponent';
-import CertificateCard from '../components/certificateComponent';
-function InteriorDesign() {
-    const tools = [
-        { name: "AutoCAD", image: "/software logos/pngegg (17).png", color: "from-pink-100 to-rose-100", textColor: "text-pink-600" },
-        { name: "SketchUp", image: "/software logos/pngegg (18).png", color: "from-purple-100 to-pink-100", textColor: "text-purple-600" },
-        { name: "3dsMax", image: "/software logos/pngegg (19).png", color: "from-blue-100 to-indigo-100", textColor: "text-blue-700" },
-        { name: "Photoshop", image: "/software logos/pngegg (24).png", color: "from-orange-100 to-yellow-100", textColor: "text-orange-600" },
-    ];
+import FAQComponent from './FaqComponent';
+import CertificateCard from './certificateComponent';
+
+
+export default function LandingPageComponent({ data }) {
+
+    const { hero_image_url, gallery_images, gallery_description, course_title, software_tools, offer_price, theme_color, pricing_banner_url, original_price, duration, course_type, content, admin_image, certificate_image } = data
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -27,39 +25,9 @@ function InteriorDesign() {
         document.body.appendChild(script);
     }, []);
 
-    const works = [
-
-        "/landingImages/interior-design/2 daining render copy.jpg",
-        "/landingImages/interior-design/fainal nighat ji render 1.jpg",
-        "/landingImages/interior-design/nighat ji dining 1 render .jpg",
-        "/landingImages/interior-design/nighat ji second render copy.jpg",
-        "/landingImages/interior-design/open restaurant jalore 3d.jpg",
-
-        "/landingImages/civil/SURESH JI  3D 2.jpg",
-        "/landingImages/civil/resort 3d render 1 ..jpg",
-        "/landingImages/civil/pawan ji   3d render.jpg",
-        "/landingImages/civil/open restaurant 2 3d.jpg",
-        "/landingImages/civil/3d render 3.jpg",
-        "/landingImages/civil/3d render 2.jpg",
-        "/landingImages/civil/3d House 3 render.jpg",
-        "/landingImages/interior-design/fainal nighat ji render 1.jpg",
-        "/landingImages/interior-design/hq720.jpg"
-    ];
-
-    const targetAudience = [
-        "Furniture Experts",
-        "Interior Enthusiasts",
-        "10th Pass",
-        "Professionals",
-        "Vendors",
-        "Carpenters",
-        "Architects",
-        "Interior Decorators",
-        "Teachers"
-    ];
-
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -80,17 +48,21 @@ function InteriorDesign() {
             }
         };
     }, []);
+
+    const { heroInfo, delivery, additionalSupport, targetAudience, live, offerSection, keyFeatures } = content;
+    console.clear();
+    console.log(targetAudience);
+
     return (
         <>
             <HeroSection offPercentage="75%" />
             {/* <div className="min-h-screen min-w-full bg-white"> */}
             <div className="min-h-full min-w-full   pt-11 pb-5">
-                {/* Hero Section */}
 
                 {/* Hero Banner Image */}
                 <div className="relative w-full h-[26vh] sm:h-[60vh] md:h-[70vh] lg:h-[94vh] overflow-hidden">
                     <Image
-                        src="/landingImages/we banner.png"
+                        src={hero_image_url}
                         alt="Hero Banner"
                         fill
                         priority
@@ -104,13 +76,13 @@ function InteriorDesign() {
                         <div className="min-w-full mx-auto">
                             {/* Main Course Info */}
                             <div className="animate-slide-up">
-                                <CourseInfo courseType="interior" percentageOff="86%" theme="yellow" projects="8" title="Interior Design Course" priceWithDiscount="1499" originalPrice='10,493' />
+                                <CourseInfo courseType="interior" theme="yellow" projects="8" title={course_type} priceWithDiscount={offer_price} originalPrice={original_price} />
                             </div>
 
                             {/* Pricing Banner Section */}
                             <div className="relative mt-5  w-full h-[27vh] sm:h-[45vh] md:h-[85vh] overflow-hidden">
                                 <Image
-                                    src={"/landingImages/course landscape-01-01-01.jpg"}
+                                    src={pricing_banner_url}
                                     alt="Hero Banner"
                                     fill
                                     priority
@@ -134,14 +106,21 @@ function InteriorDesign() {
 
                                     {/* Description */}
                                     <p className="text-sm sm:text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center relative z-10">
-                                        Master industry-leading tools like
-                                        <span className="text-yellow-400 font-semibold"> Photoshop</span>,
-                                        <span className="text-yellow-400 font-semibold"> AutoCad</span>,
-                                        <span className="text-yellow-400 font-semibold"> 3ds Max</span>,
-                                        <span className="text-yellow-400 font-semibold"> SketchUp</span>,
-                                        and more — with the help of our intelligent
-                                        <span className="text-yellow-400 font-bold"> AI-powered learning assistant.</span>
+                                        Master industry-leading tools like{" "}
+                                        {software_tools.map((tool: any, index: any) => (
+                                            <span key={tool.id}>
+                                                <span className="text-yellow-400 font-semibold">
+                                                    {tool.name}
+                                                </span>
+                                                {index < software_tools.length - 1 && ", "}
+                                            </span>
+                                        ))}
+                                        {" "}— with the help of our intelligent{" "}
+                                        <span className="text-yellow-400 font-bold">
+                                            AI-powered learning assistant.
+                                        </span>
                                     </p>
+
 
                                     {/* Feature List */}
                                     <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 text-base font-semibold relative z-10 max-w-3xl mx-auto">
@@ -176,11 +155,10 @@ function InteriorDesign() {
                                 <div className="relative">
                                     {/* Main Card */}
                                     <div className=" bg-yellow-400
-                    border border-yellow-400/30 
-                   
-                    px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
-                    shadow-xl
-                    overflow-hidden">
+                                                    border border-yellow-400/30 
+                                                    px-6 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-12
+                                                    shadow-xl
+                                                    overflow-hidden">
 
                                         {/* Subtle background pattern */}
                                         <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-white/15 to-transparent rounded-full -translate-y-24 translate-x-12" />
@@ -199,7 +177,7 @@ function InteriorDesign() {
 
                                                 <div className="text-center sm:text-left">
                                                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                                                        Designed for Class 10+ Students & Career Beginners
+                                                        {heroInfo.title}
                                                     </h3>
                                                     <div className="h-1 w-16 bg-gradient-to-r from-gray-900/50 to-transparent rounded-full mx-auto sm:mx-0" />
                                                 </div>
@@ -207,82 +185,103 @@ function InteriorDesign() {
 
                                             {/* Main Description */}
                                             <div className="max-w-4xl mx-auto">
-                                                <p className="text-gray-800 text-base sm:text-lg lg:text-xl leading-relaxed text-center font-medium">
-                                                    This comprehensive program is delivered as a
+                                                <p className="text-gray-800 text-base sm:text-lg lg:text-xl leading-relaxed text-center font-medium"> {heroInfo.description}
+                                                    {/* This comprehensive program is delivered as a */}
                                                     <span className="relative mx-2">
-                                                        <span className="text-gray-900 font-bold bg-white/50 px-3 py-1.5 rounded-md shadow-sm border border-white/50">100% Online Course</span>
+                                                        <span className="text-gray-900 font-bold bg-white/50 px-3 py-1.5 rounded-md shadow-sm border border-white/50">{heroInfo.highlight}</span>
                                                         <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                                                     </span>
-                                                    combining structured pre-recorded video lessons with interactive live sessions for optimal learning outcomes.
                                                 </p>
 
                                                 {/* Feature Highlights */}
                                                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                    {/* Pre-Recorded Lessons */}
-                                                    <div className="bg-white/50 backdrop-blur-sm rounded-lg p-5 border border-white/70 shadow-sm">
-                                                        <div className="flex items-start gap-4">
-                                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#e6d219] to-[#cfb817] rounded-lg flex items-center justify-center shadow-sm">
-                                                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                                </svg>
-                                                            </div>
-                                                            <div>
-                                                                <h4 className="text-gray-900 font-semibold text-lg mb-2">Pre-Recorded Video Lessons</h4>
-                                                                <ul className="space-y-2">
-                                                                    <li className="flex items-center gap-2 text-gray-700 text-sm">
-                                                                        <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
-                                                                        Learn at your own pace and schedule
-                                                                    </li>
-                                                                    <li className="flex items-center gap-2 text-gray-700 text-sm">
-                                                                        <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
-                                                                        Access course materials 24/7
-                                                                    </li>
+                                                    {Object.values(delivery).map((feature, index) => (
+                                                        <div
+                                                            key={index}
+                                                            className="bg-white/50 backdrop-blur-sm rounded-lg p-5 border border-white/70 shadow-sm"
+                                                        >
+                                                            <div className="flex items-start gap-4">
+                                                                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#e6d219] to-[#cfb817] rounded-lg flex items-center justify-center shadow-sm">
+                                                                    {feature.icon === "Play" ? (
+                                                                        <svg
+                                                                            className="w-5 h-5 text-white"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            viewBox="0 0 24 24"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                                                                            />
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                                            />
+                                                                        </svg>
+                                                                    ) : (
+                                                                        <svg
+                                                                            className="w-5 h-5 text-white"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            viewBox="0 0 24 24"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2
+                                                                                    c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857
+                                                                                    M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0
+                                                                                    M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                                                                            />
+                                                                        </svg>
+                                                                    )}
+                                                                </div>
 
-                                                                </ul>
+                                                                <div>
+                                                                    <h4 className="text-gray-900 font-semibold text-lg mb-2">
+                                                                        {feature.title}
+                                                                    </h4>
+
+                                                                    <ul className="space-y-2">
+                                                                        {feature.points.map((point, idx) => (
+                                                                            <li
+                                                                                key={idx}
+                                                                                className="flex items-center gap-2 text-gray-700 text-sm"
+                                                                            >
+                                                                                <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
+                                                                                {point}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    {/* Live Sessions */}
-                                                    <div className="bg-white/50 backdrop-blur-sm rounded-lg p-5 border border-white/70 shadow-sm">
-                                                        <div className="flex items-start gap-4">
-                                                            <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#e6d219] to-[#cfb817] rounded-lg flex items-center justify-center shadow-sm">
-                                                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                                                </svg>
-                                                            </div>
-                                                            <div>
-                                                                <h4 className="text-gray-900 font-semibold text-lg mb-2">Live Interactive Sessions</h4>
-                                                                <ul className="space-y-2">
-
-                                                                    <li className="flex items-center gap-2 text-gray-700 text-sm">
-                                                                        <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
-                                                                        Real-time Q&A and discussions
-                                                                    </li>
-                                                                    <li className="flex items-center gap-2 text-gray-700 text-sm">
-                                                                        <div className="w-1.5 h-1.5 bg-gray-800/60 rounded-full" />
-                                                                        Peer collaboration opportunities
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    ))}
                                                 </div>
 
                                                 {/* Additional Benefits */}
                                                 <div className="mt-8 pt-6 border-t border-white/30">
-                                                    <h4 className="text-gray-900 font-semibold text-center mb-4">Additional Learning Support</h4>
+                                                    <h4 className="text-gray-900 font-semibold text-center mb-4">
+                                                        Additional Learning Support
+                                                    </h4>
+
                                                     <div className="flex flex-wrap justify-center gap-4">
-                                                        {[
-                                                            "Assignments with Feedback",
-                                                            "Progress Tracking",
-                                                            "Mentor Support",
-                                                            "Certificate of Completion"
-                                                        ].map((item, index) => (
-                                                            <div key={index} className="flex items-center gap-2 px-4 py-2 bg-white/70 rounded-full shadow-sm border border-white/50">
+                                                        {additionalSupport.map((item: any, index: any) => (
+                                                            <div
+                                                                key={index}
+                                                                className="flex items-center gap-2 px-4 py-2 bg-white/70 rounded-full shadow-sm border border-white/50"
+                                                            >
                                                                 <svg className="w-4 h-4 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                                    <path
+                                                                        fillRule="evenodd"
+                                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                        clipRule="evenodd"
+                                                                    />
                                                                 </svg>
                                                                 <span className="text-gray-800 text-sm font-medium">{item}</span>
                                                             </div>
@@ -290,19 +289,10 @@ function InteriorDesign() {
                                                     </div>
                                                 </div>
 
-                                                {/* Stats Section */}
-
-
-
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Decorative corner accents */}
-                                    <div className="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-yellow-600/50 rounded-tl" />
-                                    <div className="absolute -top-1 -right-1 w-4 h-4 border-t border-r border-yellow-600/50 rounded-tr" />
-                                    <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b border-l border-yellow-600/50 rounded-bl" />
-                                    <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-yellow-600/50 rounded-br" />
                                 </div>
                             </div>
                             {/* ======== */}
@@ -319,13 +309,27 @@ function InteriorDesign() {
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
-                                    {tools.map((tool, index) => (
-                                        <div key={index} className={`flex flex-col items-center p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg border border-gray-100 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: isVisible ? `${index * 120}ms` : '0ms' }}>
-                                            <img src={tool.image} alt={tool.name} className="w-26 h-20 object-contain drop-shadow-lg" />
-                                            <p className="font-semibold text-gray-900 text-center text-lg">{tool.name}</p>
+                                    {software_tools.map((tool: any, index: any) => (
+                                        <div
+                                            key={tool.id} // ✅ use id, not index
+                                            className={`flex flex-col items-center p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg border border-gray-100 transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                                                }`}
+                                            style={{
+                                                transitionDelay: isVisible ? `${index * 120}ms` : "0ms",
+                                            }}
+                                        >
+                                            <img
+                                                src={tool.icon_url} // ✅ correct field
+                                                alt={tool.name}
+                                                className="w-26 h-20 object-contain drop-shadow-lg"
+                                            />
 
+                                            <p className="font-semibold text-gray-900 text-center text-lg">
+                                                {tool.name}
+                                            </p>
                                         </div>
                                     ))}
+
                                 </div>
                             </section>
 
@@ -333,7 +337,7 @@ function InteriorDesign() {
                                 courseType='Interior Design'
                                 title="Become A Certified Interior Design Expert"
                                 subtitle="Upon Successful Completion of the Course, You Will Receive Certification From Inframe a Renowned Institution That Adds Substantial Credibility to Your Certificate and Strengthens Your Resume"
-                                imageUrl="/Certificate/inframe_certificate.png"
+                                imageUrl={certificate_image}
                                 themeColor="yellow"
                             />
 
@@ -346,7 +350,7 @@ function InteriorDesign() {
                                 </h3>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl mx-auto px-2">
-                                    {targetAudience.map((audience, index) => (
+                                    {targetAudience.map((audience: string, index: any) => (
                                         <div
                                             key={index}
                                             className="
@@ -415,11 +419,9 @@ function InteriorDesign() {
                             <TestimonialCarousel />
 
                             <StudentsWork
-                                images={works}
-                                title="Our Students’ Creative Gallery"
-                                description="This gallery showcases the creative vision and technical expertise of our Interior Design students through detailed 3D visualizations and spatial concepts. The displayed works represent a blend of design thinking, aesthetics, functionality, and digital precision.
-
-                            Each 3D model and rendered space reflects the student’s understanding of form, material, lighting, and spatial planning. From residential interiors to commercial concepts, these projects demonstrate how ideas are transformed into realistic, immersive environments using advanced 3D software."
+                                images={gallery_images}
+                                title={course_title}
+                                description={gallery_description}
                             />
 
                             <div className="w-44 mb-10 h-1 bg-yellow-500 mx-auto rounded-full"></div>
@@ -429,7 +431,7 @@ function InteriorDesign() {
                             {/* CEO Banner Section */}
                             <div className="relative w-full h-[28vh] sm:h-[60vh] md:h-[50vh] lg:h-[84vh] overflow-hidden">
                                 <Image
-                                    src={"/landingImages/by fb sir.png"}
+                                    src={admin_image}
                                     alt="Hero Banner"
                                     fill
                                     priority
@@ -467,13 +469,13 @@ function InteriorDesign() {
                                         {/* Limited Time Badge */}
                                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#141350] to-[#13285556]  mb-8 border border-white/10 shadow-lg">
                                             <div className="w-2 h-2 bg-[#fd0000] rounded-full animate-pulse" />
-                                            <span className="text-white font-semibold text-sm tracking-wide">LIMITED TIME OFFER</span>
+                                            <span className="text-white font-semibold text-sm tracking-wide">{offerSection.badge}</span>
                                         </div>
 
                                         {/* Heading */}
                                         <div className="mb-6">
                                             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
-                                                New Year Enrollment Special
+                                                {offerSection.title}
                                             </h3>
                                             <div className="h-1 w-20 bg-gradient-to-r from-white/50 to-transparent rounded-full" />
                                         </div>
@@ -482,24 +484,7 @@ function InteriorDesign() {
 
                                         {/* Benefits Grid */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-2 md:mb-12">
-                                            {[
-                                                {
-                                                    title: "Portfolio Development",
-                                                    description: "Professional portfolio consultation and optimization"
-                                                },
-                                                {
-                                                    title: "Career Guidance",
-                                                    description: "Personalized 1-on-1 mentorship sessions"
-                                                },
-                                                {
-                                                    title: "Certifications",
-                                                    description: "Industry-recognized certification upon completion"
-                                                },
-                                                {
-                                                    title: "Lifetime Access",
-                                                    description: "Course material and future updates included"
-                                                }
-                                            ].map((benefit, index) => (
+                                            {offerSection.benefits.map((benefit, index) => (
                                                 <div
                                                     key={index}
                                                     className="group bg-white/5 backdrop-blur-sm rounded-lg p-2 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
@@ -534,7 +519,7 @@ function InteriorDesign() {
 
                             {/* Features Section */}
 
-                            <FeaturesSection courseType='interior' />
+                            <FeaturesSection keyFeatures={keyFeatures} />
 
                             {/* FAQ Section */}
                             <div className="w-full flex justify-center">
@@ -594,4 +579,3 @@ function InteriorDesign() {
     );
 }
 
-export default InteriorDesign

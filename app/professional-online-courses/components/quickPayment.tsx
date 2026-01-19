@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import OrderConfirmationModal from "./orderConfirmation";
+import { usePathname } from 'next/navigation';
+import { validateUtmFromUrl } from "../../../utils/validateUTMFromUrl";
+
 declare global {
     interface Window {
         Razorpay: any;
@@ -14,25 +17,191 @@ interface QuickPaymentProps {
     className?: string;
 }
 
-interface UserDetails {
-    name: string;
-    email: string;
-    contact: string;
-}
+const STATE_CITY_MAP: Record<string, string[]> = {
+    "Andhra Pradesh": [
+        "Visakhapatnam", "Vijayawada", "Guntur", "Nellore",
+        "Kurnool", "Rajahmundry", "Tirupati", "Kadapa"
+    ],
+
+    "Arunachal Pradesh": [
+        "Itanagar", "Naharlagun", "Pasighat", "Tawang"
+    ],
+
+    "Assam": [
+        "Guwahati", "Dibrugarh", "Silchar", "Jorhat",
+        "Tezpur", "Nagaon"
+    ],
+
+    "Bihar": [
+        "Patna", "Gaya", "Bhagalpur", "Muzaffarpur",
+        "Darbhanga", "Purnia"
+    ],
+
+    "Chhattisgarh": [
+        "Raipur", "Bhilai", "Durg", "Bilaspur",
+        "Korba", "Raigarh"
+    ],
+
+    "Goa": [
+        "Panaji", "Margao", "Vasco da Gama", "Mapusa"
+    ],
+
+    "Gujarat": [
+        "Ahmedabad", "Surat", "Vadodara", "Rajkot",
+        "Bhavnagar", "Jamnagar"
+    ],
+
+    "Haryana": [
+        "Gurgaon", "Faridabad", "Panipat", "Ambala",
+        "Hisar", "Karnal"
+    ],
+
+    "Himachal Pradesh": [
+        "Shimla", "Solan", "Dharamshala", "Mandi",
+        "Kullu", "Una"
+    ],
+
+    "Jharkhand": [
+        "Ranchi", "Jamshedpur", "Dhanbad", "Bokaro",
+        "Hazaribagh"
+    ],
+
+    "Karnataka": [
+        "Bengaluru", "Mysuru", "Mangaluru", "Hubballi",
+        "Belagavi", "Shivamogga", "Davangere"
+    ],
+
+    "Kerala": [
+        "Thiruvananthapuram", "Kochi", "Kozhikode",
+        "Thrissur", "Kannur", "Alappuzha"
+    ],
+
+    "Madhya Pradesh": [
+        "Bhopal", "Indore", "Jabalpur", "Gwalior",
+        "Ujjain", "Sagar"
+    ],
+
+    "Maharashtra": [
+        "Mumbai", "Pune", "Nagpur", "Nashik",
+        "Thane", "Aurangabad", "Kolhapur", "Solapur"
+    ],
+
+    "Manipur": [
+        "Imphal", "Thoubal", "Churachandpur"
+    ],
+
+    "Meghalaya": [
+        "Shillong", "Tura", "Jowai"
+    ],
+
+    "Mizoram": [
+        "Aizawl", "Lunglei", "Champhai"
+    ],
+
+    "Nagaland": [
+        "Kohima", "Dimapur", "Mokokchung"
+    ],
+
+    "Odisha": [
+        "Bhubaneswar", "Cuttack", "Rourkela",
+        "Sambalpur", "Balasore"
+    ],
+
+    "Punjab": [
+        "Chandigarh", "Ludhiana", "Amritsar",
+        "Jalandhar", "Patiala", "Bathinda"
+    ],
+
+    "Rajasthan": [
+        "Jaipur", "Jodhpur", "Udaipur", "Ajmer",
+        "Bikaner", "Kota", "Alwar"
+    ],
+
+    "Sikkim": [
+        "Gangtok", "Namchi", "Gyalshing"
+    ],
+
+    "Tamil Nadu": [
+        "Chennai", "Coimbatore", "Madurai",
+        "Tiruchirappalli", "Salem", "Erode",
+        "Tirunelveli"
+    ],
+
+    "Telangana": [
+        "Hyderabad", "Warangal", "Karimnagar",
+        "Nizamabad", "Khammam", "Mahbubnagar"
+    ],
+
+    "Tripura": [
+        "Agartala", "Udaipur", "Dharmanagar"
+    ],
+
+    "Uttar Pradesh": [
+        "Lucknow", "Kanpur", "Noida", "Ghaziabad",
+        "Agra", "Meerut", "Varanasi", "Prayagraj",
+        "Bareilly", "Aligarh"
+    ],
+
+    "Uttarakhand": [
+        "Dehradun", "Haridwar", "Roorkee",
+        "Haldwani", "Rudrapur"
+    ],
+
+    "West Bengal": [
+        "Kolkata", "Howrah", "Durgapur",
+        "Asansol", "Siliguri", "Malda"
+    ],
+
+    /* ----------- UNION TERRITORIES ----------- */
+
+    "Andaman and Nicobar Islands": [
+        "Port Blair"
+    ],
+
+    "Chandigarh": [
+        "Chandigarh"
+    ],
+
+    "Dadra and Nagar Haveli and Daman and Diu": [
+        "Daman", "Silvassa"
+    ],
+
+    "Delhi": [
+        "New Delhi", "Delhi", "Dwarka", "Rohini",
+        "Saket", "Karol Bagh"
+    ],
+
+    "Jammu and Kashmir": [
+        "Srinagar", "Jammu", "Anantnag", "Baramulla"
+    ],
+
+    "Ladakh": [
+        "Leh", "Kargil"
+    ],
+
+    "Lakshadweep": [
+        "Kavaratti"
+    ],
+
+    "Puducherry": [
+        "Puducherry", "Karaikal", "Mahe", "Yanam"
+    ]
+};
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
+    const pathname = usePathname();
+
     const router = useRouter();
     const [paymentSuccess, setPaymentSuccess] = useState(false);
-
-    // Add new state for order confirmation
     const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    const [user, setUser] = useState<UserDetails>({
+    const [user, setUser] = useState({
         name: "",
         email: "",
         contact: "",
+        state: "",
+        city: ""
     });
-
     const [loading, setLoading] = useState(false);
     const [razorpayLoaded, setRazorpayLoaded] = useState(false);
     const [orderDetails, setOrderDetails] = useState({
@@ -40,8 +209,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         tax: "0",
         total: "0"
     });
-
-    // Calculate order details
     useEffect(() => {
         const amount = parseFloat(price);
 
@@ -71,7 +238,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         document.body.appendChild(script);
     }, []);
 
-    // ✅ FIXED — Correct email API call
+    // email API call
     const sendLeadEmail = async () => {
         try {
             const res = await fetch("/api/send-payment-intent-email", {
@@ -95,12 +262,37 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         }
     };
 
+    const sendWhatsApp = async (
+        phoneNumber: string,
+        studentName: string,
+        price: string,
+        courseName: string
+    ) => {
+        try {
+            const res = await fetch("/api/send-whatsapp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phoneNumber, courseName }),
+            });
+
+            const data = await res.json();
+            if (!res.ok || data.status !== "1") {
+                throw new Error(JSON.stringify(data));
+            }
+
+            console.log("WhatsApp sent successfully:", data);
+            return data;
+        } catch (err) {
+            console.error("WhatsApp error:", err);
+            return { success: false, error: err };
+        }
+    };
+
     const sendToPrivyr = async () => {
         const PRIVYR_URL =
             "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/iQR8c5Xr#generic-webhook";
 
         try {
-            // 🔹 Raw enroll data
             const leadData = {
                 name: user.name,
                 email: user.email,
@@ -110,6 +302,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 currency: "INR",
                 source: "Enroll Now Page",
                 device: navigator.userAgent,
+                city: user.city,
+                state: user.state,
             };
 
             // Final payload
@@ -128,7 +322,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 lead_stage: "New Enrollment",
                 price: price,
                 course_name: courseName,
-
+                city: user.city,
+                state: user.state,
                 webhook_source: "Website Frontend - Professional Course",
             };
 
@@ -148,7 +343,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
             console.error(err);
         }
     };
-
     // VALIDATION
     const validateForm = () => {
         if (!user.name.trim()) return alert("Enter your name"), false;
@@ -164,6 +358,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     };
 
     const saveLeadDataSilently = async () => {
+        const { state, city } = user;
         try {
             await Promise.all([
                 sendLeadEmail(),
@@ -176,9 +371,13 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                         contact: user.contact,
                         courseName,
                         price,
+                        state,
+                        city,
                     }),
                 }),
+
                 sendToPrivyr(),
+                sendWhatsApp(user.contact, user.name, price, courseName),
             ]);
         } catch (err) {
             console.error("Lead save failed", err);
@@ -190,8 +389,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         e.preventDefault();
 
         if (!validateForm()) return;
-
-        // ✅ SAVE DATA IMMEDIATELY
         setShowForm(false);
         setShowOrderConfirmation(true);
         await saveLeadDataSilently();
@@ -207,10 +404,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         setLoading(true);
 
         try {
-            // ✅ amount in paisa
             const amountInPaisa = Math.round(Number(price) * 100);
 
-            // ✅ CREATE ORDER ON BACKEND
             const orderRes = await fetch("/api/order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -223,10 +418,9 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 throw new Error("Order creation failed");
             }
 
-            // ✅ RAZORPAY OPTIONS (WITH ORDER ID)
             const options = {
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-                order_id: orderId, // 🔥 THIS STOPS REFUND
+                order_id: orderId,
                 amount: amountInPaisa,
                 currency: "INR",
                 name: "Inframe College",
@@ -251,10 +445,9 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
                 modal: {
                     ondismiss: () => {
-                        // ✅ USER CANCELLED PAYMENT
                         setLoading(false);
 
-                        toast.dismiss(); // close processing toast
+                        toast.dismiss();
                         toast.info("Payment cancelled", {
                             position: "top-center",
                         });
@@ -269,9 +462,16 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 setLoading(false);
             });
 
-            if ((window as any).fbq) {
-                (window as any).fbq("track", "InitiateCheckout", {
-                    currency: "INR",
+            // if ((window as any).fbq) {
+            //     (window as any).fbq("track", "InitiateCheckout", {
+            //         currency: "INR",
+            //         value: Number(price),
+            //         content_name: courseName,
+            //     });
+            // }
+            if ((window as any).fbq && validateUtmFromUrl(pathname)) {
+                (window as any).fbq('track', 'InitiateCheckout', {
+                    currency: 'INR',
                     value: Number(price),
                     content_name: courseName,
                 });
@@ -316,20 +516,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         );
 
         try {
-            // await Promise.all([
-            //     sendLeadEmail(),
-            //     fetch("/api/add-to-sheet", {
-            //         method: "POST",
-            //         headers: { "Content-Type": "application/json" },
-            //         body: JSON.stringify({
-            //             name: user.name,
-            //             email: user.email,
-            //             contact: user.contact,
-            //             courseName,
-            //             price,
-            //         }),
-            //     }),
-            // ]);
+
 
             // ✅ Success toast
             toast.success(
@@ -397,13 +584,14 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 <button
                     // onClick={() => setShowForm(true)}
                     onClick={() => {
-                        if ((window as any).fbq) {
-                            (window as any).fbq("track", "AddToCart", {
-                                currency: "INR",
+                        if ((window as any).fbq && validateUtmFromUrl(pathname)) {
+                            (window as any).fbq('track', 'AddToCart', {
+                                currency: 'INR',
                                 value: Number(price),
                                 content_name: courseName,
                             });
                         }
+
                         setShowForm(true);
                     }}
                     disabled={loading}
@@ -466,6 +654,49 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                                 }
                                 disabled={loading}
                             />
+
+                            <select
+                                required
+                                className="w-full border p-3 rounded-lg"
+                                value={user.state}
+                                onChange={(e) =>
+                                    setUser({
+                                        ...user,
+                                        state: e.target.value,
+                                        city: ""
+                                    })
+                                }
+                                disabled={loading}
+                            >
+                                <option value="">Select State *</option>
+                                {Object.keys(STATE_CITY_MAP).map((state) => (
+                                    <option key={state} value={state}>
+                                        {state}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <select
+                                required
+                                className="w-full border p-3 rounded-lg"
+                                value={user.city}
+                                onChange={(e) =>
+                                    setUser({ ...user, city: e.target.value })
+                                }
+                                disabled={loading || !user.state}
+                            >
+                                <option value="">
+                                    {user.state ? "Select City *" : "Select State First"}
+                                </option>
+
+                                {user.state &&
+                                    STATE_CITY_MAP[user.state]?.map((city: string) => (
+                                        <option key={city} value={city}>
+                                            {city}
+                                        </option>
+                                    ))}
+                            </select>
+
 
                             <button
                                 type="submit"

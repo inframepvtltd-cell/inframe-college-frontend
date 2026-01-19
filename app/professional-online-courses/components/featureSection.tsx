@@ -2,44 +2,10 @@
 import type React from "react"
 import { CheckCircle, Users, Brain, Briefcase, Target, Clock } from "lucide-react"
 
-const FeaturesSection = ({ courseType }: { courseType: string }) => {
-  const mainFeatures = [
-    {
-      icon: Users,
-      title: "Live Sessions by Industry Professionals",
-      description: "Gain insights from professionals working at top companies."
-    },
-    {
-      icon: Brain,
-      title: "AI-Powered Marketing Training",
-      description: "Learn to automate, analyze, and optimize using cutting-edge AI tools."
-    },
-    {
-      icon: Briefcase,
-      title: "Hands-On Projects and Case Studies",
-      description: "Apply your knowledge to real-world scenarios that hiring managers value."
-    },
-    {
-      icon: Target,
-      title: "Placement Assistance",
-      description: "Interview prep, resume help, and job support for career advancement."
-    },
-    {
-      icon: CheckCircle,
-      title: "Freelancer and Career Focused",
-      description: "Designed to help you grow your brand, business, and professional network."
-    },
-    {
-      icon: Clock,
-      title: "Built for Busy Professionals",
-      description: "Flexible and high-impact learning designed for graduates and working professionals."
-    }
-  ]
+const FeaturesSection = ({ keyFeatures }: any) => {
 
-    const themesMap: any = {
-        interior: 'yellow-500',
-        graphic: '[#731e88]'
-    }
+
+
 
   return (
     <section className="py-4 w-full bg-gradient-to-br from-white to-gray-200">
@@ -55,7 +21,7 @@ const FeaturesSection = ({ courseType }: { courseType: string }) => {
 
         {/* Main Features */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {mainFeatures.map((feature, index) => (
+          {keyFeatures.map((feature: any, index: any) => (
             <div
               key={index}
               className="
@@ -95,7 +61,7 @@ const FeaturesSection = ({ courseType }: { courseType: string }) => {
                   shadow-inner
                 "
                 >
-                  <feature.icon className="w-7 h-7 text-yellow-700 group-hover:text-white" />
+                  <CheckCircle className="w-7 h-7 text-yellow-700 group-hover:text-white" />
                 </div>
 
                 <h3
