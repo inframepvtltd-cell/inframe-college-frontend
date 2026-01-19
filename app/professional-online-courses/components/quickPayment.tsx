@@ -18,11 +18,18 @@ interface UserDetails {
   name: string;
   email: string;
   contact: string;
+  city: string;
+  state: string;
 }
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
   const router = useRouter();
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [enrollmentId, setEnrollmentId] = useState<string | null>(null);
+
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
+  const [loadingCity, setLoadingCity] = useState(false);
 
   // Add new state for order confirmation
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
@@ -31,6 +38,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     name: "",
     email: "",
     contact: "",
+    city: "",
+    state: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,6 +49,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     tax: "0",
     total: "0",
   });
+
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   // Calculate order details
   useEffect(() => {
@@ -70,117 +81,157 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     document.body.appendChild(script);
   }, []);
 
+  useEffect(() => {
+    if (!showForm) return;
+
+    const fetchStates = async () => {
+      try {
+        const res = await fetch(BASE_URL + "/city-state/states");
+        const data = await res.json();
+        setStates(data);
+      } catch (err) {
+        console.error("State fetch failed", err);
+      }
+    };
+
+    fetchStates();
+  }, [showForm]);
+
+  useEffect(() => {
+    if (!user.state) return;
+
+    const fetchCities = async () => {
+      setLoadingCity(true);
+      try {
+        const res = await fetch(BASE_URL + "/city-state/cities", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ state: user.state }),
+        });
+
+        const data = await res.json();
+        setCities(data);
+      } catch (err) {
+        console.error("City fetch failed", err);
+      } finally {
+        setLoadingCity(false);
+      }
+    };
+
+    fetchCities();
+  }, [user.state]);
+
   // Correct email API call
-  const sendLeadEmail = async () => {
-    try {
-      const startTime = Date.now();
-      const res = await fetch("/api/send-payment-intent-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          contact: user.contact,
-          price,
-          courseName,
-        }),
-      });
+  // const sendLeadEmail = async () => {
+  //   try {
+  //     const startTime = Date.now();
+  //     const res = await fetch("/api/send-payment-intent-email", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         name: user.name,
+  //         email: user.email,
+  //         contact: user.contact,
+  //         price,
+  //         courseName,
+  //       }),
+  //     });
 
-      const responseTime = Date.now() - startTime;
+  //     const responseTime = Date.now() - startTime;
 
-      if (!res.ok) {
-        let errorData;
-        try {
-          errorData = await res.json();
-        } catch {
-          errorData = { message: await res.text() };
-        }
+  //     if (!res.ok) {
+  //       let errorData;
+  //       try {
+  //         errorData = await res.json();
+  //       } catch {
+  //         errorData = { message: await res.text() };
+  //       }
 
-        throw new Error(
-          `Email failed: ${res.status} ${JSON.stringify(errorData)}`,
-        );
-      }
+  //       throw new Error(
+  //         `Email failed: ${res.status} ${JSON.stringify(errorData)}`,
+  //       );
+  //     }
 
-      const data = await res.json();
-      console.log("Email API response:", data);
-      return data;
-    } catch (err) {
-      console.error("Email sending error:", err);
-      return { success: false, error: err };
-    }
-  };
+  //     const data = await res.json();
+  //     console.log("Email API response:", data);
+  //     return data;
+  //   } catch (err) {
+  //     console.error("Email sending error:", err);
+  //     return { success: false, error: err };
+  //   }
+  // };
 
-  const sendWhatsApp = async (
-    phoneNumber: string,
-    studentName: string,
-    price: string,
-    courseName: string,
-  ) => {
-    try {
-      const res = await fetch("/api/send-whatsapp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber, courseName, studentName, price }),
-      });
+  // const sendWhatsApp = async (
+  //   phoneNumber: string,
+  //   studentName: string,
+  //   price: string,
+  //   courseName: string,
+  // ) => {
+  //   try {
+  //     const res = await fetch("/api/send-whatsapp", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ phoneNumber, courseName, studentName, price }),
+  //     });
 
-      const data = await res.json();
-      if (!res.ok || data.status !== "1") {
-        throw new Error(JSON.stringify(data));
-      }
+  //     const data = await res.json();
+  //     if (!res.ok || data.status !== "1") {
+  //       throw new Error(JSON.stringify(data));
+  //     }
 
-      console.log("WhatsApp sent successfully:", data);
-      return data;
-    } catch (err) {
-      console.error("WhatsApp error:", err);
-      return { success: false, error: err };
-    }
-  };
+  //     console.log("WhatsApp sent successfully:", data);
+  //     return data;
+  //   } catch (err) {
+  //     console.error("WhatsApp error:", err);
+  //     return { success: false, error: err };
+  //   }
+  // };
 
-  const sendPurchaseEmail = async (razorpay_id: string) => {
-    try {
-      console.log("enter in email purchased fn and id" + razorpay_id);
+  // const sendPurchaseEmail = async (razorpay_id: string) => {
+  //   try {
+  //     console.log("enter in email purchased fn and id" + razorpay_id);
 
-      const startTime = Date.now();
-      const res = await fetch("/api/send-email-purchased", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          contact: user.contact,
-          price,
-          courseName,
-          razorpay_id: razorpay_id,
-        }),
-      });
+  //     const startTime = Date.now();
+  //     const res = await fetch("/api/send-email-purchased", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         name: user.name,
+  //         email: user.email,
+  //         contact: user.contact,
+  //         price,
+  //         courseName,
+  //         razorpay_id: razorpay_id,
+  //       }),
+  //     });
 
-      const responseTime = Date.now() - startTime;
+  //     const responseTime = Date.now() - startTime;
 
-      if (!res.ok) {
-        let errorData;
-        try {
-          errorData = await res.json();
-        } catch {
-          errorData = { message: await res.text() };
-        }
+  //     if (!res.ok) {
+  //       let errorData;
+  //       try {
+  //         errorData = await res.json();
+  //       } catch {
+  //         errorData = { message: await res.text() };
+  //       }
 
-        throw new Error(
-          `Email failed: ${res.status} ${JSON.stringify(errorData)}`,
-        );
-      }
+  //       throw new Error(
+  //         `Email failed: ${res.status} ${JSON.stringify(errorData)}`,
+  //       );
+  //     }
 
-      const data = await res.json();
-      console.log("Email API response:", data);
-      return data;
-    } catch (err) {
-      console.error("Email sending error:", err);
-      return { success: false, error: err };
-    }
-  };
+  //     const data = await res.json();
+  //     console.log("Email API response:", data);
+  //     return data;
+  //   } catch (err) {
+  //     console.error("Email sending error:", err);
+  //     return { success: false, error: err };
+  //   }
+  // };
 
   const sendToPrivyr = async () => {
     const PRIVYR_URL =
@@ -237,51 +288,81 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
   // VALIDATION
   const validateForm = () => {
-    if (!user.name.trim()) return (alert("Enter your name"), false);
-    if (!user.email.trim()) return (alert("Enter your email"), false);
+    if (!user.name.trim()) return alert("Enter your name"), false;
+    if (!user.email.trim()) return alert("Enter your email"), false;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(user.email)) return (alert("Invalid email"), false);
+    if (!emailRegex.test(user.email)) return alert("Invalid email"), false;
 
     const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(user.contact)) return (alert("Invalid phone"), false);
+    if (!phoneRegex.test(user.contact)) return alert("Invalid phone"), false;
 
     return true;
   };
 
-  const saveLeadDataSilently = async () => {
-    try {
-      await Promise.all([
-        sendLeadEmail(),
-        fetch("/api/add-to-sheet", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: user.name,
-            email: user.email,
-            contact: user.contact,
-            courseName,
-            price,
-          }),
-        }),
-        sendToPrivyr(),
-        sendWhatsApp(user.contact, user.name, price, courseName),
-      ]);
-    } catch (err) {
-      console.error("Lead save failed", err);
-    }
-  };
+  // const saveLeadDataSilently = async () => {
+  //   try {
+  //     await Promise.all([
+  //       sendLeadEmail(),
+  //       fetch("/api/add-to-sheet", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({
+  //           name: user.name,
+  //           email: user.email,
+  //           contact: user.contact,
+  //           courseName,
+  //           price,
+  //         }),
+  //       }),
+  //       sendToPrivyr(),
+  //       sendWhatsApp(user.contact, user.name, price, courseName),
+  //     ]);
+  //   } catch (err) {
+  //     console.error("Lead save failed", err);
+  //   }
+  // };
 
   // Handle form submission to show order confirmation
+  // const handleFormSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (!validateForm()) return;
+
+  //   // ✅ SAVE DATA IMMEDIATELY
+  //   setShowForm(false);
+  //   setShowOrderConfirmation(true);
+  //   await saveLeadDataSilently();
+  // };
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
-    // ✅ SAVE DATA IMMEDIATELY
+    const res = await fetch(BASE_URL + "/enrollment/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email,
+        contact: user.contact,
+        courseName,
+        price,
+        state: user.state,
+        city: user.city,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      alert("Failed to create enrollment");
+      return;
+    }
+
+    setEnrollmentId(data.enrollmentId);
     setShowForm(false);
     setShowOrderConfirmation(true);
-    await saveLeadDataSilently();
   };
 
   // Proceed to payment after order confirmation
@@ -294,15 +375,23 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     setLoading(true);
 
     try {
-      // ✅ amount in paisa
       const amountInPaisa = Math.round(Number(price) * 100);
 
       // ✅ CREATE ORDER ON BACKEND
-      const orderRes = await fetch("/api/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: amountInPaisa }),
-      });
+      // const orderRes = await fetch("/api/order", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ amount: amountInPaisa }),
+      // });
+
+      const orderRes = await fetch(
+        BASE_URL + "/payment/enrollment-create-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ enrollmentId }),
+        },
+      );
 
       const { orderId } = await orderRes.json();
 
@@ -310,10 +399,10 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         throw new Error("Order creation failed");
       }
 
-      // ✅ RAZORPAY OPTIONS (WITH ORDER ID)
+      // RAZORPAY OPTIONS (WITH ORDER ID)
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        order_id: orderId, // 🔥 THIS STOPS REFUND
+        order_id: orderId,
         amount: amountInPaisa,
         currency: "INR",
         name: "Inframe College",
@@ -321,44 +410,29 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
         image: "/pixelcut-export4.png",
 
         handler: async function (response: any) {
-          // Store purchase info in session
-          sessionStorage.setItem("purchase_amount", String(price));
-          sessionStorage.setItem("purchase_event_id", crypto.randomUUID());
-
-          // Add Razorpay payment ID to user object
-          const purchasedUser = {
-            ...user,
-            razorpay_id: response.razorpay_payment_id,
-          };
-          const razorpay_id = response.razorpay_payment_id;
-          console.log("razorpay_id: " + razorpay_id);
-          try {
-            // Call sheet + email APIs
-            await Promise.all([
-              sendPurchaseEmail(razorpay_id),
-
-              fetch("/api/add-purchase-to-sheet", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  name: user.name,
-                  email: user.email,
-                  contact: user.contact,
-                  courseName,
-                  price,
-                  RazorpayId: razorpay_id,
-                }),
+          const verifyRes = await fetch(
+            BASE_URL + "/payment/enrollment-verify",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                enrollmentId,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
               }),
-            ]);
-            // Show success toast or redirect
-            toast.success("Payment successful! 🎉");
-            router.push("/order-confirmation");
-          } catch (err) {
-            console.error("Error processing purchase:", err);
-            alert(
-              "Payment succeeded but recording purchase failed. Contact support."
-            );
+            },
+          );
+
+          const verifyData = await verifyRes.json();
+
+          if (!verifyData.success) {
+            alert("Payment verification failed");
+            return;
           }
+
+          toast.success("Payment successful 🎉");
+          router.push("/order-confirmation");
         },
 
         prefill: {
@@ -371,7 +445,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
         modal: {
           ondismiss: () => {
-            // ✅ USER CANCELLED PAYMENT
+            // USER CANCELLED PAYMENT
             setLoading(false);
 
             toast.dismiss(); // close processing toast
@@ -476,7 +550,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
           },
         },
       );
-
+      setPaymentSuccess(true);
       setTimeout(handleProceedToPayment, 2200);
     } catch (err) {
       // ❌ Error toast
@@ -506,8 +580,17 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
   };
 
   // Handle Place Order button click
+  // const handlePlaceOrder = () => {
+  //   setShowOrderConfirmation(false);
+  //   submitUserData();
+  // };
+
   const handlePlaceOrder = () => {
-    setShowOrderConfirmation(false);
+    if (!enrollmentId) {
+      alert("Enrollment not found");
+      return;
+    }
+
     submitUserData();
   };
 
@@ -587,6 +670,40 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 }
                 disabled={loading}
               />
+
+              <select
+                required
+                className="w-full border p-3 rounded-lg"
+                value={user.state}
+                onChange={(e) =>
+                  setUser({ ...user, state: e.target.value, city: "" })
+                }
+              >
+                <option value="">Select State *</option>
+                {states.map((state) => (
+                  <option key={state.id} value={state.name}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                required
+                className="w-full border p-3 rounded-lg"
+                value={user.city}
+                onChange={(e) => setUser({ ...user, city: e.target.value })}
+                disabled={!user.state || loadingCity}
+              >
+                <option value="">
+                  {loadingCity ? "Loading cities..." : "Select City *"}
+                </option>
+
+                {cities.map((city) => (
+                  <option key={city.id} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
 
               <button
                 type="submit"
