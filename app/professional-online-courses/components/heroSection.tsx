@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 interface HeroSectionProps {
     offPercentage: string;
@@ -75,7 +74,6 @@ export default function HeroSection({ offPercentage }: HeroSectionProps) {
                                                     </span>
                                                 </>
                                             ) : (
-                                                // 👇 Server renders fixed time so HTML matches
                                                 <>
                                                     <span className="text-lg sm:text-2xl font-bold">03</span>
                                                     <span className="text-lg sm:text-2xl font-bold">:</span>

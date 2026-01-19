@@ -9,11 +9,7 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-// export const metadata: Metadata = {
-//   title:
-//     // "Inframe School: Best Art, Design & Business School in Jodhpur | Top College for Creative Education",
-// };
-// Remove this, or leave empty:
+
 export const metadata: Metadata = {};
 
 export default function MainLayout({

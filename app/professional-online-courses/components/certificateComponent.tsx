@@ -20,7 +20,9 @@ export default function CertificateCard({
     imageUrl,
     themeColor = "#731e88", // Default purple theme
 }: CertificateCardProps) {
-
+    console.clear();
+    console.log(imageUrl);
+    
     const meta = useMemo(() => themeClasses[courseType], [courseType]);
     return (
         <section className={`w-full py-8 sm:py-12 md:py-16 lg:py-10 ${meta.rbg}`}>

@@ -6,6 +6,11 @@ interface StudentsWorkProps {
     images: string[];
     title?: string;
 }
+interface GalleryImage {
+    id: string;
+    image_url: string;
+}
+
 
 function StudentsWork({
     images,
@@ -31,22 +36,19 @@ function StudentsWork({
                     {description}
                 </p>
 
-                {/* Optional little underline accent */}
                 {/* GRID GALLERY */}
-                <div
-                    className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-                >
-                    {images.map((src, idx) => (
+                <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {images.map((image, idx) => (
                         <div
-                            key={idx}
+                            key={image.id}
                             className="relative h-36 sm:h-40 md:h-48 
-                       overflow-hidden rounded-xl shadow-md 
-                       cursor-pointer hover:scale-105 hover:shadow-xl
-                       border border-gray-200 transition-all duration-300"
-                            onClick={() => openImage(src)}
+                 overflow-hidden rounded-xl shadow-md 
+                 cursor-pointer hover:scale-105 hover:shadow-xl
+                 border border-gray-200 transition-all duration-300"
+                            onClick={() => openImage(image.image_url)}
                         >
                             <Image
-                                src={src}
+                                src={image.image_url}
                                 alt={`Student Work ${idx + 1}`}
                                 fill
                                 className="object-cover"
@@ -54,6 +56,7 @@ function StudentsWork({
                         </div>
                     ))}
                 </div>
+
             </div>
 
             {/* MODAL */}

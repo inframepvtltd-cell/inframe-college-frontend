@@ -20,8 +20,8 @@ const categoryColors: Record<string, string> = {
 }
 
 export default async function BlogPost({ params }: { params: BlogPostParams }) {
-    const { slug } = await params
-    const post = blogPostsData[slug as keyof typeof blogPostsData]
+  const { slug } = await params
+  const post = blogPostsData[slug as keyof typeof blogPostsData]
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -257,7 +257,7 @@ export default async function BlogPost({ params }: { params: BlogPostParams }) {
 }
 
 export async function generateStaticParams() {
-    return Object.keys(blogPostsData).map((slug) => ({
-      slug,
-    }))
-  }
+  return Object.keys(blogPostsData).map((slug) => ({
+    slug,
+  }))
+}

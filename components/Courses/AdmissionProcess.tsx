@@ -109,11 +109,9 @@ const AdmissionProcess = () => {
         ].map((step) => (
           <div
             key={step.step}
-            className={`${step.bgColor} ${
-              step.textColor || "text-white"
-            } p-6 rounded-lg flex items-center space-x-4 border-2 ${
-              step.borderColor
-            } hover:scale-[1.02] transition-transform duration-200`}
+            className={`${step.bgColor} ${step.textColor || "text-white"
+              } p-6 rounded-lg flex items-center space-x-4 border-2 ${step.borderColor
+              } hover:scale-[1.02] transition-transform duration-200`}
           >
             <div className="flex-shrink-0">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">

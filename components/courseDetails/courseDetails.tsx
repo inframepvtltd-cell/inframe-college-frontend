@@ -4,7 +4,29 @@ import CourseContent from './courseContent';
 import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation";
 import { AboutTheCourse } from './AboutTheCourse';
-const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, noOfHours, noOfLessons }: { noOfHours: string, noOfLessons: string, courseMetaContent: string, courseName: string, title: string, price: string, offerPrice: string }) => {
+const CourseHero = ({
+    courseMetaContent,
+    courseName,
+    title,
+    price,
+    offerPrice,
+    noOfHours,
+    noOfLessons,
+    category,
+}: {
+    noOfHours: string;
+    noOfLessons: string;
+    category: string;
+    courseMetaContent: {
+        overview: string;
+        description: string;
+    };
+    courseName: string;
+    title: string;
+    price: string;
+    offerPrice: string;
+}) => {
+
     const router = useRouter();
     console.log(offerPrice + "00");
 
@@ -88,7 +110,20 @@ const CourseHero = ({ courseMetaContent, courseName, title, price, offerPrice, n
         duration: "6 hours"
     };
 
-    const paragraphs = courseMetaContent.split(". ").map(p => p.trim()).filter(p => p);
+    const overviewText = courseMetaContent?.overview ?? "";
+    const descriptionText = courseMetaContent?.description ?? "";
+
+    const paragraphs1 = overviewText
+        .split(". ")
+        .map(p => p.trim())
+        .filter(Boolean);
+
+    const paragraphs2 = descriptionText
+        .split(". ")
+        .map(p => p.trim())
+        .filter(Boolean);
+
+    const paragraphs = [...paragraphs1, ...paragraphs2];
 
     return (
         <div className="min-h-full bg-white">

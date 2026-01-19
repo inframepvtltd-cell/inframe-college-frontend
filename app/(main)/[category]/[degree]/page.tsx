@@ -22,19 +22,11 @@ export default async function DegreePage({ params }: { params: Promise<ParamsTyp
     return notFound();
   }
 
-  // const initialTabIndex = selectedCourseIndex;
-
   return <CoursePage courseType={categoryCourses} category={categoryLower} />;
 }
 
 export async function generateStaticParams(): Promise<ParamsType[]> {
   const paths: ParamsType[] = [];
-
-  // Object.entries(courseTypes).forEach(([category, courses]) => {
-  //   courses.forEach((course: any) => {
-  //     paths.push({ category, degree: course.value });
-  //   });
-  // });
 
   Object.entries(courseTypes as Record<string, any[]>).forEach(
     ([category, courses]) => {
