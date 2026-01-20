@@ -30,12 +30,9 @@ const getCategoryFromSlug = (slug: string) => {
     return parts[0].split("-")[0];
 }
 
-// SEO (SERVER ONLY)
 export async function generateMetadata({ params }: any) {
     const { slug } = await params;
-    console.log(slug);
     const course = await getCourse(slug);
-    console.log(course);
 
     return {
         title: course?.data.meta_title || "Inframe School",

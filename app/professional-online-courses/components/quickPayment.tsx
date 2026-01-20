@@ -3,7 +3,8 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import OrderConfirmationModal from "./orderConfirmation";
-import { validateUtmFromUrl } from "../../../components/util";
+import { validateUtmFromUrl } from "@utils/validateUTMFromUrl";
+
 declare global {
     interface Window {
         Razorpay: any;
@@ -324,7 +325,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 source: "Enroll Now Page",
                 device: navigator.userAgent,
                 city: user.city,
-        state: user.state,
+                state: user.state,
             };
 
             // Final payload
@@ -343,8 +344,8 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
                 lead_stage: "New Enrollment",
                 price: price,
                 course_name: courseName,
-city: user.city,
-        state: user.state,
+                city: user.city,
+                state: user.state,
                 webhook_source: "Website Frontend - Professional Course",
             };
 

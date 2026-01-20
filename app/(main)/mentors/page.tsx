@@ -12,11 +12,6 @@ const poppins = Poppins({
   weight: ["400", "500", "700"],
 });
 
-// Server-side metadata (fallback)
-export const metadata: Metadata = {
-  title: "Meet Our Expert Mentors | Inframe School",
-  description: "Learn from industry leaders at Inframe School",
-};
 
 // Single export default function
 export default async function MentorsPage() {

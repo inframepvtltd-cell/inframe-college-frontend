@@ -1,11 +1,7 @@
 "use client"
-import type React from "react"
-import { CheckCircle, Users, Brain, Briefcase, Target, Clock } from "lucide-react"
+import { CheckCircle } from "lucide-react"
 
 const FeaturesSection = ({ keyFeatures }: any) => {
-
-
-
 
   return (
     <section className="py-4 w-full bg-gradient-to-br from-white to-gray-200">
