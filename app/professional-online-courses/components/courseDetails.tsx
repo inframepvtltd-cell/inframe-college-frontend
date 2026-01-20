@@ -19,7 +19,7 @@ const themes: any = {
 }
 
 type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic' | 'civil';
-function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType,  projects: string, title: string, priceWithDiscount: string, originalPrice: string, theme: string }) {
+function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType,  projects: string, title: string, priceWithDiscount: any, originalPrice: any, theme: string }) {
 
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
