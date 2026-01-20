@@ -18,6 +18,9 @@ export default function LandingPageComponent({ data }) {
 
     const { hero_image_url, gallery_images, gallery_description, course_title, software_tools, offer_price, theme_color, pricing_banner_url, original_price, duration, course_type, content, admin_image, certificate_image } = data
 
+    console.clear();
+    console.log(data);
+
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -484,7 +487,7 @@ export default function LandingPageComponent({ data }) {
 
                                         {/* Benefits Grid */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-2 md:mb-12">
-                                            {offerSection.benefits.map((benefit, index) => (
+                                            {offerSection.benefits.map((benefit: any, index: any) => (
                                                 <div
                                                     key={index}
                                                     className="group bg-white/5 backdrop-blur-sm rounded-lg p-2 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"

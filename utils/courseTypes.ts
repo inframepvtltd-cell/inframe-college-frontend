@@ -65,7 +65,7 @@ const res = await fetch(`${API_BASE}/courses/course-types`);
 const data = await res.json();
 
 const trimmedCourseTypes = deepTrim(data);
-console.clear()
+// console.clear()
 console.log(trimmedCourseTypes);
 
 export const courseTypes = trimmedCourseTypes;

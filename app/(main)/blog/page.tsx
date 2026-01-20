@@ -1,160 +1,41 @@
-import Link from "next/link"
+
+import { Button } from "@/components/ui/button";
+import { getAllBlogs } from "./api";
+import BlogCard from "./components/blogCard";
+import { Search } from "lucide-react";
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ChevronRight, Search, Tag, } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
 import { Metadata } from "next"
 import Head from "next/head"
 
-// Enhanced metadata with more keywords and structured data
-export const metadata: Metadata = {
-  title: 'Educational Insights, Career Tips & Design Inspiration | Inframe School Blog',
-  description: 'Explore expert insights on design education, career guidance, placement opportunities, and industry trends at Inframe School - the top arts & design institute in Rajasthan, India.',
-  keywords: 'design school, best design college in Rajasthan, arts education, creative curriculum, design career, design placement, Inframe alumni, design facilities, student life',
-  openGraph: {
+
+// SEO (SERVER ONLY)
+export async function generateMetadata({ params }: any) {
+  const { slug } = await params;
+  const blogs = await getAllBlogs();
+
+  return {
+    // title: course?.data.meta_title || "Inframe School",
+    // description: course?.data.meta_description || "",
     title: 'Educational Insights, Career Tips & Design Inspiration | Inframe School Blog',
-    description: 'Explore expert insights on design education, career guidance, placement opportunities, and industry trends at Inframe School.',
-    images: ['/images/gallery/DSC04232.JPG'],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Educational Insights, Career Tips & Design Inspiration | Inframe School Blog',
-    description: 'Explore expert insights on design education, career guidance, and industry trends at Inframe School.',
-    images: ['/images/gallery/DSC04232.JPG'],
-  },
-};
-
-// Blog card data with enhanced SEO elements (tags, keywords)
-const blogPosts = [
-  {
-    id: "top-5-reasons-to-choose-inframe-school",
-    title: "Top 5 Reasons to Choose Inframe School for Your Child's Education",
-    excerpt:
-      "Discover why Inframe School stands out as one of the best design schools in India and the top arts & design school in Rajasthan.",
-    image:
-      "/images/gallery/1717492615506 - Copy (2).jpg",
-    category: "Education",
-    date: "Feb 28, 2025",
-    readTime: "5 min read",
-    tags: ["design education", "arts school", "best design college", "creative education", "Rajasthan"],
-    keywords: "top design school, arts education in Rajasthan, best design college in India",
-
-  },
-  {
-    id: "why-inframe-school-is-the-best-choice",
-    title: "Why Inframe School is the Best Choice for Your Child's Future",
-    excerpt:
-      "Explore the perfect blend of education, expertise, and exposure at Inframe School for students after 12th grade.",
-    image:
-      "/images/gallery/1721737773149.jpg",
-    category: "Career",
-    date: "Feb 25, 2025",
-    readTime: "6 min read",
-    tags: ["career guidance", "after 12th", "design career", "career planning", "design education"],
-    keywords: "design career after 12th, best design college, career opportunities in design",
-
-  },
-  {
-    id: "state-of-the-art-facilities",
-    title: "Explore the State-of-the-Art Facilities at Inframe School",
-    excerpt: "Take a virtual tour of our modern design labs, creative spaces, and innovative learning environments.",
-    image:
-      "/images/gallery/SKF02844.JPG",
-    category: "Facilities",
-    date: "Feb 20, 2025",
-    readTime: "4 min read",
-    tags: ["design labs", "creative spaces", "modern facilities", "design infrastructure", "technology"],
-    keywords: "design school facilities, creative studio, design labs, modern campus",
-
-  },
-  {
-    id: "success-stories-from-inframe-alumni",
-    title: "Success Stories from Inframe School Alumni",
-    excerpt: "Read inspiring stories of our graduates who are making waves in the design and creative industries.",
-    image:
-      "/images/gallery/1721366034581.jpg",
-    category: "Alumni",
-    date: "Feb 15, 2025",
-    readTime: "7 min read",
-    tags: ["alumni success", "design careers", "industry leaders", "graduate achievements", "placements"],
-    keywords: "design school alumni, successful designers, career after design school, placement success",
-
-  },
-  {
-    id: "creative-curriculum-at-inframe",
-    title: "The Creative Curriculum at Inframe School",
-    excerpt:
-      "Discover our innovative approach to design education that combines theory, practice, and industry exposure.",
-    image:
-      "/images/gallery/1717475821142 - Copy (8).jpg",
-    category: "Curriculum",
-    date: "Feb 10, 2025",
-    readTime: "5 min read",
-    tags: ["design curriculum", "creative education", "practical learning", "industry exposure", "design theory"],
-    keywords: "design school curriculum, creative education, practical design training, industry-focused learning",
-
-  },
-  {
-    id: "industry-partnerships-and-placements",
-    title: "Industry Partnerships and Placement Opportunities at Inframe",
-    excerpt:
-      "Learn about our extensive network of industry partners and how they help our students launch successful careers.",
-    image:
-      "/images/gallery/1717475821142 - Copy (8).jpg",
-    category: "Placements",
-    date: "Feb 5, 2025",
-    readTime: "6 min read",
-    tags: ["placements", "industry partnerships", "career opportunities", "internships", "job placement"],
-    keywords: "design school placements, industry partnerships, design internships, career launch",
-
-  },
-  {
-    id: "faculty-spotlight-meet-our-experts",
-    title: "Faculty Spotlight: Meet Our Industry Experts",
-    excerpt: "Get to know the accomplished professionals who make up our teaching faculty at Inframe School.",
-    image:
-      "/images/gallery/DSC04264.JPG",
-    category: "Faculty",
-    date: "Jan 30, 2025",
-    readTime: "8 min read",
-    tags: ["expert faculty", "industry professionals", "design mentors", "experienced teachers", "design education"],
-    keywords: "design school faculty, industry experts teaching, professional mentors, design educators",
-
-  },
-  {
-    id: "student-life-at-inframe-school",
-    title: "Student Life at Inframe School: Beyond the Classroom",
-    excerpt:
-      "Explore the vibrant student community, extracurricular activities, and creative events at Inframe School.",
-    image:
-      "/images/gallery/1721738128651.jpg",
-    category: "Student Life",
-    date: "Jan 25, 2025",
-    readTime: "5 min read",
-    tags: ["student life", "campus activities", "creative events", "community", "extracurricular"],
-    keywords: "design school campus life, creative activities, student community, design school events",
-
-  },
-]
-
-// Category colors mapping
-const categoryColors: Record<string, string> = {
-  Education: "bg-yellow-400 text-black",
-  Career: "bg-blue-500 text-white",
-  Facilities: "bg-green-500 text-white",
-  Alumni: "bg-purple-500 text-white",
-  Curriculum: "bg-red-500 text-white",
-  Placements: "bg-indigo-500 text-white",
-  Faculty: "bg-pink-500 text-white",
-  "Student Life": "bg-orange-500 text-white",
+    description: 'Explore expert insights on design education, career guidance, placement opportunities, and industry trends at Inframe School - the top arts & design institute in Rajasthan, India.',
+    keywords: 'design school, best design college in Rajasthan, arts education, creative curriculum, design career, design placement, Inframe alumni, design facilities, student life',
+    openGraph: {
+      title: 'Educational Insights, Career Tips & Design Inspiration | Inframe School Blog',
+      description: 'Explore expert insights on design education, career guidance, placement opportunities, and industry trends at Inframe School.',
+      images: ['/images/gallery/DSC04232.JPG'],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Educational Insights, Career Tips & Design Inspiration | Inframe School Blog',
+      description: 'Explore expert insights on design education, career guidance, and industry trends at Inframe School.',
+      images: ['/images/gallery/DSC04232.JPG'],
+    },
+  };
 }
 
-// Popular tags from all blog posts for SEO
-const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags)));
-
-export default function Home() {
+export default async function BlogsPage() {
+  const blogs = await getAllBlogs();
   return (
     <>
       <Head>
@@ -176,7 +57,7 @@ export default function Home() {
                   "url": "https://inframeschool.edu.in/logo.png"
                 }
               },
-              "blogPost": blogPosts.map(post => ({
+              "blogPost": blogs.map((post: { title: any; excerpt: any; keywords: any; date: any; image: any; }) => ({
                 "@type": "BlogPosting",
                 "headline": post.title,
                 "description": post.excerpt,
@@ -188,12 +69,10 @@ export default function Home() {
           }}
         />
       </Head>
-
       <main className="min-h-screen bg-white">
-        {/* Hero Section with Enhanced SEO */}
         <div className="relative z-10">
           <div className="relative h-[80vh]">
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/10 to-transparent z-10" />
             <Image
               src="/images/gallery/DSC04232.JPG"
               alt="Inframe School - Best Design School in Rajasthan - Campus Life"
@@ -236,122 +115,62 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Popular Tags Section for SEO */}
-        <section className="bg-gray-50 py-8 border-t border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center gap-4 mb-4">
-              <Tag className="text-yellow-500" />
-              <h2 className="text-xl font-semibold">Popular Topics</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {allTags.map((tag, index) => (
-                <Link key={index} href={`/tag/${tag.replace(/\s+/g, '-').toLowerCase()}`}>
-                  <Badge className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 px-3 py-1">
-                    #{tag}
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Articles Section with Enhanced UI */}
-        <section id="featured-articles" className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-2">
-              <span className="w-2 h-8 bg-yellow-400 inline-block"></span>
-              Featured Articles
-            </h2>
-            <div className="flex gap-2 mt-4 sm:mt-0">
-              <Button variant="outline" className="border-yellow-400 text-black hover:bg-yellow-50">
-                All Categories
-              </Button>
-              <Button variant="outline" className="border-yellow-400 text-black hover:bg-yellow-50">
-                Most Popular
-              </Button>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          {/* Section Header */}
+          <div className="text-start mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Latest Blogs</h1>
+            <p className="text-gray-600 max-w-4xl ">
+              Stay updated with our latest insights, tips, and guides on interior design, lifestyle, and more. Explore in-depth articles, curated advice, and practical tips from our experts to inspire your creativity.
+            </p>
           </div>
 
-          {/* Category Filter Tabs */}
-          <div className="mb-10 overflow-x-auto">
-            <div className="flex gap-2 min-w-max pb-2">
-              <Button className="bg-black text-white hover:bg-yellow-400 hover:text-black">
-                All
-              </Button>
-              {Object.keys(categoryColors).map((category) => (
-                <Button
-                  key={category}
-                  variant="outline"
-                  className={`border-2 ${categoryColors[category].replace('bg-', 'border-').replace(' text-white', '')} hover:bg-opacity-10`}
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
+          {/* Blog Grid */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {blogs.length > 0 ? (
+              blogs.map((blog: any) => <BlogCard key={blog.id} blog={blog} />)
+            ) : (
+              <p className="text-center text-gray-500 col-span-full">
+                No blogs available at the moment. Please check back later.
+              </p>
+            )}
           </div>
-
-          {/* Blog Cards Grid - Enhanced Design */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <div key={post.id} id={post.id} className="scroll-mt-16">
-                <Link href={`/blog/${post.id}`} className="group">
-                  <Card className="overflow-hidden border-2 hover:border-yellow-400 transition-all duration-300 hover:shadow-xl h-full flex flex-col">
-                    <div className="relative h-56 overflow-hidden">
-                      <Image
-                        src={post.image || "/placeholder.svg"}
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <Badge className={`${categoryColors[post.category]} px-3 py-1 text-xs font-semibold`}>
-                          {post.category}
-                        </Badge>
-                      </div>
-                    </div>
-                    <CardContent className="p-6 flex-grow flex flex-col">
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-600 transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-600 mb-4 flex-grow">{post.excerpt}</p>
-                      <div className="flex items-center justify-between text-sm text-gray-500 mt-auto">
-                        <span>{post.date}</span>
-                        <span>{post.readTime}</span>
-                      </div>
-                      <Button className="mt-4 bg-black text-white hover:bg-yellow-400 hover:text-black transition-colors w-full">
-                        Read More <ChevronRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </div>
-            ))}
-          </div>
-
-
-        </section>
-
-        {/* Enhanced Newsletter Section with SEO */}
-        <section className="py-16 my-10 bg-black text-white">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay Updated with Inframe School</h2>
-            <p className="mb-8">Subscribe to our newsletter to receive the latest articles, news, and updates about design education and career opportunities.</p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="px-4 py-3 rounded-md flex-grow text-black"
-                aria-label="Email for newsletter"
-              />
-              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-6 py-6">Subscribe</Button>
-            </div>
-            <p className="mt-4 text-sm text-gray-400">By subscribing, you`ll receive exclusive content about design education, career opportunities, and admission updates.</p>
-          </div>
-        </section>
-
-
+        </div>
 
       </main>
-    </>)
+    </>
+  );
 }
+
+
+
+{/* <Head> */ }
+{/* Schema.org JSON-LD structured data for better SEO */ }
+{/* <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "name": "Inframe School Blog",
+              "description": "Insights, stories, and information about the best design school in Rajasthan",
+              "url": "https://inframeschool.edu.in/blog",
+              "publisher": {
+                "@type": "Organization",
+                "name": "Inframe School",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://inframeschool.edu.in/logo.png"
+                }
+              },
+              "blogPost": blogPosts.map(post => ({
+                "@type": "BlogPosting",
+                "headline": post.title,
+                "description": post.excerpt,
+                "keywords": post.keywords,
+                "datePublished": post.date,
+                "image": post.image
+              }))
+            })
+          }}
+        /> */}
+{/* </Head> */ }

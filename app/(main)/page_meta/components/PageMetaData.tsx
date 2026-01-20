@@ -9,10 +9,10 @@ interface PageMetaDataProps {
   fallbackDescription?: string;
 }
 
-export default function PageMetaData({ 
-  slug, 
-  fallbackTitle, 
-  fallbackDescription 
+export default function PageMetaData({
+  slug,
+  fallbackTitle,
+  fallbackDescription
 }: PageMetaDataProps) {
   const { meta, loading } = usePageMeta(slug);
 
@@ -20,11 +20,11 @@ export default function PageMetaData({
     if (!loading && meta) {
       // Update page title
       document.title = meta.title;
-      
+
       // Update meta tags dynamically
       updateMetaTag('description', meta.description);
       updateMetaTag('keywords', Array.isArray(meta.keywords) ? meta.keywords.join(', ') : meta.keywords);
-      
+
       // Update Open Graph tags if available
       if (meta.additional_text?.openGraph) {
         const og = meta.additional_text.openGraph;
@@ -34,7 +34,7 @@ export default function PageMetaData({
         if (og.image) updateMetaTag('og:image', og.image);
         if (og.url) updateMetaTag('og:url', og.url);
       }
-      
+
       // Update Twitter tags if available
       if (meta.additional_text?.twitter) {
         const twitter = meta.additional_text.twitter;
@@ -52,12 +52,12 @@ export default function PageMetaData({
 
   const updateMetaTag = (name: string, content: string) => {
     if (!content) return;
-    
+
     let element = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
     if (!element) {
       element = document.querySelector(`meta[property="${name}"]`) as HTMLMetaElement;
     }
-    
+
     if (element) {
       element.content = content;
     } else {
