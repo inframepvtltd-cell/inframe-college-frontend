@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/form";
 import { CheckCircle, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
-import { getStates, getCities, getLevels, getPrograms, submitApplication } from "@app/api/apply-now/route";
+import { getStates, getCities, getLevels, getPrograms, submitApplication } from "@utils/apply-now";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -197,7 +197,6 @@ const ApplyNowForm = ({
         setTimeout(() => {
           setIsRedirecting(true);
           setIsFormOpen(false); // Close the sheet
-          router.push("/thank-you");
         }, 2000);
       } else {
         setSubmissionStatus("error");
