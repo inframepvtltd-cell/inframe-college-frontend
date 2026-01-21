@@ -61,14 +61,27 @@ const deepTrim = (value: any): any => {
   return value;
 };
 
-const res = await fetch(`${API_BASE}/courses/course-types`);
-const data = await res.json();
+// utils/server/courseTypes.ts
+export async function getCourseTypes() {
+  const res = await fetch(`${API_BASE}/courses/course-types`, {
+    cache: "no-store",
+  });
 
-const trimmedCourseTypes = deepTrim(data);
-// console.clear()
-console.log(trimmedCourseTypes);
+  return res.json();
+}
 
-export const courseTypes = trimmedCourseTypes;
+
+// const res = await fetch(`${API_BASE}/courses/course-types`);
+// const data = await res.json();
+
+// const trimmedCourseTypes = deepTrim(data);
+// console.log(trimmedCourseTypes);
+
+// export const courseTypes = trimmedCourseTypes;
+
+// page.tsx (server component)
+export const courseTypes = await getCourseTypes();
+// export { courseTypes };
 
 // const res = await fetch(`${API_BASE}/courses/course-types`);
 // console.clear();
