@@ -38,7 +38,7 @@ function StudentsWork({
 
                 {/* GRID GALLERY */}
                 <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    {images.map((image : any, idx) => (
+                    {images.map((image: any, idx) => (
                         <div
                             key={image.id}
                             className="relative h-36 sm:h-40 md:h-48 
