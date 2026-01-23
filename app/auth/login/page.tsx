@@ -1,5 +1,5 @@
 "use client";
-
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useState, ChangeEvent, FormEvent } from "react";
 import {
     Mail,
@@ -22,6 +22,8 @@ interface LoginForm {
 }
 
 export default function LoginPage() {
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
     const [form, setForm] = useState<LoginForm>({
         email: "",
         password: "",
@@ -33,7 +35,7 @@ export default function LoginPage() {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-        setError(null); // Clear error on change
+        setError(null);
     };
 
     const router = useRouter();
@@ -50,14 +52,16 @@ export default function LoginPage() {
             if (res.success) {
                 setSuccess(res.message || "Login successful!");
 
-                // Save token (if using localStorage)
                 localStorage.setItem("token", res.token);
-                console.log(localStorage.getItem("token"))
-                // Optional: redirect
+
+                document.cookie = `token=${res.token}; path=/; max-age=86400`;
+
                 setTimeout(() => {
-                    router.push("/application-form");
+                    router.push("/addmission-form");
                 }, 1000);
             }
+            console.log(localStorage.getItem("token"));
+
         } catch (err) {
             const error = err as AxiosError<{ message: string }>;
 

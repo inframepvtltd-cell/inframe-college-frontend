@@ -1,8 +1,9 @@
-// app/(main)/aboutus/components/IndustryPartners.tsx
+
 "use client";
 
+import { fetchActivePlacementPartners } from "@app/(main)/about-us/api/api";
 import React, { useEffect, useState } from "react";
-import { fetchActivePlacementPartners } from "../api/api";
+// import { fetchActivePlacementPartners } from "../api/api";
 import { FaSpinner } from "react-icons/fa";
 
 // Fallback to static logos if API fails
@@ -44,7 +45,7 @@ const IndustryPartners: React.FC = () => {
     try {
       setLoading(true);
       const partners = await fetchActivePlacementPartners();
-
+      
       if (partners.length > 0) {
         // Use dynamic partners from database
         const dynamicLogos: LogoItem[] = partners.map(partner => ({
@@ -53,7 +54,7 @@ const IndustryPartners: React.FC = () => {
           website: partner.website || undefined,
           industry: partner.industry_type || undefined,
         }));
-
+        
         setLogos(dynamicLogos);
       } else {
         // Fallback to static logos
@@ -68,7 +69,7 @@ const IndustryPartners: React.FC = () => {
     }
   };
 
-  const scrollLogos = [...logos, ...logos];
+  const scrollLogos = [...logos, ...logos]; 
 
   if (loading) {
     return (
@@ -95,7 +96,7 @@ const IndustryPartners: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             INDUSTRY & PLACEMENT PARTNERS
           </h2>
-
+          
           <p className="text-lg text-gray-800 max-w-3xl mx-auto mb-8">
             Inframe's strong industry partnerships provide students with unparalleled career opportunities and real-world experience to excel in design and business.
           </p>
@@ -105,7 +106,7 @@ const IndustryPartners: React.FC = () => {
         <div className="relative">
           {/* Left gradient overlay */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r to-transparent z-10 pointer-events-none"></div>
-
+          
           {/* Right gradient overlay */}
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l to-transparent z-10 pointer-events-none"></div>
 
@@ -137,7 +138,7 @@ const IndustryPartners: React.FC = () => {
 const LogoCard: React.FC<{ logo: LogoItem }> = ({ logo }) => {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
+  
   const handleClick = (e: React.MouseEvent) => {
     if (!logo.website) {
       e.preventDefault();
@@ -145,16 +146,18 @@ const LogoCard: React.FC<{ logo: LogoItem }> = ({ logo }) => {
   };
 
   return (
-    <div
+    <div 
       className="group flex-shrink-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Main Card - Clickable if website exists */}
-      <div
-        className={`w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-2 ${logo.website ? 'cursor-pointer' : 'cursor-default'
-          } ${isHovered ? 'shadow-2xl scale-105 border-yellow-300' : 'border-white'
-          }`}
+      <div 
+        className={`w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-white rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-2 ${
+          logo.website ? 'cursor-pointer' : 'cursor-default'
+        } ${
+          isHovered ? 'shadow-2xl scale-105 border-yellow-300' : 'border-white'
+        }`}
         onClick={handleClick}
       >
         {logo.website ? (
@@ -170,7 +173,7 @@ const LogoCard: React.FC<{ logo: LogoItem }> = ({ logo }) => {
           <CardContent logo={logo} imageError={imageError} setImageError={setImageError} isHovered={isHovered} />
         )}
       </div>
-
+      
       {/* Partner Name */}
       <div className="mt-3 text-center">
         <p className="text-sm font-medium text-gray-900 truncate px-2">
@@ -182,9 +185,9 @@ const LogoCard: React.FC<{ logo: LogoItem }> = ({ logo }) => {
 };
 
 // Separate content component for reusability
-const CardContent: React.FC<{
-  logo: LogoItem;
-  imageError: boolean;
+const CardContent: React.FC<{ 
+  logo: LogoItem; 
+  imageError: boolean; 
   setImageError: (value: boolean) => void;
   isHovered: boolean;
 }> = ({ logo, imageError, setImageError, isHovered }) => {
@@ -197,8 +200,9 @@ const CardContent: React.FC<{
             src={logo.src}
             alt={logo.name}
             onError={() => setImageError(true)}
-            className={`object-contain w-full h-full transition-transform duration-300 ${isHovered ? 'scale-110' : ''
-              }`}
+            className={`object-contain w-full h-full transition-transform duration-300 ${
+              isHovered ? 'scale-110' : ''
+            }`}
           />
         ) : (
           <div className="flex flex-col items-center justify-center text-gray-400">

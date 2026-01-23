@@ -1,9 +1,10 @@
+import api from "@lib/api";
 import axios from "axios";
 const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const submitApplication = async (data: any) => {
   const formData = new FormData();
-  
+
   // Personal details
   formData.append("first_name", data.firstName);
   formData.append("last_name", data.lastName);
@@ -18,10 +19,10 @@ export const submitApplication = async (data: any) => {
   formData.append("permanent_address", data.permanentAddress);
   formData.append("temporary_address", data.temporaryAddress || "");
   formData.append("aadhar_number", data.aadharNumber || "");
-  
+
   // Program details
   formData.append("course_id", data.courseId);
-  
+
   // Payment details (optional)
   if (data.paymentAmount !== undefined) {
     formData.append("payment_amount", data.paymentAmount.toString());
@@ -38,10 +39,10 @@ export const submitApplication = async (data: any) => {
   if (data.razorpaySignature) {
     formData.append("razorpay_signature", data.razorpaySignature);
   }
-  
+
   // Terms
   formData.append("termsAccepted", String(data.termsAccepted));
-  
+
   // Convert education array to match backend format
   if (data.educationDetails && Array.isArray(data.educationDetails)) {
     const educationArray = data.educationDetails.map((edu: any) => ({
@@ -54,13 +55,13 @@ export const submitApplication = async (data: any) => {
     }));
     formData.append("education", JSON.stringify(educationArray));
   }
-  
+
   // Files
   // 1. Profile Photo (single file)
   if (data.profilePhoto) {
     formData.append("profilePhoto", data.profilePhoto);
   }
-  
+
   // 2. Education Documents (one per education record)
   if (data.educationDetails && Array.isArray(data.educationDetails)) {
     data.educationDetails.forEach((edu: any) => {
@@ -69,7 +70,7 @@ export const submitApplication = async (data: any) => {
       }
     });
   }
-  
+
   // 3. Other Documents (Aadhar, PAN, etc.)
   if (data.documents && Array.isArray(data.documents)) {
     data.documents.forEach((doc: any) => {
@@ -80,9 +81,9 @@ export const submitApplication = async (data: any) => {
       }
     });
   }
-  
+
   try {
-    const response = await axios.post(
+    const response = await api.post(
       `${API_BASE_URL}/student/add`,
       formData,
       {

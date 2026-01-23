@@ -36,7 +36,7 @@ const Footer = async () => {
 
             <li>
               <a
-                href="https://admission.inframeschool.com/"
+                href="/auth/login"
                 // href="https://admission-portal-one.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"

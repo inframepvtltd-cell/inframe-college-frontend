@@ -1,9 +1,11 @@
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { headers } from "next/headers";
 import { Toaster } from "sonner";
 import FacebookPixel from "../components/FacebookPixel";
+import Providers from "./providers";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -217,8 +219,11 @@ export default async function RootLayout({
             alt=""
           />
         </noscript>
-        {children}
-        {/* <Toaster position="top-right" /> */}
+        {/* <Providers> */}
+
+          {children}
+        {/* </Providers> */}
+
         <Toaster
           position="top-center"
           richColors

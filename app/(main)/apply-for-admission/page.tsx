@@ -33,7 +33,7 @@
 //     <div className="flex h-screen bg-gray-100 mt-24 overflow-hidden">
 //       {/* Sidebar */}
 //       <AdmissionSidebar/>
-      
+
 //       {/* Main Content */}
 //       <div className="flex-1 p-8 bg-gray-50 text-black overflow-y-auto">
 //         {activePage === 'personal' && (
@@ -266,7 +266,7 @@
 //             </div>
 //           </div>
 //         )}
-        
+
 //         {activePage === 'educational' && (
 //           <div>
 //             <h2 className="text-2xl font-bold mb-6">Educational Details</h2>
@@ -379,7 +379,7 @@
 //             </div>
 //           </div>
 //         )}
-        
+
 //         {activePage === 'program' && (
 //           <div>
 //             <h2 className="text-2xl font-bold mb-6">Program Selection</h2>
@@ -482,7 +482,7 @@
 //             </div>
 //           </div>
 //         )}
-        
+
 //         {activePage === 'payment' && (
 //           <div>
 //             <h2 className="text-2xl font-bold mb-6">Payment</h2>
@@ -555,7 +555,7 @@
 //             </div>
 //           </div>
 //         )}
-        
+
 //         {activePage === 'complete' && (
 //           <div className="text-center py-12">
 //             <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
