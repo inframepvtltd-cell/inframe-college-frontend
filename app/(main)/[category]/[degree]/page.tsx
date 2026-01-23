@@ -8,7 +8,7 @@ type ParamsType = {
 };
 
 export default async function DegreePage({ params }: { params: ParamsType }) {
-  const { category, degree } = await params;
+  const { category, degree } = params;
   const categoryLower = category.toLowerCase();
 
   if (!courseTypes[categoryLower]) {
