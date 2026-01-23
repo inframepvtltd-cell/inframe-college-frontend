@@ -19,6 +19,7 @@ const images = [
   "/images/gallery/1719471947426.jpg",
   "/images/gallery/DSC04143.JPG",
 ];
+// "/images/webbb.png",
 
 function ImageCarousel() {
   return (
@@ -37,13 +38,13 @@ function ImageCarousel() {
             key={index}
             className="relative flex-shrink-0 w-full h-screen"
           >
-            {/* <Image
+            <Image
               src={src}
               alt={`Background ${index + 1}`}
               layout="fill"
               objectFit="cover"
               className="z-0"
-            /> */}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -1,7 +1,6 @@
 // services/api.ts
 import axios from "axios";
 
-// const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}/courses`
 
 
@@ -18,14 +17,14 @@ export const fetchCourseBySlug = async (slug: string) => {
 };
 
 // Fetch all courses
-export const fetchAllCourses = async () => {
-    try {
-        const response = await axios.get(`${API_BASE}/courses`);
-        return response.data;
-    } catch (error: any) {
-        console.error("Error fetching courses:", error.response || error.message);
-        return [];
-    }
-};
+// export const fetchAllCourses = async () => {
+//     try {
+//         const response = await axios.get(`${API_BASE}/courses`);
+//         return response.data;
+//     } catch (error: any) {
+//         console.error("Error fetching courses:", error.response || error.message);
+//         return [];
+//     }
+// };
 
 

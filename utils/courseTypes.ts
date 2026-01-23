@@ -61,15 +61,6 @@ const deepTrim = (value: any): any => {
   return value;
 };
 
-// utils/server/courseTypes.ts
-// export async function getCourseTypes() {
-//   const res = await fetch(`${API_BASE}/courses/course-types`, {
-//     cache: "no-store",
-//   });
-
-//   return res.json();
-// }
-
 
 const res = await fetch(`${API_BASE}/courses/course-types`);
 const data = await res.json();

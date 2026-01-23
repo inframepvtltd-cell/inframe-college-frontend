@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = `http://localhost:7000/api/v1`
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export interface LoginPayload {
   email: string;
@@ -63,6 +63,5 @@ export const loginApi = async (payload: any): Promise<AuthResponse> => {
     `${baseURL}/authentication/login`,
     payload
   );
-
   return data;
 };

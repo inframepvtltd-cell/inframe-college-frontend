@@ -57,7 +57,7 @@ export default async function CourseContent({ params }: any) {
                 courseName={course.data.course_name}
                 title={course.data.parent_course_name}
                 price={String(Math.round(course.data.price * 2.2))}
-                offerPrice={String(Math.floor(Number(course.data.price)))} category={""}            />
+                offerPrice={String(Math.floor(Number(course.data.price)))} category={""} />
 
             <ComboPack />
             <CustomizeCourse
