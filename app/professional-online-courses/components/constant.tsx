@@ -108,7 +108,8 @@ export const FAQ_DATA: any = {
     // export const FAQ_DATA: Record<CourseType, FAQItem[]> = {
     "Interior Design": [
         {
-            question: "How do I enroll in the interior design course?",
+            question: "How do I enroll in the course?",
+            // question: "How do I enroll in the interior design course?",
             answer:
                 "To enroll in the Interior Design course, open the Wereskill app, go to the “Courses” section, find the Interior Design course, and tap the “Enroll” or “Buy Now” button. Complete the payment process, and once confirmed, you’ll get instant access to all course materials."
         },

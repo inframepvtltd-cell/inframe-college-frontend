@@ -51,7 +51,7 @@ export default function HeroSection({ offPercentage }: HeroSectionProps) {
 
                                     <div className="marquee-item">
                                         <span className="text-yellow-400 text-sm sm:text-lg font-bold animate-pulse">
-                                            🎉 NEW YEAR {offPercentage} OFF 🎉
+                                            🎉 Republic Day Offer {offPercentage} OFF 🎉
                                         </span>
                                     </div>
 
