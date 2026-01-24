@@ -108,7 +108,8 @@ const meta = useMemo(() => {
                 </div>
 
                 <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${meta.gradient} mb-3`}>
-                    {meta.title} FAQs
+                    {/* {meta.title} */}
+                    Course FAQs
                 </h1>
 
                 <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">

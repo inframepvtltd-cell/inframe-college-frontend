@@ -19,7 +19,7 @@ const themes: any = {
 }
 
 type CourseType = 'interior' | 'uiux' | 'motion' | 'digital' | 'fashion' | 'animation' | 'jewellery' | 'finearts' | 'graphic' | 'civil';
-function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType,  projects: string, title: string, priceWithDiscount: any, originalPrice: any, theme: string }) {
+function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPrice, theme }: { courseType: CourseType, projects: string, title: string, priceWithDiscount: any, originalPrice: any, theme: string }) {
 
     const router = useRouter();
     const [showForm, setShowForm] = useState(false);
@@ -32,7 +32,7 @@ function CourseInfo({ courseType, projects, title, priceWithDiscount, originalPr
     const [loading, setLoading] = useState(false);
     const [razorpayLoaded, setRazorpayLoaded] = useState(false);
     const features = [
-        "Become an Interior Designer",
+        "Become a Certified Professional",
         "Master 4+ Industry Tools",
         `Work on ${projects}+ Hands-on Real Projects`,
         "Live Doubt Support on App",

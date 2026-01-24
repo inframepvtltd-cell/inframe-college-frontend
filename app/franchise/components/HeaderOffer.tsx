@@ -31,7 +31,7 @@ export const OfferStrip: React.FC = () => {
               className="flex items-center gap-6 whitespace-nowrap text-xl text-white font-medium"
             >
               <span className="text-yellow-400 font-bold animate-pulse">
-                🎉 NEW YEAR 75% OFF 🎉
+                🎉 Republic Day Offer 75% OFF 🎉
               </span>
 
               <span className="font-semibold">
