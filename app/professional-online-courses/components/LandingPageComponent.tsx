@@ -632,11 +632,11 @@ export default function LandingPageComponent({ data }: LandingPageProps) {
                         <div className="flex items-center gap-2 sm:gap-4 whitespace-nowrap overflow-hidden">
 
                             <span className="text-xl sm:text-lg text-red-500 line-through">
-                                ₹10,493
+                                ₹{original_price}
                             </span>
 
                             <span className="text-2xl sm:text-3xl font-bold text-green-600">
-                                ₹1,499
+                                ₹{offer_price}
                             </span>
 
                             <span className="hidden sm:inline text-sm text-gray-600 dark:text-gray-300">
