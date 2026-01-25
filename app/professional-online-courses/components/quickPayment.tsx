@@ -461,37 +461,76 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
     return true;
   };
+const handleFormSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  // Show Order Confirmation immediately
+  setShowForm(false);
+  setShowOrderConfirmation(true);
+
+  // Fire-and-forget backend call
+  (async () => {
+    try {
+      const res = await fetch(BASE_URL + "/enrollment/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          contact: user.contact,
+          courseName,
+          price,
+          state: user.state,
+          city: user.city,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        console.error("Failed to create enrollment lead", data);
+        toast.error("There was a problem processing your lead in background");
+      } else {
+        setEnrollmentId(data.enrollmentId); // store ID for payment
+      }
+    } catch (err) {
+      console.error("Enrollment lead API failed", err);
+      toast.error("There was a problem processing your lead in background");
+    }
+  })();
+};
 
   // Handle form submission to show order confirmation
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  // const handleFormSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
 
-    const res = await fetch(BASE_URL + "/enrollment/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: user.name,
-        email: user.email,
-        contact: user.contact,
-        courseName,
-        price,
-        state: user.state,
-        city: user.city,
-      }),
-    });
+  //   const res = await fetch(BASE_URL + "/enrollment/lead", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       name: user.name,
+  //       email: user.email,
+  //       contact: user.contact,
+  //       courseName,
+  //       price,
+  //       state: user.state,
+  //       city: user.city,
+  //     }),
+  //   });
 
-    const data = await res.json();
+  //   const data = await res.json();
 
-    if (!data.success) {
-      alert("Failed to create enrollment");
-      return;
-    }
+  //   if (!data.success) {
+  //     alert("Failed to create enrollment");
+  //     return;
+  //   }
 
-    setEnrollmentId(data.enrollmentId);
-    setShowForm(false);
-    setShowOrderConfirmation(true);
-  };
+  //   setEnrollmentId(data.enrollmentId);
+  //   setShowForm(false);
+  //   setShowOrderConfirmation(true);
+  // };
 
   // Proceed to payment after order confirmation
   const handleProceedToPayment = async () => {
