@@ -650,15 +650,9 @@ export default function LandingPageComponent({ data }: LandingPageProps) {
 
                         {/* CTA */}
                         <div className="shrink-0">
-       {/* /* {/* <QuickPayment
-                    price={offer_price.toString()}
-                    courseName={course_title}
-                /> */} */ */}
-
                             <QuickPayment
                         price={offer_price.toString()}
-                        courseName={course_title}
-                    />
+                        courseName={course_title}/>
                         </div>
 
                     </div>
