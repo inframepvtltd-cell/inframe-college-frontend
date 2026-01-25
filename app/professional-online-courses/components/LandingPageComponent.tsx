@@ -129,7 +129,7 @@ export default function LandingPageComponent({ data }: LandingPageProps) {
     }, []);
 
     const { heroInfo, delivery, additionalSupport, targetAudience, live, offerSection, keyFeatures } = content;
-
+    const value = "2"
     return (
         <>
             <HeroSection offPercentage="75%" />
@@ -650,11 +650,15 @@ export default function LandingPageComponent({ data }: LandingPageProps) {
 
                         {/* CTA */}
                         <div className="shrink-0">
-                                                                                    <QuickPayment price={String({2})} courseName={course_title} />
+       {/* <QuickPayment
+                    price={offer_price.toString()}
+                    courseName={course_title}
+                /> */}
 
-                                                        {/* <QuickPayment price={String({original_price})} courseName={course_title} /> */}
-
-                            {/* <QuickPayment price=" ₹{original_price}" courseName="Interior Design" /> */}
+                            <QuickPayment
+                        price={value}
+                        courseName={course_title}
+                    />
                         </div>
 
                     </div>
