@@ -6,6 +6,10 @@ import { notFound } from 'next/navigation';
 interface Props {
     params: { slug: string };
 }
+
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 export default async function Page({ params }: Props) {
     const { slug } = await params;
     const response = await getLandingPageBySlug(slug);
