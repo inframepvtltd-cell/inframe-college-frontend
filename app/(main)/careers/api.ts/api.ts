@@ -1,8 +1,7 @@
-// import api from "@/lib/api";
+// api.ts
 import axios from "axios";
-
-// const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
+
 export interface Career {
     id: string;
     title: string;
@@ -13,25 +12,119 @@ export interface Career {
     is_active: boolean;
 }
 
+export interface ApiResponse<T> {
+    success: boolean;
+    data: T;
+    message?: string;
+}
+
 // GET: fetch all careers
-export const getAllCareers = async () => {
-    const res = await axios.get(`${API_BASE}/career/all`);
-    return res.data;
+export const getAllCareers = async (): Promise<ApiResponse<Career[]>> => {
+    try {
+        const res = await axios.get(`${API_BASE}/career/all`);
+        return res.data;
+    } catch (error) {
+        console.error("Error fetching careers:", error);
+        throw error;
+    }
 };
 
 // POST: apply for career
-export const applyForCareer = async (formData: FormData) => {
-  const res = await axios.post(
-    `${API_BASE}/test/add`,
-    formData
-  );
-
-  return res.data;
+export const applyForCareer = async (formData: FormData): Promise<{status: string; message: string}> => {
+    try {
+        const res = await axios.post(
+            `${API_BASE}/app/add`,
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        );
+        return res.data;
+    } catch (error: any) {
+        console.error("Error submitting application:", error);
+        if (error.response) {
+            throw new Error(error.response.data.message || "Submission failed");
+        } else if (error.request) {
+            throw new Error("No response from server. Please check your connection.");
+        } else {
+            throw new Error("Failed to submit application.");
+        }
+    }
 };
 
 
 
-// export const getAllJobRoles = async () => {
-//     const res = await axios.get(`${API_BASE}/career/all`);
-//     return res.data;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // api.ts
+// import axios from "axios";
+// const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}`
+
+// export interface Career {
+//     id: string;
+//     title: string;
+//     place: string;
+//     description: string;
+//     requirements: string[];
+//     part_time: boolean;
+//     is_active: boolean;
+// }
+
+// export interface ApiResponse<T> {
+//     success: boolean;
+//     data: T;
+//     message?: string;
+// }
+
+// // GET: fetch all careers
+// export const getAllCareers = async (): Promise<ApiResponse<Career[]>> => {
+//     try {
+//         const res = await axios.get(`${API_BASE}/career/all`);
+//         return res.data;
+//     } catch (error) {
+//         console.error("Error fetching careers:", error);
+//         throw error;
+//     }
+// };
+
+// // POST: apply for career
+// export const applyForCareer = async (formData: FormData): Promise<{status: string; message: string}> => {
+//     try {
+//         const res = await axios.post(
+//             `${API_BASE}/app/add`,
+//             formData,
+//             {
+//                 headers: {
+//                     'Content-Type': 'multipart/form-data',
+//                 },
+//             }
+//         );
+//         return res.data;
+//     } catch (error: any) {
+//         console.error("Error submitting application:", error);
+//         if (error.response) {
+//             throw new Error(error.response.data.message || "Submission failed");
+//         } else if (error.request) {
+//             throw new Error("No response from server. Please check your connection.");
+//         } else {
+//             throw new Error("Failed to submit application.");
+//         }
+//     }
 // };

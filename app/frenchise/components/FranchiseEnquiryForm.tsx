@@ -398,133 +398,134 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { createFranchiseLead, fetchCities, fetchStates, FranchiseLead } from "../api";
 
-const STATES = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "West Bengal",
-  "Andaman and Nicobar Islands",
-  "Chandigarh",
-  "Dadra and Nagar Haveli and Daman and Diu",
-  "Delhi",
-  "Jammu and Kashmir",
-  "Ladakh",
-  "Lakshadweep",
-  "Puducherry",
-];
+// const STATES = [
+//   "Andhra Pradesh",
+//   "Arunachal Pradesh",
+//   "Assam",
+//   "Bihar",
+//   "Chhattisgarh",
+//   "Goa",
+//   "Gujarat",
+//   "Haryana",
+//   "Himachal Pradesh",
+//   "Jharkhand",
+//   "Karnataka",
+//   "Kerala",
+//   "Madhya Pradesh",
+//   "Maharashtra",
+//   "Manipur",
+//   "Meghalaya",
+//   "Mizoram",
+//   "Nagaland",
+//   "Odisha",
+//   "Punjab",
+//   "Rajasthan",
+//   "Sikkim",
+//   "Tamil Nadu",
+//   "Telangana",
+//   "Tripura",
+//   "Uttar Pradesh",
+//   "Uttarakhand",
+//   "West Bengal",
+//   "Andaman and Nicobar Islands",
+//   "Chandigarh",
+//   "Dadra and Nagar Haveli and Daman and Diu",
+//   "Delhi",
+//   "Jammu and Kashmir",
+//   "Ladakh",
+//   "Lakshadweep",
+//   "Puducherry",
+// ];
 
-const CITIES = [
-  "Agra",
-  "Ahmedabad",
-  "Ajmer",
-  "Alwar",
-  "Amritsar",
-  "Anand",
-  "Aurangabad",
-  "Bengaluru",
-  "Bhopal",
-  "Bhubaneswar",
-  "Bikaner",
-  "Bilaspur",
-  "Bhilwara",
-  "Bhavnagar",
-  "Chandigarh",
-  "Chennai",
-  "Coimbatore",
-  "Cuttack",
-  "Calicut",
-  "Delhi",
-  "Dehradun",
-  "Dhanbad",
-  "Durg",
-  "Faridabad",
-  "Gandhinagar",
-  "Ghaziabad",
-  "Gorakhpur",
-  "Gurugram",
-  "Guwahati",
-  "Gwalior",
-  "Hyderabad",
-  "Hisar",
-  "Hubballi",
-  "Haridwar",
-  "Indore",
-  "Jaipur",
-  "Jaisalmer",
-  "Jalandhar",
-  "Jammu",
-  "Jamnagar",
-  "Jodhpur",
-  "Junagadh",
-  "Jabalpur",
-  "Kanpur",
-  "Kalyan",
-  "Karnal",
-  "Kochi",
-  "Kolkata",
-  "Kolhapur",
-  "Kota",
-  "Lucknow",
-  "Ludhiana",
-  "Mumbai",
-  "Mysuru",
-  "Madurai",
-  "Mangaluru",
-  "Meerut",
-  "Morbi",
-  "Nagpur",
-  "Nashik",
-  "Noida",
-  "Pune",
-  "Patna",
-  "Panipat",
-  "Prayagraj",
-  "Patiala",
-  "Rajkot",
-  "Raipur",
-  "Ranchi",
-  "Rourkela",
-  "Surat",
-  "Sikar",
-  "Srinagar",
-  "Shimla",
-  "Salem",
-  "Solapur",
-  "Thane",
-  "Trichy",
-  "Trivandrum",
-  "Tiruppur",
-  "Udaipur",
-  "Ujjain",
-  "Vadodara",
-  "Varanasi",
-  "Vellore",
-];
+// const CITIES = [
+//   "Agra",
+//   "Ahmedabad",
+//   "Ajmer",
+//   "Alwar",
+//   "Amritsar",
+//   "Anand",
+//   "Aurangabad",
+//   "Bengaluru",
+//   "Bhopal",
+//   "Bhubaneswar",
+//   "Bikaner",
+//   "Bilaspur",
+//   "Bhilwara",
+//   "Bhavnagar",
+//   "Chandigarh",
+//   "Chennai",
+//   "Coimbatore",
+//   "Cuttack",
+//   "Calicut",
+//   "Delhi",
+//   "Dehradun",
+//   "Dhanbad",
+//   "Durg",
+//   "Faridabad",
+//   "Gandhinagar",
+//   "Ghaziabad",
+//   "Gorakhpur",
+//   "Gurugram",
+//   "Guwahati",
+//   "Gwalior",
+//   "Hyderabad",
+//   "Hisar",
+//   "Hubballi",
+//   "Haridwar",
+//   "Indore",
+//   "Jaipur",
+//   "Jaisalmer",
+//   "Jalandhar",
+//   "Jammu",
+//   "Jamnagar",
+//   "Jodhpur",
+//   "Junagadh",
+//   "Jabalpur",
+//   "Kanpur",
+//   "Kalyan",
+//   "Karnal",
+//   "Kochi",
+//   "Kolkata",
+//   "Kolhapur",
+//   "Kota",
+//   "Lucknow",
+//   "Ludhiana",
+//   "Mumbai",
+//   "Mysuru",
+//   "Madurai",
+//   "Mangaluru",
+//   "Meerut",
+//   "Morbi",
+//   "Nagpur",
+//   "Nashik",
+//   "Noida",
+//   "Pune",
+//   "Patna",
+//   "Panipat",
+//   "Prayagraj",
+//   "Patiala",
+//   "Rajkot",
+//   "Raipur",
+//   "Ranchi",
+//   "Rourkela",
+//   "Surat",
+//   "Sikar",
+//   "Srinagar",
+//   "Shimla",
+//   "Salem",
+//   "Solapur",
+//   "Thane",
+//   "Trichy",
+//   "Trivandrum",
+//   "Tiruppur",
+//   "Udaipur",
+//   "Ujjain",
+//   "Vadodara",
+//   "Varanasi",
+//   "Vellore",
+// ];
 
 const investmentBudgets = ["₹5-10 Lakhs", "₹10-20 Lakhs", "₹20 Lakhs+"];
 const franchiseModels = ["Training Center", "School Campus", "Studio Model"];
@@ -539,6 +540,8 @@ interface FormData {
   model: string;
   profession: string;
 }
+type StateItem = { id: string; name: string };
+type CityItem = { id: string; name: string };
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
@@ -558,18 +561,21 @@ export default function FranchiseEnquiryForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+const [states, setStates] = useState<StateItem[]>([]);
+const [cities, setCities] = useState<CityItem[]>([]);
   const triggerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (success) alert("Enquiry submitted successfully! Our team will contact you soon.");
-  }, [success]);
+useEffect(() => {
+  fetchStates().then((data) => {
+    setStates(data);
+  });
+}, []);
+  
 
   useEffect(() => {
     const btn = document.getElementById("enrollBtn");
     if (!btn) return;
 
-    const showAfter = 400; // hero approx height (px)
+    const showAfter = 400; 
 
     const handleScroll = () => {
       if (window.scrollY > showAfter) {
@@ -586,6 +592,25 @@ export default function FranchiseEnquiryForm() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleStateChange = async (
+  e: React.ChangeEvent<HTMLSelectElement>
+) => {
+  const stateId = e.target.value;
+
+  setFormData((prev) => ({
+    ...prev,
+    state: stateId,
+    city: "",
+  }));
+
+  setCities([]);
+
+  if (stateId) {
+    const cityList = await fetchCities(stateId);
+    setCities(cityList);
+  }
+};
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -620,20 +645,34 @@ export default function FranchiseEnquiryForm() {
     setErrors(e);
     return Object.keys(e).length === 0;
   };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  if (!validate()) return;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!validate()) return;
+  setLoading(true);
 
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      setFormData(INITIAL_FORM);
-      setTimeout(() => setSuccess(false), 4000);
-    }, 1500);
+  const leadData: FranchiseLead = {
+    name: formData.name,
+    phone_number: formData.phone,
+    email: formData.email,
+    state: formData.state, 
+    city: formData.city,   
+    investment_budget: formData.budget,
+    franchise_model: formData.model,
+    current_profession: formData.profession,
   };
+
+  const res = await createFranchiseLead(leadData);
+
+  setLoading(false);
+
+  if (res) {
+    setSuccess(true);
+    setFormData(INITIAL_FORM);
+    setCities([]);
+    setTimeout(() => setSuccess(false), 4000);
+  }
+};
 
   const inputClass =
     "box-border h-[52px] w-full rounded-xl border border-gray-300 bg-white/90 px-4 text-gray-800 outline-none transition-all duration-300 focus:border-red-500 focus:ring-2 focus:ring-red-400/40";
@@ -675,7 +714,6 @@ export default function FranchiseEnquiryForm() {
             </div>
           </div>
 
-          {/* RIGHT SIDE FORM */}
           <div className="lg:col-span-4">
             <form
               onSubmit={handleSubmit}
@@ -703,18 +741,18 @@ export default function FranchiseEnquiryForm() {
               <select
                 name="state"
                 value={formData.state}
-                onChange={handleChange}
+                onChange={handleStateChange}
                 className={inputClass}
                 required
               >
                 <option value="" disabled>
                   Select State
                 </option>
-                {STATES.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
+               {states.map((s) => (
+  <option key={s.id} value={s.id}>
+    {s.name}
+  </option>
+))}
               </select>
 
               <select
@@ -727,11 +765,12 @@ export default function FranchiseEnquiryForm() {
                 <option value="" disabled>
                   Select City
                 </option>
-                {CITIES.map((c, i) => (
-                  <option key={i} value={c}>
-                    {c}
-                  </option>
-                ))}
+               {cities.map((c) => (
+  <option key={c.id} value={c.id}>
+    {c.name}
+  </option>
+))}
+
               </select>
 
               <select

@@ -15,6 +15,7 @@ import FranchiseLegalAndBrochure from "../components/FranchiseLegalAndBrochure";
 import FranchiseFAQ from "../components/FranchiseFAQ";
 import { fetchFranchiseSEOBySlug, fetchSectionsWithItems, Section } from "../api";
 import { Metadata } from "next";
+import FranchiseEnquiryFormOnly from "../components/FranchiseEnquiryFormOnly";
 
 
 interface PageProps {
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 
 // ---------------- Page Component ----------------
 export default async function Home({ params }: any) {
-  const { slug } = await params;
+    const { slug } = await params;
 
   const [sections, seoData] = await Promise.all([
     fetchSectionsWithItems(),
@@ -76,7 +77,7 @@ export default async function Home({ params }: any) {
       <InvestmentDetails data={getSection("Investment Plan")} />
       <FranchiseWhatsIncluded data={getSection("WHAT S INCLUDED")} />
       <ReturnsGrowth data={getSection("RETURNS and GROWTH POTENTIAL")} />
-      <IndustryPlacement />
+      <IndustryPlacement/>
       <InframeSupport data={getSection("SUPPORT FROM INFRAME")} />
       <AffiliationAccreditation data={getSection("Partnerships  Recognition")} />
       <IdealFranchisee data={getSection("ideal_franchisee_profile")} />

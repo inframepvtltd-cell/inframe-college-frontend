@@ -20,6 +20,8 @@ export interface SectionItem {
 
 interface SEOPage {
   city: string;
+  page_title:string;
+  page_desc:string;
   meta_title: string;
   meta_desc: string;
   vision: string;
@@ -27,7 +29,7 @@ interface SEOPage {
 }
 
 interface SectionContent {
-  title: string;
+  section_title: string;
   description: string;
   items: SectionItem[];
 }
@@ -88,9 +90,6 @@ function Highlight({ title, text }: { title: string; text: string }) {
   );
 }
 
-// =======================
-// MAIN COMPONENT
-// =======================
 export default function FranchiseOverview({ aboutSection, inframeSection, heroSlider, seoPage }: FranchiseOverviewProps) {
   return (
     <>
@@ -118,15 +117,18 @@ export default function FranchiseOverview({ aboutSection, inframeSection, heroSl
           {seoPage && (
             <div>
               <p className="inline-block text-yellow-600 font-bold mb-3 text-xl tracking-widest uppercase">
-                {seoPage.meta_title}
+               About Inframe School
               </p>
 
-              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6">
+              {/* <h2 className="text-4xl sm:text-5xl font-extrabold mb-6">
                 Build a <span className="bg-clip-text text-yellow-600">Profitable Education Franchise</span> in {seoPage.city}
+              </h2> */}
+              <h2 className="text-4xl sm:text-5xl font-extrabold mb-6">
+                 <span className="bg-clip-text text-yellow-600"></span> {seoPage.page_title}
               </h2>
 
               <p className="text-gray-700 sm:text-lg mb-7">
-                {seoPage.meta_desc}
+                {seoPage.page_desc}
               </p>
 
               <div className="grid gap-5">
@@ -150,8 +152,8 @@ export default function FranchiseOverview({ aboutSection, inframeSection, heroSl
         {/* ================= FEATURES (Inframe Truly) - Props se ================= */}
         {inframeSection && (
           <div className="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 mt-24">
-            <h3 className="text-2xl sm:text-4xl font-bold mb-4 text-center">{inframeSection.title}</h3>
-            <p className="text-center text-gray-700 mb-12">{inframeSection.description}</p>
+            <h3 className="text-2xl sm:text-4xl font-bold mb-4 text-center">{inframeSection.section_title}</h3>
+            {/* <p className="text-center text-gray-700 mb-12">{inframeSection.description}</p> */}
 
             <div className="grid md:grid-cols-3 gap-8">
               {inframeSection.items.map((item, i) => (

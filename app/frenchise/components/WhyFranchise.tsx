@@ -149,7 +149,7 @@ export default function WhyFranchise({ data }: WhyFranchiseProps) {
   return (
     <>
       {/* ================= HERO ================= */}
-      <section className="relative h-105 w-full overflow-hidden">
+      <section className="relative h-[28rem] w-full overflow-hidden">
         {data.bg_image && (
           <img
             src={data.bg_image}
