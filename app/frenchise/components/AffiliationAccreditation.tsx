@@ -48,7 +48,7 @@ export default function AffiliationAccreditation({ data }: AffiliationAccreditat
 
       {/* ITEMS GRID */}
       <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
           {data.items.map(item => (
             <div
               key={item.id}
@@ -61,13 +61,13 @@ export default function AffiliationAccreditation({ data }: AffiliationAccreditat
                     src={`${item.image_urls[0]}`} 
                     alt={item.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+    className="object-contain transition-transform duration-500 group-hover:scale-105 p-4"
                   />
                 </div>
               )}
 
               {/* ICON + CONTENT */}
-              <div className="flex items-start gap-3 p-6">
+              {/* <div className="flex items-start gap-3 p-6">
                 {(!item.image_urls || item.image_urls.length === 0) && (
                   <Check className="text-yellow-500 w-6 h-6 mt-1 shrink-0" />
                 )}
@@ -81,7 +81,7 @@ export default function AffiliationAccreditation({ data }: AffiliationAccreditat
                     </p>
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
