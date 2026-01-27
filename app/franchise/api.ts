@@ -32,7 +32,6 @@ export type FranchiseLead = {
   state: string;
   city: string;
   investment_budget: string;
-  franchise_model: string;
   current_profession: string;
 };
 const API_BASE = `${process.env.NEXT_PUBLIC_BASE_URL}/franchise_section`
@@ -188,5 +187,3 @@ export const fetchCities = async (stateId: string): Promise<CityItem[]> => {
     return [];
   }
 };
-
-

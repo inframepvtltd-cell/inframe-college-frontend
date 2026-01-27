@@ -254,7 +254,9 @@ onClick={() => {
               ✕
             </button>
 <FranchiseEnquiryFormOnly
+ enableDownload={true}
 pdfUrl={selectedPdf} 
+ submitLabel="Download Brochure"
  onClose={() => setShowForm(false)}
 />
           </div>
