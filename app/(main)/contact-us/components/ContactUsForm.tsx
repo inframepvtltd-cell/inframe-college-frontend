@@ -90,7 +90,12 @@ export function ContactUsForm({
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
       category: "",
+      message: "",
     },
   });
 
@@ -126,16 +131,13 @@ export function ContactUsForm({
       const result = await submitContactForm(data);
       setSubmitResult(result);
 
-      if (result.status === "success") {
+      if (result.success === true) {
         setIsSuccess(true);
-        setSuccessMessage(
-          "Your message has been sent successfully! We'll get back to you soon.",
-        );
-        reset(); // Reset form after successful submission
+        setSuccessMessage(result.message);
+        reset();
       } else {
-        const errorMsg = result.message || "Failed to submit form";
         setIsError(true);
-        setErrorMessage(errorMsg);
+        setErrorMessage(result.message || "Failed to submit form");
       }
     } catch (err: any) {
       console.error("Form submission error:", err);

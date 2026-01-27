@@ -1,6 +1,8 @@
 
+
 "use client";
 import React, { useEffect, useState } from "react";
+import FranchiseEnquiryFormOnly from "./FranchiseEnquiryFormOnly";
 
 export interface SlideItem {
   image: string;
@@ -18,7 +20,9 @@ export const HeroSliderSection: React.FC<HeroSliderSectionProps> = ({
   interval = 4000,
 }) => {
   const [current, setCurrent] = useState(0);
+  const [open, setOpen] = useState(false);
 
+  // Slider auto-slide
   useEffect(() => {
     if (slides.length === 0) return;
 
@@ -63,12 +67,10 @@ export const HeroSliderSection: React.FC<HeroSliderSectionProps> = ({
                 </p>
               )}
 
+              {/* Apply Now Button */}
               <button
-                onClick={() => {
-                  const el = document.getElementById("enquiry-form");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="mt-6 inline-block bg-yellow-500 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-600 transition animate-pop-in delay-400 cursor-pointer"
+                onClick={() => setOpen(true)} // just open modal
+                className="mt-6 inline-block bg-yellow-500 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-600 transition cursor-pointer animate-pop-in delay-400"
               >
                 Apply for Franchise
               </button>
@@ -76,6 +78,27 @@ export const HeroSliderSection: React.FC<HeroSliderSectionProps> = ({
           </div>
         </div>
       ))}
+
+      {/* ================= MODAL ================= */}
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+          <div className="relative bg-white w-full max-w-xl rounded-2xl p-6 shadow-xl">
+            {/* Close button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-black text-2xl"
+            >
+              ✕
+            </button>
+
+            <FranchiseEnquiryFormOnly
+              enableDownload={false} 
+              submitLabel="Apply Now"
+              onClose={() => setOpen(false)}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
