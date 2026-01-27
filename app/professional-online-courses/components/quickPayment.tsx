@@ -26,177 +26,6 @@ interface UserDetails {
 }
 
 function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
-  // const STATE_CITY_MAP: Record<string, string[]> = {
-  //     "Andhra Pradesh": [
-  //         "Visakhapatnam", "Vijayawada", "Guntur", "Nellore",
-  //         "Kurnool", "Rajahmundry", "Tirupati", "Kadapa"
-  //     ],
-
-  //     "Arunachal Pradesh": [
-  //         "Itanagar", "Naharlagun", "Pasighat", "Tawang"
-  //     ],
-
-  //     "Assam": [
-  //         "Guwahati", "Dibrugarh", "Silchar", "Jorhat",
-  //         "Tezpur", "Nagaon"
-  //     ],
-
-  //     "Bihar": [
-  //         "Patna", "Gaya", "Bhagalpur", "Muzaffarpur",
-  //         "Darbhanga", "Purnia"
-  //     ],
-
-  //     "Chhattisgarh": [
-  //         "Raipur", "Bhilai", "Durg", "Bilaspur",
-  //         "Korba", "Raigarh"
-  //     ],
-
-  //     "Goa": [
-  //         "Panaji", "Margao", "Vasco da Gama", "Mapusa"
-  //     ],
-
-  //     "Gujarat": [
-  //         "Ahmedabad", "Surat", "Vadodara", "Rajkot",
-  //         "Bhavnagar", "Jamnagar"
-  //     ],
-
-  //     "Haryana": [
-  //         "Gurgaon", "Faridabad", "Panipat", "Ambala",
-  //         "Hisar", "Karnal"
-  //     ],
-
-  //     "Himachal Pradesh": [
-  //         "Shimla", "Solan", "Dharamshala", "Mandi",
-  //         "Kullu", "Una"
-  //     ],
-
-  //     "Jharkhand": [
-  //         "Ranchi", "Jamshedpur", "Dhanbad", "Bokaro",
-  //         "Hazaribagh"
-  //     ],
-
-  //     "Karnataka": [
-  //         "Bengaluru", "Mysuru", "Mangaluru", "Hubballi",
-  //         "Belagavi", "Shivamogga", "Davangere"
-  //     ],
-
-  //     "Kerala": [
-  //         "Thiruvananthapuram", "Kochi", "Kozhikode",
-  //         "Thrissur", "Kannur", "Alappuzha"
-  //     ],
-
-  //     "Madhya Pradesh": [
-  //         "Bhopal", "Indore", "Jabalpur", "Gwalior",
-  //         "Ujjain", "Sagar"
-  //     ],
-
-  //     "Maharashtra": [
-  //         "Mumbai", "Pune", "Nagpur", "Nashik",
-  //         "Thane", "Aurangabad", "Kolhapur", "Solapur"
-  //     ],
-
-  //     "Manipur": [
-  //         "Imphal", "Thoubal", "Churachandpur"
-  //     ],
-
-  //     "Meghalaya": [
-  //         "Shillong", "Tura", "Jowai"
-  //     ],
-
-  //     "Mizoram": [
-  //         "Aizawl", "Lunglei", "Champhai"
-  //     ],
-
-  //     "Nagaland": [
-  //         "Kohima", "Dimapur", "Mokokchung"
-  //     ],
-
-  //     "Odisha": [
-  //         "Bhubaneswar", "Cuttack", "Rourkela",
-  //         "Sambalpur", "Balasore"
-  //     ],
-
-  //     "Punjab": [
-  //         "Chandigarh", "Ludhiana", "Amritsar",
-  //         "Jalandhar", "Patiala", "Bathinda"
-  //     ],
-
-  //     "Rajasthan": [
-  //         "Jaipur", "Jodhpur", "Udaipur", "Ajmer",
-  //         "Bikaner", "Kota", "Alwar"
-  //     ],
-
-  //     "Sikkim": [
-  //         "Gangtok", "Namchi", "Gyalshing"
-  //     ],
-
-  //     "Tamil Nadu": [
-  //         "Chennai", "Coimbatore", "Madurai",
-  //         "Tiruchirappalli", "Salem", "Erode",
-  //         "Tirunelveli"
-  //     ],
-
-  //     "Telangana": [
-  //         "Hyderabad", "Warangal", "Karimnagar",
-  //         "Nizamabad", "Khammam", "Mahbubnagar"
-  //     ],
-
-  //     "Tripura": [
-  //         "Agartala", "Udaipur", "Dharmanagar"
-  //     ],
-
-  //     "Uttar Pradesh": [
-  //         "Lucknow", "Kanpur", "Noida", "Ghaziabad",
-  //         "Agra", "Meerut", "Varanasi", "Prayagraj",
-  //         "Bareilly", "Aligarh"
-  //     ],
-
-  //     "Uttarakhand": [
-  //         "Dehradun", "Haridwar", "Roorkee",
-  //         "Haldwani", "Rudrapur"
-  //     ],
-
-  //     "West Bengal": [
-  //         "Kolkata", "Howrah", "Durgapur",
-  //         "Asansol", "Siliguri", "Malda"
-  //     ],
-
-  //     /* ----------- UNION TERRITORIES ----------- */
-
-  //     "Andaman and Nicobar Islands": [
-  //         "Port Blair"
-  //     ],
-
-  //     "Chandigarh": [
-  //         "Chandigarh"
-  //     ],
-
-  //     "Dadra and Nagar Haveli and Daman and Diu": [
-  //         "Daman", "Silvassa"
-  //     ],
-
-  //     "Delhi": [
-  //         "New Delhi", "Delhi", "Dwarka", "Rohini",
-  //         "Saket", "Karol Bagh"
-  //     ],
-
-  //     "Jammu and Kashmir": [
-  //         "Srinagar", "Jammu", "Anantnag", "Baramulla"
-  //     ],
-
-  //     "Ladakh": [
-  //         "Leh", "Kargil"
-  //     ],
-
-  //     "Lakshadweep": [
-  //         "Kavaratti"
-  //     ],
-
-  //     "Puducherry": [
-  //         "Puducherry", "Karaikal", "Mahe", "Yanam"
-  //     ]
-  // };
-
   const pathname = usePathname();
   const router = useRouter();
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -208,6 +37,7 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
   const [states, setStates] = useState<any[]>([]);
   const [cities, setCities] = useState<any[]>([]);
   const [loadingCity, setLoadingCity] = useState(false);
+  const [creatingEnrollment, setCreatingEnrollment] = useState(false);
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
   const [user, setUser] = useState({
@@ -295,160 +125,6 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
     fetchCities();
   }, [user.state]);
 
-  // const sendLeadEmail = async () => {
-  //     try {
-
-  //         const startTime = Date.now();
-  //         const res = await fetch("/api/send-payment-intent-email", {
-  //             method: "POST",
-  //             headers: {
-  //                 "Content-Type": "application/json",
-  //             },
-  //             body: JSON.stringify({
-  //                 name: user.name,
-  //                 email: user.email,
-  //                 contact: user.contact,
-  //                 price,
-  //                 courseName,
-  //                 state: user.state,
-  //                 city: user.city,
-  //             }),
-  //         });
-
-  //         const responseTime = Date.now() - startTime;
-
-  //         if (!res.ok) {
-  //             let errorData;
-  //             try {
-  //                 errorData = await res.json();
-  //             } catch {
-  //                 errorData = { message: await res.text() };
-  //             }
-
-  //             throw new Error(`Email failed: ${res.status} ${JSON.stringify(errorData)}`);
-  //         }
-
-  //         const data = await res.json();
-  //         console.log("Email API response:", data);
-  //         return data;
-  //     } catch (err) {
-  //         console.error("Email sending error:", err);
-  //         return { success: false, error: err };
-  //     }
-  // };
-
-  // const sendWhatsApp = async (
-  //     phoneNumber: string,
-  //     studentName: string,
-  //     price: string,
-  //     courseName: string
-  // ) => {
-  //     try {
-  //         const res = await fetch("/api/send-whatsapp", {
-  //             method: "POST",
-  //             headers: { "Content-Type": "application/json" },
-  //             body: JSON.stringify({ phoneNumber, courseName }),
-  //         });
-
-  //         const data = await res.json();
-  //         if (!res.ok || data.status !== "1") {
-  //             throw new Error(JSON.stringify(data));
-  //         }
-
-  //         console.log("WhatsApp sent successfully:", data);
-  //         return data;
-  //     } catch (err) {
-  //         console.error("WhatsApp error:", err);
-  //         return { success: false, error: err };
-  //     }
-  // };
-
-  // const sendToPrivyr = async () => {
-  //     const PRIVYR_URL =
-  //         "https://www.privyr.com/api/v1/incoming-leads/0vZfjMQw/iQR8c5Xr#generic-webhook";
-
-  //     try {
-  //         const leadData = {
-  //             name: user.name,
-  //             email: user.email,
-  //             phone_number: user.contact,
-  //             course_name: courseName,
-  //             price,
-  //             currency: "INR",
-  //             source: "Enroll Now Page",
-  //             device: navigator.userAgent,
-  //             city: user.city,
-  //             state: user.state,
-  //         };
-
-  //         // Final payload
-  //         const payload = {
-  //             // REQUIRED
-  //             name: user.name,
-  //             display_name: user.name,
-
-  //             // CONTACT
-  //             phone: user.contact,
-  //             mobile_number: user.contact,
-  //             whatsapp_number: user.contact,
-  //             email_address: user.email,
-
-  //             // BUSINESS FIELDS
-  //             lead_stage: "New Enrollment",
-  //             price: price,
-  //             course_name: courseName,
-  //             city: user.city,
-  //             state: user.state,
-  //             webhook_source: "Website Frontend - Professional Course",
-  //         };
-
-  //         const res = await fetch(PRIVYR_URL, {
-  //             method: "POST",
-  //             headers: { "Content-Type": "application/json" },
-  //             body: JSON.stringify(payload),
-  //         });
-
-  //         if (!res.ok) {
-  //             const errorText = await res.text();
-  //         } else {
-  //             const successText = await res.text();
-  //         }
-
-  //     } catch (err) {
-  //         console.error(err);
-  //     }
-  // };
-
-  // VALIDATION
-  //   const saveLeadDataSilently = async () => {
-  //     const { state, city } = user;
-  //     try {
-  //       await Promise.all([
-  //         sendLeadEmail(),
-  //         fetch("/api/add-to-sheet", {
-  //           method: "POST",
-  //           headers: { "Content-Type": "application/json" },
-  //           body: JSON.stringify({
-  //             name: user.name,
-  //             email: user.email,
-  //             contact: user.contact,
-  //             courseName,
-  //             price,
-  //             state,
-  //             city,
-  //           }),
-  //         }),
-  //         sendToPrivyr(),
-  //         sendWhatsApp(user.contact, user.name, price, courseName),
-  //       ]);
-
-  //       console.log("Lead data saved silently");
-  //     } catch (err) {
-  //       console.error("Lead save failed", err);
-  //       // ❌ DO NOT block user
-  //     }
-  //   };
-
   const validateForm = () => {
     if (!user.name.trim()) return alert("Enter your name"), false;
     if (!user.email.trim()) return alert("Enter your email"), false;
@@ -461,45 +137,45 @@ function QuickPayment({ className, price, courseName }: QuickPaymentProps) {
 
     return true;
   };
-const handleFormSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!validateForm()) return;
+  // const handleFormSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
 
-  // Show Order Confirmation immediately
-  setShowForm(false);
-  setShowOrderConfirmation(true);
+  //   // Show Order Confirmation immediately
+  //   setShowForm(false);
+  //   setShowOrderConfirmation(true);
 
-  // Fire-and-forget backend call
-  (async () => {
-    try {
-      const res = await fetch(BASE_URL + "/enrollment/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          contact: user.contact,
-          courseName,
-          price,
-          state: user.state,
-          city: user.city,
-        }),
-      });
+  //   // Fire-and-forget backend call
+  //   (async () => {
+  //     try {
+  //       const res = await fetch(BASE_URL + "/enrollment/lead", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({
+  //           name: user.name,
+  //           email: user.email,
+  //           contact: user.contact,
+  //           courseName,
+  //           price,
+  //           state: user.state,
+  //           city: user.city,
+  //         }),
+  //       });
 
-      const data = await res.json();
+  //       const data = await res.json();
 
-      if (!data.success) {
-        console.error("Failed to create enrollment lead", data);
-        toast.error("There was a problem processing your lead in background");
-      } else {
-        setEnrollmentId(data.enrollmentId); // store ID for payment
-      }
-    } catch (err) {
-      console.error("Enrollment lead API failed", err);
-      toast.error("There was a problem processing your lead in background");
-    }
-  })();
-};
+  //       if (!data.success) {
+  //         console.error("Failed to create enrollment lead", data);
+  //         toast.error("There was a problem processing your lead in background");
+  //       } else {
+  //         setEnrollmentId(data.enrollmentId); // store ID for payment
+  //       }
+  //     } catch (err) {
+  //       console.error("Enrollment lead API failed", err);
+  //       toast.error("There was a problem processing your lead in background");
+  //     }
+  //   })();
+  // };
 
   // Handle form submission to show order confirmation
   // const handleFormSubmit = async (e: React.FormEvent) => {
@@ -533,6 +209,47 @@ const handleFormSubmit = (e: React.FormEvent) => {
   // };
 
   // Proceed to payment after order confirmation
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setCreatingEnrollment(true); //loader ON
+
+    try {
+      const res = await fetch(BASE_URL + "/enrollment/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          contact: user.contact,
+          courseName,
+          price,
+          state: user.state,
+          city: user.city,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success || !data.enrollmentId) {
+        toast.error("Failed to process enrollment. Please try again.");
+        return;
+      }
+
+      // SUCCESS FLOW
+      setEnrollmentId(data.enrollmentId);
+      setShowForm(false);
+      setShowOrderConfirmation(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setCreatingEnrollment(false); // 🔥 loader OFF
+    }
+  };
+
   const handleProceedToPayment = async () => {
     if (!razorpayLoaded) {
       alert("Payment gateway loading...");
@@ -854,10 +571,11 @@ const handleFormSubmit = (e: React.FormEvent) => {
 
               <button
                 type="submit"
-                disabled={loading}
+                // disabled={loading}
+                disabled={creatingEnrollment}
                 className="w-full bg-yellow-500 text-black py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors"
               >
-                Review Order
+                 {creatingEnrollment ? "Enrollment Preparing..." : "Enrollment Now"}
               </button>
 
               <button
