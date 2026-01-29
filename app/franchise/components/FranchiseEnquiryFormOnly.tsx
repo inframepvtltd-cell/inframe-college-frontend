@@ -135,6 +135,8 @@ if (!validate()) {
         return;
       }
 
+      console.clear();
+      console.log(pdfUrl)
       if (enableDownload && pdfUrl) {
         window.open(pdfUrl, "_blank");
         toast.success("PDF downloaded successfully");
