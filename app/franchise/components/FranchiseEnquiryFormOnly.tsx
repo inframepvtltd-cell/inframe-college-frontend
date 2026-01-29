@@ -49,6 +49,17 @@ export default function FranchiseEnquiryFormOnly({
   const [states, setStates] = useState<StateItem[]>([]);
   const [cities, setCities] = useState<CityItem[]>([]);
 
+
+    const downloadPdf = (url: string) => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+  
   /* ================= FETCH STATES ================= */
   useEffect(() => {
     fetchStates().then(setStates);
@@ -138,7 +149,7 @@ if (!validate()) {
       console.clear();
       console.log(pdfUrl)
       if (enableDownload && pdfUrl) {
-        window.open(pdfUrl, "_blank");
+      downloadPdf(pdfUrl);
         toast.success("PDF downloaded successfully");
       } else {
         toast.success("Form submitted successfully");
