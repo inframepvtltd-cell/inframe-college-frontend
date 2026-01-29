@@ -119,12 +119,67 @@ export default function FranchiseEnquiryFormOnly({
   };
 
   /* ================= SUBMIT ================= */
-  const handleSubmit = async (e: React.FormEvent) => {
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+// if (!validate()) {
+//   return;
+// }
+
+//     setLoading(true);
+
+//     try {
+//       const leadData: FranchiseLead = {
+//         name: formData.name,
+//         phone_number: formData.phone,
+//         email: formData.email,
+//         state: formData.state,
+//         city: formData.city,
+//         investment_budget: formData.budget,
+//         current_profession: formData.profession,
+//       };
+
+//       const result = await createFranchiseLead(leadData);
+
+//       if (!result) {
+//         toast.error("Failed to submit lead");
+//         return;
+//       }
+
+//       console.clear();
+//       console.log(pdfUrl)
+//       if (enableDownload && pdfUrl) {
+//       downloadPdf(pdfUrl);
+//         toast.success("PDF downloaded successfully");
+//       } else {
+//         toast.success("Form submitted successfully");
+//       }
+
+//       setFormData(INITIAL_FORM);
+//       onClose?.();
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Something went wrong");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-if (!validate()) {
-  return;
-}
+    if (!validate()) return;
+
+    // 🔥 OPEN PDF FIRST (SYNC USER ACTION)
+    if (enableDownload && pdfUrl) {
+      const a = document.createElement("a");
+      a.href = pdfUrl;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
 
     setLoading(true);
 
@@ -146,14 +201,7 @@ if (!validate()) {
         return;
       }
 
-      console.clear();
-      console.log(pdfUrl)
-      if (enableDownload && pdfUrl) {
-      downloadPdf(pdfUrl);
-        toast.success("PDF downloaded successfully");
-      } else {
-        toast.success("Form submitted successfully");
-      }
+      toast.success(enableDownload ? "PDF opened successfully" : "Form submitted");
 
       setFormData(INITIAL_FORM);
       onClose?.();
