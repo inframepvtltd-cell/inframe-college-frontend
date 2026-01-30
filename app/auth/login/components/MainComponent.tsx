@@ -69,7 +69,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
+    <div className="max-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-0">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         {/* Card Container */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-2xl border border-gray-100 overflow-hidden">
           {/* Header Gradient Bar */}
           <div className="h-2 bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600"></div>
 
@@ -238,9 +238,9 @@ export default function LoginPage() {
           {/* Footer */}
           <div className="border-t border-gray-100 bg-gray-50/80 p-2">
             <div className="text-center space-y-3">
-              <div className="flex items-center justify-center gap-4">
+              {/* <div className="flex items-center justify-center gap-4">  
                 <span className="text-gray-300">•</span>
-              </div>
+              </div> */}
               <p className="text-xs text-gray-500">
                 © {new Date().getFullYear()} INFRAME SCHOOL. All rights
                 reserved.
