@@ -62,7 +62,7 @@ const OrderConfirmationModal = memo(function OrderConfirmationModal({
       content_name: courseName,
     });
 
-    console.log("🔥 Meta Purchase fired:", price);
+    console.log("Meta Purchase fired:", price);
 
     hasTrackedPurchase.current = true;
   }, [open, paymentSuccess, price, courseName, pathname]);

@@ -54,7 +54,6 @@ export default function ThankYouPage() {
     return (
         <section className="min-h-screen flex flex-col items-center justify-center 
                             bg-gray-50 px-4 sm:px-6 text-center">
-
             {/* Success Icon */}
             <div className="w-20 h-20 bg-green-100 rounded-full 
                             flex items-center justify-center mb-8">
